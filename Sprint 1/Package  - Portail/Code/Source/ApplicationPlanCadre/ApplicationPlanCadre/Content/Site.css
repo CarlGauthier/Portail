@@ -1,0 +1,70 @@
+﻿body {
+    font-family: 'Open Sans';
+}
+
+.portail {
+    background-image: url(Images/cegep.jpg);
+    background-size: cover;
+    background-position: 25% bottom;
+}
+
+.portail-login {
+    min-height: 100vh;
+    background-color: #e7ecf2;
+}
+
+.logo-portail {
+    width: 100%;
+}
+
+.portail-forgotPassword {
+    text-align: center;
+}
+
+.portail-login .form-control {
+    border: 1px solid #aaaaaa;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.portail-submit {
+    text-align: center;
+    margin: 25px;
+}
+
+input[type='submit'] {
+    display: inline-block;
+    color: #083a7c;
+    border: 2px solid;
+    border-radius: 0;
+    background-color: transparent;
+    font-size: 1.2em;
+    transition: 0.1s;
+}
+
+input[type='submit']:hover {
+    border-color: #083a7c;
+    background-color: #083a7c;
+    color: #ffffff;
+}
+
+.portail-associes {
+    margin-top: 150px;
+}
+
+@media screen and (max-width: 767px) {
+
+    .portail {
+        background-size: 100%;
+        background-position: center top;
+    }
+
+    .portail-login {
+        margin-top: 100px;
+        min-height: calc(100vh - 100px);
+    }
+
+    .portail-associes {
+        margin-top: 0;
+    }
+}
