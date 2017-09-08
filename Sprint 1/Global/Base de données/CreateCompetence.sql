@@ -18,7 +18,7 @@ CREATE TABLE tblContexteRealisation
 	idContexte			INT				NOT NULL	IDENTITY(1,1),
 
 	contexteRealisation	VARCHAR(150)	NOT NULL,
-	commentaire			VARCHAR(200)		NULL,
+	commentaire			VARCHAR(200)	NULL,
 
 	codeCompetence		VARCHAR(10)		NOT NULL,	--FK
 

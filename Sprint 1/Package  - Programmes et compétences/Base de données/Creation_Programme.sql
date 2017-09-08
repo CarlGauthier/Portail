@@ -23,6 +23,7 @@ IF OBJECT_ID ('dbo.tblProgramme') IS NOT NULL
 DROP TABLE dbo.tblProgramme
 GO
 CREATE TABLE tblProgramme (
+	id 
 	code				CHAR(3)			UNIQUE			NOT NULL,
 	annee				CHAR(4)							NOT NULL,
 	codeSpecialisation	VARCHAR(3)		UNIQUE			NOT NULL,
