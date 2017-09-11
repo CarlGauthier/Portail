@@ -89,7 +89,7 @@ input[type='submit']:hover {
     vertical-align: top;
     width: 420px;
     height: 50px;
-    background: url(~/img/cj-layout.png) center center no-repeat;
+    background: url(Images/cj-layout.png) center center no-repeat;
     background-size: contain;
 }
 
@@ -157,7 +157,7 @@ input[type='submit']:hover {
 
     #layout .header-logo {
         width: 100px;
-        background-image: url(~/Content/Images/cj-layout-mini.png);
+        background-image: url(Images/cj-layout-mini.png);
     }
 }
 

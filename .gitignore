@@ -256,6 +256,9 @@ paket-files/
 # CodeRush
 .cr/
 
+# ________________
+*.web.config
+
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
