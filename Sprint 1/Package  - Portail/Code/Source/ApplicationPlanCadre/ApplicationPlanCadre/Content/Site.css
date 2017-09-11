@@ -117,7 +117,7 @@ input[type='submit']:hover {
     background-color: #0a4696;
 }
 
-#layout .tuile-container a {
+ #layout .tuile-container a {
     font-size: 12px;
     color: #ffffff;
     text-decoration: none;
@@ -183,3 +183,57 @@ input[type='submit']:hover {
 #page-content {
     margin-top: 50px;
 }
+/*debut css page index*/
+#indexNav {
+    background-image: url(Images/cegep-index.png);
+    position:fixed;
+    top:auto;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    background-repeat:no-repeat;
+    background-size:cover;
+    box-shadow:inset 0 0 0 1000px rgba(0,0,0,0.7);
+    background-position:center;
+
+    
+}
+
+    #indexNav .index-tuile {
+        margin: 2px 0;
+        padding-top:25px;
+        display: inline-block;
+        vertical-align: top;
+        width: 175px;
+        height: 175px;
+        text-align: center;
+        z-index:1;
+        cursor: pointer;
+        transition: 0.1s;
+       
+    }
+#indexNav .tuile-container a {
+    font-size: 15px;
+    color: #ffffff;
+    text-decoration: none;
+    line-height: 14px;
+    user-select: none;
+    z-index:1;
+}
+#indexNav .index-tuile .glyphicon {
+    margin: 15px 0 10px;
+    font-size: 70px;
+}
+#indexNav .layers .index-tuile:hover {
+    background-color: #083a7c;
+    z-index:1;
+}
+body, html{
+    height:100%;
+    
+}
+
