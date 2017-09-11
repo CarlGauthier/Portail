@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    [Authorize]
+    
     public class AccueilController : Controller
     {
         // GET: Accueil
