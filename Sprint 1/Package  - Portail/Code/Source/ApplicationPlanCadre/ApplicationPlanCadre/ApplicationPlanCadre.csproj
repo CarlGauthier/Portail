@@ -193,7 +193,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccueilController.cs" />
+    <Compile Include="Controllers\CompetenceController.cs" />
+    <Compile Include="Controllers\ConsoleController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -284,6 +287,9 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Accueil\index.cshtml" />
+    <Content Include="Views\Competence\indexCompetence.cshtml" />
+    <Content Include="Views\Stage\indexStage.cshtml" />
+    <Content Include="Views\Console\indexConsole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
