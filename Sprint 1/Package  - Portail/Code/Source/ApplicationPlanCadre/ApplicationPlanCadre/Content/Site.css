@@ -95,24 +95,37 @@ input[type='submit']:hover {
     background-size: contain;
 }
 
-#layout #nav-button {
-    float: left;
+#layout button {
     width: 50px;
     height: 50px;
     font-size: 24px;
-    background-color: #0d5ec9;
     border: none;
     color: #ffffff;
     transition: 0.1s;
 }
 
-    #layout #nav-button:focus {
-        outline: 0;
-    }
+#layout button:focus {
+    outline: 0;
+}
 
-    #layout #nav-button:hover {
-        background-color: #0a4696;
-    }
+#layout #nav-button {
+    float: left;
+    background-color: #0d5ec9;
+}
+
+#layout #logoutForm {
+    float: right;
+}
+
+#layout #logoutForm button {
+    float: right;
+    background-color: transparent;
+    border-left: 1px solid #0d5ec9;
+}
+
+#layout #nav-button:hover, #layout #logoutForm button:hover {
+    background-color: #0d5ec9;
+}
 
 #layout .tuile-container {
     padding: 10px;
@@ -160,25 +173,6 @@ input[type='submit']:hover {
     }
 }
 
-#login-partiel ul li {
-    float: right;
-    line-height: 50px;
-    list-style: none;
-    border-left: 1px solid #0a4696;
-}
-
-#login-partiel a {
-    display: block;
-    padding: 0 20px;
-    height: 50px;
-    color: white;
-    text-decoration: none;
-}
-
-#login-partiel a:hover {
-    color: #e7ecf2;
-}
-
 #page-content {
     margin-top: 50px;
 }
@@ -188,14 +182,14 @@ input[type='submit']:hover {
     width: 100%;
     min-height: calc(100vh - 50px);
     text-align: center;
-    background: url(Images/cegep-index.png) no-repeat center center;
+    background: url(Images/cegep-index.png) no-repeat center center, #4f4f4f;
     background-size: cover;
 }
 
 #accueil h1 {
     padding: 125px 0 25px;
     font-size: 5em;
-    font-family: Segoe UI Light, Calibri, Sans-Serif;
+    font-family: Segoe UI Light, Calibri Light, Sans-Serif;
     color: #ffffff;
 }
 

@@ -23,6 +23,7 @@ IF OBJECT_ID ('dbo.tblProgramme') IS NOT NULL
 DROP TABLE dbo.tblProgramme
 GO
 CREATE TABLE tblProgramme (
+	id					int				IDENTITY(1,1)	NOT NULL,
 	code				CHAR(3)			UNIQUE			NOT NULL,
 	annee				CHAR(4)							NOT NULL,
 	codeSpecialisation	VARCHAR(3)		UNIQUE			NOT NULL,
@@ -34,14 +35,15 @@ CREATE TABLE tblProgramme (
 	condition			VARCHAR(300),
 	sanction			VARCHAR(50),
 	commentaire			VARCHAR(200),
-	PRIMARY KEY (code, annee, codeSpecialisation)
+	PRIMARY KEY (id)
 );
 
 IF OBJECT_ID ('dbo.tblCodeProgramme') IS NOT NULL
 DROP TABLE dbo.tblCodeProgramme
 GO
 CREATE TABLE tblCodeProgramme (
-	code		 CHAR(3)		UNIQUE	NOT NULL,
+	id			 int			IDENTITY(1,1)	NOT NULL,
+	code		 CHAR(3)		UNIQUE			NOT NULL,
 	commentaire	 VARCHAR(200),
-	PRIMARY KEY (Code)
+	PRIMARY KEY (id)
 );
