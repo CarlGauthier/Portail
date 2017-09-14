@@ -1,5 +1,3 @@
-USE [BDPlanCadre]
-GO
 /****** Object:  Table [dbo].[__MigrationHistory]    Script Date: 2017-09-12 10:19:48 ******/
 SET ANSI_NULLS ON
 GO

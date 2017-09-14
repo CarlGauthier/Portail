@@ -1,6 +1,3 @@
-USE BDPlanCadre
-GO
-
 -- Insertion des codes des programmes
 INSERT INTO tblCodeProgramme(code, commentaire)
 VALUES ('420', 'Informatique') 

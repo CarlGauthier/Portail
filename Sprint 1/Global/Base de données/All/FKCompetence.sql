@@ -1,6 +1,3 @@
-USE BDPlanCadre
-GO
-
 ALTER TABLE tblEnonceCompetence
 ADD FOREIGN KEY(idProgramme) REFERENCES tblProgramme(idProgramme)
 

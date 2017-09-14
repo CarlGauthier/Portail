@@ -1,6 +1,3 @@
-USE BDPlanCadre
-GO 
-
 IF OBJECT_ID ('tblProgramme') IS NOT NULL
 DROP TABLE tblProgramme
 GO

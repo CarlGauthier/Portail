@@ -1,6 +1,3 @@
-USE BDPlanCadre
-GO
-
 CREATE TABLE tblEnonceCompetence
 (	
 	idCompetence		INT				NOT NULL	IDENTITY(1,1),
