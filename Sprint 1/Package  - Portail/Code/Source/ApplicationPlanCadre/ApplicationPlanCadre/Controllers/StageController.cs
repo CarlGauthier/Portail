@@ -8,7 +8,7 @@ namespace ApplicationPlanCadre.Controllers
 {
     public class StageController : Controller
     {
-        [Authorize]
+        [Authorize(Roles ="Enseignant,Gestionnaire de stage")]
         // GET: Stage
         public ActionResult indexStage()
         {

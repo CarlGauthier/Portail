@@ -8,7 +8,7 @@ namespace ApplicationPlanCadre.Controllers
 {
     public class ConsoleController : Controller
     {
-        [Authorize]
+        [Authorize(Roles ="Admin")]
         // GET: Console
         public ActionResult indexConsole()
         {

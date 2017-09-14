@@ -218,8 +218,11 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\cegep-index.png" />
     <Content Include="Content\Images\cegep.jpg" />
     <Content Include="Content\Images\cegep2.jpg" />
+    <Content Include="Content\Images\cj-layout-mini.png" />
+    <Content Include="Content\Images\cj-layout.png" />
     <Content Include="Content\Images\cj-logo.png" />
     <Content Include="Content\Images\dicj-logo.png" />
     <Content Include="Content\Images\portail-logo.png" />

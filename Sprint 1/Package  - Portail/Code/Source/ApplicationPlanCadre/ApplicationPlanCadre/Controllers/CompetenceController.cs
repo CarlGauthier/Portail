@@ -8,7 +8,7 @@ namespace ApplicationPlanCadre.Controllers
 {
     public class CompetenceController : Controller
     {
-        [Authorize]
+        [Authorize(Roles ="RCP")]
         // GET: Competence
         public ActionResult indexCompetence()
         {
