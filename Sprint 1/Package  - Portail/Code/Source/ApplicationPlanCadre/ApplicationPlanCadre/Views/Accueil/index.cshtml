@@ -8,14 +8,14 @@
         @if (User.IsInRole("RCP"))
         {
 
-            <a class="icon">
+            <a class="icon" href='@Url.Action("indexCompetence", "Competence")'>
                 <span class="glyphicon glyphicon-education"></span>
                 <p>Gestion des programmes</p>
             </a>
         }
         @if (User.IsInRole("Enseignant,Gestionnaire de stage"))
         {
-            <a class="icon">
+            <a class="icon" href='@Url.Action("indexStage", "Stage")'>
                 <span class="glyphicon glyphicon-briefcase"></span>
                 <p>Stage</p>
             </a>
