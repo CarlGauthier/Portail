@@ -20,22 +20,32 @@
             </div>
             <nav id="nav" class="collapse">
                 <div class="tuile-container">
-                    <a class="tuile">
+
+                    <a class="tuile" href='@Url.Action("Index", "Accueil")'>
+                        <span class="glyphicon glyphicon-home"></span>
+                        <p>Accueil</p>
+                    </a>
+                @if (User.IsInRole("RCP"))
+                {
+                    <a class="tuile"  href='@Url.Action("indexCompetence", "Competence")'>
                         <span class="glyphicon glyphicon-education"></span>
                         <p>Gestion des programmes</p>
                     </a>
-                    <a class="tuile">
+                }
+                @if (User.IsInRole("Enseignant,Gestionnaire de stage"))
+                {
+                    <a class="tuile" href='@Url.Action("indexStage", "Stage")'>
                         <span class="glyphicon glyphicon-briefcase"></span>
                         <p>Stage</p>
                     </a>
-                    <a class="tuile">
-                        <span class="glyphicon glyphicon-tasks"></span>
-                        <p>Liste des compétences</p>
-                    </a>
-                    <a class="tuile">
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <a class="tuile" href='@Url.Action("indexConsole", "Console")'>
                         <span class="glyphicon glyphicon-cog"></span>
                         <p>Console d'administration</p>
                     </a>
+                }
                 </div>
             </nav>
         </header>
