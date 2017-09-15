@@ -259,7 +259,7 @@ paket-files/
 # ________________
 *web.config
 *LoginBD.txt
-*serveurIIS.txt
+*DossierIIS.txt
 *RunProd.bat
 *RunTest.bat
 
