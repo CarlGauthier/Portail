@@ -1,0 +1,36 @@
+USER : gauca1532715@etu.cegepjonquiere.ca
+PSW  : Projet-2017
+RÔLE : Admin
+________________________________________________
+USER : larsa1432920@etu.cegepjonquiere.ca
+PSW  : Projet-2017
+RÔLE : RCP
+________________________________________________
+USER : foned1530057@etu.cegepjonquiere.ca
+PSW  : Projet-2017
+RÔLE : Conseiller
+________________________________________________
+USER : cotfr1530860@etu.cegepjonquiere.ca
+PSW  : Projet-2017
+RÔLE : Enseignant
+________________________________________________
+USER : hamfa1330387@etu.cegepjonquiere.ca
+PSW  : Projet-2017
+RÔLE : RCD
+________________________________________________
+USER : ducma1532694@etu.cegepjonquiere.ca
+PSW  : Projet-2017
+RÔLE : Gestionnaire de stage
+________________________________________________
+
+--Pas encore implémenté
+|||||||||||||||||||||||
+VVVVVVVVVVVVVVVVVVVVVVV
+
+USER : ericchose@outlook.ca
+PSW  : Projet-2017
+RÔLE : Admin, RCP, Conseiller, Enseignant, RCD, Gestionnaire de stage
+________________________________________________
+USER : aymentravail@outlook.ca
+PSW  : Projet-2017
+RÔLE : RCP, Gestionnaire de stage

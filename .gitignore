@@ -257,9 +257,9 @@ paket-files/
 .cr/
 
 # ________________
-*.web.config
-*.LoginBD.txt
-*.serveurIIS.txt
+*web.config
+*LoginBD.txt
+*serveurIIS.txt
 
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
