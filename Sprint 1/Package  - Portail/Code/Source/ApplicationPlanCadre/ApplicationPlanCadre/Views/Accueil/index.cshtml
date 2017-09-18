@@ -14,7 +14,7 @@
                 <p>Gestion des programmes</p>
             </a>
         }
-        @if (User.IsInRole("Enseignant,Gestionnaire de stage"))
+        @if (User.IsInRole("Enseignant")||User.IsInRole("Gestionnaire de stage"))
         {
             <a class="icon" href='@Url.Action("indexStage", "Stage")'>
                 <span class="glyphicon glyphicon-briefcase"></span>
