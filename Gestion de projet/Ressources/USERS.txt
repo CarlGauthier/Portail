@@ -1,18 +1,22 @@
 USER : gauca1532715@etu.cegepjonquiere.ca
 PSW  : Projet-2017
 RÔLE : Admin
+ACCÈS: Console d'administration
 ________________________________________________
 USER : larsa1432920@etu.cegepjonquiere.ca
 PSW  : Projet-2017
 RÔLE : RCP
+ACCÈS: Gestion des programme
 ________________________________________________
 USER : foned1530057@etu.cegepjonquiere.ca
 PSW  : Projet-2017
 RÔLE : Conseiller
+ACCÈS: Rien présentemement
 ________________________________________________
 USER : cotfr1530860@etu.cegepjonquiere.ca
 PSW  : Projet-2017
 RÔLE : Enseignant
+ACCÈS: Stage
 ________________________________________________
 USER : hamfa1330387@etu.cegepjonquiere.ca
 PSW  : Projet-2017
@@ -21,6 +25,7 @@ ________________________________________________
 USER : ducma1532694@etu.cegepjonquiere.ca
 PSW  : Projet-2017
 RÔLE : Gestionnaire de stage
+ACCÈS: Rien présentemement
 ________________________________________________
 
 --Pas encore implémenté
@@ -30,7 +35,9 @@ VVVVVVVVVVVVVVVVVVVVVVV
 USER : ericchose@outlook.ca
 PSW  : Projet-2017
 RÔLE : Admin, RCP, Conseiller, Enseignant, RCD, Gestionnaire de stage
+ACCÈS: tout
 ________________________________________________
 USER : aymentravail@outlook.ca
 PSW  : Projet-2017
 RÔLE : RCP, Gestionnaire de stage
+ACCÈS: Gestion des programme, Stage
