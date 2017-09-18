@@ -244,7 +244,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="obj\Release\CoreCompileInputs.cache" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\IIS Développement.pubxml" />
+    <None Include="Properties\PublishProfiles\IIS Production.pubxml" />
+    <None Include="Properties\PublishProfiles\IIS Test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
