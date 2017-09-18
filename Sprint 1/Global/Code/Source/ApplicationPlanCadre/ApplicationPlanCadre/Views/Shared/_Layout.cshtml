@@ -14,33 +14,28 @@
             <div class="fluid-container">
                 <div id="layout-head" class="clearfix">
                     <button type="button" id="nav-button" data-toggle="collapse" data-target="#nav"><span class="glyphicon glyphicon-th"></span></button>
-                    <a href='@Url.Action("Index", "Accueil")'><div class="header-logo"><!----></div></a>
+                    <a><div class="header-logo"><!----></div></a>
                     @Html.Partial("_LoginPartial")
                 </div>
             </div>
             <nav id="nav" class="collapse">
                 <div class="tuile-container">
-                @if (User.IsInRole("RCP"))
-                {
-                    <a class="tuile"  href='@Url.Action("indexCompetence", "Competence")'>
+                    <a class="tuile">
                         <span class="glyphicon glyphicon-education"></span>
                         <p>Gestion des programmes</p>
                     </a>
-                }
-                @if (User.IsInRole("Enseignant,Gestionnaire de stage"))
-                {
-                    <a class="tuile" href='@Url.Action("indexStage", "Stage")'>
+                    <a class="tuile">
                         <span class="glyphicon glyphicon-briefcase"></span>
                         <p>Stage</p>
                     </a>
-                }
-                @if (User.IsInRole("Admin"))
-                {
-                    <a class="tuile" href='@Url.Action("indexConsole", "Console")'>
+                    <a class="tuile">
+                        <span class="glyphicon glyphicon-tasks"></span>
+                        <p>Liste des compétences</p>
+                    </a>
+                    <a class="tuile">
                         <span class="glyphicon glyphicon-cog"></span>
                         <p>Console d'administration</p>
                     </a>
-                }
                 </div>
             </nav>
         </header>

@@ -257,7 +257,12 @@ paket-files/
 .cr/
 
 # ________________
-*.web.config
+*Web.config
+*LoginBD.txt
+*DossierIIS.txt
+*RunProd.bat
+*RunLocal.bat
+*RunTest.bat
 
 # Python Tools for Visual Studio (PTVS)
 __pycache__/

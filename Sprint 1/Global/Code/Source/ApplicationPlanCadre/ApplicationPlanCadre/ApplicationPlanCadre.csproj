@@ -193,15 +193,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccueilController.cs" />
-    <Compile Include="Controllers\CompetenceController.cs" />
-    <Compile Include="Controllers\ConsoleController.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\StageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\customAuthorize.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BDPlanCadre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -220,11 +215,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\cegep-index.png" />
     <Content Include="Content\Images\cegep.jpg" />
     <Content Include="Content\Images\cegep2.jpg" />
-    <Content Include="Content\Images\cj-layout-mini.png" />
-    <Content Include="Content\Images\cj-layout.png" />
     <Content Include="Content\Images\cj-logo.png" />
     <Content Include="Content\Images\dicj-logo.png" />
     <Content Include="Content\Images\portail-logo.png" />
@@ -245,8 +237,8 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="obj\Release\CoreCompileInputs.cache" />
     <None Include="Properties\PublishProfiles\IIS Développement.pubxml" />
-    <None Include="Properties\PublishProfiles\IIS Production.pubxml" />
     <None Include="Properties\PublishProfiles\IIS Test.pubxml" />
+    <None Include="Properties\PublishProfiles\Version Officiel.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -295,10 +287,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Accueil\index.cshtml" />
-    <Content Include="Views\Competence\indexCompetence.cshtml" />
-    <Content Include="Views\Stage\indexStage.cshtml" />
-    <Content Include="Views\Console\indexConsole.cshtml" />
-    <Content Include="Views\Error\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
