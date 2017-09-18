@@ -257,7 +257,7 @@ paket-files/
 .cr/
 
 # ________________
-*web.config
+*Web.config
 *LoginBD.txt
 *DossierIIS.txt
 *RunProd.bat
