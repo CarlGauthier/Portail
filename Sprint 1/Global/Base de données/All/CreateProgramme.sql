@@ -1,7 +1,7 @@
-IF OBJECT_ID ('tblProgramme') IS NOT NULL
-DROP TABLE tblProgramme
+IF OBJECT_ID ('Programme') IS NOT NULL
+DROP TABLE Programme
 GO
-CREATE TABLE tblProgramme
+CREATE TABLE Programme
 (
 	idProgramme				INT				NOT NULL	IDENTITY(1,1),
 
@@ -19,20 +19,20 @@ CREATE TABLE tblProgramme
 	docMinistere_path		VARCHAR(200)	NULL,
 	dateValidation			DATETIME		NULL,
 
-	idCodeProgramme			INT				NOT NULL	UNIQUE,		--FK
+	idEnteteProgramme			INT				NOT NULL	UNIQUE,		--FK
 
 	PRIMARY KEY (idProgramme)
 );
 
-IF OBJECT_ID ('tblCodeProgramme') IS NOT NULL
-DROP TABLE tblCodeProgramme
+IF OBJECT_ID ('EnteteProgramme') IS NOT NULL
+DROP TABLE EnteteProgramme
 GO
-CREATE TABLE tblCodeProgramme
+CREATE TABLE EnteteProgramme
 (
-	idCodeProgramme		INT				NOT NULL	IDENTITY(1,1),
+	idEnteteProgramme		INT				NOT NULL	IDENTITY(1,1),
 		
 	code				CHAR(3)			NOT NULL	UNIQUE,
 	commentaire			VARCHAR(200)	NULL,
 
-	PRIMARY KEY(idCodeProgramme)
+	PRIMARY KEY(idEnteteProgramme)
 );

@@ -52,6 +52,10 @@ input[type='submit']:hover {
     margin-top: 150px;
 }
 
+.portail-associes a img {
+    width: 100%;
+}
+
 @media screen and (max-width: 767px) {
 
     .portail {
@@ -234,4 +238,15 @@ input[type='submit']:hover {
         width: 140px;
         height: 180px;
     }
+}
+
+#programme #tree-view {
+    float: left;
+    min-height: calc(100vh - 50px);
+    width: 450px;
+    background-color: #e7ecf2;
+}
+
+#programme #action-container {
+    float: left;
 }

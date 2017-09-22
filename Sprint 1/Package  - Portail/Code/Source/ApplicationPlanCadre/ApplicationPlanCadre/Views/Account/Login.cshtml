@@ -2,7 +2,7 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "Portail";
-    Layout = "";
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -55,8 +55,8 @@
                     </p>
                 }
                 <div class="portail-associes clearfix">
-                    <img class="col-xs-6" src="~/Content/Images/dicj-logo.png" />
-                    <img class="col-xs-6" src="~/Content/Images/cj-logo.png" />
+                    <a class="col-xs-6"><img src="~/Content/Images/dicj-logo.png" /></a>
+                    <a class="col-xs-6" href="http://www.cegepjonquiere.ca/"><img src="~/Content/Images/cj-logo.png" /></a>
                 </div>
             </div>
         </div>

@@ -25,10 +25,8 @@ ________________________________________________
 USER : ducma1532694@etu.cegepjonquiere.ca
 PSW  : Projet-2017
 RÔLE : Gestionnaire de stage
-ACCÈS: Rien présentemement
+ACCÈS: Rien présentement
 ________________________________________________
-
-
 USER : ericchose@outlook.ca
 PSW  : Projet-2017
 RÔLE : Admin, RCP, Conseiller, Enseignant, RCD, Gestionnaire de stage

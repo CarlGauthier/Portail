@@ -1,0 +1,130 @@
+﻿@model ApplicationPlanCadre.Models.Programme
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Programme</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EnteteProgramme.code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnteteProgramme.code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.annee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.annee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nbUnite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nbUnite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.codeSpecialisation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.codeSpecialisation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.specialisation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.specialisation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nbHeurefrmGenerale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nbHeurefrmGenerale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nbHeurefrmSpecifique)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nbHeurefrmSpecifique)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.condition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.condition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sanction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sanction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.commentaire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.commentaire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.docMinistere_path)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.docMinistere_path)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateValidation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateValidation)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idProgramme }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
