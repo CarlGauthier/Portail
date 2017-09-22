@@ -28,9 +28,6 @@ RÔLE : Gestionnaire de stage
 ACCÈS: Rien présentemement
 ________________________________________________
 
---Pas encore implémenté
-|||||||||||||||||||||||
-VVVVVVVVVVVVVVVVVVVVVVV
 
 USER : ericchose@outlook.ca
 PSW  : Projet-2017

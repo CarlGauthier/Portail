@@ -1,11 +1,11 @@
-ALTER TABLE tblEnonceCompetence
+ALTER TABLE EnonceCompetence
 ADD FOREIGN KEY(idProgramme) REFERENCES tblProgramme(idProgramme)
 
-ALTER TABLE tblContexteRealisation
-ADD FOREIGN KEY(idCompetence)REFERENCES tblEnonceCompetence(idCompetence)
+ALTER TABLE ContexteRealisation
+ADD FOREIGN KEY(idCompetence)REFERENCES EnonceCompetence(idCompetence)
 
-ALTER TABLE tblElementCompetence
-ADD FOREIGN KEY(idCompetence) REFERENCES tblEnonceCompetence(idCompetence)
+ALTER TABLE ElementCompetence
+ADD FOREIGN KEY(idCompetence) REFERENCES EnonceCompetence(idCompetence)
 
-ALTER TABLE tblCriterePerformance
-ADD FOREIGN KEY(idElement) REFERENCES tblElementCompetence(idElement)
+ALTER TABLE CriterePerformance
+ADD FOREIGN KEY(idElement) REFERENCES ElementCompetence(idElement)

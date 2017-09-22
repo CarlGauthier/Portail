@@ -1,4 +1,4 @@
-CREATE TABLE tblEnonceCompetence
+CREATE TABLE EnonceCompetence
 (	
 	idCompetence		INT				NOT NULL	IDENTITY(1,1),
 
@@ -14,7 +14,7 @@ CREATE TABLE tblEnonceCompetence
 	PRIMARY KEY(idCompetence)
 )
 
-CREATE TABLE tblContexteRealisation
+CREATE TABLE ContexteRealisation
 (
 	idContexte			INT				NOT NULL	IDENTITY(1,1),
 
@@ -26,7 +26,7 @@ CREATE TABLE tblContexteRealisation
 	PRIMARY KEY(idContexte)
 )
 
-CREATE TABLE tblElementCompetence
+CREATE TABLE ElementCompetence
 (
 	idElement			INT				NOT NULL	IDENTITY(1,1),
 
@@ -40,7 +40,7 @@ CREATE TABLE tblElementCompetence
 	PRIMARY KEY (idElement)
 )
 
-CREATE TABLE tblCriterePerformance
+CREATE TABLE CriterePerformance
 (
 	idCritere			INT				NOT NULL	IDENTITY(1,1),
 
