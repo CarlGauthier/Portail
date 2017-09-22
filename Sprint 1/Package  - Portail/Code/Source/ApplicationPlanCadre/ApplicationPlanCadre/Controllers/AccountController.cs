@@ -55,9 +55,14 @@ namespace ApplicationPlanCadre.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Accueil");
+            }
+            ViewBag.ReturnUrl = returnUrl ?? Url.Action("Index", "Accueil");
             return View();
         }
 
@@ -392,7 +397,7 @@ namespace ApplicationPlanCadre.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Accueil");
+            return RedirectToAction("Login", "Account");
         }
 
         //

@@ -8,8 +8,7 @@
 
         @if (User.IsInRole("RCP"))
         {
-
-            <a class="icon" href='@Url.Action("indexCompetence", "Competence")'>
+            <a class="icon" href='@Url.Action("Index", "Programme")'>
                 <span class="glyphicon glyphicon-education"></span>
                 <p>Gestion des programmes</p>
             </a>
@@ -28,9 +27,5 @@
                 <p>Console d'administration</p>
             </a>
         }
-
-
-
-
     </div>
 </div>

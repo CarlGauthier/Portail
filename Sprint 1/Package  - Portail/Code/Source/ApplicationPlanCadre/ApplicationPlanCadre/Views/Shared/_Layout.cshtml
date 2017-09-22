@@ -20,14 +20,18 @@
             </div>
             <nav id="nav" class="collapse">
                 <div class="tuile-container">
+                <a class="tuile" href='@Url.Action("Index", "Accueil")'>
+                    <span class="glyphicon glyphicon-home"></span>
+                    <p>Accueil</p>
+                </a>
                 @if (User.IsInRole("RCP"))
                 {
-                    <a class="tuile"  href='@Url.Action("indexCompetence", "Competence")'>
+                    <a class="tuile"  href='@Url.Action("Index", "Programme")'>
                         <span class="glyphicon glyphicon-education"></span>
                         <p>Gestion des programmes</p>
                     </a>
                 }
-                @if (User.IsInRole("Enseignant,Gestionnaire de stage"))
+                @if (User.IsInRole("Enseignant") || User.IsInRole("Gestionnaire de stage"))
                 {
                     <a class="tuile" href='@Url.Action("indexStage", "Stage")'>
                         <span class="glyphicon glyphicon-briefcase"></span>
