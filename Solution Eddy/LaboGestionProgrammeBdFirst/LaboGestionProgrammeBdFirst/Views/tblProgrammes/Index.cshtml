@@ -1,0 +1,106 @@
+﻿@model IEnumerable<LaboGestionProgrammeBdFirst.tblProgramme>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="jumbotron">
+    <img src="~/image/logo.png" alt="" />
+
+    <h1>Portail</h1>
+    <h2>Cégep de Jonquière</h2>
+
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.annee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codeSpecialisation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nbUnité)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.specialisation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.formationGeneral)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.formationSpecifique)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.condition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sanction)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.commentaire)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblCodeProgramme.code)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.annee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codeSpecialisation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nbUnité)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.specialisation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.formationGeneral)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.formationSpecifique)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.condition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sanction)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.commentaire)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblCodeProgramme.code)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

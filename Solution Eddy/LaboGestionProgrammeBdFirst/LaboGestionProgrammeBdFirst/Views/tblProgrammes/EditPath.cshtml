@@ -1,0 +1,165 @@
+﻿@model LaboGestionProgrammeBdFirst.tblProgramme
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="jumbotron">
+    <h1>@Html.DisplayFor(model => model.nom)</h1>
+    <h2>Spécialisation : @Html.DisplayFor(model => model.specialisation)</h2>
+    <h3>code : @Html.DisplayFor(model => model.tblCodeProgramme.code)-@Html.DisplayFor(model => model.annee)-@Html.DisplayFor(model => model.codeSpecialisation)</h3>
+</div>
+
+<h2>Modifications des informations </h2>
+
+
+<!-- **************************************************************************************************************************************** -->
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="invisible">
+            <div class="form-group">
+                @Html.LabelFor(model => model.code, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.EditorFor(model => model.code, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.code, "", new { @class = "text-danger" })
+
+                    <!--@Html.DisplayFor(model => model.code, new { htmlAttributes = new { @class = "form-control" } })-->
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.annee, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.annee, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.annee, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.codeSpecialisation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.codeSpecialisation, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.codeSpecialisation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nom, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.specialisation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.specialisation, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.specialisation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.commentaire, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.commentaire, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.commentaire, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            
+        </div>
+
+
+
+        <!---->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="code">Type de sanction : </label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.sanction, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.sanction, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Nombre d'unité : </label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nbUnité, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nbUnité, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Conditions particulières : </label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.condition, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.condition, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Formation générale : </label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.formationGeneral, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.formationGeneral, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Formation spécifique : </label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.formationSpecifique, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.formationSpecifique, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Document du ministère : </label>
+                @Html.DisplayFor(model => model.pathDocMinistere)
+                <!--Je ne comprend pas les deux lignes suivantes. En quoi sont elles dépendantes par exemple ?-->
+                <input type="file" id="fileLoader" name="files" title="Load File" />
+                <asp:Button ID="LoginButton" runat="server" Text="ASP click Me" onclientclick="openfileDialog()" />
+                
+                @Html.ActionLink("Sauver", "EditPath", new { id = Model.id })
+                
+                <!--
+                <form id="form1" runat="server" enctype="multipart/form-data">
+                    <input type="file" id="myFile" name="myFile" />
+                    <asp:Button runat="server" ID="btnUpload" OnClick="testAlert" Text="Upload" />
+                </form>
+                -->
+            </div>
+        </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+}
+
+
+<div class="row">
+    <div class="competences">
+        <h1>Zone compétence</h1>
+
+    </div>
+    <button class="enregistrerProgramme" type="submit">Enregistrer</button>
+    <button class="enregistrerProgramme" type="submit">Valider</button>
+
+</div>
+
+
+
+<div>
+    @Html.ActionLink("Retour à la liste des programmes", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

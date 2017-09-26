@@ -8,6 +8,6 @@ more FKCompetence.sql >> ../sqltemp.sql
 more FKProgramme.sql >> ../sqltemp.sql
 more InsertProgramme.sql >> ../sqltemp.sql
 cd ../
-sqlcmd -S //NOM DU SERVEUR LOCAL// -E -i sqltemp.sql
+sqlcmd -S INFO-324-1A-110 -E -i sqltemp.sql
 del sqltemp.sql
 pause
