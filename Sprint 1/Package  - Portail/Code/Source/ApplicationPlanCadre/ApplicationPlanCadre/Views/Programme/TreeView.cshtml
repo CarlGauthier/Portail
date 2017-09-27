@@ -4,15 +4,15 @@
 
     @foreach (var programme in Model)
     {
-        @Html.DisplayFor(p => programme.nom);
+        <a>@Html.DisplayFor(p => programme.nom)</a>
 
         foreach (var enonceCompetence in programme.EnonceCompetence)
         {
-            @Html.DisplayFor(enc => enonceCompetence.enonceCompetence1);
+            <a>@Html.DisplayFor(enc => enonceCompetence.enonceCompetence1)</a>
 
             foreach (var elementCompetence in enonceCompetence.ElementCompetence)
             {
-                @Html.DisplayFor(elc => elementCompetence.element);
+                <a>@Html.DisplayFor(elc => elementCompetence.element)</a>
             }
         }
     }

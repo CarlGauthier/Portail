@@ -14,7 +14,7 @@ namespace ApplicationPlanCadre.Models
 
         [Column("criterePerformance")]
         [Required]
-        [StringLength(150)]
+        [StringLength(300)]
         public string criterePerformance1 { get; set; }
 
         public int numero { get; set; }

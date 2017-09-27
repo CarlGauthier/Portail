@@ -1,0 +1,95 @@
+﻿.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+@media screen and (max-width: 767px) {
+
+    .row-eq-height {
+        display: block;
+    }
+}
+
+input, button {
+    outline: 0;
+}
+
+.form-control {
+    border: 1px solid #aaaaaa;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.small-input {
+    width: 100px;
+}
+
+input[type='submit'], .fancy-button {
+    margin: 0 15px;
+    display: inline-block;
+    border: 2px solid;
+    border-radius: 0;
+    color: #083a7c;
+    background-color: transparent;
+    font-size: 1.2em;
+    transition: 0.1s;
+}
+
+input[type='submit']:hover, .fancy-button:hover {
+    border-color: #083a7c;
+    background-color: #083a7c;
+    color: #ffffff;
+}
+
+.form-box {
+    margin: 0 15px;
+    padding: 20px;
+    border: 1px solid #aaaaaa;
+    background-color: #eef2f6;
+}
+
+.form-box hr {
+    border: none;
+    border-bottom: 1px solid #aaaaaa;
+}
+
+.crud-list table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+.crud-list th, .crud-list td {
+    padding: 10px 20px;
+}
+
+.crud-list th {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.crud-list td {
+    background-color: #e7ecf2;
+}
+
+.crud-list button {
+    background: none;
+    border: none;
+    color: #083a7c;
+}
+
+.crud-list button:hover {
+    color: #0d5ec9;
+}
+
+.crud-list .action-cell {
+    text-align: center;
+    background-color: #eef2f6;
+}
+
+.crud-list .action-cell-header {
+    padding: 10px 5px;
+    text-align: center;
+}

@@ -16,13 +16,12 @@ namespace ApplicationPlanCadre.Models
         }
 
         [Key]
-        public int idEnteteProgramme { get; set; }
-
-        [Required]
         [StringLength(3)]
-        public string code { get; set; }
+        [Display(Name = "Code")]
+        public string codeProgramme { get; set; }
 
         [StringLength(200)]
+        [Display(Name = "Commentaire")]
         public string commentaire { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

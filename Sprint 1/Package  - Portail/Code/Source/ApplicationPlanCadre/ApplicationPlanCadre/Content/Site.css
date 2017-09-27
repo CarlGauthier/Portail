@@ -2,74 +2,55 @@
     font-family: Segoe UI, Calibri, Sans-Serif;
 }
 
-.portail {
+#portail #image {
+    min-height: 100vh;
     background-image: url(Images/cegep.jpg);
+    background-position: center center;
     background-size: cover;
-    background-position: 25% bottom;
 }
 
-.portail-login {
+#portail #main {
     min-height: 100vh;
     background-color: #e7ecf2;
 }
 
-.logo-portail {
+#portail #login {
+    min-height: calc(100vh - 175px);
+}
+
+#portail #portail-logo {
     width: 100%;
 }
 
-.portail-forgotPassword {
+#portail #forgot-password {
     text-align: center;
 }
 
-.portail-login .form-control {
-    border: 1px solid #aaaaaa;
-    border-radius: 0;
-    box-shadow: none;
-}
-
-.portail-submit {
+#portail #submit {
     text-align: center;
     margin: 25px;
 }
 
-input[type='submit'] {
-    display: inline-block;
-    color: #083a7c;
-    border: 2px solid;
-    border-radius: 0;
-    background-color: transparent;
-    font-size: 1.2em;
-    transition: 0.1s;
+#portail #associes {
+    height: 100px;
 }
 
-input[type='submit']:hover {
-    border-color: #083a7c;
-    background-color: #083a7c;
-    color: #ffffff;
-}
-
-.portail-associes {
-    margin-top: 150px;
-}
-
-.portail-associes a img {
+#portail #associes a img {
     width: 100%;
 }
 
 @media screen and (max-width: 767px) {
 
-    .portail {
-        background-size: 100%;
-        background-position: center top;
+    #portail #image {
+        min-height: 100px;
     }
 
-    .portail-login {
-        margin-top: 100px;
+    #portail #login {
+        min-height: 0;
+    }
+
+    #portail #main {
         min-height: calc(100vh - 100px);
-    }
-
-    .portail-associes {
-        margin-top: 0;
     }
 }
 
@@ -106,10 +87,6 @@ input[type='submit']:hover {
     border: none;
     color: #ffffff;
     transition: 0.1s;
-}
-
-#layout button:focus {
-    outline: 0;
 }
 
 #layout #nav-button {
@@ -167,6 +144,7 @@ input[type='submit']:hover {
 }
 
 @media (max-width: 767px) {
+    
     #layout .tuile-container {
         text-align: center;
     }
@@ -228,6 +206,7 @@ input[type='submit']:hover {
 }
 
 @media (max-width: 767px) {
+
     #accueil h1 {
         padding: 25px 0;
         font-size: 3em;
@@ -241,12 +220,30 @@ input[type='submit']:hover {
 }
 
 #programme #tree-view {
+    padding: 15px;
     float: left;
     min-height: calc(100vh - 50px);
     width: 450px;
     background-color: #e7ecf2;
 }
 
+#programme #tree-view a {
+    padding: 5px 0;
+    display: block;
+    text-decoration: none;
+    color: #000000;
+    cursor: pointer;
+}
+
+#programme #tree-view a:hover {
+    text-decoration: underline;
+    color: #083a7c;
+}
+
 #programme #action-container {
     float: left;
+}
+
+#console-programme {
+    margin-top: 100px;
 }

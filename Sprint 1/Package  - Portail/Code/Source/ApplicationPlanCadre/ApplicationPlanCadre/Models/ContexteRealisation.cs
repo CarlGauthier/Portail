@@ -14,7 +14,7 @@ namespace ApplicationPlanCadre.Models
 
         [Column("contexteRealisation")]
         [Required]
-        [StringLength(150)]
+        [StringLength(300)]
         public string contexteRealisation1 { get; set; }
 
         [StringLength(200)]

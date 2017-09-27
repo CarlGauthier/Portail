@@ -19,7 +19,7 @@ namespace ApplicationPlanCadre.Models
         public int idElement { get; set; }
 
         [Required]
-        [StringLength(150)]
+        [StringLength(300)]
         public string element { get; set; }
 
         public int numero { get; set; }
