@@ -7,9 +7,10 @@ using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
+    [customAuthorize(Roles = "Admin")]
     public class ConsoleController : Controller
     {
-        [customAuthorize(Roles ="Admin")]
+        
         // GET: Console
         public ActionResult indexConsole()
         {

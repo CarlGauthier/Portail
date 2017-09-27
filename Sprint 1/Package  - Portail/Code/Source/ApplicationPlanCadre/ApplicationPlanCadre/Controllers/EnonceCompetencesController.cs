@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ApplicationPlanCadre.Models;
+using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
+    [customAuthorize(Roles ="RCP")]
     public class EnonceCompetencesController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
