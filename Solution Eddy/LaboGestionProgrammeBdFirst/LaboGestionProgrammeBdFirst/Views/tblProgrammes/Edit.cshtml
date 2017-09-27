@@ -21,7 +21,7 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.code)
 
         <div class="invisible">
             <div class="form-group">
@@ -34,6 +34,20 @@
                     <!--@Html.DisplayFor(model => model.code, new { htmlAttributes = new { @class = "form-control" } })-->
                 </div>
             </div>
+
+            <!-- Test **************************************************************************************************************************************** -->
+            <div class="form-group">
+                @Html.LabelFor(model => model.dateValidation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.EditorFor(model => model.dateValidation, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.dateValidation, "", new { @class = "text-danger" })
+
+                    <!--@Html.DisplayFor(model => model.dateValidation, new { htmlAttributes = new { @class = "form-control" } })-->
+                </div>
+            </div>
+            <!-- Test **************************************************************************************************************************************** -->
+
             <div class="form-group">
                 @Html.LabelFor(model => model.annee, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -88,8 +102,8 @@
             <div class="form-group">
                 <label>Nombre d'unité : </label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.nbUnité, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.nbUnité, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.nbUnite, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nbUnite, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
@@ -104,30 +118,30 @@
             <div class="form-group">
                 <label>Formation générale : </label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.formationGeneral, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.formationGeneral, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.nbHeurefrmGenerale, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nbHeurefrmGenerale, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Formation spécifique : </label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.formationSpecifique, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.formationSpecifique, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.nbHeurefrmSpecifique, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nbHeurefrmSpecifique, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 <label>Document du ministère : </label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.pathDocMinistere, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.pathDocMinistere, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.docMinistere_path, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.docMinistere_path, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group">
                     <div class="col-md-4">
-                        @Html.DisplayFor(model => model.pathDocMinistere) .pdf
+                        @Html.DisplayFor(model => model.docMinistere_path) .pdf
                     </div>
                     <div class="col-md-4">
                         <input type="button" class="btn btn-info" value="Modifier" onclick="location.href='@Url.Action("UploadFile", "tblProgrammes",  new { type = "file" })'" />
@@ -165,7 +179,7 @@
             }
             -->
                     <!-- Exemple de lien fonctionnel
-            @Html.ActionLink("Sauver", "EditPath", new { id = Model.id })
+            @Html.ActionLink("Sauver", "EditPath", new { id = Model.idCodeProgramme })
             Esmple de bouton fonctionnel
             <input type="button" class="btn btn-info" value="Un bouton!" onclick="location.href='@Url.Action("Sauver", "EditPath")'" />
             -->

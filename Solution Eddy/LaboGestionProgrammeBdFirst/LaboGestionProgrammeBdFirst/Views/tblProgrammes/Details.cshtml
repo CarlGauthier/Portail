@@ -18,12 +18,12 @@
         @Html.DisplayFor(model => model.sanction)
         <br><br>
         <label>Nombre d'unité : </label>
-        @Html.DisplayFor(model => model.nbUnité)
+        @Html.DisplayFor(model => model.nbUnite)
         <br><br>
         <label>Conditions particulières : </label>
         @Html.DisplayFor(model => model.condition)
         <br><br>
-        <!--<button class="btn btn-default" type="submit">@Html.ActionLink("Consulter", "ViewPdf", "tblProgrammes")</button>@Html.DisplayFor(model => model.pathDocMinistere)--> <!--Utiliser la donnée de la BD pour afficher-->
+        <!--<button class="btn btn-default" type="submit">@Html.ActionLink("Consulter", "ViewPdf", "tblProgrammes")</button>@Html.DisplayFor(model => model.docMinistere_path)--> <!--Utiliser la donnée de la BD pour afficher-->
 
         <a href="~/image/programme.pdf" target=_blank>Document du ministère (PDF)</a>
         
@@ -34,10 +34,10 @@
         
         <label>Durée totale : </label>@Html.ViewData["total"]<br><br>
         <label>Formation générale : </label>
-        @Html.DisplayFor(model => model.formationGeneral)
+        @Html.DisplayFor(model => model.nbHeurefrmGenerale)
         <br><br>
         <label>Formation spécifique : </label>
-        @Html.DisplayFor(model => model.formationSpecifique)
+        @Html.DisplayFor(model => model.nbHeurefrmSpecifique)
         <br><br>
        
     </div>
@@ -52,10 +52,10 @@
 
     </div>
     <div class="col-md-4">
-        <input type="button" class="btn btn-info" value="Modifier" onclick="location.href='@Url.Action("Edit", "tblProgrammes", new { id = Model.id })'" />
+        <input type="button" class="btn btn-info" value="Modifier" onclick="location.href='@Url.Action("Edit", "tblProgrammes", new { id = Model.idCodeProgramme })'" />
 
         <!-- Exemple de lien fonctionnel
-        <div class="edit">@Html.ActionLink("Modifier", "Edit", new { id = Model.id })</div>
+        <div class="edit">@Html.ActionLink("Modifier", "Edit", new { id = Model.code })</div>
         -->
 
     </div>
@@ -88,6 +88,6 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.code }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -149,8 +149,23 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AspNetRoles.cs">
+      <DependentUpon>programmeDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaims.cs">
+      <DependentUpon>programmeDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogins.cs">
+      <DependentUpon>programmeDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUsers.cs">
+      <DependentUpon>programmeDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>programmeDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -169,13 +184,44 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProgrammesController.cs" />
     <Compile Include="Models\tblProgrammesController.cs" />
+    <Compile Include="programmeDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>programmeDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="programmeDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>programmeDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="programmeDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>programmeDB.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tblCodeProgramme.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>programmeDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblContexteRealisation.cs">
+      <DependentUpon>programmeDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblCriterePerformance.cs">
+      <DependentUpon>programmeDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblElementCompetence.cs">
+      <DependentUpon>programmeDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblEnonceCompetence.cs">
+      <DependentUpon>programmeDB.tt</DependentUpon>
     </Compile>
     <Compile Include="tblProgramme.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>programmeDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tt.cs">
+      <DependentUpon>programmeDB.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +241,16 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Content Include="programmeDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>programmeDB.edmx</DependentUpon>
+      <LastGenOutput>programmeDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="programmeDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>programmeDB.edmx</DependentUpon>
+      <LastGenOutput>programmeDB.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -206,6 +262,13 @@
     </EntityDeploy>
     <Content Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="programmeDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>programmeDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="programmeDB.edmx.diagram">
+      <DependentUpon>programmeDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -224,6 +287,7 @@
     </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -249,6 +313,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UploadedFiles\" />
+    <Folder Include="Views\Programmes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

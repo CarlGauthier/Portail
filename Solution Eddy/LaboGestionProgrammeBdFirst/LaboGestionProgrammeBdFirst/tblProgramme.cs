@@ -14,21 +14,30 @@ namespace LaboGestionProgrammeBdFirst
     
     public partial class tblProgramme
     {
-        public int id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblProgramme()
+        {
+            this.tblEnonceCompetence = new HashSet<tblEnonceCompetence>();
+        }
+    
+        public int idProgramme { get; set; }
         public string code { get; set; }
         public string annee { get; set; }
-        public string codeSpecialisation { get; set; }
-        public string nbUnité { get; set; }
-        public string specialisation { get; set; }
         public string nom { get; set; }
-        public string formationGeneral { get; set; }
-        public string formationSpecifique { get; set; }
+        public string nbUnite { get; set; }
+        public string codeSpecialisation { get; set; }
+        public string specialisation { get; set; }
+        public Nullable<int> nbHeurefrmGenerale { get; set; }
+        public Nullable<int> nbHeurefrmSpecifique { get; set; }
         public string condition { get; set; }
         public string sanction { get; set; }
         public string commentaire { get; set; }
-        public string pathDocMinistere { get; set; }
+        public string docMinistere_path { get; set; }
         public Nullable<System.DateTime> dateValidation { get; set; }
+        public int idCodeProgramme { get; set; }
     
         public virtual tblCodeProgramme tblCodeProgramme { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblEnonceCompetence> tblEnonceCompetence { get; set; }
     }
 }

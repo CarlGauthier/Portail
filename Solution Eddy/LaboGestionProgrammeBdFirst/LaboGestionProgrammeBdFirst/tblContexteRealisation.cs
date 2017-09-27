@@ -12,19 +12,13 @@ namespace LaboGestionProgrammeBdFirst
     using System;
     using System.Collections.Generic;
     
-    public partial class tblCodeProgramme
+    public partial class tblContexteRealisation
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblCodeProgramme()
-        {
-            this.tblProgramme = new HashSet<tblProgramme>();
-        }
-    
-        public int idCodeProgramme { get; set; }
-        public string code { get; set; }
+        public int idContexte { get; set; }
+        public string contexteRealisation { get; set; }
         public string commentaire { get; set; }
+        public int idCompetence { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblProgramme> tblProgramme { get; set; }
+        public virtual tblEnonceCompetence tblEnonceCompetence { get; set; }
     }
 }

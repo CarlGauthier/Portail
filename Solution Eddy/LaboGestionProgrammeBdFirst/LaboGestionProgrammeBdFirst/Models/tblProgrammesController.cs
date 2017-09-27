@@ -13,8 +13,9 @@ namespace LaboGestionProgrammeBdFirst.Models
 {
     public class tblProgrammesController : Controller
     {
-        private BDtestEntities db = new BDtestEntities();
-        
+        //private BDtestEntities db = new BDtestEntities();
+        private BDPlanCadreDEVEntities db = new BDPlanCadreDEVEntities();
+
 
         // GET: tblProgrammes
         public ActionResult Index()
@@ -35,7 +36,7 @@ namespace LaboGestionProgrammeBdFirst.Models
             {
                 return HttpNotFound();
             }
-            int total =  int.Parse(tblProgramme.formationGeneral) + int.Parse(tblProgramme.formationSpecifique);
+            int total = Convert.ToInt32( tblProgramme.nbHeurefrmGenerale) +Convert.ToInt32( tblProgramme.nbHeurefrmSpecifique);
             ViewBag.total = total;
             return View(tblProgramme);
         }
@@ -61,7 +62,7 @@ namespace LaboGestionProgrammeBdFirst.Models
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id = new SelectList(db.tblCodeProgramme, "id", "code", tblProgramme.id);
+            ViewBag.id = new SelectList(db.tblCodeProgramme, "id", "code", tblProgramme.code);
             return View(tblProgramme);
         }
 
@@ -77,7 +78,7 @@ namespace LaboGestionProgrammeBdFirst.Models
             {
                 return HttpNotFound();
             }
-            ViewBag.id = new SelectList(db.tblCodeProgramme, "id", "code", tblProgramme.id);
+            ViewBag.id = new SelectList(db.tblCodeProgramme, "id", "code", tblProgramme.code);
             return View(tblProgramme);
             
         }
@@ -94,8 +95,8 @@ namespace LaboGestionProgrammeBdFirst.Models
             {
                 return HttpNotFound();
             }
-            ViewBag.id = new SelectList(db.tblCodeProgramme, "id", "code", tblProgramme.id);
-            tblProgramme.pathDocMinistere = "Test2";
+            ViewBag.id = new SelectList(db.tblCodeProgramme, "id", "code", tblProgramme.code);
+            tblProgramme.docMinistere_path = "Test2";
             return View(tblProgramme);
 
         }
@@ -106,8 +107,11 @@ namespace LaboGestionProgrammeBdFirst.Models
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        //public ActionResult Edit([Bind(Include = "id,code,annee,codeSpecialisation,nbUnité,specialisation,nom,formationGeneral,formationSpecifique,condition,sanction,commentaire")] tblProgramme tblProgramme)
-        public ActionResult Edit([Bind(Include = "id,code,annee,codeSpecialisation,nbUnité,specialisation,nom,formationGeneral,formationSpecifique,condition,sanction,commentaire,pathDocMinistere,dateValidation")] tblProgramme tblProgramme)
+
+        //Fonctionne avec ma BD
+        //public ActionResult Edit([Bind(Include = "id,code,annee,codeSpecialisation,nbUnité,specialisation,nom,formationGeneral,formationSpecifique,condition,sanction,commentaire,pathDocMinistere,dateValidation")] tblProgramme tblProgramme)
+
+        public ActionResult Edit([Bind(Include = "idProgramme,code,annee,codeSpecialisation,nbUnite,specialisation,nom,nbHeurefrmGenerale,nbHeurefrmSpecifique,condition,sanction,commentaire,docMinistere_path,dateValidation")] tblProgramme tblProgramme)
         {
             if (ModelState.IsValid)
             {
@@ -115,7 +119,7 @@ namespace LaboGestionProgrammeBdFirst.Models
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.id = new SelectList(db.tblCodeProgramme, "id", "code", tblProgramme.id);
+            ViewBag.id = new SelectList(db.tblCodeProgramme, "idProgramme", "code", tblProgramme.code);
             return View(tblProgramme);
         }
 

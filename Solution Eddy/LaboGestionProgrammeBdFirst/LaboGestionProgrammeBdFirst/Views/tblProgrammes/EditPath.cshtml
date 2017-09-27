@@ -21,7 +21,7 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.code)
 
         <div class="invisible">
             <div class="form-group">
@@ -88,8 +88,8 @@
             <div class="form-group">
                 <label>Nombre d'unité : </label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.nbUnité, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.nbUnité, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.nbUnite, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nbUnite, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
@@ -104,27 +104,27 @@
             <div class="form-group">
                 <label>Formation générale : </label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.formationGeneral, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.formationGeneral, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.nbHeurefrmGenerale, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nbHeurefrmGenerale, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Formation spécifique : </label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.formationSpecifique, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.formationSpecifique, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.nbHeurefrmSpecifique, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nbHeurefrmSpecifique, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Document du ministère : </label>
-                @Html.DisplayFor(model => model.pathDocMinistere)
+                @Html.DisplayFor(model => model.docMinistere_path)
                 <!--Je ne comprend pas les deux lignes suivantes. En quoi sont elles dépendantes par exemple ?-->
                 <input type="file" id="fileLoader" name="files" title="Load File" />
                 <asp:Button ID="LoginButton" runat="server" Text="ASP click Me" onclientclick="openfileDialog()" />
                 
-                @Html.ActionLink("Sauver", "EditPath", new { id = Model.id })
+                @Html.ActionLink("Sauver", "EditPath", new { id = Model.code })
                 
                 <!--
                 <form id="form1" runat="server" enctype="multipart/form-data">
