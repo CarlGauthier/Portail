@@ -1,2 +1,2 @@
-ALTER TABLE tblProgramme
-ADD FOREIGN KEY(idCodeProgramme) REFERENCES tblCodeProgramme(idCodeProgramme)
+ALTER TABLE Programme
+ADD FOREIGN KEY(codeProgramme) REFERENCES EnteteProgramme(codeProgramme)

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ApplicationPlanCadre.Models.Programme>
+
+<div id="tree-view">
+
+    @foreach (var programme in Model)
+    {
+        <a>@Html.DisplayFor(p => programme.nom)</a>
+
+        foreach (var enonceCompetence in programme.EnonceCompetence)
+        {
+            <a>@Html.DisplayFor(enc => enonceCompetence.enonceCompetence1)</a>
+
+            foreach (var elementCompetence in enonceCompetence.ElementCompetence)
+            {
+                <a>@Html.DisplayFor(elc => elementCompetence.element)</a>
+            }
+        }
+    }
+</div>

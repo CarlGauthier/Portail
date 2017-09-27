@@ -2,7 +2,7 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "Portail";
-    Layout = "";
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -17,46 +17,49 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="container-fluid portail">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-8 col-sm-6 col-sm-offset-6 col-sx-12 portail-login">
-                <img class="logo-portail" src="~/Content/Images/portail-logo.png" />
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email, new { @class = "col-xs-3 control-label" })
-                        <div class="col-xs-9">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password, new { @class = "col-xs-3 control-label" })
-                        <div class="col-xs-9">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-offset-3 col-xs-9">
-                            <div class="checkbox">
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
+    <div id="portail" class="container-fluid">
+        <div class="row row-eq-height">
+            <div id="image" class="col-md-8 col-sm-6"></div>
+            <div id="main" class="col-md-4 col-sm-6">
+                <div id="login">
+                    <img id="portail-logo" src="~/Content/Images/portail-logo.png" />
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-xs-3 control-label" })
+                            <div class="col-xs-9">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group, portail-submit">
-                        <input type="submit" value="Connexion" class="btn btn-default" />
-                    </div>
-                    <p class="portail-forgotPassword">
-                        @Html.ActionLink("Vous avez oublié votre mot de passe ?", "ForgotPassword")
-                    </p>
-                }
-                <div class="portail-associes clearfix">
-                    <img class="col-xs-6" src="~/Content/Images/dicj-logo.png" />
-                    <img class="col-xs-6" src="~/Content/Images/cj-logo.png" />
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-xs-3 control-label" })
+                            <div class="col-xs-9">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-offset-3 col-xs-9">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                            </div>
+                        </div>
+                        <div id="submit" class="form-group">
+                            <input type="submit" value="Connexion" class="btn btn-default" />
+                        </div>
+                        <p id="forgot-password">
+                            @Html.ActionLink("Vous avez oublié votre mot de passe ?", "ForgotPassword")
+                        </p>
+                    }
+                </div>
+                <div id="associes" class="clearfix">
+                    <a class="col-xs-6"><img src="~/Content/Images/dicj-logo.png" /></a>
+                    <a class="col-xs-6" href="http://www.cegepjonquiere.ca/"><img src="~/Content/Images/cj-logo.png" /></a>
                 </div>
             </div>
         </div>

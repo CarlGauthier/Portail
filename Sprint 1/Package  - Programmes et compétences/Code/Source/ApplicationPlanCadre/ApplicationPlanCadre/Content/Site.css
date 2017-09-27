@@ -1,0 +1,237 @@
+﻿body {
+    font-family: Segoe UI, Calibri, Sans-Serif;
+}
+
+.portail {
+    background-image: url(Images/cegep.jpg);
+    background-size: cover;
+    background-position: 25% bottom;
+}
+
+.portail-login {
+    min-height: 100vh;
+    background-color: #e7ecf2;
+}
+
+.logo-portail {
+    width: 100%;
+}
+
+.portail-forgotPassword {
+    text-align: center;
+}
+
+.portail-login .form-control {
+    border: 1px solid #aaaaaa;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.portail-submit {
+    text-align: center;
+    margin: 25px;
+}
+
+input[type='submit'] {
+    display: inline-block;
+    color: #083a7c;
+    border: 2px solid;
+    border-radius: 0;
+    background-color: transparent;
+    font-size: 1.2em;
+    transition: 0.1s;
+}
+
+input[type='submit']:hover {
+    border-color: #083a7c;
+    background-color: #083a7c;
+    color: #ffffff;
+}
+
+.portail-associes {
+    margin-top: 150px;
+}
+
+@media screen and (max-width: 767px) {
+
+    .portail {
+        background-size: 100%;
+        background-position: center top;
+    }
+
+    .portail-login {
+        margin-top: 100px;
+        min-height: calc(100vh - 100px);
+    }
+
+    .portail-associes {
+        margin-top: 0;
+    }
+}
+
+#layout header {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#layout #layout-head {
+    background-color: #083a7c;
+}
+
+#layout .header-logo {
+    position: absolute;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    vertical-align: top;
+    width: 420px;
+    height: 50px;
+    background: url(Images/cj-layout.png) center center no-repeat;
+    background-size: contain;
+}
+
+#layout button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    border: none;
+    color: #ffffff;
+    transition: 0.1s;
+}
+
+#layout button:focus {
+    outline: 0;
+}
+
+#layout #nav-button {
+    float: left;
+    background-color: #0d5ec9;
+}
+
+#layout #logoutForm {
+    float: right;
+}
+
+#layout #logoutForm button {
+    float: right;
+    background-color: transparent;
+    border-left: 1px solid #0d5ec9;
+}
+
+#layout #nav-button:hover, #layout #logoutForm button:hover {
+    background-color: #0d5ec9;
+}
+
+#layout .tuile-container {
+    padding: 10px;
+    background-color: #0a4696;
+}
+
+#layout .tuile {
+    margin: 2px 0;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 14px;
+    width: 110px;
+    height: 110px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    color: #ffffff;
+    background-color: #0d5ec9;
+    user-select: none;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+#layout .tuile:hover {
+    background-color: #083a7c;
+}
+
+#layout .tuile:active {
+    transform: scale(0.9, 0.9);
+}
+
+#layout .tuile .glyphicon {
+    margin: 15px 0 10px;
+    font-size: 42px;
+}
+
+@media (max-width: 767px) {
+    #layout .tuile-container {
+        text-align: center;
+    }
+
+    #layout .header-logo {
+        width: 100px;
+        background-image: url(Images/cj-layout-mini.png);
+    }
+}
+
+#page-content {
+    margin-top: 50px;
+}
+
+#accueil {
+    padding-bottom: 30px;
+    width: 100%;
+    min-height: calc(100vh - 50px);
+    text-align: center;
+    background: url(Images/cegep-index.png) no-repeat center center, #4f4f4f;
+    background-size: cover;
+}
+
+#accueil h1 {
+    padding: 125px 0 25px;
+    font-size: 5em;
+    font-family: Segoe UI Light, Calibri Light, Sans-Serif;
+    color: #ffffff;
+}
+
+#accueil .icon {
+    margin: 35px;
+    padding-top: 25px;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 20px;
+    width: 180px;
+    height: 180px;
+    text-align: center;
+    font-size: 18px;
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.1s;
+    user-select: none;
+}
+
+#accueil .icon:hover {
+    transform: scale(1.1, 1.1);
+}
+
+#accueil .icon:active {
+    transform: scale(1, 1);
+}
+
+#accueil .icon .glyphicon {
+    margin-bottom: 10px;
+    font-size: 92px;
+}
+
+@media (max-width: 767px) {
+    #accueil h1 {
+        padding: 25px 0;
+        font-size: 3em;
+    }
+
+    #accueil .icon {
+        margin: 0 5px;
+        width: 140px;
+        height: 180px;
+    }
+}

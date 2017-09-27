@@ -193,10 +193,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccueilController.cs" />
-    <Compile Include="Controllers\CompetenceController.cs" />
     <Compile Include="Controllers\ConsoleController.cs" />
+    <Compile Include="Controllers\EnonceCompetencesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProgrammeController.cs" />
     <Compile Include="Controllers\StageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -204,9 +205,14 @@
     <Compile Include="Helpers\customAuthorize.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BDPlanCadre.cs" />
+    <Compile Include="Models\ContexteRealisation.cs" />
+    <Compile Include="Models\CriterePerformance.cs" />
+    <Compile Include="Models\ElementCompetence.cs" />
+    <Compile Include="Models\EnonceCompetence.cs" />
+    <Compile Include="Models\EnteteProgramme.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\PlanCadreContext.cs" />
+    <Compile Include="Models\Programme.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
@@ -220,6 +226,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\extend.css" />
     <Content Include="Content\Images\cegep-index.png" />
     <Content Include="Content\Images\cegep.jpg" />
     <Content Include="Content\Images\cegep2.jpg" />
@@ -294,11 +301,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Accueil\index.cshtml" />
-    <Content Include="Views\Competence\indexCompetence.cshtml" />
+    <Content Include="Views\Accueil\Index.cshtml" />
     <Content Include="Views\Stage\indexStage.cshtml" />
     <Content Include="Views\Console\indexConsole.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
+    <Content Include="Views\Programme\Index.cshtml" />
+    <Content Include="Views\Programme\TreeView.cshtml" />
+    <Content Include="Views\Programme\Edit.cshtml" />
+    <Content Include="Views\Programme\Create.cshtml" />
+    <Content Include="Views\Programme\_PartialList.cshtml" />
+    <Content Include="Views\Shared\_ConsoleNav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
