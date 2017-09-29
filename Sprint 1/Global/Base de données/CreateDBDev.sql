@@ -1,3 +1,10 @@
+/*
+use master;
+GO
+ALTER DATABASE BDPlanCadreDEV SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+GO
+*/
+
 USE master
 IF EXISTS(select * from sys.databases where name='BDPlanCadreDEV')
 DROP DATABASE BDPlanCadreDEV
