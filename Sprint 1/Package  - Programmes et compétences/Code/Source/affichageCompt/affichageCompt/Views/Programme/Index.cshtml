@@ -1,0 +1,50 @@
+﻿@model IEnumerable<affichageCompt.Models.Programme>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Competence</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+<div id="programme">
+    <div id="tree-view">
+
+        @foreach (var programme in Model){ //affiche le programme
+            @Html.DisplayFor(p => programme.nom);
+            <br />
+            <br />
+
+            foreach (var enonceCompetence in programme.EnonceCompetence){
+                <br />
+                <br />
+
+                //affiche codeCompetence+affiche le nom de competence
+                <p>                                                 
+                    @Html.DisplayFor(enc => enonceCompetence.idCompetence) @*<-- debug voir ce qui est envoyer     ///  aller dans le details genere des enonce de competences?*@
+                    <a href="@Url.Action("Details", "Enoncecompetence", new { id = enonceCompetence.idCompetence })">@Html.DisplayFor(enc => enonceCompetence.enonceCompetence1)</a>
+
+                    code: @Html.DisplayFor(enc => enonceCompetence.codeCompetence)
+                </p>
+
+                //affiche obligatoire+Actif
+                <p>Obligatoire: 
+                @Html.DisplayFor(enc => enonceCompetence.obligatoire)
+                Actif: 
+                @Html.DisplayFor(enc => enonceCompetence.actif)
+                </p>
+
+                foreach (var contexteRealisation in enonceCompetence.ContexteRealisation){
+                    @Html.DisplayFor(elc => contexteRealisation.contexteRealisation1);//affiche le contexte de realisation
+                    <br />
+                }
+                <hr>
+            }
+            <hr>
+        }
+    </div>
+</div>

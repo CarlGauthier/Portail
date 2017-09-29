@@ -1,0 +1,31 @@
+﻿@model IEnumerable<affichageCompt.Models.EnonceCompetence>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2> @*créer une vue apart  https://www.developpez.net/forums/d923151/dotnet/developpement-web-net/asp-net-mvc/mvc-quelques-questions-niveau-model-controller/*@
+    
+
+<div>
+    <div id="tree-view">
+        @foreach (var enonceCompetence in Model)
+        {
+
+            foreach (var elementCompt in enonceCompetence.ElementCompetence)
+            {
+                <a>@Html.DisplayFor(p => elementCompt.numero)</a>
+                <a>@Html.DisplayFor(p => elementCompt.element)</a>
+                <a>@Html.DisplayFor(p => elementCompt.motClef)</a>
+
+
+                foreach (var critPerformance in elementCompt.CriterePerformance)
+                {
+                    <a>@Html.DisplayFor(enc => critPerformance.numero)</a>
+                    <a>@Html.DisplayFor(enc => critPerformance.criterePerformance1)</a>
+                }
+            }
+        }
+    </div>
+</div>
+

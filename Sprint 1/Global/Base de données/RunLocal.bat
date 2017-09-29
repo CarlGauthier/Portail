@@ -9,6 +9,6 @@ more FKProgramme.sql >> ../sqltemp.sql
 more InsertProgramme.sql >> ../sqltemp.sql
 
 cd ../
-sqlcmd -S INFO-324-1A-130\CARLSQL -U Sa -P SACarl -i sqltemp.sql
+sqlcmd -S INFO-324-1A-132 -U Sa -P toro11mai -i sqltemp.sql
 del sqltemp.sql
 pause
