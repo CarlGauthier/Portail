@@ -5,6 +5,6 @@
     {
     @Html.AntiForgeryToken()
         <button onclick="location.href='javascript:document.getElementById(&#39;logoutForm&#39;).submit()'"><span class="glyphicon glyphicon-log-out"></span></button>
-        <button onclick="location.href='@Url.Action("Index", "Manage")'"><span class="glyphicon glyphicon-user"></span></button>
+        @*<button onclick="location.href='@Url.Action("Index", "Manage")'"><span class="glyphicon glyphicon-user"></span></button>*@
     }
 }

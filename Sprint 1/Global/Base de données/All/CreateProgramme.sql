@@ -29,7 +29,7 @@ GO
 CREATE TABLE EnteteProgramme
 (
 	codeProgramme		CHAR(3)			NOT NULL,
-	commentaire			VARCHAR(200)	NULL,
+	commentaire			VARCHAR(200)	NOT NULL,
 
 	PRIMARY KEY(codeProgramme)
 );

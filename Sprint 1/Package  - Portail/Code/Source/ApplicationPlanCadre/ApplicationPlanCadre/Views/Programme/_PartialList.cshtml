@@ -1,49 +1,60 @@
 ﻿@model IEnumerable<ApplicationPlanCadre.Models.Programme>
 
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.EnteteProgramme.codeProgramme)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.annee)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.specialisation)
-        </th>
-        <th class="action-cell-header">
-            <b>Modifier</b>
-        </th>
-        <th class="action-cell-header">
-            <b>Supprimer</b>
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="crud-list">
+    <table>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EnteteProgramme.codeProgramme)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.annee)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.codeSpecialisation)
-            </td>
-            <td class="action-cell">
-                <button onclick="location.href='@Url.Action("Edit", "Programme", new { id = item.idProgramme })'">
-                    <span class="glyphicon glyphicon-pencil"><!----></span>
-                </button>
-            </td>
-            <td class="action-cell">
-                <button onclick="location.href='@Url.Action("DeleteConfirmed", "Programme", new { id = item.idProgramme })'">
-                    <span class="glyphicon glyphicon-trash"><!----></span>
-                </button>
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.EnteteProgramme.codeProgramme)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.annee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.specialisation)
+            </th>
+            <th class="action-cell-header">
+                <b>Modifier</b>
+            </th>
+            <th class="action-cell-header">
+                <b>Supprimer</b>
+            </th>
         </tr>
-    }
-</table>
+
+        @foreach (var item in Model)
+        {
+            bool valide = item.EnonceCompetence.Count == 0;
+            string dblclickEvent = valide ? Url.Action("Edit", "Programme", new { id = item.idProgramme }) : "";
+            string cssClass = valide ? "valide" : "";
+            <tr ondblclick="location.href='@dblclickEvent'" class="@cssClass">
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnteteProgramme.codeProgramme)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.annee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.codeSpecialisation)
+                </td>
+                <td class="action-cell">
+                    @if (valide)
+                    {
+                        <button onclick="location.href='@Url.Action("Edit", "Programme", new { id = item.idProgramme })'">
+                            <span class="glyphicon glyphicon-pencil"><!----></span>
+                        </button>
+                    }
+                </td>
+                <td class="action-cell">
+                    @if(valide)
+                    {
+                        <button onclick="location.href='@Url.Action("DeleteConfirmed", "Programme", new { id = item.idProgramme })'">
+                            <span class="glyphicon glyphicon-trash"><!----></span>
+                        </button>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
 
 @*<script src="../../Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
 <script type="text/javascript">

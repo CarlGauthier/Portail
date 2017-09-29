@@ -11,7 +11,7 @@ using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    [customAuthorize(Roles ="Admin")]
+    //[Authorize(Roles = "Admin,RCP")]
     public class ProgrammeController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
@@ -34,7 +34,7 @@ namespace ApplicationPlanCadre.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "codeProgramme");
+            ViewBag.codeProgramme = GetCodeProgrammeSelectList();
             return View();
         }
 
@@ -42,21 +42,34 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "codeProgramme, annee, codeSpecialisation")] Programme programme)
         {
-            if (db.Programme.Any(p => p.codeProgramme == programme.codeProgramme && p.annee == programme.annee && p.codeSpecialisation == programme.codeSpecialisation))
+            programme.codeSpecialisation = programme.codeSpecialisation.ToUpper();
+            ModelState.Clear();
+            TryValidateModel(programme);
+            bool existe = db.Programme.Any(p => p.codeProgramme == programme.codeProgramme && p.annee == programme.annee && p.codeSpecialisation == programme.codeSpecialisation);
+            bool valide = ModelState.IsValid && !existe;
+            if (valide)
             {
-                ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "codeProgramme");
-                ViewBag.messageError = "Erreur, ce programme existe déjà.";
-                return View();
-            }
-            else
-            {
-                if (ModelState.IsValid)
-                {
-                    db.Programme.Add(programme);
-                    db.SaveChanges();
-                }
+                db.Programme.Add(programme);
+                db.SaveChanges();
                 return RedirectToAction("Create");
             }
+            if (existe)
+                ViewBag.messageError = "Erreur, ce programme existe déjà.";
+            ViewBag.codeProgramme = GetCodeProgrammeSelectList();
+            return View(programme);
+        }
+
+        private SelectList GetCodeProgrammeSelectList()
+        {
+            var liste =
+            db.EnteteProgramme
+            .Select(ep => new
+            {
+                codeProgramme = ep.codeProgramme,
+                texte = ep.codeProgramme + " - " + ep.commentaire
+            })
+            .ToList();
+            return new SelectList(liste, "codeProgramme", "texte");
         }
 
         public ActionResult Edit(int? id)
@@ -70,7 +83,7 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "CodeProgramme", "CodeProgramme", programme.codeProgramme);
+            ViewBag.codeProgramme = GetCodeProgrammeSelectList();
             return View(programme);
         }
 
@@ -78,21 +91,15 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idProgramme, codeProgramme, annee, codeSpecialisation")] Programme programme)
         {
-            if (db.Programme.Any(p => p.codeProgramme == programme.codeProgramme && p.annee == programme.annee && p.codeSpecialisation == programme.codeSpecialisation))
+            programme.codeSpecialisation = programme.codeSpecialisation.ToUpper();
+            if (ModelState.IsValid)
             {
-                ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "codeProgramme");
-                ViewBag.messageError = "Erreur, ce programme existe déjà.";
-                return View();
-            }
-            else
-            {
-                if (ModelState.IsValid)
-                {
-                    db.Entry(programme).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
+                db.Programme.Add(programme);
+                db.SaveChanges();
                 return RedirectToAction("Create");
             }
+            ViewBag.codeProgramme = GetCodeProgrammeSelectList();
+            return View(programme);
         }
 
         public ActionResult DeleteConfirmed(int id)

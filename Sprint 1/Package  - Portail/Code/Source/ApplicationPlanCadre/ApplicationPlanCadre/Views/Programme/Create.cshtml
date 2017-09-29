@@ -4,54 +4,54 @@
     ViewBag.Title = "Console d'administration";
 }
 
-@*@Html.Partial("_ConsoleNav")*@
-
 <div id="console-programme" class="container">
     <div class="col-md-6">
         <div class="form-box">
+
+            <h3>Ajouter un programme</h3>
+            <hr />
+
             @using (Html.BeginForm(FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
-                    <h3>Ajouter un programme</h3>
-                    <hr />
-                    <label id="Error">@ViewBag.messageError</label>
+                    <p class="text-danger">@ViewBag.messageError</p>
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
-                        @Html.LabelFor(model => model.EnteteProgramme, htmlAttributes: new { @class = "control-label col-md-4" })
-                        <div class="col-md-8">
-                            @Html.DropDownList("codeProgramme", null, htmlAttributes: new { @class = "form-control small-input", @id = "ddlCode" })
+                        @Html.LabelFor(model => model.EnteteProgramme, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.DropDownList("codeProgramme", null, htmlAttributes: new { @class = "form-control"})
                             @Html.ValidationMessageFor(model => model.EnteteProgramme, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.annee, htmlAttributes: new { @class = "control-label col-md-4" })
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.annee, new { htmlAttributes = new { @class = "form-control small-input" } })
+                        @Html.LabelFor(model => model.annee, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.annee, new { htmlAttributes = new { @class = "form-control small-input", @maxlength = 4 } })
                             @Html.ValidationMessageFor(model => model.annee, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.codeSpecialisation, htmlAttributes: new { @class = "control-label col-md-4" })
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.codeSpecialisation, new { htmlAttributes = new { @class = "form-control small-input" } })
+                        @Html.LabelFor(model => model.codeSpecialisation, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.EditorFor(model => model.codeSpecialisation, new { htmlAttributes = new { @class = "form-control small-input", @maxlength = 2 } })
                             @Html.ValidationMessageFor(model => model.codeSpecialisation, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-md-offset-4">
-                            <input type="submit" value="Enregistrer" class="btn btn-default" />
+                        <div class="col-md-offset-3">
+                            <input type="submit" value="Enregistrer" />
                         </div>
                     </div>
                 </div>
             }
         </div>
     </div>
-    <div class="crud-list col-md-6">
+    <div class="col-md-6">
         @Html.Action("_PartialList")
     </div>
 
