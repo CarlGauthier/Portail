@@ -18,7 +18,7 @@ CREATE TABLE Programme
 	docMinistere_path		VARCHAR(200)	NULL,
 	dateValidation			DATETIME		NULL,
 
-	codeProgramme		CHAR(3)				NOT NULL,		--FK
+	codeProgramme			CHAR(3)			NOT NULL,		--FK
 
 	PRIMARY KEY (idProgramme)
 );

@@ -21,7 +21,7 @@ namespace ApplicationPlanCadre.Models
         [Required]
         [StringLength(4)]
         [Display(Name = "Année")]
-        [RegularExpression("^(196[7-9]|19[789][0-9]|2[01][0-9][0-9])$", ErrorMessage = "L'année est invalide, le programme ne peux avoir été crée avant 1967.")]
+        [Range(1967, 2199, ErrorMessage = "L'année est invalide. Le programme ne peux avoir été crée avant 1967.") ]
         public string annee { get; set; }
 
         [StringLength(50)]
@@ -34,7 +34,7 @@ namespace ApplicationPlanCadre.Models
 
         [Required]
         [StringLength(3)]
-        [RegularExpression("^[A-Z][A-Z|0-9]?[A-Z|0-9]$", ErrorMessage = "Le code est invalide, il doit commencer par une lettre et être suivis d'une autre lettre ou un chiffre.")]
+        [RegularExpression("^[A-Za-z][A-Za-z|0-9]?[A-Za-z|0-9]$", ErrorMessage = "Le code est invalide, il doit commencer par une lettre et être suivis d'une autre lettre ou un chiffre.")]
         [Display(Name = "Code de spécialisation")]
         public string codeSpecialisation { get; set; }
 
