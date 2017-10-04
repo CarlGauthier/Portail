@@ -311,6 +311,9 @@
     <Content Include="Views\ConsoleProgramme\Create.cshtml" />
     <Content Include="Views\ConsoleProgramme\_PartialList.cshtml" />
     <Content Include="Views\Shared\_ConsoleNav.cshtml" />
+    <Content Include="Views\Programme\Details.cshtml" />
+    <Content Include="Views\Programme\Edit.cshtml" />
+    <Content Include="Views\Programme\_PartialEnonceCompetence.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
