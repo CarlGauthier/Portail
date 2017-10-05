@@ -1,0 +1,128 @@
+﻿.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+@media screen and (max-width: 767px) {
+
+    .row-eq-height {
+        display: block;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 15px;
+    font-family: Segoe UI Light, Calibri Light, Sans-Serif;
+}
+
+input, button {
+    outline: 0;
+}
+
+.form-control {
+    border: 1px solid #aaaaaa;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.text-danger {
+    color: #ce0000;
+}
+
+.small-input {
+    width: 100px;
+}
+
+input[type='submit'], .fancy-button {
+    margin: 0 15px;
+    padding: 5px 15px;
+    display: inline-block;
+    border: 2px solid;
+    border-radius: 0;
+    color: #083a7c;
+    background-color: transparent;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.fancy-button.cancel {
+    color: #ce0000;
+}
+
+input[type='submit']:hover, .fancy-button:hover {
+    border-color: #083a7c;
+    background-color: #083a7c;
+    color: #ffffff;
+}
+
+.fancy-button.cancel:hover {
+    border-color: #ce0000;
+    background-color: #ce0000;
+    color: #ffffff;
+}
+
+.form-box {
+    margin: 0 15px;
+    padding: 20px;
+    border: 1px solid #aaaaaa;
+    background-color: #eef2f6;
+}
+
+.form-box hr {
+    border: none;
+    border-bottom: 1px solid #aaaaaa;
+}
+
+.single-action {
+    margin-top: 75px;
+}
+
+.crud-list table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+.crud-list th, .crud-list td {
+    padding: 10px 20px;
+}
+
+.crud-list th {
+    font-weight: normal;
+}
+
+.crud-list td {
+    background-color: #e7ecf2;
+    transition: 0.1s;
+}
+
+.crud-list .valide:hover td {
+    background-color: #eef2f6;
+}
+
+.crud-list button {
+    background: none;
+    border: none;
+    color: #083a7c;
+}
+
+.crud-list button:hover {
+    color: #0d5ec9;
+}
+
+.crud-list .action-cell {
+    text-align: center;
+    background-color: #e7ecf2;
+}
+
+.crud-list .valide .action-cell {
+    background-color: #eef2f6;
+}
+
+.crud-list .action-cell-header {
+    padding: 10px 5px;
+    text-align: center;
+}

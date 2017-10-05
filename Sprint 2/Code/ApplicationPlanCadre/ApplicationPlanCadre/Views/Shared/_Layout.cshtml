@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <section id="layout">
+        <header>
+            <div class="fluid-container">
+                <div id="layout-head" class="clearfix">
+                    <button type="button" id="nav-button" data-toggle="collapse" data-target="#nav"><span class="glyphicon glyphicon-th"></span></button>
+                    <a href='@Url.Action("Index", "Accueil")'><div class="header-logo"><!----></div></a>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+            <nav id="nav" class="collapse">
+                <div class="tuile-container">
+                <a class="tuile" href='@Url.Action("Index", "Accueil")'>
+                    <span class="glyphicon glyphicon-home"></span>
+                    <p>Accueil</p>
+                </a>
+                @if (User.IsInRole("RCP"))
+                {
+                    <a class="tuile"  href='@Url.Action("Index", "Programme")'>
+                        <span class="glyphicon glyphicon-education"></span>
+                        <p>Gestion des programmes</p>
+                    </a>
+                }
+                @if (User.IsInRole("Enseignant") || User.IsInRole("Gestionnaire de stage"))
+                {
+                    <a class="tuile" href='@Url.Action("indexStage", "Stage")'>
+                        <span class="glyphicon glyphicon-briefcase"></span>
+                        <p>Stage</p>
+                    </a>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <a class="tuile" href='@Url.Action("Create", "ConsoleProgramme")'>
+                        <span class="glyphicon glyphicon-cog"></span>
+                        <p>Console d'administration</p>
+                    </a>
+                }
+                </div>
+            </nav>
+        </header>
+    </section>
+    <section id="page-content">
+        @RenderBody()
+    </section>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
