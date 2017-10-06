@@ -257,7 +257,7 @@ paket-files/
 .cr/
 
 # ________________
-*Web.config
+*Sprint 2\Code\ApplicationPlanCadre\Web.config
 *LoginBD.txt
 *DossierIIS.txt
 *.bat
