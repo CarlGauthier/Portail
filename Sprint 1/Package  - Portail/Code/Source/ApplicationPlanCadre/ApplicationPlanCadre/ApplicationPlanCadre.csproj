@@ -199,18 +199,17 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProgrammeController.cs" />
     <Compile Include="Controllers\StageController.cs" />
-    <Compile Include="Controllers\TestProgrammesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\customAuthorize.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BDPlanCadre.cs" />
-    <Compile Include="Models\EnteteProgramme.cs" />
     <Compile Include="Models\ContexteRealisation.cs" />
     <Compile Include="Models\CriterePerformance.cs" />
     <Compile Include="Models\ElementCompetence.cs" />
     <Compile Include="Models\EnonceCompetence.cs" />
+    <Compile Include="Models\EnteteProgramme.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Programme.cs" />
@@ -227,6 +226,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\extend.css" />
     <Content Include="Content\Images\cegep-index.png" />
     <Content Include="Content\Images\cegep.jpg" />
     <Content Include="Content\Images\cegep2.jpg" />
@@ -307,16 +307,10 @@
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\Programme\Index.cshtml" />
     <Content Include="Views\Programme\TreeView.cshtml" />
-    <Content Include="Views\EnonceCompetences\Create.cshtml" />
-    <Content Include="Views\EnonceCompetences\Delete.cshtml" />
-    <Content Include="Views\EnonceCompetences\Details.cshtml" />
-    <Content Include="Views\EnonceCompetences\Edit.cshtml" />
-    <Content Include="Views\EnonceCompetences\Index.cshtml" />
-    <Content Include="Views\TestProgrammes\Create.cshtml" />
-    <Content Include="Views\TestProgrammes\Delete.cshtml" />
-    <Content Include="Views\TestProgrammes\Details.cshtml" />
-    <Content Include="Views\TestProgrammes\Edit.cshtml" />
-    <Content Include="Views\TestProgrammes\Index.cshtml" />
+    <Content Include="Views\Programme\Edit.cshtml" />
+    <Content Include="Views\Programme\Create.cshtml" />
+    <Content Include="Views\Programme\_PartialList.cshtml" />
+    <Content Include="Views\Shared\_ConsoleNav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

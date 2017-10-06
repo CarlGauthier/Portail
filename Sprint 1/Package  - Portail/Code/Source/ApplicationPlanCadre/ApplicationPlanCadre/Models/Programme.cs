@@ -19,28 +19,31 @@ namespace ApplicationPlanCadre.Models
         public int idProgramme { get; set; }
 
         [Required]
-        [StringLength(3)]
-        public string code { get; set; }
-
-        [Required]
         [StringLength(4)]
+        [Display(Name = "Année")]
         public string annee { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Nom")]
         public string nom { get; set; }
 
         [StringLength(6)]
+        [Display(Name = "Nombre d'unités")]
         public string nbUnite { get; set; }
 
         [Required]
         [StringLength(3)]
+        [Display(Name = "Code de spécialisation")]
         public string codeSpecialisation { get; set; }
 
         [StringLength(30)]
+        [Display(Name = "Spécialisation")]
         public string specialisation { get; set; }
 
+        [Display(Name = "Heures de formation générale")]
         public int? nbHeurefrmGenerale { get; set; }
 
+        [Display(Name = "Heures de formation spécifique")]
         public int? nbHeurefrmSpecifique { get; set; }
 
         [StringLength(300)]
@@ -57,13 +60,14 @@ namespace ApplicationPlanCadre.Models
 
         public DateTime? dateValidation { get; set; }
 
-        public int idEnteteProgramme { get; set; }
-
-        public virtual EnteteProgramme EnteteProgramme { get; set; }
+        [Required]
+        [StringLength(3)]
+        public string codeProgramme { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EnonceCompetence> EnonceCompetence { get; set; }
+
+        [Display(Name = "Programme")]
+        public virtual EnteteProgramme EnteteProgramme { get; set; }
     }
 }
-
-

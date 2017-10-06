@@ -1,0 +1,51 @@
+﻿@model ApplicationPlanCadre.Models.Programme
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Modification</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Programme</h4>
+        <hr/>
+        <label id="Error">@ViewBag.messageError</label>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.idProgramme)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EnteteProgramme, "EnteteProgramme", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("codeProgramme", null, htmlAttributes: new { @class = "form-control", @id = "ddlCode" })
+                @Html.ValidationMessageFor(model => model.EnteteProgramme, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.annee, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.annee, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.annee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.codeSpecialisation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.codeSpecialisation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.codeSpecialisation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button class="btn btn-default" onclick="location.href='@Url.Action("Create", "Programme")'">Annuler</button>
+                <input type="submit" value="Enregistrer" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

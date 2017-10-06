@@ -12,29 +12,15 @@ namespace ApplicationPlanCadre.Models
         {
         }
 
-        public virtual DbSet<EnteteProgramme> EnteteProgramme { get; set; }
         public virtual DbSet<ContexteRealisation> ContexteRealisation { get; set; }
         public virtual DbSet<CriterePerformance> CriterePerformance { get; set; }
         public virtual DbSet<ElementCompetence> ElementCompetence { get; set; }
         public virtual DbSet<EnonceCompetence> EnonceCompetence { get; set; }
+        public virtual DbSet<EnteteProgramme> EnteteProgramme { get; set; }
         public virtual DbSet<Programme> Programme { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<EnteteProgramme>()
-                .Property(e => e.code)
-                .IsFixedLength()
-                .IsUnicode(false);
-
-            modelBuilder.Entity<EnteteProgramme>()
-                .Property(e => e.commentaire)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<EnteteProgramme>()
-                .HasMany(e => e.Programme)
-                .WithRequired(e => e.EnteteProgramme)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<ContexteRealisation>()
                 .Property(e => e.contexteRealisation1)
                 .IsUnicode(false);
@@ -94,10 +80,19 @@ namespace ApplicationPlanCadre.Models
                 .WithRequired(e => e.EnonceCompetence)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Programme>()
-                .Property(e => e.code)
+            modelBuilder.Entity<EnteteProgramme>()
+                .Property(e => e.codeProgramme)
                 .IsFixedLength()
                 .IsUnicode(false);
+
+            modelBuilder.Entity<EnteteProgramme>()
+                .Property(e => e.commentaire)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<EnteteProgramme>()
+                .HasMany(e => e.Programme)
+                .WithRequired(e => e.EnteteProgramme)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Programme>()
                 .Property(e => e.annee)
@@ -134,6 +129,11 @@ namespace ApplicationPlanCadre.Models
 
             modelBuilder.Entity<Programme>()
                 .Property(e => e.docMinistere_path)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Programme>()
+                .Property(e => e.codeProgramme)
+                .IsFixedLength()
                 .IsUnicode(false);
 
             modelBuilder.Entity<Programme>()

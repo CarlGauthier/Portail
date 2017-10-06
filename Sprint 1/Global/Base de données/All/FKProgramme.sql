@@ -1,2 +1,2 @@
 ALTER TABLE Programme
-ADD FOREIGN KEY(idEnteteProgramme) REFERENCES EnteteProgramme(idEnteteProgramme)
+ADD FOREIGN KEY(codeProgramme) REFERENCES EnteteProgramme(codeProgramme)

@@ -5,7 +5,6 @@ CREATE TABLE Programme
 (
 	idProgramme				INT				NOT NULL	IDENTITY(1,1),
 
-	code					CHAR(3)			NOT NULL	UNIQUE,
 	annee					CHAR(4)			NOT NULL,
 	nom						VARCHAR(50)		NULL,
 	nbUnite					VARCHAR(6)		NULL,
@@ -19,7 +18,7 @@ CREATE TABLE Programme
 	docMinistere_path		VARCHAR(200)	NULL,
 	dateValidation			DATETIME		NULL,
 
-	idEnteteProgramme			INT				NOT NULL	UNIQUE,		--FK
+	codeProgramme		CHAR(3)				NOT NULL,		--FK
 
 	PRIMARY KEY (idProgramme)
 );
@@ -29,10 +28,8 @@ DROP TABLE EnteteProgramme
 GO
 CREATE TABLE EnteteProgramme
 (
-	idEnteteProgramme		INT				NOT NULL	IDENTITY(1,1),
-		
-	code				CHAR(3)			NOT NULL	UNIQUE,
+	codeProgramme		CHAR(3)			NOT NULL,
 	commentaire			VARCHAR(200)	NULL,
 
-	PRIMARY KEY(idEnteteProgramme)
+	PRIMARY KEY(codeProgramme)
 );
