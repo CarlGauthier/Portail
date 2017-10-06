@@ -1,0 +1,35 @@
+﻿@model ApplicationPlanCadre.Models.Programme
+
+<div id="programme">
+    <div id="enoncerProgramme">
+
+        <table>
+            <tr>
+                <th>Compétence</th>
+                <th>Code Compétence</th>
+                <th>status</th>
+                <th>Contexte de Réalisation</th>
+            </tr>
+
+            @foreach (var enonceCompetence in Model.EnonceCompetence)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(enc => enonceCompetence.enonceCompetence1)</td>
+                    <td>@Html.DisplayFor(enc => enonceCompetence.codeCompetence)</td>
+                    <td>
+                        Obligatoire:@Html.DisplayFor(enc => enonceCompetence.obligatoire)
+
+                        Actif: @Html.DisplayFor(enc => enonceCompetence.actif)
+                    </td>
+                    <td>
+                        @foreach (var contexteRealisation in enonceCompetence.ContexteRealisation)
+                        {
+
+                            @Html.DisplayFor(elc => contexteRealisation.contexteRealisation1)<br />
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
