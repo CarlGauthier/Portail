@@ -1,0 +1,58 @@
+﻿@model ApplicationPlanCadre.Models.Programme
+
+@{
+    ViewBag.Title = "UploadFile";
+}
+
+<h2>Téléchargement du document du ministère :</h2>
+
+<div class="container">
+    @*
+    <script type="text/javascript">
+        alert("test");
+    </script>
+    *@
+    <div class="jumbotron">
+        <h1>@Html.DisplayFor(model => model.nom)</h1>
+        <h2>Spécialisation : @Html.DisplayFor(model => model.specialisation)</h2>
+        <h3>code : @Html.DisplayFor(model => model.codeProgramme)-@Html.DisplayFor(model => model.annee)-@Html.DisplayFor(model => model.codeSpecialisation)</h3>
+        <h4>@ViewBag.dateValidationModule</h4>
+        <h4>@ViewBag.dateValidation</h4>
+    </div>
+</div>
+
+
+    @using (Html.BeginForm("UploadFile", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div>
+            
+            @*@Html.Hidden("idProgramme", Model.idProgramme);*@
+            @Html.TextBox("file", "", new { type = "file" }) <br />
+
+            @*<input type="button" value="Télécharger" onclick="location.href='@Url.Action("UploadFile", "Upload", FormMethod.Post)'" />*@
+            @*@Html.ActionLink("Télécharger", "UploadFileId", "Upload", new { idProgramme = Model.idProgramme }, new { file = @Html.TextBox("file", "", new { type = "file" })}) |*@
+
+            <input type="submit" value="Télécharger" />
+
+
+    @ViewBag.Message
+
+    @* Pour mettre en place un bouton retour il faut pouvoir renenir à cette page avec les infos du programme une fois le nouveau document téléchargé.
+        Je n'ai pas réussi à envoyer au controller à la fois le doc et le programme dans le submit ou au clic sur le bouton.
+    @Html.ActionLink("Retour", "Edit", "Programme", new { id = Model.idProgramme }, null) |
+    <input type="submit" value="Retour" onclick="location.href='@Url.Action("Edit", "Programme", new { id =Model.idProgramme })'" />*@
+
+
+        </div>
+
+
+    }
+
+@*
+<h3><span class="texte Style1"><a class="texte" href="javascript:window.close();">Fermer cette fenêtre</a></span></h3>
+@Html.ActionLink("Edit", "Edit", new { id = Model.idProgramme }) |
+*@
+<a href="@Url.Content("~/Programme/Edit/" + Model.idProgramme)">Retour)</a>
+
+    

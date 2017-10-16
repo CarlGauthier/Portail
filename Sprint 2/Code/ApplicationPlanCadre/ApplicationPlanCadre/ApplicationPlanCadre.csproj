@@ -194,11 +194,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccueilController.cs" />
     <Compile Include="Controllers\ConsoleProgrammeController.cs" />
+    <Compile Include="Controllers\ElementCompetenceController.cs" />
+    <Compile Include="Controllers\EnonceCompetenceController.cs" />
     <Compile Include="Controllers\EnonceCompetencesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProgrammeController.cs" />
     <Compile Include="Controllers\StageController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -265,7 +268,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\portail.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config">
@@ -313,6 +315,11 @@
     <Content Include="Views\Programme\Details.cshtml" />
     <Content Include="Views\Programme\Edit.cshtml" />
     <Content Include="Views\Programme\_PartialEnonceCompetence.cshtml" />
+    <Content Include="Views\Programme\_TreeView.cshtml" />
+    <Content Include="Views\EnonceCompetence\Info.cshtml" />
+    <Content Include="Views\ElementCompetence\Info.cshtml" />
+    <Content Include="Views\Programme\Info.cshtml" />
+    <Content Include="Views\Upload\UploadFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

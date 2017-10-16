@@ -218,29 +218,138 @@
     }
 }
 
-#programme #tree-view {
-    padding: 15px;
-    float: left;
+#tree-view {
     min-height: calc(100vh - 50px);
     width: 450px;
+    border-right: 1px solid #929ab1;
     background-color: #e7ecf2;
 }
 
-#programme #tree-view a {
-    padding: 5px 0;
+#tree-view .tree-view-header {
+    padding: 10px 5px 10px 35px;
+    font-weight: bold;
+    border-bottom: 1px solid #ffffff;
+    background-color: #f2f4f7;
+}
+
+#tree-view .tree-view-item {
+    border-bottom: 1px solid #ffffff;
+    display: flex;
+    background-color: #e7ecf2;
+}
+
+#tree-view .tree-view-item.active {
+    color: #ffffff;
+    background-color: #0d5ec9;
+}
+
+#tree-view .tree-view-item.active a {
+    color: #ffffff;
+}
+
+#tree-view .tree-view-item.active a:hover {
+    color: #ffffff;
+}
+
+#tree-view .tree-view-item-container {
+    padding-left: 30px;
+    background-color: #ffffff;
+}
+
+#tree-view .collapse-button {
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+#tree-view .collapse-button:hover {
+    color: #ffffff;
+    background-color: #929ab1;
+}
+
+#tree-view .collapse-button .glyphicon {
+    margin-top: 15px;
+    padding: 0 10px;
+    font-size: 10px;
+}
+
+#tree-view .collapse-button[aria-expanded='true'] .glyphicon {
+    transform: rotate(90deg);
+}
+
+#tree-view .no-button {
+    padding-left: 30px;
+}
+
+#tree-view .tree-view-item a {
+    padding: 10px 5px;
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+#tree-view .tree-view-item a:hover {
+    color: #929ab1;
+}
+
+#super-view {
+    display: flex;
+}
+
+#super-view #info-display {
+    padding: 0;
+    width: calc(100% - 450px);
+}
+
+#super-view #info-header {
+    padding: 20px;
+    background-color: #f2f4f7;
+}
+
+#super-view #info-header h1 {
+    display: inline-block;
+}
+
+#super-view .edit {
+    display: inline-block;
+    vertical-align: 3px;
+}
+
+#super-view #info-detail {
+    margin: 0;
+    padding: 20px;
+}
+
+#super-view .info-child {
+    margin: 20px;
     display: block;
+    width: 600px;
+    border-left: 7px solid #0d5ec9;
     text-decoration: none;
     color: #000000;
+    background-color: #e7ecf2;
     cursor: pointer;
+    transition: 0.1s;
 }
 
-#programme #tree-view a:hover {
-    text-decoration: underline;
-    color: #083a7c;
+#super-view .info-child p {
+    margin: 10px 15px;
 }
 
-#programme #action-container {
+#super-view .info-child:hover {
+    background-color: #f2f4f7;
+}
+
+#super-view .info-child .gauche {
     float: left;
+    width: 400px;
+}
+
+#super-view .info-child .droite {
+    float: right;
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
 }
 
 #console-programme {
