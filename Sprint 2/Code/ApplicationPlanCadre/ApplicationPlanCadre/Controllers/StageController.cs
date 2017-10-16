@@ -12,6 +12,7 @@ namespace ApplicationPlanCadre.Controllers
     {
         
         // GET: Stage
+        [Route("Stage",Name ="index-Stage")]
         public ActionResult indexStage()
         {
             return View();

@@ -83,7 +83,9 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.idProgramme }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.idProgramme }) |
+                    <button onclick="location.href='@Url.RouteUrl("Details-programme", new { id = item.idProgramme })'">
+                        <span class="glyphicon glyphicon-list-alt"><!----></span>
+                    </button> |
                 </td>
             </tr>
         }

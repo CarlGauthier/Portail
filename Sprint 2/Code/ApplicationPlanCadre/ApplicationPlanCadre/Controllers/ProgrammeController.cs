@@ -16,12 +16,14 @@ namespace ApplicationPlanCadre.Controllers
     {
         private BDPlanCadre db = new BDPlanCadre();
 
+        [Route("Programme", Name = "Index-programme")]
         public ActionResult Index()
         {
             var programme = db.Programme.Include(t => t.EnteteProgramme);
             return View(programme.ToList());
         }
 
+        [Route("Programme/{id:int?}", Name = "Details-programme")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -60,6 +62,7 @@ namespace ApplicationPlanCadre.Controllers
             return View(programme);
         }
 
+        [Route("Programme/editer/{id:int?}", Name = "edit-prog")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,6 +80,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Programme/editer/{id:int?}", Name = "Enredit-prog")]
         public ActionResult Edit([Bind(Include = "idProgramme, codeProgramme, annee, codeSpecialisation, nom, dateValidation, docMinistere_path, specialisation, sanction, nbUnite, condition, nbHeurefrmGenerale,nbHeurefrmSpecifique")] Programme programme)
         {
             if (ModelState.IsValid)

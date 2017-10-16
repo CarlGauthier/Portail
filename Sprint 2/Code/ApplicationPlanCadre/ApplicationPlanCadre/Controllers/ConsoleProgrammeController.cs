@@ -22,6 +22,7 @@ namespace ApplicationPlanCadre.Controllers
             return PartialView(programme.ToList());
         }
 
+        [Route("Admin-programme", Name = "creation-programme")]
         public ActionResult Create()
         {
             ViewBag.codeProgramme = GetCodeProgrammeSelectList();
@@ -30,6 +31,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Admin-programme", Name = "ajouter-programme")]
         public ActionResult Create([Bind(Include = "codeProgramme, annee, codeSpecialisation")] Programme programme)
         {
             bool valide, existe;
@@ -47,7 +49,7 @@ namespace ApplicationPlanCadre.Controllers
             ViewBag.codeProgramme = GetCodeProgrammeSelectList();
             return View(programme);
         }
-
+        [Route("Admin-programme/{id:int?}", Name = "edit-programme")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -65,6 +67,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Admin-programme/{id:int?}", Name = "EnrEdit-programme")]
         public ActionResult Edit([Bind(Include = "idProgramme, codeProgramme, annee, codeSpecialisation")] Programme programme)
         {
             bool valide, existe;

@@ -11,7 +11,7 @@
             <h3>Ajouter un programme</h3>
             <hr />
 
-            @using (Html.BeginForm(FormMethod.Post))
+            @using (Html.BeginForm("Create","ConsoleProgramme",FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
 

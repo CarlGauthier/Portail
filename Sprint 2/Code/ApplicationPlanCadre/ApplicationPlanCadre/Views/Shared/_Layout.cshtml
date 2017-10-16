@@ -26,21 +26,21 @@
                 </a>
                 @if (User.IsInRole("RCP"))
                 {
-                    <a class="tuile"  href='@Url.Action("Index", "Programme")'>
+                    <a class="tuile"  href='@Url.RouteUrl("Index-programme")'>
                         <span class="glyphicon glyphicon-education"></span>
                         <p>Gestion des programmes</p>
                     </a>
                 }
                 @if (User.IsInRole("Enseignant") || User.IsInRole("Gestionnaire de stage"))
                 {
-                    <a class="tuile" href='@Url.Action("indexStage", "Stage")'>
+                    <a class="tuile" href='@Url.RouteUrl("index-Stage")'>
                         <span class="glyphicon glyphicon-briefcase"></span>
                         <p>Stage</p>
                     </a>
                 }
                 @if (User.IsInRole("Admin"))
                 {
-                    <a class="tuile" href='@Url.Action("Create", "ConsoleProgramme")'>
+                    <a class="tuile" href='@Url.RouteUrl("creation-programme")'>
                         <span class="glyphicon glyphicon-cog"></span>
                         <p>Console d'administration</p>
                     </a>
