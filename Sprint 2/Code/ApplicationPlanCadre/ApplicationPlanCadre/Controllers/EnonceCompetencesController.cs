@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using ApplicationPlanCadre.Helpers;
+using ApplicationPlanCadre.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ApplicationPlanCadre.Models;
-using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
@@ -120,6 +116,56 @@ namespace ApplicationPlanCadre.Controllers
             db.EnonceCompetence.Remove(enonceCompetence);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+
+        /*-------------------------------- COMPÉTENCE --------------------------------*/
+
+        public ActionResult CreateCompetence(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            EnonceCompetence competence = db.EnonceCompetence.Find(id);
+            if (competence == null)
+            {
+                return HttpNotFound();
+            }
+            return View(competence);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateCompetence([Bind(Include = "idProgramme,codeCompetence,enonceCompetence1,obligatoire,actif")] EnonceCompetence competence)
+        {
+            if (ModelState.IsValid)
+            {
+                db.EnonceCompetence.Add(competence);
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = competence.idProgramme });
+            }
+
+            return View(competence);
+        }
+
+        //public ActionResult _partialContexte(int? id)
+        //{
+        //    var contexte = db.EnonceCompetence.SingleOrDefault(x => x.idCompetence == id);
+        //    return View(contexte); 
+        //}
+
+        public ActionResult _partialCreateContexte()
+        {
+            return View();
+        }
+        public void createContexte([Bind(Include = "contexteRealisation1,idCompetence")] ContexteRealisation contexte)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ContexteRealisation.Add(contexte);
+                db.SaveChanges();
+            }
         }
 
         protected override void Dispose(bool disposing)

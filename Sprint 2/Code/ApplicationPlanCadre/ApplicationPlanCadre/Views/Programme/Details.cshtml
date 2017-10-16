@@ -48,11 +48,10 @@
             <div class="fancy-button cancel" onclick="location.href='@Url.Action("Index")'">Annuler</div>
             <input type="submit" value="Modifier" onclick="location.href='@Url.Action("Edit", "Programme", new { id =Model.idProgramme })'" />
 
-            @* Exemple de lien fonctionnel
-                <div class="edit">@Html.ActionLink("Modifier", "Edit", new { id = Model.codeProgramme })</div>
-            *@
-
         </div>
+    </div>
+    <div>
+        <div class="fancy-button cancel" onclick="location.href='@Url.Action("CreateCompetence", "EnonceCompetences", new { id =Model.idProgramme})'">Ajouter une compétence</div>
     </div>
 
     <div class="row">

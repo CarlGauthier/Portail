@@ -1,0 +1,25 @@
+﻿@model ApplicationPlanCadre.Models.ContexteRealisation
+
+<div class="form-group">
+    @Html.LabelFor(model => model.contexteRealisation1, htmlAttributes: new { @class = "control-label col-md-3" })
+    <div class="col-md-9">
+        @Html.EditorFor(model => model.contexteRealisation1, new { htmlAttributes = new { @class = "form-control small-input" } })
+        @Html.ValidationMessageFor(model => model.contexteRealisation1, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div>
+    <div id="createContexte" class="fancy-button cancel" onclick="location.href='@Url.Action("createContexte",new { contexte = Model.contexteRealisation1, id = Model.idCompetence})'">Ajouter un Contexte</div>
+</div>
+
+@**@
+<script src="../../Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#createContexte').click(function () {
+                $.get('@Url.Action("_partialContexte", Model)', function (data) {
+                    $('#lstContexte').replaceWith(data);
+                });
+            });
+        });
+</script>

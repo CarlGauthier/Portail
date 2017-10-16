@@ -301,7 +301,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Accueil\Index.cshtml" />
     <Content Include="Views\Stage\indexStage.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\Programme\Index.cshtml" />
@@ -313,6 +312,10 @@
     <Content Include="Views\Programme\Details.cshtml" />
     <Content Include="Views\Programme\Edit.cshtml" />
     <Content Include="Views\Programme\_PartialEnonceCompetence.cshtml" />
+    <Content Include="Views\EnonceCompetences\CreateCompetence.cshtml" />
+    <Content Include="Views\EnonceCompetences\_partialContexte.cshtml" />
+    <Content Include="Views\EnonceCompetences\_partialCreateContexte.cshtml" />
+    <Content Include="Views\Accueil\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

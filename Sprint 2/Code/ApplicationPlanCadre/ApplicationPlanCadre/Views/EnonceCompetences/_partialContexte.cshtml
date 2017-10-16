@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ApplicationPlanCadre.Models.ContexteRealisation>
+
+<h4>Contexte de réalisation</h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.contexteRealisation1)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.contexteRealisation1)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
