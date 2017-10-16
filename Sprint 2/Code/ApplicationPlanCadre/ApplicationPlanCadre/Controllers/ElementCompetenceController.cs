@@ -13,7 +13,7 @@ namespace ApplicationPlanCadre.Controllers
     public class ElementCompetenceController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
-
+        [Route("Element-Competence/{id:int?}",Name ="Info-elementComp")]
         public ActionResult Info(int? id)
         {
             if (id == null)

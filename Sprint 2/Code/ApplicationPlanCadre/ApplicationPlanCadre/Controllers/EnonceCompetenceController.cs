@@ -14,6 +14,7 @@ namespace ApplicationPlanCadre.Controllers
     {
         private BDPlanCadre db = new BDPlanCadre();
         
+        [Route("Enoncer-Competence/{id:int?}",Name ="Info-enonceCompetence")]
         public ActionResult Info(int? id)
         {
             if (id == null)

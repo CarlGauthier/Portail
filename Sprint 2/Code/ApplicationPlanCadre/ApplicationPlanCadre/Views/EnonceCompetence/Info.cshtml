@@ -10,10 +10,10 @@
     <div id="info-display" class="container-fluid">
         <div id="info-header">
             <h3>Énoncé de compétence</h3>
-            <div>
+            @*<div>
                 <h1>@Html.DisplayFor(model => model.codeCompetence) - @Html.DisplayFor(model => model.enonceCompetence1)</h1>
-                <div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "EnonceCompetence")'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>
-            </div>
+                <div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "EnonceCompetence")'"><span class="glyphicon glyphicon-pencil"></span> Modifier</div>
+            </div>*@
         </div>
 
         <div id="info-detail">
@@ -30,7 +30,7 @@
 
             @foreach (var elementCompetence in Model.ElementCompetence)
             {
-                <a class="info-child clearfix" href='@Url.Action("Info", "ElementCompetence", new { id = elementCompetence.idElement })'>
+                <a class="info-child clearfix" href='@Url.RouteUrl("Info-elementComp", new { id = elementCompetence.idElement })'>
                     <p>@Html.DisplayFor(ec => elementCompetence.element)</p>
                 </a>
             }

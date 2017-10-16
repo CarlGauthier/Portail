@@ -27,7 +27,7 @@ namespace ApplicationPlanCadre.Controllers
             return View(db.Programme.ToList());
         }
 
-        //[Route("Programme/{id:int?}", Name = "Details-programme")]
+        [Route("Programme/{id:int?}", Name = "Info-programme")]
         public ActionResult Info(int? id)
         {
             if (id == null)
@@ -65,7 +65,7 @@ namespace ApplicationPlanCadre.Controllers
             return View(programme);
         }
 
-        [Route("Programme/editer/{id:int?}", Name = "edit-prog")]
+        [Route("Programme/editer/{id:int?}", Name = "Edit-prog")]
         public ActionResult Edit(int? id)
         {
             if (id == null)

@@ -64,6 +64,7 @@ namespace ApplicationPlanCadre.Controllers
         }
 
         // GET: EnonceCompetences/Edit/5
+        [Route("Enoncer-Competence/Editer/{id:int?}",Name ="Edit-elemComp")]
         public ActionResult Edit(int? id)
         {
             if (id == null)

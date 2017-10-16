@@ -12,7 +12,7 @@
             <h3>Programme</h3>
             <div>
                 <h1>@Html.DisplayFor(model => model.EnteteProgramme.commentaire)</h1>
-                <div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "Programme")'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>
+                <div class="fancy-button edit" onclick="location.href='@Url.RouteUrl("Edit-prog",new {id=Model.idProgramme})'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>
             </div>
             <hr />
             <h3><b>@Html.DisplayNameFor(model => model.specialisation) : </b>@Html.DisplayFor(model => model.specialisation)</h3>
