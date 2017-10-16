@@ -7,22 +7,27 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ApplicationPlanCadre.Models;
-using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    [customAuthorize(Roles = "RCP")]
     public class ProgrammeController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
 
-        public ActionResult Index()
+        public ActionResult _TreeView()
         {
-            var programme = db.Programme.Include(t => t.EnteteProgramme);
-            return View(programme.ToList());
+            var programme = db.Programme
+                          .Include(p => p.EnonceCompetence)
+                          .ToList();
+            return PartialView(programme);
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Index()
+        {
+            return View(db.Programme.ToList());
+        }
+
+        public ActionResult Info(int? id)
         {
             if (id == null)
             {
@@ -33,9 +38,8 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            int total = Convert.ToInt32(programme.nbHeurefrmGenerale) + Convert.ToInt32(programme.nbHeurefrmSpecifique);
-            ViewBag.total = " " + total;
-            ViewBag.dateValidation = checkValidation(programme);
+            ViewBag.total = programme.nbHeurefrmGenerale + programme.nbHeurefrmSpecifique;
+            //ViewBag.dateValidation = checkValidation(programme);
             return View(programme);
         }
 

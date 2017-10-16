@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ApplicationPlanCadre.Models.Programme>
+
+<div id="tree-view">
+    <div class="tree-view-header">Programmes</div>
+    @foreach (var programme in Model)
+    {
+        string p_id = "p" + programme.idProgramme.ToString();
+        string p_item = p_id + "item";
+        string p_target = "#" + p_id;
+        <div id=@p_item class="tree-view-item">
+            @if (programme.EnonceCompetence.Count > 0) {
+                <div class="collapse-button" data-toggle="collapse" data-target=@p_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
+            else {
+                <div class="no-button"><!----></div> }
+            <a href='@Url.Action("Info", "Programme", new { id = programme.idProgramme })'>@Html.DisplayFor(p => programme.nom)</a>
+        </div>
+        <div id=@p_id class="collapse">
+            <div class="tree-view-item-container">
+                <div class="tree-view-header">Énoncés de compétences</div>
+                @foreach (var enonceCompetence in programme.EnonceCompetence)
+                {
+                    string enc_id = "enc" + enonceCompetence.idCompetence.ToString();
+                    string enc_item = enc_id + "item";
+                    string enc_target = "#" + enc_id;
+                    <div id=@enc_item class="tree-view-item">
+                        @if (enonceCompetence.ElementCompetence.Count > 0) {
+                            <div class="collapse-button" data-toggle="collapse" data-target=@enc_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
+                        else { 
+                            <div class="no-button"><!----></div> }
+                        <a href='@Url.Action("Info", "EnonceCompetence", new { id = enonceCompetence.idCompetence })'>@Html.DisplayFor(enc => enonceCompetence.enonceCompetence1)</a>
+                    </div>
+                    <div id=@enc_id class="collapse">
+                        <div class="tree-view-item-container">
+                            <div class="tree-view-header">Éléments de compétences</div>
+                            @foreach (var elementCompetence in enonceCompetence.ElementCompetence)
+                            {
+                                string el_item = "el" + elementCompetence.idElement.ToString() + "item";
+                                <div id=@el_item class="tree-view-item">
+                                    <div class="no-button"><!----></div>
+                                    <a href='@Url.Action("Info", "ElementCompetence", new { id = elementCompetence.idElement })'>@Html.DisplayFor(elc => elementCompetence.element)</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    }
+</div>
