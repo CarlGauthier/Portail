@@ -1,9 +1,9 @@
 ﻿@model ApplicationPlanCadre.Models.ContexteRealisation
 
 <div class="form-group">
-    @Html.LabelFor(model => model.contexteRealisation1, htmlAttributes: new { @class = "control-label col-md-3" })
+    @Html.LabelFor(model => model.contexteRealisation1, htmlAttributes: new { @class = "control-label col-md-3"})
     <div class="col-md-9">
-        @Html.EditorFor(model => model.contexteRealisation1, new { htmlAttributes = new { @class = "form-control small-input" } })
+        @Html.EditorFor(model => model.contexteRealisation1, new { htmlAttributes = new { @class = "form-control small-input", @Value = "" } })
         @Html.ValidationMessageFor(model => model.contexteRealisation1, "", new { @class = "text-danger" })
     </div>
 </div>

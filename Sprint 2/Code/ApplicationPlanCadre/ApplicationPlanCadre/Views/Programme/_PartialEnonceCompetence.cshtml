@@ -28,6 +28,9 @@
                             @Html.DisplayFor(elc => contexteRealisation.contexteRealisation1)<br />
                         }
                     </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "EnonceCompetences", new { id = Model.idProgramme }, null)
+                    </td>
                 </tr>
             }
         </table>
