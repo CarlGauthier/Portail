@@ -1,93 +1,22 @@
 ﻿@model IEnumerable<ApplicationPlanCadre.Models.Programme>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Programme";
 }
 
-<div class="container">
-    <h2>Index</h2>
-
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.nom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.annee)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nbUnite)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.specialisation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.codeSpecialisation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nbHeurefrmGenerale)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nbHeurefrmSpecifique)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.condition)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.sanction)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.docMinistere_path)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dateValidation)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.annee)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nbUnite)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.specialisation)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.codeSpecialisation)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nbHeurefrmGenerale)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.nbHeurefrmSpecifique)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.condition)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.sanction)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.docMinistere_path)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.dateValidation)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.idProgramme }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.idProgramme }) |
-                </td>
-            </tr>
-        }
-
-    </table>
-
+<div id="super-view">
+    @Html.Action("_TreeView")
+    <div id="info-display" class="container-fluid">
+        <div id="info-detail">
+            <h1>Programmes</h1>
+            <hr />
+            @foreach (var programme in Model)
+            {                                       
+                <a class="info-child clearfix" href='@Url.RouteUrl("Info-programme", new { id = programme.idProgramme })'>
+                    <p class="gauche">@Html.DisplayFor(ec => programme.EnteteProgramme.commentaire)</p>
+                    <p class="droite">@Html.DisplayFor(model => programme.codeProgramme)-@Html.DisplayFor(model => programme.annee)-@Html.DisplayFor(model => programme.codeSpecialisation)</p>
+                </a>
+            }
+        </div>
+    </div>
 </div>

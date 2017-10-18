@@ -7,22 +7,28 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ApplicationPlanCadre.Models;
-using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    [customAuthorize(Roles = "RCP")]
     public class ProgrammeController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
-
-        public ActionResult Index()
+        public ActionResult _TreeView()
         {
-            var programme = db.Programme.Include(t => t.EnteteProgramme);
-            return View(programme.ToList());
+            var programme = db.Programme
+                          .Include(p => p.EnonceCompetence)
+                          .ToList();
+            return PartialView(programme);
         }
 
-        public ActionResult Details(int? id)
+        [Route("Programme", Name = "Index-programme")]
+        public ActionResult Index()
+        {
+            return View(db.Programme.ToList());
+        }
+
+        [Route("Programme/{id:int?}", Name = "Info-programme")]
+        public ActionResult Info(int? id)
         {
             if (id == null)
             {
@@ -33,9 +39,8 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            int total = Convert.ToInt32(programme.nbHeurefrmGenerale) + Convert.ToInt32(programme.nbHeurefrmSpecifique);
-            ViewBag.total = " " + total;
-            ViewBag.dateValidation = checkValidation(programme);
+            ViewBag.total = programme.nbHeurefrmGenerale + programme.nbHeurefrmSpecifique;
+            //ViewBag.dateValidation = checkValidation(programme);
             return View(programme);
         }
 
@@ -60,6 +65,7 @@ namespace ApplicationPlanCadre.Controllers
             return View(programme);
         }
 
+        [Route("Programme/editer/{id:int?}", Name = "Edit-prog")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,6 +83,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Programme/editer/{id:int?}", Name = "Enredit-prog")]
         public ActionResult Edit([Bind(Include = "idProgramme, codeProgramme, annee, codeSpecialisation, nom, dateValidation, docMinistere_path, specialisation, sanction, nbUnite, condition, nbHeurefrmGenerale,nbHeurefrmSpecifique")] Programme programme)
         {
             if (ModelState.IsValid)

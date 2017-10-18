@@ -1,0 +1,35 @@
+﻿@model ApplicationPlanCadre.Models.ElementCompetence
+
+@{
+    ViewBag.Title = Model.element;
+}
+
+<div id="super-view">
+    @Html.Action("_TreeView", "Programme")
+
+    <div id="info-display" class="container-fluid">
+        <div id="info-header">
+            <h3>Élément de compétence</h3>
+            @*<div>
+                <h1>@Html.DisplayFor(model => model.element)</h1>
+                <div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "ElementCompetence")'"><span class="glyphicon glyphicon-pencil"></span> Modifier</div>
+            </div>*@
+        </div>
+
+        <div id="info-detail">
+            <h2>Critères de performance</h2>
+            <ul>
+                @foreach (var criterePerformance in Model.CriterePerformance)
+                {
+                    <li>@Html.DisplayFor(cp => criterePerformance.criterePerformance1)</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(("#el" + @Model.idElement + "item")).addClass('active');
+    $(("#enc" + @Model.EnonceCompetence.idCompetence)).collapse('show');
+    $(("#p" + @Model.EnonceCompetence.Programme.idProgramme)).collapse('show');
+</script>

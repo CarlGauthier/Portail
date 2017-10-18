@@ -1,0 +1,45 @@
+﻿@model ApplicationPlanCadre.Models.EnonceCompetence
+
+@{
+    ViewBag.Title = Model.enonceCompetence1;
+}
+
+<div id="super-view">
+    @Html.Action("_TreeView", "Programme")
+
+    <div id="info-display" class="container-fluid">
+        <div id="info-header">
+            <h3>Énoncé de compétence</h3>
+            @*<div>
+                <h1>@Html.DisplayFor(model => model.codeCompetence) - @Html.DisplayFor(model => model.enonceCompetence1)</h1>
+                <div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "EnonceCompetence")'"><span class="glyphicon glyphicon-pencil"></span> Modifier</div>
+            </div>*@
+        </div>
+
+        <div id="info-detail">
+            <h2>Contextes de réalisations</h2>
+            <ul>
+                @foreach (var contexteRealisation in Model.ContexteRealisation)
+                {
+                    <li>@Html.DisplayFor(ec => contexteRealisation.contexteRealisation1)</li>
+                }
+            </ul>
+
+            <hr />
+            <h2>Éléments de compétence</h2>
+
+            @foreach (var elementCompetence in Model.ElementCompetence)
+            {
+                <a class="info-child clearfix" href='@Url.RouteUrl("Info-elementComp", new { id = elementCompetence.idElement })'>
+                    <p>@Html.DisplayFor(ec => elementCompetence.element)</p>
+                </a>
+            }
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(("#enc" + @Model.idCompetence + "item")).addClass('active');
+    $(("#p" + @Model.Programme.idProgramme)).collapse('show');
+</script>

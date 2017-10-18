@@ -38,7 +38,7 @@
                 <td class="action-cell">
                     @if (valide)
                     {
-                        <button onclick="location.href='@Url.Action("Edit", new { id = item.idProgramme })'">
+                        <button onclick="location.href='@Url.RouteUrl("edit-programme", new { id = item.idProgramme })'">
                             <span class="glyphicon glyphicon-pencil"><!----></span>
                         </button>
                     }
