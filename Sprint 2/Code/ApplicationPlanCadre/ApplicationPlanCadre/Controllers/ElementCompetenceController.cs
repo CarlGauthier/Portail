@@ -10,6 +10,7 @@ using ApplicationPlanCadre.Models;
 
 namespace ApplicationPlanCadre.Controllers
 {
+    [Authorize(Roles = "RCP")]
     public class ElementCompetenceController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();

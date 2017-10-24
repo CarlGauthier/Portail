@@ -61,7 +61,7 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.codeProgramme = GetCodeProgrammeSelectList();
+            ViewBag.codeProgramme = GetCodeProgrammeSelectList(programme.codeProgramme);
             return View(programme);
         }
 
@@ -86,16 +86,18 @@ namespace ApplicationPlanCadre.Controllers
             return View(programme);
         }
 
-        private SelectList GetCodeProgrammeSelectList()
+        private SelectList GetCodeProgrammeSelectList(string codeProgramme = null)
         {
             var liste =
             db.EnteteProgramme
             .Select(ep => new
             {
                 codeProgramme = ep.codeProgramme,
-                texte = ep.codeProgramme + " - " + ep.commentaire
+                texte = ep.codeProgramme + " - " + ep.commentaire,
             })
             .ToList();
+            if(codeProgramme != null)
+                return new SelectList(liste, "codeProgramme", "texte", codeProgramme);
             return new SelectList(liste, "codeProgramme", "texte");
         }
 

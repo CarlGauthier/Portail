@@ -21,11 +21,13 @@ namespace ApplicationPlanCadre.Models
 
         [Required]
         [StringLength(4)]
+        [Display(Name = "Code de la compétence")]
         public string codeCompetence { get; set; }
 
         [Column("enonceCompetence")]
         [Required]
         [StringLength(300)]
+        [Display(Name = "Description")]
         public string enonceCompetence1 { get; set; }
 
         [StringLength(30)]

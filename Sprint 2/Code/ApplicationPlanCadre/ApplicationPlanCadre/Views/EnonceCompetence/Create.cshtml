@@ -1,0 +1,45 @@
+﻿@model ApplicationPlanCadre.Models.EnonceCompetence
+
+@{
+    ViewBag.Title = "Énoncé de compétence - création";
+}
+
+
+
+<div class="container">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.idProgramme)
+
+        <div class="form-horizontal form-box single-action">
+            <h1>Créer un énoncé de compétence</h1>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.codeCompetence, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.codeCompetence, new { htmlAttributes = new { @class = "form-control small-input" } })
+                    @Html.ValidationMessageFor(model => model.codeCompetence, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.enonceCompetence1, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.enonceCompetence1, new {@rows = "3", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.enonceCompetence1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    <input type="submit" value="Suivant" />
+                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "Programme", new { id = Model.idProgramme })'">Retour</div>
+                </div>
+            </div>
+        </div>
+        
+    }
+
+</div>
