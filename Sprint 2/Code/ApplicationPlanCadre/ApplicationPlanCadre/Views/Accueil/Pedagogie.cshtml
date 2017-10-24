@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Pedagogie";
+}
+
+
+<div id="accueil">
+    <h1>Pédagogie</h1>
+    <div class="icon-container">
+        @if (User.IsInRole("RCP"))
+        {
+            <a class="icon" href='@Url.RouteUrl("Index-programme")'>
+                <span class="glyphicon glyphicon-duplicate"></span>
+                <p>Gestion des programmes</p>
+            </a>
+        }
+        @*Les rôles pour l'accès aux plans cadre sont à discuter / En attendant tous les rôles y ont accès *@
+        @if (User.IsInRole("RCP") || User.IsInRole("Gestionnaire de stage") || User.IsInRole("Admin") || User.IsInRole("Enseignant"))
+        {
+        <a class="icon" href='@Url.RouteUrl("")'>
+            <span class="glyphicon glyphicon-th-list"></span>
+            <p>Gestion des plans cadre</p>
+        </a>
+        }
+        @*Les rôles pour l'accès à la gestion des grilles sont à discuter / En attendant tous les rôles y ont accès *@
+        @if (User.IsInRole("RCP") || User.IsInRole("Gestionnaire de stage") || User.IsInRole("Admin") || User.IsInRole("Enseignant"))
+        {
+            <a class="icon" href='@Url.RouteUrl("")'>
+                <span class="glyphicon glyphicon-th"></span>
+                <p>Gestion des grilles</p>
+            </a>
+        }
+
+        @*Les rôles pour l'accès à la gestion des cours sont à discuter / En attendant tous les rôles y ont accès *@
+        @if (User.IsInRole("RCP") || User.IsInRole("Gestionnaire de stage") || User.IsInRole("Admin") || User.IsInRole("Enseignant"))
+        {
+                    <a class="icon" href='@Url.RouteUrl("")'>
+                        <span class="glyphicon glyphicon-blackboard"></span>
+                        <p>Gestion des cours</p>
+                    </a>
+        }
+    </div>
+</div>

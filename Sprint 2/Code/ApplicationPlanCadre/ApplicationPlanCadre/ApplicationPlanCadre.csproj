@@ -320,10 +320,10 @@
     <Content Include="Views\ElementCompetence\Info.cshtml" />
     <Content Include="Views\Programme\Info.cshtml" />
     <Content Include="Views\Upload\UploadFile.cshtml" />
+    <Content Include="Views\Accueil\Pedagogie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

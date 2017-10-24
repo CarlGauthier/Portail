@@ -6,11 +6,16 @@ using System.Web.Mvc;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class AccueilController : Controller
     {
         // GET: Accueil
         public ActionResult Index()
+        {
+            return View();
+        }
+        [Route("Pedagogie", Name = "Accueil-pedagogie")]
+        public ActionResult Pedagogie()
         {
             return View();
         }
