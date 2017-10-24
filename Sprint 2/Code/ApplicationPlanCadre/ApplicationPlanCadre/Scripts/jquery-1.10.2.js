@@ -5444,7 +5444,7 @@ jQuery.Event.prototype = {
 
 		// Support: IE
 		// Set the cancelBubble property of the original event to true
-		e.cancelBubble = true;
+		e.rougeBubble = true;
 	},
 	stopImmediatePropagation: function() {
 		this.isImmediatePropagationStopped = returnTrue;

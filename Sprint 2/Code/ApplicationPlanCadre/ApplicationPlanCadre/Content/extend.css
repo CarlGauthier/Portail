@@ -12,6 +12,10 @@
     }
 }
 
+body {
+    font-family: Segoe UI, Calibri, Sans-Serif;
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin: 5px 15px;
     line-height: 50px;
@@ -29,8 +33,13 @@ hr {
     border-bottom: 1px solid;
 }
 
+.form-horizontal .control-label {
+    text-align: left;
+}
+
 legend {
     margin: 0;
+    margin-bottom: 19px;
     padding: 0 15px;
     font-family: Segoe UI Light, Calibri Light, Sans-Serif;
     border-bottom: 1px solid #929ab1;
@@ -46,8 +55,16 @@ input, button {
     box-shadow: none;
 }
 
+.form-group {
+    padding: 0 15px;
+}
+
 .text-danger {
     color: #ce0000;
+}
+
+textarea {
+    resize: none;
 }
 
 .small-input {
@@ -60,6 +77,7 @@ input[type='submit'], .fancy-button {
     display: inline-block;
     border: 2px solid;
     border-radius: 0;
+    text-align: center;
     color: #083a7c;
     background-color: transparent;
     font-size: 18px;
@@ -67,7 +85,11 @@ input[type='submit'], .fancy-button {
     transition: 0.1s;
 }
 
-.fancy-button.cancel {
+input[type='submit'] span, .fancy-button span {
+    word-break: break-all;
+}
+
+.fancy-button.rouge {
     color: #ce0000;
 }
 
@@ -77,10 +99,19 @@ input[type='submit']:hover, .fancy-button:hover {
     color: #ffffff;
 }
 
-.fancy-button.cancel:hover {
+.fancy-button.rouge:hover {
     border-color: #ce0000;
     background-color: #ce0000;
     color: #ffffff;
+}
+
+.file-button {
+    font-weight: normal;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    display: none;
 }
 
 .form-box {
@@ -90,8 +121,16 @@ input[type='submit']:hover, .fancy-button:hover {
     background-color: #eef2f6;
 }
 
+.margin-auto {
+    margin: auto;
+}
+
 .single-action {
     margin-top: 75px;
+}
+
+.crud-list {
+    padding: 15px;
 }
 
 .crud-list table {
@@ -117,7 +156,7 @@ input[type='submit']:hover, .fancy-button:hover {
     background-color: #f2f4f7;
 }
 
-.crud-list button {
+.crud-list a {
     background: none;
     border: none;
     color: #083a7c;
@@ -128,6 +167,7 @@ input[type='submit']:hover, .fancy-button:hover {
 }
 
 .crud-list .action-cell {
+    width: 15%;
     text-align: center;
     background-color: #e7ecf2;
 }

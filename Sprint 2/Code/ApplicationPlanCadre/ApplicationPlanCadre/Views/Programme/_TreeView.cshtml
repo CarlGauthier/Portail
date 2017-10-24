@@ -12,7 +12,14 @@
                 <div class="collapse-button" data-toggle="collapse" data-target=@p_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
             else {
                 <div class="no-button"><!----></div> }
-            <a href='@Url.Action("Info", "Programme", new { id = programme.idProgramme })'>@Html.DisplayFor(p => programme.nom)</a>
+            @if (programme.nom != null) {
+                <a href='@Url.Action("Info", "Programme", new { id = programme.idProgramme })'>@Html.DisplayFor(p => programme.nom)</a> }
+            else {
+                <a href='@Url.Action("Info", "Programme", new { id = programme.idProgramme })'>
+                    @Html.DisplayFor(p => programme.EnteteProgramme.commentaire)
+                    @Html.DisplayFor(p => programme.codeProgramme)-@Html.DisplayFor(p => programme.annee)-@Html.DisplayFor(p => programme.codeSpecialisation)
+                </a>
+            }
         </div>
         <div id=@p_id class="collapse">
             <div class="tree-view-item-container">

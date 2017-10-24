@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -10,6 +11,7 @@ using ApplicationPlanCadre.Models;
 
 namespace ApplicationPlanCadre.Controllers
 {
+    [Authorize(Roles = "RCP")]
     public class ProgrammeController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
@@ -44,28 +46,7 @@ namespace ApplicationPlanCadre.Controllers
             return View(programme);
         }
 
-        public ActionResult Create()
-        {
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire");
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProgramme,annee,nom,nbUnite,codeSpecialisation,specialisation,nbHeurefrmGenerale,nbHeurefrmSpecifique,condition,sanction,commentaire,docMinistere_path,dateValidation,codeProgramme")] Programme programme)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Programme.Add(programme);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire", programme.codeProgramme);
-            return View(programme);
-        }
-
-        [Route("Programme/editer/{id:int?}", Name = "edit-prog")]
+        //[Route("Programme/editer/{id:int?}", Name = "edit-prog")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,47 +58,63 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire", programme.codeProgramme);
             return View(programme);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("Programme/editer/{id:int?}", Name = "Enredit-prog")]
-        public ActionResult Edit([Bind(Include = "idProgramme, codeProgramme, annee, codeSpecialisation, nom, dateValidation, docMinistere_path, specialisation, sanction, nbUnite, condition, nbHeurefrmGenerale,nbHeurefrmSpecifique")] Programme programme)
+        public ActionResult Edit([Bind(Include = "idProgramme, codeProgramme, annee, codeSpecialisation, nom, dateValidation, docMinistere_path, specialisation, sanction, nbUnite, condition, nbHeurefrmGenerale,nbHeurefrmSpecifique")] Programme programme, HttpPostedFileBase docMinistere_path)
         {
+            if(docMinistere_path != null)
+                UploadFile(docMinistere_path, programme);
             if (ModelState.IsValid)
             {
                 db.Entry(programme).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Info", "Programme", new { id = programme.idProgramme });
             }
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire", programme.codeProgramme);
+            Trim(programme);
             return View(programme);
         }
 
-        public ActionResult Delete(int? id)
+        public bool UploadFile(HttpPostedFileBase file, Programme programme)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                string fileName = Path.GetFileName(file.FileName);
+                string path = Path.Combine(Server.MapPath("~/Files/Document ministériel"), fileName);
+                file.SaveAs(path);
+                if (programme.docMinistere_path != null)
+                    DeleteFile(programme.docMinistere_path);
+                programme.docMinistere_path = fileName;
+                return true;
             }
-            Programme programme = db.Programme.Find(id);
-            if (programme == null)
+            catch(IOException)
             {
-                return HttpNotFound();
+                return false;
             }
-            return View(programme);
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public bool DeleteFile(string fileName)
         {
-            Programme programme = db.Programme.Find(id);
-            db.Programme.Remove(programme);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                System.IO.File.Delete(Path.Combine(Server.MapPath("~/Files/Document ministériel"), fileName));
+                return true;
+            }
+            catch(IOException)
+            {
+                return false;
+            }
+        }
+
+        private void Trim(Programme programme)
+        {
+            programme.nom.Trim();
+            programme.specialisation.Trim();
+            programme.sanction.Trim();
+            programme.nbUnite.Trim();
+            programme.condition.Trim();
         }
 
         protected override void Dispose(bool disposing)
@@ -127,43 +124,6 @@ namespace ApplicationPlanCadre.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public ActionResult ValiderProgramme(int? id)
-        {
-            var programme = db.Programme.Include(p => p.EnteteProgramme);
-            Programme program = db.Programme.Find(id);
-
-            var dateTime = DateTime.Now;
-            var date = dateTime.Date;
-            program.dateValidation = date;
-
-            db.Entry(program).State = EntityState.Modified;
-            db.SaveChanges();
-
-            return RedirectToAction("Details", new { id = id });
-        }
-
-        public string checkValidation(Programme programme)
-        {
-            string statut;
-            if (programme.dateValidation == null)
-            {
-                statut = "Programme non enregistré.";
-            }
-            else
-            {
-                string date = programme.dateValidation.ToString();
-                date = date.Substring(0, 10);
-                statut = "Programme enregistré le " + date + ".";
-            }
-            return statut;
-        }
-
-        public ActionResult _PartialEnonceCompetence(int? id)
-        {
-            var programme = db.Programme.Include(p => p.EnteteProgramme).SingleOrDefault(x => x.idProgramme == id);
-            return PartialView(programme);
         }
     }
 }

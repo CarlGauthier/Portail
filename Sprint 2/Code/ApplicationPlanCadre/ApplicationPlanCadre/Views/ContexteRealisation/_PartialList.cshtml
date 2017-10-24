@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ApplicationPlanCadre.Models.ContexteRealisation>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.contexteRealisation1)
+        </th>
+        <th class="action-cell-header">
+            <b>Modifier</b>
+        </th>
+        <th class="action-cell-header">
+            <b>Supprimer</b>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.contexteRealisation1)
+            </td>
+            <td class="action-cell">
+                <a>
+                    <span class="glyphicon glyphicon-pencil"><!----></span>
+                </a>
+            </td>
+            <td class="action-cell">
+                <a>
+                    <span class="glyphicon glyphicon-trash"><!----></span>
+                </a>
+            </td>
+        </tr>
+    }
+</table>

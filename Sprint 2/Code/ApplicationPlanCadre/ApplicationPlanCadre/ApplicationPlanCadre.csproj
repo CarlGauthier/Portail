@@ -194,14 +194,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccueilController.cs" />
     <Compile Include="Controllers\ConsoleProgrammeController.cs" />
+    <Compile Include="Controllers\ContexteRealisationController.cs" />
     <Compile Include="Controllers\ElementCompetenceController.cs" />
     <Compile Include="Controllers\EnonceCompetenceController.cs" />
-    <Compile Include="Controllers\EnonceCompetencesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProgrammeController.cs" />
     <Compile Include="Controllers\StageController.cs" />
-    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -263,6 +262,9 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.custom-file-input.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -319,10 +321,13 @@
     <Content Include="Views\EnonceCompetence\Info.cshtml" />
     <Content Include="Views\ElementCompetence\Info.cshtml" />
     <Content Include="Views\Programme\Info.cshtml" />
-    <Content Include="Views\Upload\UploadFile.cshtml" />
+    <Content Include="Views\EnonceCompetence\Create.cshtml" />
+    <Content Include="Views\ContexteRealisation\List.cshtml" />
+    <Content Include="Views\ContexteRealisation\_PartialList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\Document ministériel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -12,7 +12,7 @@
             <h3>Programme</h3>
             <div>
                 <h1>@Html.DisplayFor(model => model.EnteteProgramme.commentaire)</h1>
-                <div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "Programme")'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>
+                <div class="fancy-button" onclick="location.href='@Url.Action("Edit", "Programme", new { id = Model.idProgramme })'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>
             </div>
             <hr />
             <h3><b>@Html.DisplayNameFor(model => model.specialisation) : </b>@Html.DisplayFor(model => model.specialisation)</h3>
@@ -37,9 +37,13 @@
                         <p>@Html.DisplayFor(model => model.condition)</p>
                     </div>
 
-                    <a href="@Url.Content("~/UploadedFiles/" + Model.docMinistere_path)">
-                        @Html.DisplayFor(model => Model.docMinistere_path)
-                    </a>
+                    @if (Model.docMinistere_path != null)
+                    {
+                        <div class="fancy-button rouge" onclick="location.href='@Url.Content("~/Files/Document ministériel/" + Model.docMinistere_path)'">
+                            <span>@Html.DisplayFor(model => Model.docMinistere_path)</span> <span class="glyphicon glyphicon-file"><!----></span>
+                        </div>
+                    }
+                    
                 </div>
 
                 <div class="col-md-6">
@@ -72,6 +76,8 @@
                     <p class="droite">@Html.DisplayFor(p => enonceCompetence.codeCompetence)</p>
                 </a>
             }
+
+            <a href='@Url.Action("Create", "EnonceCompetence", new { id = Model.idProgramme })' >CREATE</a>
             
         </div>
     </div>

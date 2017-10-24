@@ -1,0 +1,39 @@
+﻿@model ApplicationPlanCadre.Models.ContexteRealisation
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="container">
+
+    @using (Ajax.BeginForm("Create", new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "partial-list",
+        HttpMethod = "POST"
+    }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.idCompetence)
+
+        <div class="horizontal-form form-box single-action">
+
+            <h3>Ajouter un nouveau contexte de réalisation</h3>
+            <hr />
+            <div class="form-group">
+                @Html.TextAreaFor(model => model.contexteRealisation1, new { @rows = "3", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.contexteRealisation1, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Suivant" />
+            </div>
+        </div>
+    }
+
+    <div id="partial-list" class="crud-list">
+        @{ Html.RenderAction("_PartialList");}
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
