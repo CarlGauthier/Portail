@@ -38,7 +38,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.obligatoire, htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-9">
-                            @Html.CheckBoxFor(model => model.obligatoire)
+                            @Html.CheckBoxFor(model => model.obligatoire, new { @Checked = "checked"})
                             @Html.ValidationMessageFor(model => model.obligatoire, "", new { @class = "text-danger" })
                         </div>
                     </div>

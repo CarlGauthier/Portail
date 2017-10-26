@@ -1,25 +1,27 @@
 ﻿@model ApplicationPlanCadre.Models.ContexteRealisation
 
-<div class="form-group">
-    @Html.LabelFor(model => model.contexteRealisation1, htmlAttributes: new { @class = "control-label col-md-3"})
-    <div class="col-md-9">
-        @Html.EditorFor(model => model.contexteRealisation1, new { htmlAttributes = new { @class = "form-control small-input", @Value = "" } })
-        @Html.ValidationMessageFor(model => model.contexteRealisation1, "", new { @class = "text-danger" })
+@using (Ajax.BeginForm("_partialCreateContexte", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "lstContexte", InsertionMode = InsertionMode.Replace }))
+{
+    @Html.HiddenFor(model => model.idCompetence)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.contexteRealisation1, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.contexteRealisation1, new { htmlAttributes = new { @class = "form-control small-input", @Value = "", @id = "contexteRealisation1" } })
+            @Html.ValidationMessageFor(model => model.contexteRealisation1, "", new { @class = "text-danger" })
+        </div>
     </div>
-</div>
 
-<div>
-    <div id="createContexte" class="fancy-button cancel" onclick="location.href='@Url.Action("createContexte",new { contexte = Model.contexteRealisation1, id = Model.idCompetence})'">Ajouter un Contexte</div>
-</div>
 
-@**@
-<script src="../../Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('#createContexte').click(function () {
-                $.get('@Url.Action("_partialContexte", Model)', function (data) {
-                    $('#lstContexte').replaceWith(data);
-                });
-            });
-        });
-</script>
+    <div class="col-md-offset-3">
+        <input type="submit" value="Enregistrer" />
+    </div>
+}
+
+        @{Html.RenderAction("_partialContexte", new { id = Model.idCompetence });}
+
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

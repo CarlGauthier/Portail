@@ -7,34 +7,31 @@ using System.Web.Mvc;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    [customAuthorize(Roles ="RCP")]
+    [customAuthorize(Roles = "RCP")]
     public class EnonceCompetencesController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
 
-        // GET: EnonceCompetences
-        public ActionResult Index()
-        {
-            var enonceCompetence = db.EnonceCompetence.Include(e => e.Programme);
-            return View(enonceCompetence.ToList());
-        }
+        //public ActionResult Index()
+        //{
+        //    var enonceCompetence = db.EnonceCompetence.Include(e => e.Programme);
+        //    return View(enonceCompetence.ToList());
+        //}
 
-        // GET: EnonceCompetences/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(id);
-            if (enonceCompetence == null)
-            {
-                return HttpNotFound();
-            }
-            return View(enonceCompetence);
-        }
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(id);
+        //    if (enonceCompetence == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(enonceCompetence);
+        //}
 
-        // GET: EnonceCompetences/Create
         public ActionResult Create(int? id)
         {
             if (id == null)
@@ -91,7 +88,34 @@ namespace ApplicationPlanCadre.Controllers
             return View(enonceCompetence);
         }
 
-        public ActionResult Delete(int? id)
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(id);
+        //    if (enonceCompetence == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(enonceCompetence);
+        //}
+
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(id);
+        //    db.EnonceCompetence.Remove(enonceCompetence);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+
+
+        /*-------------------------------- CONTEXTE --------------------------------*/
+
+        public ActionResult _partialCreateContexte(int? id)
         {
             if (id == null)
             {
@@ -102,42 +126,35 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            return View(enonceCompetence);
+            ContexteRealisation contexteRealisation = new ContexteRealisation();
+            contexteRealisation.EnonceCompetence = enonceCompetence;
+            contexteRealisation.idCompetence = enonceCompetence.idCompetence;
+            return PartialView(contexteRealisation);
+
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(id);
-            db.EnonceCompetence.Remove(enonceCompetence);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-
-        /*-------------------------------- CONTEXTE --------------------------------*/
-
-
-
-        //public ActionResult _partialContexte(int? id)
-        //{
-        //    var contexte = db.EnonceCompetence.SingleOrDefault(x => x.idCompetence == id);
-        //    return View(contexte); 
-        //}
-
-        public ActionResult _partialCreateContexte(int? id)
-        {
-            ContexteRealisation contexte = db.ContexteRealisation.Find(id);
-            return View(contexte);
-        }
-        public void createContexte([Bind(Include = "idContexte,contexteRealisation1,commentaire,idCompetence")] ContexteRealisation contexteRealisation)
+        public ActionResult _partialCreateContexte([Bind(Include = "idContexte,contexteRealisation1,commentaire,idCompetence")] ContexteRealisation contexteRealisation)
         {
             if (ModelState.IsValid)
             {
                 db.ContexteRealisation.Add(contexteRealisation);
                 db.SaveChanges();
+                return RedirectToAction("_partialCreateContexte", contexteRealisation.idCompetence);
             }
+            else
+            {
+                EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(contexteRealisation.idCompetence);
+                return View("Edit", enonceCompetence);
+            }
+        }
+
+
+        public ActionResult _partialContexte(int? id)
+        {
+            var contexte = db.ContexteRealisation.Include(p => p.EnonceCompetence);
+            return PartialView(contexte.ToList());
         }
 
         protected override void Dispose(bool disposing)
