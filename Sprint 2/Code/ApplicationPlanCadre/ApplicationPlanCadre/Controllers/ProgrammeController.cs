@@ -165,5 +165,14 @@ namespace ApplicationPlanCadre.Controllers
             var programme = db.Programme.Include(p => p.EnteteProgramme).SingleOrDefault(x => x.idProgramme == id);
             return PartialView(programme);
         }
+
+        public ActionResult Invoice()
+        {
+            var programme = db.Programme
+                          .Include(p => p.EnonceCompetence)
+                          .ToList();
+            // code to retrieve data from a database
+            return new Rotativa.MVC.ViewAsPdf("index", programme);
+        }
     }
 }
