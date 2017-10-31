@@ -68,8 +68,8 @@ $.extend($.fn, {
 		if ( validator.settings.onsubmit ) {
 		
 			// allow suppresing validation by adding a cancel class to the submit button
-			this.find("input, button").filter(".cancel").click(function() {
-				validator.cancelSubmit = true;
+			this.find("input, button").filter(".rouge").click(function() {
+				validator.rougeSubmit = true;
 			});
 			
 			// when a submitHandler is used, capture the submitting button
@@ -102,8 +102,8 @@ $.extend($.fn, {
 				}
 					
 				// prevent submit for invalid forms or custom submit handlers
-				if ( validator.cancelSubmit ) {
-					validator.cancelSubmit = false;
+				if ( validator.rougeSubmit ) {
+					validator.rougeSubmit = false;
 					return handle();
 				}
 				if ( validator.form() ) {

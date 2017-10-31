@@ -46,7 +46,11 @@
     <div class="row">
         <div class="col-md-4">
             <div class="fancy-button cancel" onclick="location.href='@Url.Action("Index")'">Annuler</div>
+<<<<<<< HEAD
             <input type="submit" value="Modifier" onclick="location.href='@Url.Action("Edit", "Programme", new { id =Model.idProgramme })'" />
+=======
+            <input type="submit" value="Modifier" onclick="location.href='@Url.RouteUrl("edit-prog", new { id = Model.idProgramme })'" />
+>>>>>>> master
 
         </div>
     </div>

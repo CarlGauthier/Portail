@@ -42,22 +42,25 @@ namespace ApplicationPlanCadre.Models
         [Display(Name = "Spécialisation")]
         public string specialisation { get; set; }
 
-        [Display(Name = "Heures de formation générale")]
+        [Display(Name = "Formation générale")]
         public int? nbHeurefrmGenerale { get; set; }
 
-        [Display(Name = "Heures de formation spécifique")]
+        [Display(Name = "Formation spécifique")]
         public int? nbHeurefrmSpecifique { get; set; }
 
         [StringLength(300)]
+        [Display(Name = "Type de condition")]
         public string condition { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Sanction")]
         public string sanction { get; set; }
 
         [StringLength(200)]
         public string commentaire { get; set; }
 
         [StringLength(200)]
+        [Display(Name = "Document ministériel")]
         public string docMinistere_path { get; set; }
 
         public DateTime? dateValidation { get; set; }

@@ -12,9 +12,37 @@
     }
 }
 
+body {
+    font-family: Segoe UI, Calibri, Sans-Serif;
+}
+
 h1, h2, h3, h4, h5, h6 {
-    margin: 0 15px;
+    margin: 5px 15px;
+    line-height: 50px;
     font-family: Segoe UI Light, Calibri Light, Sans-Serif;
+}
+
+li {
+    padding: 10px 15px;
+    list-style-type: square;
+}
+
+hr {
+    color: #929ab1;
+    border: none;
+    border-bottom: 1px solid;
+}
+
+.form-horizontal .control-label {
+    text-align: left;
+}
+
+legend {
+    margin: 0;
+    margin-bottom: 19px;
+    padding: 0 15px;
+    font-family: Segoe UI Light, Calibri Light, Sans-Serif;
+    border-bottom: 1px solid #929ab1;
 }
 
 input, button {
@@ -22,13 +50,21 @@ input, button {
 }
 
 .form-control {
-    border: 1px solid #aaaaaa;
+    border: 1px solid #929ab1;
     border-radius: 0;
     box-shadow: none;
 }
 
+.form-group {
+    padding: 0 15px;
+}
+
 .text-danger {
     color: #ce0000;
+}
+
+textarea {
+    resize: none;
 }
 
 .small-input {
@@ -36,19 +72,24 @@ input, button {
 }
 
 input[type='submit'], .fancy-button {
-    margin: 0 15px;
-    padding: 5px 15px;
+    margin: 5px 15px;
+    padding: 5px 10px;
     display: inline-block;
     border: 2px solid;
     border-radius: 0;
+    text-align: center;
     color: #083a7c;
     background-color: transparent;
-    font-size: 1.2em;
+    font-size: 18px;
     cursor: pointer;
     transition: 0.1s;
 }
 
-.fancy-button.cancel {
+input[type='submit'] span, .fancy-button span {
+    word-break: break-all;
+}
+
+.fancy-button.rouge {
     color: #ce0000;
 }
 
@@ -58,26 +99,38 @@ input[type='submit']:hover, .fancy-button:hover {
     color: #ffffff;
 }
 
-.fancy-button.cancel:hover {
+.fancy-button.rouge:hover {
     border-color: #ce0000;
     background-color: #ce0000;
     color: #ffffff;
 }
 
+.file-button {
+    font-weight: normal;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    display: none;
+}
+
 .form-box {
     margin: 0 15px;
     padding: 20px;
-    border: 1px solid #aaaaaa;
+    border: 1px solid #929ab1;
     background-color: #eef2f6;
 }
 
-.form-box hr {
-    border: none;
-    border-bottom: 1px solid #aaaaaa;
+.margin-auto {
+    margin: auto;
 }
 
 .single-action {
     margin-top: 75px;
+}
+
+.crud-list {
+    padding: 15px;
 }
 
 .crud-list table {
@@ -100,10 +153,10 @@ input[type='submit']:hover, .fancy-button:hover {
 }
 
 .crud-list .valide:hover td {
-    background-color: #eef2f6;
+    background-color: #f2f4f7;
 }
 
-.crud-list button {
+.crud-list a {
     background: none;
     border: none;
     color: #083a7c;
@@ -114,15 +167,20 @@ input[type='submit']:hover, .fancy-button:hover {
 }
 
 .crud-list .action-cell {
+    width: 15%;
     text-align: center;
     background-color: #e7ecf2;
 }
 
 .crud-list .valide .action-cell {
-    background-color: #eef2f6;
+    background-color: #f2f4f7;
 }
 
 .crud-list .action-cell-header {
     padding: 10px 5px;
     text-align: center;
+}
+
+.champ {
+    margin: 20px 15px;
 }

@@ -2,27 +2,35 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ApplicationPlanCadre.Models;
-using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    [customAuthorize(Roles = "RCP")]
+    [Authorize(Roles = "RCP")]
     public class ProgrammeController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
-
-        public ActionResult Index()
+        public ActionResult _TreeView()
         {
-            var programme = db.Programme.Include(t => t.EnteteProgramme);
-            return View(programme.ToList());
+            var programme = db.Programme
+                          .Include(p => p.EnonceCompetence)
+                          .ToList();
+            return PartialView(programme);
         }
 
-        public ActionResult Details(int? id)
+        [Route("Programme", Name = "Index-programme")]
+        public ActionResult Index()
+        {
+            return View(db.Programme.ToList());
+        }
+
+        [Route("Programme/{id:int?}", Name = "Info-programme")]
+        public ActionResult Info(int? id)
         {
             if (id == null)
             {
@@ -33,12 +41,11 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            int total = Convert.ToInt32(programme.nbHeurefrmGenerale) + Convert.ToInt32(programme.nbHeurefrmSpecifique);
-            ViewBag.total = " " + total;
-            ViewBag.dateValidation = checkValidation(programme);
+            ViewBag.total = programme.nbHeurefrmGenerale + programme.nbHeurefrmSpecifique;
+            //ViewBag.dateValidation = checkValidation(programme);
             return View(programme);
         }
-
+		
         public ActionResult Create()
         {
             ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire");
@@ -60,6 +67,7 @@ namespace ApplicationPlanCadre.Controllers
             return View(programme);
         }
 
+        [Route("Programme/editer/{id:int?}", Name = "Edit-prog")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -71,46 +79,63 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire", programme.codeProgramme);
             return View(programme);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProgramme, codeProgramme, annee, codeSpecialisation, nom, dateValidation, docMinistere_path, specialisation, sanction, nbUnite, condition, nbHeurefrmGenerale,nbHeurefrmSpecifique")] Programme programme)
+        public ActionResult Edit([Bind(Include = "idProgramme, codeProgramme, annee, codeSpecialisation, nom, dateValidation, docMinistere_path, specialisation, sanction, nbUnite, condition, nbHeurefrmGenerale,nbHeurefrmSpecifique")] Programme programme, HttpPostedFileBase docMinistere_path)
         {
+            if(docMinistere_path != null)
+                UploadFile(docMinistere_path, programme);
             if (ModelState.IsValid)
             {
                 db.Entry(programme).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Info", "Programme", new { id = programme.idProgramme });
             }
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire", programme.codeProgramme);
+            Trim(programme);
             return View(programme);
         }
 
-        public ActionResult Delete(int? id)
+        public bool UploadFile(HttpPostedFileBase file, Programme programme)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                string fileName = Path.GetFileName(file.FileName);
+                string path = Path.Combine(Server.MapPath("~/Files/Document ministériel"), fileName);
+                file.SaveAs(path);
+                if (programme.docMinistere_path != null)
+                    DeleteFile(programme.docMinistere_path);
+                programme.docMinistere_path = fileName;
+                return true;
             }
-            Programme programme = db.Programme.Find(id);
-            if (programme == null)
+            catch(IOException)
             {
-                return HttpNotFound();
+                return false;
             }
-            return View(programme);
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public bool DeleteFile(string fileName)
         {
-            Programme programme = db.Programme.Find(id);
-            db.Programme.Remove(programme);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                System.IO.File.Delete(Path.Combine(Server.MapPath("~/Files/Document ministériel"), fileName));
+                return true;
+            }
+            catch(IOException)
+            {
+                return false;
+            }
+        }
+
+        private void Trim(Programme programme)
+        {
+            programme.nom.Trim();
+            programme.specialisation.Trim();
+            programme.sanction.Trim();
+            programme.nbUnite.Trim();
+            programme.condition.Trim();
         }
 
         protected override void Dispose(bool disposing)
@@ -120,43 +145,6 @@ namespace ApplicationPlanCadre.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public ActionResult ValiderProgramme(int? id)
-        {
-            var programme = db.Programme.Include(p => p.EnteteProgramme);
-            Programme program = db.Programme.Find(id);
-
-            var dateTime = DateTime.Now;
-            var date = dateTime.Date;
-            program.dateValidation = date;
-
-            db.Entry(program).State = EntityState.Modified;
-            db.SaveChanges();
-
-            return RedirectToAction("Details", new { id = id });
-        }
-
-        public string checkValidation(Programme programme)
-        {
-            string statut;
-            if (programme.dateValidation == null)
-            {
-                statut = "Programme non enregistré.";
-            }
-            else
-            {
-                string date = programme.dateValidation.ToString();
-                date = date.Substring(0, 10);
-                statut = "Programme enregistré le " + date + ".";
-            }
-            return statut;
-        }
-
-        public ActionResult _PartialEnonceCompetence(int? id)
-        {
-            var programme = db.Programme.Include(p => p.EnteteProgramme).SingleOrDefault(x => x.idProgramme == id);
-            return PartialView(programme);
         }
     }
 }

@@ -7,13 +7,15 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body>
     <section id="layout">
         <header>
             <div class="fluid-container">
                 <div id="layout-head" class="clearfix">
-                    <button type="button" id="nav-button" data-toggle="collapse" data-target="#nav"><span class="glyphicon glyphicon-th"></span></button>
+                    <button type="button" id="nav-button" data-toggle="collapse" data-target="#nav"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
                     <a href='@Url.Action("Index", "Accueil")'><div class="header-logo"><!----></div></a>
                     @Html.Partial("_LoginPartial")
                 </div>
@@ -24,27 +26,30 @@
                     <span class="glyphicon glyphicon-home"></span>
                     <p>Accueil</p>
                 </a>
-                @if (User.IsInRole("RCP"))
+                @if (User.IsInRole("RCP") || User.IsInRole("Gestionnaire de stage") || User.IsInRole("Admin") || User.IsInRole("Enseignant"))
                 {
-                    <a class="tuile"  href='@Url.Action("Index", "Programme")'>
+                    <a class="tuile" href='@Url.RouteUrl("Accueil-pedagogie")'>
                         <span class="glyphicon glyphicon-education"></span>
-                        <p>Gestion des programmes</p>
+                        <p>Pédagogie</p>
                     </a>
                 }
-                @if (User.IsInRole("Enseignant") || User.IsInRole("Gestionnaire de stage"))
+
+        
+                @if (User.IsInRole("Enseignant")||User.IsInRole("Gestionnaire de stage"))
                 {
-                    <a class="tuile" href='@Url.Action("indexStage", "Stage")'>
+                    <a class="tuile" href='@Url.RouteUrl("index-Stage")'>
                         <span class="glyphicon glyphicon-briefcase"></span>
                         <p>Stage</p>
                     </a>
                 }
                 @if (User.IsInRole("Admin"))
                 {
-                    <a class="tuile" href='@Url.Action("Create", "ConsoleProgramme")'>
+                    <a class="tuile" href='@Url.RouteUrl("creation-programme")'>
                         <span class="glyphicon glyphicon-cog"></span>
                         <p>Console d'administration</p>
                     </a>
                 }
+
                 </div>
             </nav>
         </header>
@@ -52,7 +57,5 @@
     <section id="page-content">
         @RenderBody()
     </section>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>

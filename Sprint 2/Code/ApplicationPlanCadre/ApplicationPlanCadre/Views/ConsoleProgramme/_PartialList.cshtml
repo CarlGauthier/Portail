@@ -38,32 +38,20 @@
                 <td class="action-cell">
                     @if (valide)
                     {
-                        <button onclick="location.href='@Url.Action("Edit", new { id = item.idProgramme })'">
+                        <a href='@Url.RouteUrl("edit-programme", new { id = item.idProgramme })'>
                             <span class="glyphicon glyphicon-pencil"><!----></span>
-                        </button>
+                        </a>
                     }
                 </td>
                 <td class="action-cell">
                     @if(valide)
                     {
-                        <button onclick="location.href='@Url.Action("DeleteConfirmed", new { id = item.idProgramme })'">
+                        <a href='@Url.Action("DeleteConfirmed", new { id = item.idProgramme })'>
                             <span class="glyphicon glyphicon-trash"><!----></span>
-                        </button>
+                        </a>
                     }
                 </td>
             </tr>
         }
     </table>
 </div>
-
-@*<script src="../../Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    function deleteOnClick() {
-        $.get('@Url.Action("_PartialList", "Programme")', function (data) {
-            $('#tableProgramme').replaceWith(data);
-        });
-        $.ajax({
-            url: $(this).attr("href"),
-        });
-    }
-</script>*@

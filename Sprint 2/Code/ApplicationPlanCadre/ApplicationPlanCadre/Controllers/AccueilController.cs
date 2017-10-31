@@ -14,5 +14,10 @@ namespace ApplicationPlanCadre.Controllers
         {
             return View();
         }
+        [Route("Pedagogie", Name = "Accueil-pedagogie")]
+        public ActionResult Pedagogie()
+        {
+            return View();
+        }
     }
 }

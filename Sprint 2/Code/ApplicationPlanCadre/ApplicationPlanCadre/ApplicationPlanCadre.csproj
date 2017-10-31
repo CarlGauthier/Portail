@@ -268,7 +268,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\portail.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config">
@@ -315,6 +314,7 @@
     <Content Include="Views\Programme\Details.cshtml" />
     <Content Include="Views\Programme\Edit.cshtml" />
     <Content Include="Views\Programme\_PartialEnonceCompetence.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\EnonceCompetences\Create.cshtml" />
     <Content Include="Views\EnonceCompetences\_partialContexte.cshtml" />
     <Content Include="Views\EnonceCompetences\_partialCreateContexte.cshtml" />
@@ -324,6 +324,20 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\ContexteRealisations\" />
+=======
+    <Content Include="Views\Programme\_TreeView.cshtml" />
+    <Content Include="Views\EnonceCompetence\Info.cshtml" />
+    <Content Include="Views\ElementCompetence\Info.cshtml" />
+    <Content Include="Views\Programme\Info.cshtml" />
+    <Content Include="Views\Accueil\Pedagogie.cshtml" />
+    <Content Include="Views\EnonceCompetence\Create.cshtml" />
+    <Content Include="Views\ContexteRealisation\List.cshtml" />
+    <Content Include="Views\ContexteRealisation\_PartialList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Files\Document ministériel\" />
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
