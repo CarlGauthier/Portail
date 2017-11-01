@@ -45,7 +45,7 @@ namespace ApplicationPlanCadre.Controllers
                 return RedirectToAction("Create");
             }
             if (existe)
-                ViewBag.messageError = "Erreur, ce programme existe déjà.";
+                ModelState.AddModelError("Duplique", "Erreur, ce programme existe déjà.");
             ViewBag.codeProgramme = GetCodeProgrammeSelectList();
             return View(programme);
         }
@@ -81,7 +81,7 @@ namespace ApplicationPlanCadre.Controllers
                 return RedirectToAction("Create");
             }
             if (existe)
-                ViewBag.messageError = "Erreur, ce programme existe déjà.";
+                ModelState.AddModelError("Duplique", "Erreur, ce programme existe déjà.");
             ViewBag.codeProgramme = GetCodeProgrammeSelectList();
             return View(programme);
         }

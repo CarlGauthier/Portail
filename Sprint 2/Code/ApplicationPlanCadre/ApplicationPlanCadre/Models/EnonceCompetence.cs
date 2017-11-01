@@ -33,8 +33,10 @@ namespace ApplicationPlanCadre.Models
         [StringLength(30)]
         public string motClef { get; set; }
 
+        [Display(Name = "Obligatoire")]
         public bool obligatoire { get; set; }
 
+        [Display(Name = "Actif")]
         public bool actif { get; set; }
 
         [StringLength(200)]

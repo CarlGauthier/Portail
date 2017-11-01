@@ -13,9 +13,9 @@
             else {
                 <div class="no-button"><!----></div> }
             @if (programme.nom != null) {
-                <a href='@Url.Action("Info", "Programme", new { id = programme.idProgramme })'>@Html.DisplayFor(p => programme.nom)</a> }
+                <a href='@Url.Action("Info", "Programme", new { idProgramme = programme.idProgramme })'>@Html.DisplayFor(p => programme.nom)</a> }
             else {
-                <a href='@Url.Action("Info", "Programme", new { id = programme.idProgramme })'>
+                <a href='@Url.Action("Info", "Programme", new { idProgramme = programme.idProgramme })'>
                     @Html.DisplayFor(p => programme.EnteteProgramme.commentaire)
                     @Html.DisplayFor(p => programme.codeProgramme)-@Html.DisplayFor(p => programme.annee)-@Html.DisplayFor(p => programme.codeSpecialisation)
                 </a>
@@ -34,7 +34,7 @@
                             <div class="collapse-button" data-toggle="collapse" data-target=@enc_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
                         else { 
                             <div class="no-button"><!----></div> }
-                        <a href='@Url.RouteUrl("Info-enonceCompetence", new { id = enonceCompetence.idCompetence })'>@Html.DisplayFor(enc => enonceCompetence.enonceCompetence1)</a>
+                        <a href='@Url.RouteUrl("Info-enonceCompetence", new { idCompetence = enonceCompetence.idCompetence })'>@Html.DisplayFor(enc => enonceCompetence.enonceCompetence1)</a>
                     </div>
                     <div id=@enc_id class="collapse">
                         <div class="tree-view-item-container">
@@ -44,7 +44,7 @@
                                 string el_item = "el" + elementCompetence.idElement.ToString() + "item";
                                 <div id=@el_item class="tree-view-item">
                                     <div class="no-button"><!----></div>
-                                    <a href='@Url.RouteUrl("Info-elementComp", new { id = elementCompetence.idElement })'>@Html.DisplayFor(elc => elementCompetence.element)</a>
+                                    <a href='@Url.RouteUrl("Info-elementComp", new { idElement = elementCompetence.idElement })'>@Html.DisplayFor(elc => elementCompetence.element)</a>
                                 </div>
                             }
                         </div>

@@ -10,15 +10,11 @@
     <div id="info-display" class="container-fluid">
         <div id="info-header">
             <h3>Programme</h3>
-            <div>
-                @if (Model.nom != null) {
-                    <h1>@Html.DisplayFor(model => model.nom)</h1>
-                } else {
-                    <h1>@Html.DisplayFor(model => model.EnteteProgramme.commentaire)</h1>
-                }
-
-                <div class="fancy-button" onclick="location.href='@Url.Action("Edit", "Programme", new { id = Model.idProgramme })'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>
-            </div>
+            @if (Model.nom != null) {
+                <h1>@Html.DisplayFor(model => model.nom)</h1>
+            } else {
+                <h1>@Html.DisplayFor(model => model.EnteteProgramme.commentaire)</h1>
+            }
             <hr />
             <h3><b>@Html.DisplayNameFor(model => model.specialisation) : </b>@Html.DisplayFor(model => model.specialisation)</h3>
             <h3>@Html.DisplayFor(model => model.codeProgramme)-@Html.DisplayFor(model => model.annee)-@Html.DisplayFor(model => model.codeSpecialisation)</h3>
@@ -44,14 +40,17 @@
 
                     @if (Model.docMinistere_path != null)
                     {
-                        <div class="fancy-button rouge" onclick="location.href='@Url.Content("~/Files/Document ministériel/" + Model.docMinistere_path)'">
-                            <span>@Html.DisplayFor(model => Model.docMinistere_path)</span> <span class="glyphicon glyphicon-file"><!----></span>
+                        <div class="champ">
+                            <a class="fancy-button rouge" href='@Url.Content("~/Files/Document ministériel/" + Model.docMinistere_path)' target="_blank">
+                                <span>@Html.DisplayFor(model => Model.docMinistere_path)</span> <span class="glyphicon glyphicon-file"><!----></span>
+                            </a>
                         </div>
                     }
                     
                 </div>
 
                 <div class="col-md-6">
+
                     <fieldset>
                         <legend>Heures</legend>
                         <div class="champ">
@@ -69,20 +68,32 @@
                             <p>@Html.ViewData["total"] h</p>
                         </div>
                     </fieldset>
+
                 </div>
             </div>
-            <hr />
-            <h2>Énoncés de compétence</h2>
 
-            @foreach (var enonceCompetence in Model.EnonceCompetence)
+            @if (Model.EnonceCompetence.Count > 0)
             {
-                <a class="info-child clearfix" href='@Url.Action("Info", "EnonceCompetence", new { id = enonceCompetence.idCompetence })'>
-                    <p class="gauche">@Html.DisplayFor(p => enonceCompetence.enonceCompetence1)</p>
-                    <p class="droite">@Html.DisplayFor(p => enonceCompetence.codeCompetence)</p>
-                </a>
+                <hr />
+                <h2>Énoncés de compétence</h2>
+
+                foreach (var enonceCompetence in Model.EnonceCompetence)
+                {
+                    <a class="info-child clearfix" href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = enonceCompetence.idCompetence })'>
+                        <p class="gauche">@Html.DisplayFor(p => enonceCompetence.enonceCompetence1)</p>
+                        <p class="droite">@Html.DisplayFor(p => enonceCompetence.codeCompetence)</p>
+                    </a>
+                }
             }
 
-            <a href='@Url.Action("Create", "EnonceCompetence", new { id = Model.idProgramme })' >CREATE</a>
+            <hr />
+
+            <h2>Options</h2>
+
+            <div class="champ">
+                <a class="fancy-button" onclick="location.href='@Url.Action("Edit", new { id = Model.idProgramme })'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
+                <a class="fancy-button" onclick="location.href='@Url.Action("Create", "EnonceCompetence", new { idProgramme = Model.idProgramme })'"><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un énoncé</a>
+            </div>
             
         </div>
     </div>

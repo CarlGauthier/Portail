@@ -195,6 +195,7 @@
     <Compile Include="Controllers\AccueilController.cs" />
     <Compile Include="Controllers\ConsoleProgrammeController.cs" />
     <Compile Include="Controllers\ContexteRealisationController.cs" />
+    <Compile Include="Controllers\CriterePerformanceController.cs" />
     <Compile Include="Controllers\ElementCompetenceController.cs" />
     <Compile Include="Controllers\EnonceCompetenceController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -253,6 +254,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="obj\Release\CoreCompileInputs.cache" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\IIS Développement.pubxml" />
     <None Include="Properties\PublishProfiles\IIS Production.pubxml" />
     <None Include="Properties\PublishProfiles\IIS Test.pubxml" />
@@ -309,7 +311,6 @@
     <Content Include="Views\Stage\indexStage.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\Programme\Index.cshtml" />
-    <Content Include="Views\Programme\TreeView.cshtml" />
     <Content Include="Views\ConsoleProgramme\Edit.cshtml" />
     <Content Include="Views\ConsoleProgramme\Create.cshtml" />
     <Content Include="Views\ConsoleProgramme\_PartialList.cshtml" />
@@ -323,8 +324,18 @@
     <Content Include="Views\Programme\Info.cshtml" />
     <Content Include="Views\Accueil\Pedagogie.cshtml" />
     <Content Include="Views\EnonceCompetence\Create.cshtml" />
-    <Content Include="Views\ContexteRealisation\List.cshtml" />
+    <Content Include="Views\ContexteRealisation\Create.cshtml" />
     <Content Include="Views\ContexteRealisation\_PartialList.cshtml" />
+    <Content Include="Views\ContexteRealisation\Edit.cshtml" />
+    <Content Include="Views\EnonceCompetence\Edit.cshtml" />
+    <Content Include="Views\ElementCompetence\Create.cshtml" />
+    <Content Include="Views\ElementCompetence\Edit.cshtml" />
+    <Content Include="Views\CriterePerformance\Edit.cshtml" />
+    <Content Include="Views\CriterePerformance\Create.cshtml" />
+    <Content Include="Views\CriterePerformance\_PartialList.cshtml" />
+    <Content Include="Views\EnonceCompetence\Delete.cshtml" />
+    <Content Include="Views\ElementCompetence\Order.cshtml" />
+    <Content Include="Views\ElementCompetence\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

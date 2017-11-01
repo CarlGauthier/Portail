@@ -12,18 +12,32 @@
             <h3>Élément de compétence</h3>
             <div>
                 <h1>@Html.DisplayFor(model => model.element)</h1>
-                @*<div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "ElementCompetence")'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>*@
             </div>
         </div>
 
         <div id="info-detail">
-            <h2>Critères de performance</h2>
-            <ul>
-                @foreach (var criterePerformance in Model.CriterePerformance)
-                {
-                    <li>@Html.DisplayFor(cp => criterePerformance.criterePerformance1)</li>
-                }
-            </ul>
+
+            @if (Model.CriterePerformance.Count > 0)
+            {
+                <h2>Critères de performance</h2>
+
+                <ul>
+                    @foreach (var criterePerformance in Model.CriterePerformance)
+                    {
+                        <li>@Html.DisplayFor(cp => criterePerformance.criterePerformance1)</li>
+                    }
+                </ul>
+
+                <hr />
+            }
+
+            <h2>Options</h2>
+
+            <div class="champ">
+                <a class="fancy-button" href='@Url.Action("Edit", new { idElement = Model.idElement })'><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
+                <a class="fancy-button" onclick="location.href='@Url.Action("Delete", new { idElement = Model.idElement })'"><span class="glyphicon glyphicon-trash"><!----></span> Supprimer l'élément</a>
+            </div>
+
         </div>
     </div>
 </div>

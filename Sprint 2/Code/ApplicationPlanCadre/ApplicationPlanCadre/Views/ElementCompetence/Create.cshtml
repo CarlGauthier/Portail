@@ -1,0 +1,37 @@
+﻿@model ApplicationPlanCadre.Models.ElementCompetence
+
+@{
+    ViewBag.Title = "Élément de compétence - création";
+}
+
+<div class="container">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.idCompetence)
+
+        <div class="form-horizontal form-box single-action">
+            <h1>Créer un élément de compétence</h1>
+
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.element, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.element, new {@rows = "3", @maxlength = "300", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.element, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Suivant" class="fancy-button"/>
+                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = Model.idCompetence })'">Annuler</div>
+                </div>
+            </div>
+        </div>
+        
+    }
+
+</div>
