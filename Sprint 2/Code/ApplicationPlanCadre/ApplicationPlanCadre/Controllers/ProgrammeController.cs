@@ -96,7 +96,7 @@ namespace ApplicationPlanCadre.Controllers
                 Trim(programme);
                 db.Entry(programme).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Info", "Programme", new { id = programme.idProgramme });
+                return RedirectToAction("Info", "Programme", new { idProgramme = programme.idProgramme });
             }
             return View(programme);
         }
