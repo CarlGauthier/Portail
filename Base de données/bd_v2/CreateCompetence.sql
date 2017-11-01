@@ -1,3 +1,4 @@
+
 CREATE TABLE EnonceCompetence
 (	
 	idCompetence		INT				NOT NULL	IDENTITY(1,1),
@@ -9,7 +10,7 @@ CREATE TABLE EnonceCompetence
 	actif				BIT				NOT NULL	DEFAULT(1),
 	commentaire			VARCHAR(200)	NULL,
 
-	codeDevis			INT				NOT NULL,	--FK
+	idDevisMinistere	INT				NOT NULL,	--FK
 	
 	PRIMARY KEY(idCompetence)
 )
