@@ -2,7 +2,7 @@
 
 <div id="tree-view">
     <div class="tree-view-header">Programmes</div>
-    @foreach (var programme in Model)
+    @foreach (var programme in Model.OrderBy(p => p.nom))
     {
         string p_id = "p" + programme.idProgramme.ToString();
         string p_item = p_id + "item";
@@ -12,19 +12,15 @@
                 <div class="collapse-button" data-toggle="collapse" data-target=@p_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
             else {
                 <div class="no-button"><!----></div> }
-            @if (programme.nom != null) {
-                <a href='@Url.Action("Info", "Programme", new { idProgramme = programme.idProgramme })'>@Html.DisplayFor(p => programme.nom)</a> }
-            else {
-                <a href='@Url.Action("Info", "Programme", new { idProgramme = programme.idProgramme })'>
-                    @Html.DisplayFor(p => programme.EnteteProgramme.commentaire)
-                    @Html.DisplayFor(p => programme.codeProgramme)-@Html.DisplayFor(p => programme.annee)-@Html.DisplayFor(p => programme.codeSpecialisation)
-                </a>
-            }
+            <a href='@Url.Action("Info", "Programme", new { idProgramme = programme.idProgramme })'>
+                @Html.DisplayFor(p => programme.codeProgramme)-@Html.DisplayFor(p => programme.annee)-@Html.DisplayFor(p => programme.codeSpecialisation) • 
+                @Html.DisplayFor(p => programme.EnteteProgramme.commentaire)
+            </a>
         </div>
         <div id=@p_id class="collapse">
             <div class="tree-view-item-container">
                 <div class="tree-view-header">Énoncés de compétences</div>
-                @foreach (var enonceCompetence in programme.EnonceCompetence)
+                @foreach (var enonceCompetence in programme.EnonceCompetence.OrderBy(ec => ec.codeCompetence))
                 {
                     string enc_id = "enc" + enonceCompetence.idCompetence.ToString();
                     string enc_item = enc_id + "item";
@@ -34,12 +30,15 @@
                             <div class="collapse-button" data-toggle="collapse" data-target=@enc_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
                         else { 
                             <div class="no-button"><!----></div> }
-                        <a href='@Url.RouteUrl("Info-enonceCompetence", new { idCompetence = enonceCompetence.idCompetence })'>@Html.DisplayFor(enc => enonceCompetence.enonceCompetence1)</a>
+                        <a href='@Url.RouteUrl("Info-enonceCompetence", new { idCompetence = enonceCompetence.idCompetence })'>
+                            @Html.DisplayFor(enc => enonceCompetence.codeCompetence) • 
+                            @Html.DisplayFor(enc => enonceCompetence.enonceCompetence1)
+                        </a>
                     </div>
                     <div id=@enc_id class="collapse">
                         <div class="tree-view-item-container">
                             <div class="tree-view-header">Éléments de compétences</div>
-                            @foreach (var elementCompetence in enonceCompetence.ElementCompetence)
+                            @foreach (var elementCompetence in enonceCompetence.ElementCompetence.OrderBy(elc => elc.numero))
                             {
                                 string el_item = "el" + elementCompetence.idElement.ToString() + "item";
                                 <div id=@el_item class="tree-view-item">

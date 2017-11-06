@@ -21,7 +21,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <div class="col-md-12">
-                <p>Si vous supprimer cette compétence, vous supprimer aussi les éléments de compétence suivant.</p>
+                <p>Si vous supprimez cette compétence, vous supprimez aussi les éléments de compétence suivants.</p>
                 @foreach (var elementCompetence in Model.ElementCompetence)
                 {
                     <a class="info-child clearfix" href='@Url.Action("Info", "ElementCompetence", new { idElement = elementCompetence.idElement })'>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="col-md-12">
-                <p>Êtes vous certain de vouloir supprimer cette compétence?</p>
+                <p>Êtes-vous certain de vouloir supprimer cet énoncé de compétence?</p>
             </div>
 
             <div class="form-group">

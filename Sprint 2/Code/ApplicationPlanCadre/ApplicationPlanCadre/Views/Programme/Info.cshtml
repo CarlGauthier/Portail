@@ -91,8 +91,9 @@
             <h2>Options</h2>
 
             <div class="champ">
-                <a class="fancy-button" onclick="location.href='@Url.Action("Edit", new { id = Model.idProgramme })'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
-                <a class="fancy-button" onclick="location.href='@Url.Action("Create", "EnonceCompetence", new { idProgramme = Model.idProgramme })'"><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un énoncé</a>
+                <a class="fancy-button" href='@Url.Action("Edit", new { id = Model.idProgramme })'><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
+                <a class="fancy-button" href='@Url.Action("Create", "EnonceCompetence", new { idProgramme = Model.idProgramme })'><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un énoncé</a>
+                <a class="fancy-button rouge" href='@Url.Action("Index", "Programme")'>Retour</a>
             </div>
             
         </div>

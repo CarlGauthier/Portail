@@ -43,9 +43,9 @@ namespace ApplicationPlanCadre.Controllers
         public ActionResult Create([Bind(Include = "idCritere,criterePerformance1,numero,commentaire,idElement")] CriterePerformance criterePerformance)
         {
             AssignNo(criterePerformance);
+            Trim(criterePerformance);
             if (ModelState.IsValid)
             {
-                Trim(criterePerformance);
                 db.CriterePerformance.Add(criterePerformance);
                 db.SaveChanges();
                 return RedirectToAction("Create", new { idElement = criterePerformance.idElement });
@@ -72,9 +72,9 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idCritere,criterePerformance1,numero,commentaire,idElement")] CriterePerformance criterePerformance)
         {
+            Trim(criterePerformance);
             if (ModelState.IsValid)
             {
-                Trim(criterePerformance);
                 db.Entry(criterePerformance).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Create", new { idElement = criterePerformance.idElement });
@@ -147,7 +147,7 @@ namespace ApplicationPlanCadre.Controllers
 
         private void Trim(CriterePerformance criterePerformance)
         {
-            criterePerformance.criterePerformance1.Trim();
+            if (criterePerformance.criterePerformance1 != null) criterePerformance.criterePerformance1 = criterePerformance.criterePerformance1.Trim();
         }
 
         protected override void Dispose(bool disposing)
