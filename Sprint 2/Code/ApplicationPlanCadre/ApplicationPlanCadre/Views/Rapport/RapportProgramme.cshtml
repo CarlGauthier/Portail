@@ -1,0 +1,105 @@
+﻿@model dynamic
+@using ApplicationPlanCadre.Models
+
+@{
+    ViewBag.Title = "RapportProgramme";
+    Layout = null;
+}
+<script>
+    //$(document).ready(function () { $("table tbody th, table tbody td").wrapInner("<div></div>"); });
+</script>
+<style type="text/css">
+        table {
+            table-layout: fixed;
+            width: 100%;
+            overflow-x: visible;
+
+        }
+    table, thead, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        border-spacing: 0px;
+    }
+    th{
+        border:1px solid black;
+    }
+       
+
+
+
+
+        th, td {
+            padding: 10px;
+
+        }
+        .element {
+            font-size: 25px;
+            margin-left:25px;
+            text-align:left;
+        }
+        .enonce {
+                font-size: 40px;
+                text-align:left;
+        }
+       .pdf{
+           margin-top:100px;
+    }
+
+      table { page-break-after:auto }
+      tr    { page-break-inside:avoid; page-break-after:auto }
+      td    { page-break-inside:avoid; page-break-after:auto }
+      thead { display:table-header-group }
+      tfoot { display:table-footer-group }
+       div {
+            page-break-inside: avoid;
+        }
+
+
+    pdf table td.no-border {
+        border: solid 1px #FFF !important;
+    }
+    
+ </style>
+
+
+
+
+
+<div class="pdf">
+   
+    
+    <table cellspacing="0"> 
+        <thead>
+            <tr>
+                <th style="border:1px solid black">Compétence</th>
+            </tr>
+        </thead>
+        
+        
+        
+        @foreach (SecondaryEnonceCompetence enonceCmpt in Model.EnonceCompetence)
+        {
+            <tr>
+                <td>
+                    <span class="enonce">
+                        @Html.DisplayFor(x => enonceCmpt.enonceCompetence1)
+                    </span>
+                    <br />
+                    @foreach (SecondaryElementCompetence element in Model.ElementCompetence)
+                    {
+                        if (element.idCompetence == enonceCmpt.idCompetence)
+                        {
+                            <span class="element">
+                                @Html.DisplayFor(x => element.element)
+                            </span>
+                            <br />
+                        }
+                    }
+                </td>
+            </tr>
+        }
+        <tbody/>
+    </table>
+</div>
+
+@*@Html.Raw(Model.ElementCometence)*@

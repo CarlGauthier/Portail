@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using System.Configuration;
 using ApplicationPlanCadre.Helpers;
-using Rotativa;
+
 
 
 using ApplicationPlanCadre.Models;
@@ -36,11 +36,11 @@ namespace ApplicationPlanCadre.Controllers
             else
             {
                 model.EnonceCompetence = getEnoncerComp(searchStr);
-            model.ElementCompetence = getElemComp(searchStr);
-            model.EnteteProgramme = getEnteteProg(searchStr);
-            model.Programme = getProgramme(searchStr);
-            model.CriterePerformance = getCritPerf(searchStr);
-            model.ContexteRealisation = getContextReal(searchStr);
+                model.ElementCompetence = getElemComp(searchStr);
+                model.EnteteProgramme = getEnteteProg(searchStr);
+                model.Programme = getProgramme(searchStr);
+                model.CriterePerformance = getCritPerf(searchStr);
+                model.ContexteRealisation = getContextReal(searchStr);
             }
             
             

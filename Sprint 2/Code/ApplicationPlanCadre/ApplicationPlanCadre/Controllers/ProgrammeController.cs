@@ -166,13 +166,6 @@ namespace ApplicationPlanCadre.Controllers
             return PartialView(programme);
         }
 
-        public ActionResult Invoice()
-        {
-            var programme = db.Programme
-                          .Include(p => p.EnonceCompetence)
-                          .ToList();
-            // code to retrieve data from a database
-            return new Rotativa.MVC.ViewAsPdf("index", programme);
-        }
+       
     }
 }

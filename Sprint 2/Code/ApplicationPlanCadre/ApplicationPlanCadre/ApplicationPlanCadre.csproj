@@ -50,11 +50,8 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Rotativa.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rotativa.Core.2.0.0\lib\net45\Rotativa.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Rotativa.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Rotativa.MVC.2.0.3\lib\net45\Rotativa.MVC.dll</HintPath>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -206,6 +203,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProgrammeController.cs" />
+    <Compile Include="Controllers\RapportController.cs" />
     <Compile Include="Controllers\rechercheController.cs" />
     <Compile Include="Controllers\StageController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
@@ -239,6 +237,8 @@
   <ItemGroup>
     <Content Include="bin\ApplicationPlanCadre.dll" />
     <Content Include="bin\ApplicationPlanCadre.pdb" />
+    <Content Include="bin\Rotativa.Core.dll" />
+    <Content Include="bin\Rotativa.MVC.dll" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -273,9 +273,6 @@
     <None Include="Properties\PublishProfiles\IIS Production.pubxml" />
     <None Include="Properties\PublishProfiles\IIS Test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
-    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
-    <Content Include="Rotativa\wkhtmltoimage.exe" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -299,6 +296,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\static\header.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -351,6 +349,9 @@
     <Content Include="Views\Upload\UploadFile.cshtml" />
     <Content Include="Views\recherche\recherche.cshtml" />
     <Content Include="Views\recherche\_afficherRecherche.cshtml" />
+    <Content Include="Views\Rapport\RapportProgramme.cshtml" />
+    <Content Include="Views\Rapport\_header.cshtml" />
+    <Content Include="Views\Rapport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

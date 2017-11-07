@@ -1,0 +1,39 @@
+﻿@model ApplicationPlanCadre.Models.Programme
+
+@{
+    ViewBag.Title = "Rapport";
+}
+<style>
+    .btn{
+       float:left;
+       margin-left:2px;
+    }
+    .form-horizontal .mr-0 {
+        margin-right: 0 !important;
+        padding-right:0px !important;
+    }
+    .form-control {
+        margin-right: 0 !important;
+    }
+</style>
+<h1>Rapport</h1>
+
+<h2>Programme</h2>
+@using (Html.BeginForm("RapportProgramme", "Rapport", FormMethod.Post, new { target = "_blank" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <p class="text-danger">@ViewBag.messageError</p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-md-9 mr-0">
+            @Html.DropDownList("codeProgramme", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.EnteteProgramme, "", new { @class = "text-danger" })
+
+
+        </div>
+        <button type="submit" class="btn btn-default">
+            <span class="glyphicon glyphicon-file"></span>
+        </button>
+</div>
+}
