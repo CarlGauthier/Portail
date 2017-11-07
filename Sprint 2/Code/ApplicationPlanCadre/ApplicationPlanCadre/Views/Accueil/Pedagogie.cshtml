@@ -14,7 +14,9 @@
                 <p>Gestion des programmes</p>
             </a>
         }
-        @*Les rôles pour l'accès aux plans cadre sont à discuter / En attendant tous les rôles y ont accès *@
+
+        @*Les rôles sont à discuter*@
+
         @if (User.IsInRole("RCP") || User.IsInRole("Gestionnaire de stage") || User.IsInRole("Admin") || User.IsInRole("Enseignant"))
         {
         <a class="icon" href='@Url.RouteUrl("")'>
@@ -22,7 +24,6 @@
             <p>Gestion des plans cadre</p>
         </a>
         }
-        @*Les rôles pour l'accès à la gestion des grilles sont à discuter / En attendant tous les rôles y ont accès *@
         @if (User.IsInRole("RCP") || User.IsInRole("Gestionnaire de stage") || User.IsInRole("Admin") || User.IsInRole("Enseignant"))
         {
             <a class="icon" href='@Url.RouteUrl("")'>
@@ -31,7 +32,6 @@
             </a>
         }
 
-        @*Les rôles pour l'accès à la gestion des cours sont à discuter / En attendant tous les rôles y ont accès *@
         @if (User.IsInRole("RCP") || User.IsInRole("Gestionnaire de stage") || User.IsInRole("Admin") || User.IsInRole("Enseignant"))
         {
                     <a class="icon" href='@Url.RouteUrl("")'>

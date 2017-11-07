@@ -1,0 +1,39 @@
+﻿@model ApplicationPlanCadre.Models.CriterePerformance
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="container">
+
+    @using (Html.BeginForm("Create", "CriterePerformance"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.idElement)
+
+        <div class="horizontal-form">
+
+            <h1>@Model.ElementCompetence.element</h1>
+
+            <hr />
+
+            <h3>Ajouter un nouveau critère de performance</h3>
+
+            <div class="form-group">
+                @Html.TextAreaFor(model => model.criterePerformance1, new { @rows = "3", @maxlength = "300", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.criterePerformance1, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ajouter" class="fancy-button"/>
+            </div>
+        </div>
+    }
+    
+    <hr />
+
+    @Html.Action("_PartialList")
+
+    <div class="champ">
+        <a href='@Url.Action("Info", "ElementCompetence", new { idElement = Model.idElement })' class="fancy-button rouge">Terminer</a>
+    </div>
+</div>

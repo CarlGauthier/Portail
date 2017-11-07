@@ -1,7 +1,7 @@
 ﻿@model ApplicationPlanCadre.Models.EnonceCompetence
 
 @{
-    ViewBag.Title = "Énoncé de compétence - création";
+    ViewBag.Title = "Énoncé de compétence - modification";
 }
 
 <div class="container">
@@ -10,10 +10,11 @@
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.idCompetence)
+        @Html.HiddenFor(model => model.idProgramme)
 
         <div class="form-horizontal form-box single-action">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <h1>Créer un énoncé de compétence</h1>
+            <h1>Modifier un énoncé de compétence</h1>
 
             <hr />
 
@@ -32,7 +33,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.enonceCompetence1, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.enonceCompetence1, new {@rows = "3", @maxlength = "300", @class = "form-control" })
+                    @Html.TextAreaFor(model => model.enonceCompetence1, new { @rows = "3", @maxlength = "300", @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.enonceCompetence1, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -55,12 +56,11 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Suivant" class="fancy-button"/>
-                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "Programme", new { idProgramme = Model.idProgramme })'">Annuler</div>
+                    <input type="submit" value="Suivant" class="fancy-button" />
+                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = Model.idCompetence })'">Annuler</div>
                 </div>
             </div>
         </div>
-        
     }
 
 </div>

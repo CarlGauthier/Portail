@@ -24,7 +24,6 @@ h1, h2, h3, h4, h5, h6 {
 
 li {
     padding: 10px 15px;
-    list-style-type: square;
 }
 
 hr {
@@ -33,7 +32,16 @@ hr {
     border-bottom: 1px solid;
 }
 
-.form-horizontal .control-label {
+a:hover {
+    text-decoration: none;
+}
+
+.horizontal-form {
+    padding-top: 25px;
+    text-align: left;
+}
+
+.control-label {
     text-align: left;
 }
 
@@ -71,8 +79,8 @@ textarea {
     width: 100px;
 }
 
-input[type='submit'], .fancy-button {
-    margin: 5px 15px;
+.fancy-button {
+    margin: 5px 0;
     padding: 5px 10px;
     display: inline-block;
     border: 2px solid;
@@ -85,7 +93,7 @@ input[type='submit'], .fancy-button {
     transition: 0.1s;
 }
 
-input[type='submit'] span, .fancy-button span {
+.fancy-button span {
     word-break: break-all;
 }
 
@@ -93,7 +101,7 @@ input[type='submit'] span, .fancy-button span {
     color: #ce0000;
 }
 
-input[type='submit']:hover, .fancy-button:hover {
+.fancy-button:hover {
     border-color: #083a7c;
     background-color: #083a7c;
     color: #ffffff;
@@ -145,6 +153,8 @@ input[type="file"] {
 
 .crud-list th {
     font-weight: normal;
+    background-color: #0d5ec9;
+    color: #FFFFFF;
 }
 
 .crud-list td {

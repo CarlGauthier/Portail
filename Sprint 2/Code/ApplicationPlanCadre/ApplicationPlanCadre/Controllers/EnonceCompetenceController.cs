@@ -16,13 +16,13 @@ namespace ApplicationPlanCadre.Controllers
         private BDPlanCadre db = new BDPlanCadre();
         
         [Route("Enoncer-Competence/{id:int?}",Name ="Info-enonceCompetence")]
-        public ActionResult Info(int? id)
+        public ActionResult Info(int? idCompetence)
         {
-            if (id == null)
+            if (idCompetence == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(id);
+            EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(idCompetence);
             if (enonceCompetence == null)
             {
                 return HttpNotFound();
@@ -30,13 +30,13 @@ namespace ApplicationPlanCadre.Controllers
             return View(enonceCompetence);
         }
 
-        public ActionResult Create(int? id)
+        public ActionResult Create(int? idProgramme)
         {
-            if (id == null)
+            if (idProgramme == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Programme programme = db.Programme.Find(id);
+            Programme programme = db.Programme.Find(idProgramme);
             if (programme == null)
             {
                 return HttpNotFound();
@@ -51,13 +51,84 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idCompetence,codeCompetence,enonceCompetence1,motClef,obligatoire,actif,commentaire,idProgramme")] EnonceCompetence enonceCompetence)
         {
-            if (ModelState.IsValid)
+            bool existe;
+            existe = db.EnonceCompetence.Any(ec => ec.codeCompetence == enonceCompetence.codeCompetence && ec.idProgramme == enonceCompetence.idProgramme);
+            Trim(enonceCompetence);
+            if (!existe && ModelState.IsValid)
             {
+                enonceCompetence.codeCompetence = enonceCompetence.codeCompetence.ToUpper();
                 db.EnonceCompetence.Add(enonceCompetence);
                 db.SaveChanges();
-                return RedirectToAction("List", "ContexteRealisation", new { id = enonceCompetence.idCompetence });
+                return RedirectToAction("Create", "ContexteRealisation", new { idCompetence = enonceCompetence.idCompetence });
+            }
+            if (existe)
+                ModelState.AddModelError("Duplique", "Erreur, un énoncé de compétence avec ce code existe déjà.");
+            return View(enonceCompetence);
+        }
+
+        public ActionResult Edit(int? idCompetence)
+        {
+            if (idCompetence == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(idCompetence);
+            if (enonceCompetence == null)
+            {
+                return HttpNotFound();
             }
             return View(enonceCompetence);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "idCompetence,codeCompetence,enonceCompetence1,motClef,obligatoire,actif,commentaire,idProgramme")] EnonceCompetence enonceCompetence)
+        {
+            bool existe;
+            existe = db.EnonceCompetence.Any(ec => ec.idCompetence != enonceCompetence.idCompetence && ec.codeCompetence == enonceCompetence.codeCompetence && ec.idProgramme == enonceCompetence.idProgramme);
+            Trim(enonceCompetence);
+            if (!existe && ModelState.IsValid)
+            {
+                db.Entry(enonceCompetence).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Create", "ContexteRealisation", new { idCompetence = enonceCompetence.idCompetence });
+            }
+            if (existe)
+                ModelState.AddModelError("Duplique", "Erreur, un énoncé de compétence avec ce code existe déjà.");
+            return View(enonceCompetence);
+        }
+
+        public ActionResult Delete(int? idCompetence)
+        {
+            if (idCompetence == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(idCompetence);
+            if (enonceCompetence == null)
+            {
+                return HttpNotFound();
+            }
+            return View(enonceCompetence);
+        }
+
+        public ActionResult DeleteConfirmed(int idCompetence)
+        {
+            EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(idCompetence);
+            foreach(ElementCompetence ec in enonceCompetence.ElementCompetence)
+            {
+                db.CriterePerformance.RemoveRange(ec.CriterePerformance);
+            }
+            db.ElementCompetence.RemoveRange(enonceCompetence.ElementCompetence);
+            db.ContexteRealisation.RemoveRange(enonceCompetence.ContexteRealisation);
+            db.EnonceCompetence.Remove(enonceCompetence);
+            db.SaveChanges();
+            return RedirectToAction("Info", "Programme", new { idProgramme = enonceCompetence.idProgramme });
+        }
+
+        private void Trim(EnonceCompetence enonceCompetence)
+        {
+            if (enonceCompetence.enonceCompetence1 != null) enonceCompetence.enonceCompetence1 = enonceCompetence.enonceCompetence1.Trim();
         }
 
         protected override void Dispose(bool disposing)

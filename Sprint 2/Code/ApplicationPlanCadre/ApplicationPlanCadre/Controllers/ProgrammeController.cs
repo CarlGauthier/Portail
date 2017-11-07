@@ -29,14 +29,13 @@ namespace ApplicationPlanCadre.Controllers
             return View(db.Programme.ToList());
         }
 
-        [Route("Programme/{id:int?}", Name = "Info-programme")]
-        public ActionResult Info(int? id)
+        public ActionResult Info(int? idProgramme)
         {
-            if (id == null)
+            if (idProgramme == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Programme programme = db.Programme.Find(id);
+            Programme programme = db.Programme.Find(idProgramme);
             if (programme == null)
             {
                 return HttpNotFound();
@@ -56,6 +55,7 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idProgramme,annee,nom,nbUnite,codeSpecialisation,specialisation,nbHeurefrmGenerale,nbHeurefrmSpecifique,condition,sanction,commentaire,docMinistere_path,dateValidation,codeProgramme")] Programme programme)
         {
+            Trim(programme);
             if (ModelState.IsValid)
             {
                 db.Programme.Add(programme);
@@ -67,7 +67,6 @@ namespace ApplicationPlanCadre.Controllers
             return View(programme);
         }
 
-        [Route("Programme/editer/{id:int?}", Name = "Edit-prog")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,15 +85,18 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idProgramme, codeProgramme, annee, codeSpecialisation, nom, dateValidation, docMinistere_path, specialisation, sanction, nbUnite, condition, nbHeurefrmGenerale,nbHeurefrmSpecifique")] Programme programme, HttpPostedFileBase docMinistere_path)
         {
-            if(docMinistere_path != null)
-                UploadFile(docMinistere_path, programme);
+            if (docMinistere_path != null)
+            {
+                if(!UploadFile(docMinistere_path, programme))
+                    ModelState.AddModelError("PDF", "Le fichier doit être de type PDF.");
+            }
+            Trim(programme);
             if (ModelState.IsValid)
             {
                 db.Entry(programme).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Info", "Programme", new { id = programme.idProgramme });
+                return RedirectToAction("Info", "Programme", new { idProgramme = programme.idProgramme });
             }
-            Trim(programme);
             return View(programme);
         }
 
@@ -104,11 +106,17 @@ namespace ApplicationPlanCadre.Controllers
             {
                 string fileName = Path.GetFileName(file.FileName);
                 string path = Path.Combine(Server.MapPath("~/Files/Document ministériel"), fileName);
-                file.SaveAs(path);
-                if (programme.docMinistere_path != null)
-                    DeleteFile(programme.docMinistere_path);
+                string ext = fileName.Substring(fileName.Length - 4, 4);
+                string oldPath = programme.docMinistere_path;
                 programme.docMinistere_path = fileName;
-                return true;
+                if (ext == ".pdf")
+                {
+                    file.SaveAs(path);
+                    if (oldPath != null)
+                        DeleteFile(oldPath);
+                    return true;
+                }
+                return false;
             }
             catch(IOException)
             {
@@ -131,11 +139,11 @@ namespace ApplicationPlanCadre.Controllers
 
         private void Trim(Programme programme)
         {
-            programme.nom.Trim();
-            programme.specialisation.Trim();
-            programme.sanction.Trim();
-            programme.nbUnite.Trim();
-            programme.condition.Trim();
+            if (programme.nom != null) programme.nom = programme.nom.Trim();
+            if (programme.specialisation != null) programme.specialisation = programme.specialisation.Trim();
+            if (programme.sanction != null) programme.sanction = programme.sanction.Trim();
+            if (programme.nbUnite != null) programme.nbUnite = programme.nbUnite.Trim();
+            if (programme.condition != null) programme.condition = programme.condition.Trim();
         }
 
         protected override void Dispose(bool disposing)

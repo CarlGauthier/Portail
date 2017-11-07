@@ -20,8 +20,10 @@ namespace ApplicationPlanCadre.Models
 
         [Required]
         [StringLength(300)]
+        [Display(Name = "Description")]
         public string element { get; set; }
 
+        [Display(Name = "Numéro")]
         public int numero { get; set; }
 
         [StringLength(30)]

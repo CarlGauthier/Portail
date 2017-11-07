@@ -1,5 +1,5 @@
 ALTER TABLE EnonceCompetence
-ADD FOREIGN KEY(idDevisMinistere) REFERENCES DevisMinistere(idDevisMinistere)
+ADD FOREIGN KEY(idDevis) REFERENCES DevisMinistere(idDevis)
 
 ALTER TABLE ContexteRealisation
 ADD FOREIGN KEY(idCompetence)REFERENCES EnonceCompetence(idCompetence)

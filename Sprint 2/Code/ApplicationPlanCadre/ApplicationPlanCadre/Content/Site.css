@@ -316,8 +316,8 @@
     padding: 20px;
 }
 
-#super-view .info-child {
-    margin: 20px;
+.info-child {
+    margin: 15px;
     display: block;
     width: 600px;
     border-left: 7px solid #0d5ec9;
@@ -328,20 +328,20 @@
     transition: 0.1s;
 }
 
-#super-view .info-child p {
+.info-child p {
     margin: 10px 15px;
 }
 
-#super-view .info-child:hover {
+.info-child:hover {
     background-color: #f2f4f7;
 }
 
-#super-view .info-child .gauche {
+.info-child .gauche {
     float: left;
     width: 400px;
 }
 
-#super-view .info-child .droite {
+.info-child .droite {
     float: right;
     width: 100px;
     text-align: right;
