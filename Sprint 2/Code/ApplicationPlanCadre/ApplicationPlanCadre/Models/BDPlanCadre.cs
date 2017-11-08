@@ -26,6 +26,10 @@ namespace ApplicationPlanCadre.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<ContexteRealisation>()
+                .Property(e => e.contexteRealisation1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ContexteRealisation>()
                 .Property(e => e.commentaire)
                 .IsUnicode(false);
 

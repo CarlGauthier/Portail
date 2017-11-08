@@ -336,6 +336,8 @@
     <Content Include="Views\EnonceCompetence\Delete.cshtml" />
     <Content Include="Views\ElementCompetence\Order.cshtml" />
     <Content Include="Views\ElementCompetence\Delete.cshtml" />
+    <Content Include="Views\Accueil\ConsoleAdmin.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

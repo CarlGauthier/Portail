@@ -44,6 +44,8 @@ namespace ApplicationPlanCadre.Controllers
             EnonceCompetence enonceCompetence = new EnonceCompetence();
             enonceCompetence.Programme = programme;
             enonceCompetence.idProgramme = programme.idProgramme;
+            enonceCompetence.obligatoire = true;
+            enonceCompetence.actif = true;
             return View(enonceCompetence);
         }
 
