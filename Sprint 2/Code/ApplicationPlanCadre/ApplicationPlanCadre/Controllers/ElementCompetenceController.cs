@@ -51,9 +51,9 @@ namespace ApplicationPlanCadre.Controllers
         public ActionResult Create([Bind(Include = "idElement,element,numero,motClef,commentaire,idCompetence")] ElementCompetence elementCompetence)
         {
             AssignNo(elementCompetence);
+            Trim(elementCompetence);
             if (ModelState.IsValid)
             {
-                Trim(elementCompetence);
                 db.ElementCompetence.Add(elementCompetence);
                 db.SaveChanges();
                 return RedirectToAction("Create", "CriterePerformance", new { idElement = elementCompetence.idElement });
@@ -79,9 +79,9 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idElement,element,numero,motClef,commentaire,idCompetence")] ElementCompetence elementCompetence)
         {
+            Trim(elementCompetence);
             if (ModelState.IsValid)
             {
-                Trim(elementCompetence);
                 db.Entry(elementCompetence).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Create", "CriterePerformance", new { idElement = elementCompetence.idElement });
@@ -182,7 +182,7 @@ namespace ApplicationPlanCadre.Controllers
 
         private void Trim(ElementCompetence elementCompetence)
         {
-            elementCompetence.element.Trim();
+            if (elementCompetence.element != null) elementCompetence.element = elementCompetence.element.Trim();
         }
 
         protected override void Dispose(bool disposing)

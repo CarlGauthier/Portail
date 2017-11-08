@@ -42,9 +42,9 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idContexte,contexteRealisation1,commentaire,idCompetence")] ContexteRealisation contexteRealisation)
         {
+            Trim(contexteRealisation);
             if (ModelState.IsValid)
             {
-                Trim(contexteRealisation);
                 db.ContexteRealisation.Add(contexteRealisation);
                 db.SaveChanges();
                 return RedirectToAction("Create", new { idCompetence = contexteRealisation.idCompetence });
@@ -71,9 +71,9 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idContexte,contexteRealisation1,commentaire,idCompetence")] ContexteRealisation contexteRealisation)
         {
+            Trim(contexteRealisation);
             if (ModelState.IsValid)
             {
-                Trim(contexteRealisation);
                 db.Entry(contexteRealisation).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Create", new { idCompetence = contexteRealisation.idCompetence });
@@ -92,7 +92,7 @@ namespace ApplicationPlanCadre.Controllers
 
         private void Trim(ContexteRealisation contexteRealisation)
         {
-            contexteRealisation.contexteRealisation1.Trim();
+            if (contexteRealisation.contexteRealisation1 != null) contexteRealisation.contexteRealisation1 = contexteRealisation.contexteRealisation1.Trim();
         }
 
         protected override void Dispose(bool disposing)

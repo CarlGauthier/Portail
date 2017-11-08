@@ -56,9 +56,9 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idProgramme,annee,nom,nbUnite,codeSpecialisation,specialisation,nbHeurefrmGenerale,nbHeurefrmSpecifique,condition,sanction,commentaire,docMinistere_path,dateValidation,codeProgramme")] Programme programme)
         {
+            Trim(programme);
             if (ModelState.IsValid)
             {
-                Trim(programme);
                 db.Programme.Add(programme);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -91,13 +91,12 @@ namespace ApplicationPlanCadre.Controllers
                 if(!UploadFile(docMinistere_path, programme))
                     ModelState.AddModelError("PDF", "Le fichier doit être de type PDF.");
             }
-                
+            Trim(programme);
             if (ModelState.IsValid)
             {
-                Trim(programme);
                 db.Entry(programme).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Info", "Programme", new { id = programme.idProgramme });
+                return RedirectToAction("Info", "Programme", new { idProgramme = programme.idProgramme });
             }
             return View(programme);
         }
@@ -141,11 +140,11 @@ namespace ApplicationPlanCadre.Controllers
 
         private void Trim(Programme programme)
         {
-            programme.nom.Trim();
-            programme.specialisation.Trim();
-            programme.sanction.Trim();
-            programme.nbUnite.Trim();
-            programme.condition.Trim();
+            if (programme.nom != null) programme.nom = programme.nom.Trim();
+            if (programme.specialisation != null) programme.specialisation = programme.specialisation.Trim();
+            if (programme.sanction != null) programme.sanction = programme.sanction.Trim();
+            if (programme.nbUnite != null) programme.nbUnite = programme.nbUnite.Trim();
+            if (programme.condition != null) programme.condition = programme.condition.Trim();
         }
 
         protected override void Dispose(bool disposing)

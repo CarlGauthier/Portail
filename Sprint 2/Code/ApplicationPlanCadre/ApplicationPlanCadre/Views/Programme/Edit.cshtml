@@ -99,7 +99,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.nbHeurefrmGenerale, new { @class = "col-xs-4 control-label" })
                             <div class="col-xs-8">
-                                @Html.TextBoxFor(model => model.nbHeurefrmGenerale, new { @class = "form-control small-input" })
+                                @Html.TextBoxFor(model => model.nbHeurefrmGenerale, new { @maxlength = "4", @class = "form-control small-input" })
                                 @Html.ValidationMessageFor(model => model.nbHeurefrmGenerale, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.nbHeurefrmSpecifique, new { @class = "col-xs-4 control-label" })
                             <div class="col-xs-8">
-                                @Html.TextBoxFor(model => model.nbHeurefrmSpecifique, new { @class = "form-control small-input" })
+                                @Html.TextBoxFor(model => model.nbHeurefrmSpecifique, new { @maxlength = "4", @class = "form-control small-input" })
                                 @Html.ValidationMessageFor(model => model.nbHeurefrmSpecifique, "", new { @class = "text-danger" })
                             </div>
                         </div>

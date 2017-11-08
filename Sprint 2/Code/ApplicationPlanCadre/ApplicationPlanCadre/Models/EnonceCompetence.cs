@@ -22,6 +22,7 @@ namespace ApplicationPlanCadre.Models
         [Required]
         [StringLength(4)]
         [Display(Name = "Code de la compétence")]
+        [RegularExpression("^[0-9][0-9][0-9][A-Za-z]$", ErrorMessage = "Le code est invalide, il doit être composé de 3 chiffres suivis d'une lettre.")]
         public string codeCompetence { get; set; }
 
         [Column("enonceCompetence")]

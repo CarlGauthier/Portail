@@ -53,13 +53,18 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idCompetence,codeCompetence,enonceCompetence1,motClef,obligatoire,actif,commentaire,idProgramme")] EnonceCompetence enonceCompetence)
         {
-            if (ModelState.IsValid)
+            bool existe;
+            existe = db.EnonceCompetence.Any(ec => ec.codeCompetence == enonceCompetence.codeCompetence && ec.idProgramme == enonceCompetence.idProgramme);
+            Trim(enonceCompetence);
+            if (!existe && ModelState.IsValid)
             {
-                Trim(enonceCompetence);
+                enonceCompetence.codeCompetence = enonceCompetence.codeCompetence.ToUpper();
                 db.EnonceCompetence.Add(enonceCompetence);
                 db.SaveChanges();
                 return RedirectToAction("Create", "ContexteRealisation", new { idCompetence = enonceCompetence.idCompetence });
             }
+            if (existe)
+                ModelState.AddModelError("Duplique", "Erreur, un énoncé de compétence avec ce code existe déjà.");
             return View(enonceCompetence);
         }
 
@@ -81,13 +86,17 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idCompetence,codeCompetence,enonceCompetence1,motClef,obligatoire,actif,commentaire,idProgramme")] EnonceCompetence enonceCompetence)
         {
-            if (ModelState.IsValid)
+            bool existe;
+            existe = db.EnonceCompetence.Any(ec => ec.idCompetence != enonceCompetence.idCompetence && ec.codeCompetence == enonceCompetence.codeCompetence && ec.idProgramme == enonceCompetence.idProgramme);
+            Trim(enonceCompetence);
+            if (!existe && ModelState.IsValid)
             {
-                Trim(enonceCompetence);
                 db.Entry(enonceCompetence).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Create", "ContexteRealisation", new { idCompetence = enonceCompetence.idCompetence });
             }
+            if (existe)
+                ModelState.AddModelError("Duplique", "Erreur, un énoncé de compétence avec ce code existe déjà.");
             return View(enonceCompetence);
         }
 
@@ -121,7 +130,7 @@ namespace ApplicationPlanCadre.Controllers
 
         private void Trim(EnonceCompetence enonceCompetence)
         {
-            enonceCompetence.enonceCompetence1.Trim();
+            if (enonceCompetence.enonceCompetence1 != null) enonceCompetence.enonceCompetence1 = enonceCompetence.enonceCompetence1.Trim();
         }
 
         protected override void Dispose(bool disposing)

@@ -10,6 +10,7 @@
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.idElement)
+        @Html.HiddenFor(model => model.numero)
         @Html.HiddenFor(model => model.idCompetence)
 
         <div class="form-horizontal form-box single-action">

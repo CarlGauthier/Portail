@@ -9,10 +9,10 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.idProgramme)
 
         <div class="form-horizontal form-box single-action">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <h3>Modification d'un programme</h3>
             <hr />
             <div class="champ">
