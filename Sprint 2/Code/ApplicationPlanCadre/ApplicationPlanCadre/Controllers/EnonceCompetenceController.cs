@@ -10,6 +10,7 @@ using ApplicationPlanCadre.Models;
 
 namespace ApplicationPlanCadre.Controllers
 {
+    [Authorize(Roles = "RCP")]
     public class EnonceCompetenceController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
@@ -25,6 +26,36 @@ namespace ApplicationPlanCadre.Controllers
             if (enonceCompetence == null)
             {
                 return HttpNotFound();
+            }
+            return View(enonceCompetence);
+        }
+
+        public ActionResult Create(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Programme programme = db.Programme.Find(id);
+            if (programme == null)
+            {
+                return HttpNotFound();
+            }
+            EnonceCompetence enonceCompetence = new EnonceCompetence();
+            enonceCompetence.Programme = programme;
+            enonceCompetence.idProgramme = programme.idProgramme;
+            return View(enonceCompetence);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "idCompetence,codeCompetence,enonceCompetence1,motClef,obligatoire,actif,commentaire,idProgramme")] EnonceCompetence enonceCompetence)
+        {
+            if (ModelState.IsValid)
+            {
+                db.EnonceCompetence.Add(enonceCompetence);
+                db.SaveChanges();
+                return RedirectToAction("List", "ContexteRealisation", new { id = enonceCompetence.idCompetence });
             }
             return View(enonceCompetence);
         }

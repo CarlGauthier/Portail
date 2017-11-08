@@ -21,7 +21,7 @@ CREATE TABLE ContexteRealisation
 	contexteRealisation	VARCHAR(300)	NOT NULL,
 	commentaire			VARCHAR(200)	NULL,
 
-	idCompetence		INT		NOT NULL,	--FK
+	idCompetence		INT				NOT NULL,	--FK
 
 	PRIMARY KEY(idContexte)
 )
