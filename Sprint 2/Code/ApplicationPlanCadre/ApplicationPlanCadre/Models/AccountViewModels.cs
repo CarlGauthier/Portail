@@ -64,6 +64,14 @@ namespace ApplicationPlanCadre.Models
 
     public class RegisterViewModel
     {
+        [StringLength(50)]
+        [Display(Name = "Nom")]
+        public string nom { get; set; }
+
+        [StringLength(50)]
+        [Display(Name = "Prénom")]
+        public string prenom { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Courriel")]

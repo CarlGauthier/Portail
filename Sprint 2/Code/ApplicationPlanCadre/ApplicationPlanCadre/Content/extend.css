@@ -79,6 +79,10 @@ textarea {
     width: 100px;
 }
 
+.glyphicon.flip {
+    transform: scale(-1, 1);
+}
+
 .fancy-button {
     margin: 5px 0;
     padding: 5px 10px;
@@ -179,10 +183,6 @@ input[type="file"] {
 .crud-list .action-cell {
     width: 15%;
     text-align: center;
-    background-color: #e7ecf2;
-}
-
-.crud-list .valide .action-cell {
     background-color: #f2f4f7;
 }
 

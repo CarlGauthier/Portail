@@ -18,7 +18,7 @@
         @foreach (var item in Model)
         {
             string dblclickEvent = Url.Action("Edit", new { idContexte = item.idContexte });
-            <tr ondblclick="location.href='@dblclickEvent'" class="valide">
+            <tr ondblclick="location.href='@dblclickEvent'">
                 <td>
                     @Html.DisplayFor(modelItem => item.contexteRealisation1)
                 </td>
