@@ -39,7 +39,7 @@ DROP TABLE PlanCadreEnonce
 GO
 CREATE TABLE PlanCadreEnonce
 (
-    idPlanCadreElement      INT             NOT NULL        IDENTITY(1,1),
+    idPlanCadreEnonce		INT             NOT NULL        IDENTITY(1,1),
 
 	ponderationEnHeure      INT             NOT NULL,
 

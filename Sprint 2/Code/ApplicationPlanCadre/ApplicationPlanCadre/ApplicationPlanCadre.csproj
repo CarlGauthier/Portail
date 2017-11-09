@@ -337,6 +337,7 @@
     <Content Include="Views\EnonceCompetence\Delete.cshtml" />
     <Content Include="Views\ElementCompetence\Order.cshtml" />
     <Content Include="Views\ElementCompetence\Delete.cshtml" />
+    <Content Include="Views\PlanCadre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
