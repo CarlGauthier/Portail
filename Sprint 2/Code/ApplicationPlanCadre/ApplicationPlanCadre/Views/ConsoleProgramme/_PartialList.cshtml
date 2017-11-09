@@ -38,7 +38,7 @@
                 <td class="action-cell">
                     @if (valide)
                     {
-                        <a href='@Url.RouteUrl("edit-devisMinistere", new { id = item.idDevis })'>
+                        <a href='@Url.Action("Edit", new { id = item.idDevis })'>
                             <span class="glyphicon glyphicon-pencil"><!----></span>
                         </a>
                     }
