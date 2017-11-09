@@ -22,7 +22,6 @@ namespace ApplicationPlanCadre.Controllers
             return PartialView(programme.ToList());
         }
 
-        [Route("Admin-programme", Name = "creation-programme")]
         public ActionResult Create()
         {
             ViewBag.codeProgramme = GetCodeProgrammeSelectList();
