@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ApplicationPlanCadre.Models.DevisMinistere>
+
+@{
+    ViewBag.Title = "DevisMinistere";
+}
+
+<div id="super-view">
+    @Html.Action("_TreeView")
+    <div id="info-display" class="container-fluid">
+        <div id="info-detail">
+            <h1>DevisMinisteres</h1>
+            <hr />
+            @foreach (var devisMinistere in Model)
+            {                                       
+                <a class="info-child clearfix" href='@Url.Action("Info", new { idDevis = devisMinistere.idDevis })'>
+                    <p class="gauche">@Html.DisplayFor(ec => devisMinistere.EnteteProgramme.commentaire)</p> 
+                    <p class="droite">@Html.DisplayFor(model => devisMinistere.codeProgramme)-@Html.DisplayFor(model => devisMinistere.annee)-@Html.DisplayFor(model => devisMinistere.codeSpecialisation)</p>
+                </a>
+            }
+        </div>
+    </div>
+</div>

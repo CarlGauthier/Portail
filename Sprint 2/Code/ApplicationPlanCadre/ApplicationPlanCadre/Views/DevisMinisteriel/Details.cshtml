@@ -1,0 +1,67 @@
+﻿@model ApplicationPlanCadre.Models.DevisMinistere
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container">
+
+    <div class="jumbotron">
+        <h1>@Html.DisplayFor(model => model.nom)</h1>
+        <h2>Spécialisation : @Html.DisplayFor(model => model.specialisation)</h2>
+        <h3>code : @Html.DisplayFor(model => model.codeProgramme)-@Html.DisplayFor(model => model.annee)-@Html.DisplayFor(model => model.codeSpecialisation)</h3>
+        <h4>@ViewBag.dateValidationModule</h4>
+        <h4>@ViewBag.dateValidation</h4>
+    </div>
+
+    <h2>Informations</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <label for="code">Type de sanction : </label>
+            @Html.DisplayFor(model => model.sanction)
+            <br><br>
+            <label>Nombre d'unité : </label>
+            @Html.DisplayFor(model => model.nbUnite)
+            <br><br>
+            <label>Conditions particulières : </label>
+            @Html.DisplayFor(model => model.condition)
+            <br><br>
+            <a href="~/image/devisMinistere.pdf" target=_blank>Document du ministère (PDF)</a>
+
+            <!--@Html.ActionLink("Consulter", "ViewPdf", "DevisMinisteres")-->
+        </div>
+
+        <div class="col-md-6">
+            <label>Durée totale :  </label>@Html.ViewData["total"]<br><br>
+            <label>Formation générale : </label>
+            @Html.DisplayFor(model => model.nbHeurefrmGenerale)
+            <br><br>
+            <label>Formation spécifique : </label>
+            @Html.DisplayFor(model => model.nbHeurefrmSpecifique)
+            <br><br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="fancy-button cancel" onclick="location.href='@Url.Action("Index")'">Annuler</div>
+            <input type="submit" value="Modifier" onclick="location.href='@Url.RouteUrl("edit-prog", new { id = Model.idDevis })'" />
+
+        </div>
+    </div>
+
+    <div class="row">
+        <h1>Zone compétence</h1>
+        <div class="competences">
+            @Html.Action("_PartialEnonceCompetence", new { id = Model.idDevis })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <input type="submit" value="Valider" onclick="location.href='@Url.Action("ValiderDevisMinistere", "DevisMinistere", new { id = Model.idDevis })'" />
+        </div>
+    </div>
+
+</div>
