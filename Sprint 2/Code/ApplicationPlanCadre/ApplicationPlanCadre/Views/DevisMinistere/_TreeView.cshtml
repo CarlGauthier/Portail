@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<ApplicationPlanCadre.Models.DevisMinistere>
 
 <div id="tree-view">
-    <div class="tree-view-header">DevisMinisteres</div>
-    @foreach (var devisMinistere in Model.OrderBy(p => p.nom))
+    <div class="tree-view-header">Devis ministériels</div>
+    @foreach (var devisMinistere in Model.OrderBy(m => m.codeProgramme))
     {
         string p_id = "p" + devisMinistere.idDevis.ToString();
         string p_item = p_id + "item";
@@ -14,7 +14,7 @@
                 <div class="no-button"><!----></div> }
             <a href='@Url.Action("Info", "DevisMinistere", new { idDevis = devisMinistere.idDevis })'>
                 @Html.DisplayFor(p => devisMinistere.codeProgramme)-@Html.DisplayFor(p => devisMinistere.annee)-@Html.DisplayFor(p => devisMinistere.codeSpecialisation) • 
-                @Html.DisplayFor(p => devisMinistere.EnteteProgramme.commentaire)
+                @Html.DisplayFor(p => devisMinistere.EnteteProgramme.nom)
             </a>
         </div>
         <div id=@p_id class="collapse">
