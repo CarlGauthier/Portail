@@ -5,7 +5,7 @@
 }
 
 <div id="super-view">
-    @Html.Action("_TreeView", "Programme")
+    @Html.Action("_TreeView", "DevisMinistere")
 
     <div id="info-display" class="container-fluid">
         <div id="info-header">
@@ -57,7 +57,7 @@
                 {
                     <a class="fancy-button" onclick="location.href='@Url.Action("Order", "ElementCompetence", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-sort"><!----></span> Changer l'ordre des éléments</a>
                 }
-                <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "Programme", new { idProgramme = Model.idProgramme })'">Retour</a>
+                <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "DevisMinistere", new { idDevis = Model.idDevis })'">Retour</a>
             </div>
 
         </div>
@@ -66,5 +66,5 @@
 
 <script>
     $(("#enc" + @Model.idCompetence + "item")).addClass('active');
-    $(("#p" + @Model.Programme.idProgramme)).collapse('show');
+    $(("#p" + @Model.DevisMinistere.idDevis)).collapse('show');
 </script>

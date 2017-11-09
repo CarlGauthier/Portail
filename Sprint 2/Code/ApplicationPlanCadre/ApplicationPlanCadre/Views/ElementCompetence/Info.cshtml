@@ -5,7 +5,7 @@
 }
 
 <div id="super-view">
-    @Html.Action("_TreeView", "Programme")
+    @Html.Action("_TreeView", "DevisMinistere")
 
     <div id="info-display" class="container-fluid">
         <div id="info-header">
@@ -46,5 +46,5 @@
 <script>
     $(("#el" + @Model.idElement + "item")).addClass('active');
     $(("#enc" + @Model.EnonceCompetence.idCompetence)).collapse('show');
-    $(("#p" + @Model.EnonceCompetence.Programme.idProgramme)).collapse('show');
+    $(("#p" + @Model.EnonceCompetence.DevisMinistere.idDevis)).collapse('show');
 </script>
