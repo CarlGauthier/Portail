@@ -13,6 +13,7 @@ namespace ApplicationPlanCadre.Models
         public ElementCompetence()
         {
             CriterePerformance = new HashSet<CriterePerformance>();
+            PlanCadreElement = new HashSet<PlanCadreElement>();
         }
 
         [Key]
@@ -20,17 +21,9 @@ namespace ApplicationPlanCadre.Models
 
         [Required]
         [StringLength(300)]
-        [Display(Name = "Description")]
-        public string element { get; set; }
+        public string description { get; set; }
 
-        [Display(Name = "Numéro")]
         public int numero { get; set; }
-
-        [StringLength(30)]
-        public string motClef { get; set; }
-
-        [StringLength(200)]
-        public string commentaire { get; set; }
 
         public int idCompetence { get; set; }
 
@@ -38,5 +31,8 @@ namespace ApplicationPlanCadre.Models
         public virtual ICollection<CriterePerformance> CriterePerformance { get; set; }
 
         public virtual EnonceCompetence EnonceCompetence { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PlanCadreElement> PlanCadreElement { get; set; }
     }
 }

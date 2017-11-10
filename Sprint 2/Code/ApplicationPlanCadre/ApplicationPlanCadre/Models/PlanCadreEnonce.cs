@@ -11,7 +11,7 @@ namespace ApplicationPlanCadre.Models
     {
         [Key]
         [Column(Order = 0)]
-        public int idPlanCadreElement { get; set; }
+        public int idPlanCadreEnonce { get; set; }
 
         [Key]
         [Column(Order = 1)]

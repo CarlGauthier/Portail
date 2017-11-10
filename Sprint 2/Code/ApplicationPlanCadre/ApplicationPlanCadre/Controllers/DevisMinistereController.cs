@@ -12,38 +12,37 @@ using ApplicationPlanCadre.Models;
 namespace ApplicationPlanCadre.Controllers
 {
     [Authorize(Roles = "RCP")]
-    public class ProgrammeController : Controller
+    public class DevisMinistereController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
 
         public ActionResult _TreeView()
         {
-            var programme = db.Programme
-                          .Include(p => p.EnonceCompetence)
-                          .ToList();
-            return PartialView(programme);
+            var devisMinistere = db.DevisMinistere.ToList();
+
+            return PartialView(devisMinistere);
         }
 
-        [Route("Programme", Name = "Index-programme")]
+        [Route("DevisMinistere", Name = "Index-devisMinistere")]
         public ActionResult Index()
         {
-            return View(db.Programme.ToList());
+            return View(db.DevisMinistere.ToList());
         }
 
-        public ActionResult Info(int? idProgramme)
+        public ActionResult Info(int? idDevis)
         {
-            if (idProgramme == null)
+            if (idDevis == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Programme programme = db.Programme.Find(idProgramme);
-            if (programme == null)
+            DevisMinistere devisMinistere = db.DevisMinistere.Find(idDevis);
+            if (devisMinistere == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.total = programme.nbHeurefrmGenerale + programme.nbHeurefrmSpecifique;
-            //ViewBag.dateValidation = checkValidation(programme);
-            return View(programme);
+            ViewBag.total = devisMinistere.nbHeureFrmGenerale + devisMinistere.nbHeureFrmSpecifique;
+            //ViewBag.dateValidation = checkValidation(devisMinistere);
+            return View(devisMinistere);
         }
 		
         public ActionResult Create()
@@ -54,18 +53,18 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProgramme,annee,nom,nbUnite,codeSpecialisation,specialisation,nbHeurefrmGenerale,nbHeurefrmSpecifique,condition,sanction,commentaire,docMinistere_path,dateValidation,codeProgramme")] Programme programme)
+        public ActionResult Create([Bind(Include = "idDevis,annee,nom,nbUnite,codeSpecialisation,specialisation,nbHeurefrmGenerale,nbHeurefrmSpecifique,condition,sanction,commentaire,docMinistere,dateValidation,codeProgramme")] DevisMinistere devisMinistere)
         {
-            Trim(programme);
+            Trim(devisMinistere);
             if (ModelState.IsValid)
             {
-                db.Programme.Add(programme);
+                db.DevisMinistere.Add(devisMinistere);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire", programme.codeProgramme);
-            return View(programme);
+            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire", devisMinistere.codeProgramme);
+            return View(devisMinistere);
         }
 
         public ActionResult Edit(int? id)
@@ -74,42 +73,42 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Programme programme = db.Programme.Find(id);
-            if (programme == null)
+            DevisMinistere devisMinistere = db.DevisMinistere.Find(id);
+            if (devisMinistere == null)
             {
                 return HttpNotFound();
             }
-            return View(programme);
+            return View(devisMinistere);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProgramme, codeProgramme, annee, codeSpecialisation, nom, dateValidation, docMinistere_path, specialisation, sanction, nbUnite, condition, nbHeurefrmGenerale,nbHeurefrmSpecifique")] Programme programme, HttpPostedFileBase docMinistere_path)
+        public ActionResult Edit([Bind(Include = "idDevis, codeProgramme, annee, codeSpecialisation, nom, dateValidation, docMinistere, specialisation, sanction, nbUnite, condition, nbHeurefrmGenerale,nbHeurefrmSpecifique")] DevisMinistere devisMinistere, HttpPostedFileBase docMinistere)
         {
-            if (docMinistere_path != null)
+            if (docMinistere != null)
             {
-                if(!UploadFile(docMinistere_path, programme))
+                if(!UploadFile(docMinistere, devisMinistere))
                     ModelState.AddModelError("PDF", "Le fichier doit être de type PDF.");
             }
-            Trim(programme);
+            Trim(devisMinistere);
             if (ModelState.IsValid)
             {
-                db.Entry(programme).State = EntityState.Modified;
+                db.Entry(devisMinistere).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Info", "Programme", new { idProgramme = programme.idProgramme });
+                return RedirectToAction("Info", "DevisMinistere", new { idDevis = devisMinistere.idDevis });
             }
-            return View(programme);
+            return View(devisMinistere);
         }
 
-        public bool UploadFile(HttpPostedFileBase file, Programme programme)
+        public bool UploadFile(HttpPostedFileBase file, DevisMinistere devisMinistere)
         {
             try
             {
                 string fileName = Path.GetFileName(file.FileName);
                 string path = Path.Combine(Server.MapPath("~/Files/Document ministériel"), fileName);
                 string ext = fileName.Substring(fileName.Length - 4, 4);
-                string oldPath = programme.docMinistere_path;
-                programme.docMinistere_path = fileName;
+                string oldPath = devisMinistere.docMinistere;
+                devisMinistere.docMinistere = fileName;
                 if (ext == ".pdf")
                 {
                     file.SaveAs(path);
@@ -138,13 +137,12 @@ namespace ApplicationPlanCadre.Controllers
             }
         }
 
-        private void Trim(Programme programme)
+        private void Trim(DevisMinistere devisMinistere)
         {
-            if (programme.nom != null) programme.nom = programme.nom.Trim();
-            if (programme.specialisation != null) programme.specialisation = programme.specialisation.Trim();
-            if (programme.sanction != null) programme.sanction = programme.sanction.Trim();
-            if (programme.nbUnite != null) programme.nbUnite = programme.nbUnite.Trim();
-            if (programme.condition != null) programme.condition = programme.condition.Trim();
+            if (devisMinistere.specialisation != null) devisMinistere.specialisation = devisMinistere.specialisation.Trim();
+            if (devisMinistere.sanction != null) devisMinistere.sanction = devisMinistere.sanction.Trim();
+            if (devisMinistere.nbUnite != null) devisMinistere.nbUnite = devisMinistere.nbUnite.Trim();
+            if (devisMinistere.condition != null) devisMinistere.condition = devisMinistere.condition.Trim();
         }
 
         protected override void Dispose(bool disposing)

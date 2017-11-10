@@ -5,7 +5,7 @@
     <table>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.contexteRealisation1)
+                @Html.DisplayNameFor(model => model.description)
             </th>
             <th class="action-cell-header">
                 <b>Modifier</b>
@@ -13,14 +13,17 @@
             <th class="action-cell-header">
                 <b>Supprimer</b>
             </th>
+            <th class="action-cell-header">
+                <b>Déplacer</b>
+            </th>
         </tr>
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.OrderBy(m => m.numero))
         {
             string dblclickEvent = Url.Action("Edit", new { idContexte = item.idContexte });
             <tr ondblclick="location.href='@dblclickEvent'">
                 <td>
-                    @Html.DisplayFor(modelItem => item.contexteRealisation1)
+                    @Html.DisplayFor(modelItem => item.description)
                 </td>
                 <td class="action-cell">
                     <a href='@Url.Action("Edit", new { idContexte = item.idContexte })'>
@@ -30,6 +33,14 @@
                 <td class="action-cell">
                     <a href='@Url.Action("Delete", new { idContexte = item.idContexte })'>
                         <span class="glyphicon glyphicon-trash"><!----></span>
+                    </a>
+                </td>
+                <td class="action-cell">
+                    <a href='@Url.Action("MoveUp", new { idContexte = item.idContexte })'>
+                        <span class="glyphicon glyphicon glyphicon-arrow-up"><!----></span>
+                    </a>
+                    <a href='@Url.Action("MoveDown", new { idContexte = item.idContexte })'>
+                        <span class="glyphicon glyphicon glyphicon-arrow-down"><!----></span>
                     </a>
                 </td>
             </tr>

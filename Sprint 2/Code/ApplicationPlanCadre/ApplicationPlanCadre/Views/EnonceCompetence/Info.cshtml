@@ -1,17 +1,17 @@
 ﻿@model ApplicationPlanCadre.Models.EnonceCompetence
 
 @{
-    ViewBag.Title = Model.enonceCompetence1;
+    ViewBag.Title = Model.description;
 }
 
 <div id="super-view">
-    @Html.Action("_TreeView", "Programme")
+    @Html.Action("_TreeView", "DevisMinistere")
 
     <div id="info-display" class="container-fluid">
         <div id="info-header">
             <h3>Énoncé de compétence</h3>
             <div>
-                <h1>@Html.DisplayFor(model => model.codeCompetence) - @Html.DisplayFor(model => model.enonceCompetence1)</h1>
+                <h1>@Html.DisplayFor(model => model.codeCompetence) - @Html.DisplayFor(model => model.description)</h1>
                 @*<div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "EnonceCompetence")'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>*@
             </div>
         </div>
@@ -22,9 +22,9 @@
             {
                 <h2>Contextes de réalisations</h2>
                 <ul>
-                    @foreach (var contexteRealisation in Model.ContexteRealisation)
+                    @foreach (var contexteRealisation in Model.ContexteRealisation.OrderBy(m => m.numero))
                     {
-                        <li>@Html.DisplayFor(ec => contexteRealisation.contexteRealisation1)</li>
+                        <li>@Html.DisplayFor(ec => contexteRealisation.description)</li>
                     }
                 </ul>
 
@@ -39,7 +39,7 @@
                 foreach (var elementCompetence in Model.ElementCompetence.OrderBy(ec => ec.numero))
                 {
                     <a class="info-child clearfix" href='@Url.Action("Info", "ElementCompetence", new { idElement = elementCompetence.idElement })'>
-                        <p class="gauche">@Html.DisplayFor(ec => elementCompetence.element)</p>
+                        <p class="gauche">@Html.DisplayFor(ec => elementCompetence.description)</p>
                         <p class="droite">@Html.DisplayFor(ec => elementCompetence.numero)</p>
                     </a>
                 }
@@ -57,7 +57,7 @@
                 {
                     <a class="fancy-button" onclick="location.href='@Url.Action("Order", "ElementCompetence", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-sort"><!----></span> Changer l'ordre des éléments</a>
                 }
-                <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "Programme", new { idProgramme = Model.idProgramme })'">Retour</a>
+                <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "DevisMinistere", new { idDevis = Model.idDevis })'">Retour</a>
             </div>
 
         </div>
@@ -66,5 +66,5 @@
 
 <script>
     $(("#enc" + @Model.idCompetence + "item")).addClass('active');
-    $(("#p" + @Model.Programme.idProgramme)).collapse('show');
+    $(("#p" + @Model.DevisMinistere.idDevis)).collapse('show');
 </script>

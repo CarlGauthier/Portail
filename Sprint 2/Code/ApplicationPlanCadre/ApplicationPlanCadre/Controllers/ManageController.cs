@@ -333,7 +333,7 @@ namespace ApplicationPlanCadre.Controllers
             base.Dispose(disposing);
         }
 
-#region Programmes d'assistance
+#region DevisMinisteres d'assistance
         // Utilisé pour la protection XSRF lors de l'ajout de connexions externes
         private const string XsrfKey = "XsrfId";
 
