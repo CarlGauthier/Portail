@@ -30,9 +30,9 @@
                             <div class="collapse-button" data-toggle="collapse" data-target=@enc_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
                         else { 
                             <div class="no-button"><!----></div> }
-                        <a href='@Url.RouteUrl("Info-enonceCompetence", new { idCompetence = enonceCompetence.idCompetence })'>
+                        <a href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = enonceCompetence.idCompetence })'>
                             @Html.DisplayFor(enc => enonceCompetence.codeCompetence) • 
-                            @Html.DisplayFor(enc => enonceCompetence.enonceCompetence1)
+                            @Html.DisplayFor(enc => enonceCompetence.description)
                         </a>
                     </div>
                     <div id=@enc_id class="collapse">
@@ -43,7 +43,7 @@
                                 string el_item = "el" + elementCompetence.idElement.ToString() + "item";
                                 <div id=@el_item class="tree-view-item">
                                     <div class="no-button"><!----></div>
-                                    <a href='@Url.RouteUrl("Info-elementComp", new { idElement = elementCompetence.idElement })'>@Html.DisplayFor(elc => elementCompetence.element)</a>
+                                    <a href='@Url.Action("Info", "ElementCompetence", new { idElement = elementCompetence.idElement })'>@Html.DisplayFor(elc => elementCompetence.description)</a>
                                 </div>
                             }
                         </div>

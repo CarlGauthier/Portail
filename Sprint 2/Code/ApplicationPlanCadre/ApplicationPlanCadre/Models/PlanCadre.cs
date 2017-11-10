@@ -33,19 +33,19 @@ namespace ApplicationPlanCadre.Models
         [StringLength(300)]
         public string prealableRel { get; set; }
 
-        [StringLength(500)]
+        [Column(TypeName = "text")]
         public string indicationPedago { get; set; }
 
-        [StringLength(500)]
+        [Column(TypeName = "text")]
         public string elementsConnaissance { get; set; }
 
-        [StringLength(500)]
+        [Column(TypeName = "text")]
         public string activiteApprentissage { get; set; }
 
-        [StringLength(300)]
+        [Column(TypeName = "text")]
         public string environnementPhys { get; set; }
 
-        [StringLength(300)]
+        [Column(TypeName = "text")]
         public string ressource { get; set; }
 
         public int? nbHeureTheorie { get; set; }
@@ -54,7 +54,7 @@ namespace ApplicationPlanCadre.Models
 
         public int? nbHeureDevoir { get; set; }
 
-        public int idDevis { get; set; }
+        public int idProgramme { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cours> Cours { get; set; }

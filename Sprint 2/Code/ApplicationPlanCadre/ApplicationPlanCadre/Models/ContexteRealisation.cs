@@ -12,10 +12,9 @@ namespace ApplicationPlanCadre.Models
         [Key]
         public int idContexte { get; set; }
 
-        [Column("contexteRealisation")]
         [Required]
         [StringLength(300)]
-        public string contexteRealisation1 { get; set; }
+        public string description { get; set; }
 
         public int numero { get; set; }
 

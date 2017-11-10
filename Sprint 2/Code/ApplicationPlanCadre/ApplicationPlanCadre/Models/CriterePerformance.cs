@@ -12,10 +12,9 @@ namespace ApplicationPlanCadre.Models
         [Key]
         public int idCritere { get; set; }
 
-        [Column("criterePerformance")]
         [Required]
         [StringLength(300)]
-        public string criterePerformance1 { get; set; }
+        public string description { get; set; }
 
         public int numero { get; set; }
 

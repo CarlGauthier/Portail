@@ -9,12 +9,8 @@
 
     <div id="info-display" class="container-fluid">
         <div id="info-header">
-            <h3>DevisMinistere</h3>
-            @if (Model.nom != null) {
-                <h1>@Html.DisplayFor(model => model.nom)</h1>
-            } else {
-                <h1>@Html.DisplayFor(model => model.EnteteProgramme.commentaire)</h1>
-            }
+            <h3>Devis ministériel</h3>
+            <h1>@Html.DisplayFor(model => model.EnteteProgramme.nom)</h1>
             <hr />
             <h3><b>@Html.DisplayNameFor(model => model.specialisation) : </b>@Html.DisplayFor(model => model.specialisation)</h3>
             <h3>@Html.DisplayFor(model => model.codeProgramme)-@Html.DisplayFor(model => model.annee)-@Html.DisplayFor(model => model.codeSpecialisation)</h3>
@@ -54,13 +50,13 @@
                     <fieldset>
                         <legend>Heures</legend>
                         <div class="champ">
-                            <label>@Html.DisplayNameFor(model => model.nbHeurefrmGenerale)</label>
-                            <p>@Html.DisplayFor(model => model.nbHeurefrmGenerale) h</p>
+                            <label>@Html.DisplayNameFor(model => model.nbHeureFrmGenerale)</label>
+                            <p>@Html.DisplayFor(model => model.nbHeureFrmGenerale) h</p>
                         </div>
 
                         <div class="champ">
-                            <label>@Html.DisplayNameFor(model => model.nbHeurefrmSpecifique)</label>
-                            <p>@Html.DisplayFor(model => model.nbHeurefrmSpecifique) h</p>
+                            <label>@Html.DisplayNameFor(model => model.nbHeureFrmSpecifique)</label>
+                            <p>@Html.DisplayFor(model => model.nbHeureFrmSpecifique) h</p>
                         </div>
 
                         <div class="champ">
@@ -80,7 +76,7 @@
                 foreach (var enonceCompetence in Model.EnonceCompetence)
                 {
                     <a class="info-child clearfix" href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = enonceCompetence.idCompetence })'>
-                        <p class="gauche">@Html.DisplayFor(p => enonceCompetence.enonceCompetence1)</p>
+                        <p class="gauche">@Html.DisplayFor(p => enonceCompetence.description)</p>
                         <p class="droite">@Html.DisplayFor(p => enonceCompetence.codeCompetence)</p>
                     </a>
                 }

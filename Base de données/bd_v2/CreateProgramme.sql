@@ -1,5 +1,5 @@
-IF OBJECT_ID ('Programme') IS NOT NULL
-DROP TABLE Programme
+IF OBJECT_ID ('DevisMinistere') IS NOT NULL
+DROP TABLE DevisMinistere
 GO
 CREATE TABLE DevisMinistere
 (

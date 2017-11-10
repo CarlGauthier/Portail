@@ -8,7 +8,7 @@
                 @Html.DisplayNameFor(model => model.numero)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.criterePerformance1)
+                @Html.DisplayNameFor(model => model.description)
             </th>
             <th class="action-cell-header">
                 <b>Modifier</b>
@@ -29,7 +29,7 @@
                     @Html.DisplayFor(modelItem => item.numero)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.criterePerformance1)
+                    @Html.DisplayFor(modelItem => item.description)
                 </td>
                 <td class="action-cell">
                     <a href='@Url.Action("Edit", new { idCritere = item.idCritere })'>

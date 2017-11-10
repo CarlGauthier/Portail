@@ -15,28 +15,19 @@
         @Html.HiddenFor(model => model.codeProgramme)
         @Html.HiddenFor(model => model.annee)
         @Html.HiddenFor(model => model.codeSpecialisation)
-        @Html.HiddenFor(model => model.dateValidation)
         @Html.HiddenFor(model => model.docMinistere)
 
         <div class="form-horizontal form-box single-action">
             <h1>Modifier un devisMinistere</h1>
             <h3>
-                @Html.DisplayFor(model => model.EnteteProgramme.commentaire)
+                @Html.DisplayFor(model => model.EnteteProgramme.nom)
                 @Html.DisplayFor(model => model.codeProgramme)-@Html.DisplayFor(model => model.annee)-@Html.DisplayFor(model => model.codeSpecialisation)
             </h3>
             
             <hr />
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.nom, new { @class = "col-xs-4 control-label" })
-                        <div class="col-xs-8">
-                            @Html.TextBoxFor(model => model.nom, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.nom, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.specialisation, new { @class = "col-xs-4 control-label" })
                         <div class="col-xs-8">
@@ -44,10 +35,7 @@
                             @Html.ValidationMessageFor(model => model.specialisation, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.sanction, new { @class = "col-xs-4 control-label" })
                         <div class="col-xs-8">
@@ -97,18 +85,18 @@
                     <fieldset>
                         <legend>Heures</legend>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.nbHeurefrmGenerale, new { @class = "col-xs-4 control-label" })
+                            @Html.LabelFor(model => model.nbHeureFrmGenerale, new { @class = "col-xs-4 control-label" })
                             <div class="col-xs-8">
-                                @Html.TextBoxFor(model => model.nbHeurefrmGenerale, new { @maxlength = "4", @class = "form-control small-input" })
-                                @Html.ValidationMessageFor(model => model.nbHeurefrmGenerale, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(model => model.nbHeureFrmGenerale, new { @maxlength = "4", @class = "form-control small-input" })
+                                @Html.ValidationMessageFor(model => model.nbHeureFrmGenerale, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.nbHeurefrmSpecifique, new { @class = "col-xs-4 control-label" })
+                            @Html.LabelFor(model => model.nbHeureFrmSpecifique, new { @class = "col-xs-4 control-label" })
                             <div class="col-xs-8">
-                                @Html.TextBoxFor(model => model.nbHeurefrmSpecifique, new { @maxlength = "4", @class = "form-control small-input" })
-                                @Html.ValidationMessageFor(model => model.nbHeurefrmSpecifique, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(model => model.nbHeureFrmSpecifique, new { @maxlength = "4", @class = "form-control small-input" })
+                                @Html.ValidationMessageFor(model => model.nbHeureFrmSpecifique, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </fieldset>

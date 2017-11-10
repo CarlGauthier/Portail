@@ -29,11 +29,11 @@ namespace ApplicationPlanCadre.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ContexteRealisation>()
-                .Property(e => e.contexteRealisation1)
+                .Property(e => e.description)
                 .IsUnicode(false);
 
             modelBuilder.Entity<CriterePerformance>()
-                .Property(e => e.criterePerformance1)
+                .Property(e => e.description)
                 .IsUnicode(false);
 
             modelBuilder.Entity<DevisMinistere>()
@@ -81,7 +81,7 @@ namespace ApplicationPlanCadre.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ElementCompetence>()
-                .Property(e => e.element)
+                .Property(e => e.description)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ElementCompetence>()
@@ -99,7 +99,7 @@ namespace ApplicationPlanCadre.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<EnonceCompetence>()
-                .Property(e => e.enonceCompetence1)
+                .Property(e => e.description)
                 .IsUnicode(false);
 
             modelBuilder.Entity<EnonceCompetence>()

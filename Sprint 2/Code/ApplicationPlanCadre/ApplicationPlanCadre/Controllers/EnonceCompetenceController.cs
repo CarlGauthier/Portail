@@ -49,7 +49,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idCompetence,codeCompetence,enonceCompetence1,motClef,obligatoire,actif,commentaire,idDevis")] EnonceCompetence enonceCompetence)
+        public ActionResult Create([Bind(Include = "idCompetence,codeCompetence,description,motClef,obligatoire,actif,commentaire,idDevis")] EnonceCompetence enonceCompetence)
         {
             bool existe;
             existe = db.EnonceCompetence.Any(ec => ec.codeCompetence == enonceCompetence.codeCompetence && ec.idDevis == enonceCompetence.idDevis);
@@ -82,7 +82,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idCompetence,codeCompetence,enonceCompetence1,motClef,obligatoire,actif,commentaire,idDevis")] EnonceCompetence enonceCompetence)
+        public ActionResult Edit([Bind(Include = "idCompetence,codeCompetence,description,motClef,obligatoire,actif,commentaire,idDevis")] EnonceCompetence enonceCompetence)
         {
             bool existe;
             existe = db.EnonceCompetence.Any(ec => ec.idCompetence != enonceCompetence.idCompetence && ec.codeCompetence == enonceCompetence.codeCompetence && ec.idDevis == enonceCompetence.idDevis);
@@ -128,7 +128,7 @@ namespace ApplicationPlanCadre.Controllers
 
         private void Trim(EnonceCompetence enonceCompetence)
         {
-            if (enonceCompetence.enonceCompetence1 != null) enonceCompetence.enonceCompetence1 = enonceCompetence.enonceCompetence1.Trim();
+            if (enonceCompetence.description != null) enonceCompetence.description = enonceCompetence.description.Trim();
         }
 
         protected override void Dispose(bool disposing)

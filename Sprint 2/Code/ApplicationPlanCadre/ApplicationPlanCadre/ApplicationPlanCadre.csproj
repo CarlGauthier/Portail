@@ -318,9 +318,9 @@
     <Content Include="Views\Stage\indexStage.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\DevisMinistere\Index.cshtml" />
-    <Content Include="Views\ConsoleProgramme\Edit.cshtml" />
-    <Content Include="Views\ConsoleProgramme\Create.cshtml" />
-    <Content Include="Views\ConsoleProgramme\_PartialList.cshtml" />
+    <Content Include="Views\ConsoleDevisMinistere\Edit.cshtml" />
+    <Content Include="Views\ConsoleDevisMinistere\Create.cshtml" />
+    <Content Include="Views\ConsoleDevisMinistere\_PartialList.cshtml" />
     <Content Include="Views\Shared\_ConsoleNav.cshtml" />
     <Content Include="Views\DevisMinistere\Details.cshtml" />
     <Content Include="Views\DevisMinistere\Edit.cshtml" />
@@ -343,6 +343,9 @@
     <Content Include="Views\EnonceCompetence\Delete.cshtml" />
     <Content Include="Views\ElementCompetence\Order.cshtml" />
     <Content Include="Views\ElementCompetence\Delete.cshtml" />
+    <Content Include="Views\ConsoleProgramme\_PartialList.cshtml" />
+    <Content Include="Views\ConsoleProgramme\Create.cshtml" />
+    <Content Include="Views\ConsoleProgramme\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

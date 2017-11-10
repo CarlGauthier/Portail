@@ -17,9 +17,8 @@ namespace ApplicationPlanCadre.Controllers
         private BDPlanCadre db = new BDPlanCadre();
         public ActionResult _TreeView()
         {
-            var devisMinistere = db.DevisMinistere
-                          .Include(p => p.EnonceCompetence)
-                          .ToList();
+            var devisMinistere = db.DevisMinistere.ToList();
+
             return PartialView(devisMinistere);
         }
 

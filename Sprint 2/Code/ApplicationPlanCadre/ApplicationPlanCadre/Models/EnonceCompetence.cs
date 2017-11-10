@@ -24,10 +24,9 @@ namespace ApplicationPlanCadre.Models
         [StringLength(4)]
         public string codeCompetence { get; set; }
 
-        [Column("enonceCompetence")]
         [Required]
         [StringLength(300)]
-        public string enonceCompetence1 { get; set; }
+        public string description { get; set; }
 
         public bool obligatoire { get; set; }
 
