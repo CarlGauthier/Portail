@@ -296,6 +296,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\static\cj-layout.png" />
+    <Content Include="Views\static\footer.html" />
     <Content Include="Views\static\header.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -350,7 +352,6 @@
     <Content Include="Views\recherche\recherche.cshtml" />
     <Content Include="Views\recherche\_afficherRecherche.cshtml" />
     <Content Include="Views\Rapport\RapportProgramme.cshtml" />
-    <Content Include="Views\Rapport\_header.cshtml" />
     <Content Include="Views\Rapport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

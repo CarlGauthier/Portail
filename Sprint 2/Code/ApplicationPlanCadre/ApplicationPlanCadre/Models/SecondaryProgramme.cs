@@ -7,14 +7,7 @@ namespace ApplicationPlanCadre.Models
 {
     public class SecondaryProgramme
     {
-        //<th>idProgramme</th>
-        //<th>annee</th>
-        //<th>nom</th>
-        //<th>codeSpecialisation</th>
-        //<th>specialisation</th>
-        //<th>condition</th>
-        //<th>sanction</th>
-        //<th>Commentaires</th>
+        
         
         public int idProgramme { get; set; }
         public string annee { get; set; }
@@ -24,6 +17,11 @@ namespace ApplicationPlanCadre.Models
         public string condition { get; set; }
         public string sanction { get; set; }
         public string commentaire { get; set; }
+        public string nbUnite { get; set; }
+        public string nbHeurefrmGeneral { get; set; }
+        public string nbHeurefrmSpecifique { get; set; }
+        public string codeProgramme { get; set; }
+        public string total { get; set; }
 
         
 

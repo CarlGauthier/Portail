@@ -40,7 +40,9 @@ namespace ApplicationPlanCadre.Controllers
             dynamic model = new ExpandoObject();
             List<SecondaryElementCompetence> elemCompList = new List<SecondaryElementCompetence>();
             List<SecondaryElementCompetence> elemCompListHolder = new List<SecondaryElementCompetence>();
-            
+            List<SecondaryContexteRealisation> contextRealList = new List<SecondaryContexteRealisation>();
+            List<SecondaryContexteRealisation> contextRealListHolder = new List<SecondaryContexteRealisation>();
+
             model.Programme = getProgram(id);
             model.EnonceCompetence = getEnonceCompetence(id);
             foreach(SecondaryEnonceCompetence x in model.EnonceCompetence)
@@ -56,18 +58,34 @@ namespace ApplicationPlanCadre.Controllers
                         element=a.element
                     });
                 }
+                contextRealListHolder= getContexteRealisation(x.idCompetence);
+                foreach(SecondaryContexteRealisation a in contextRealListHolder)
+                {
+                    contextRealList.Add(new SecondaryContexteRealisation
+                    {
+                        contexteRealisation1 = a.contexteRealisation1,
+                        idCompetence = a.idCompetence,
+                        
+                    });
+                }
+
+                
             }
             model.ElementCompetence = elemCompList;
+            model.ContexteRealisation = contextRealList;
 
             string header = Server.MapPath("~/Views/static/header.html");
+            string footer = Server.MapPath("~/Views/static/footer.html");
             string customSwitches = string.Format("--header-html  \"{0}\" " +
-                        "--header-spacing \"5\" " +
-                        "--header-font-size \"10\" ", header);
+                                  "--header-spacing \"0\" " +
+                                  "--footer-html \"{1}\" " +
+                                  "--footer-spacing \"10\" " +
+                                  "--footer-font-size \"10\" " +
+                                  "--header-font-size \"10\" ", header, footer);
             return new ViewAsPdf("RapportProgramme", model)
             {
                 CustomSwitches = customSwitches,
-                PageOrientation = Rotativa.Options.Orientation.Landscape,
-               PageSize=Size.A4
+                PageSize=Size.A4
             };
         }
         private List <SecondaryProgramme> getProgram(int x)
@@ -81,7 +99,17 @@ namespace ApplicationPlanCadre.Controllers
                     programme.Add(new SecondaryProgramme
                     {
                         idProgramme = Convert.ToInt32(prog.idProgramme),
-                        nom = prog.nom
+                        annee=prog.annee,
+                        nbUnite=prog.nbUnite,
+                        codeSpecialisation=prog.codeSpecialisation,
+                        specialisation =prog.specialisation,
+                        nbHeurefrmGeneral=(prog.nbHeurefrmGenerale).ToString(),
+                        nbHeurefrmSpecifique=(prog.nbHeurefrmSpecifique).ToString(),
+                        codeProgramme =prog.codeProgramme,
+                        nom = prog.nom,
+                        sanction =prog.sanction,
+                        condition=prog.condition,
+                        total= (prog.nbHeurefrmGenerale + prog.nbHeurefrmSpecifique).ToString()
                     });
                 }
                 return programme;
@@ -142,31 +170,26 @@ namespace ApplicationPlanCadre.Controllers
         //    }
         //    return critereList;
         //}
-        //private List<SecondaryContexteRealisation>getContexteRealisation(int x)
-        //{
-        //    List<SecondaryContexteRealisation> contextList = new List<SecondaryContexteRealisation>();
-        //    var context = from a in db.ContexteRealisation
-        //                  where a.idCompetence == x
-        //                  select a;
-        //    foreach(ContexteRealisation a in context)
-        //    {
-        //        contextList.Add(new SecondaryContexteRealisation
-        //        {
-        //            idContexte = a.idContexte,
-        //            idCompetence = a.idCompetence,
-        //            contexteRealisation1 = a.contexteRealisation1
-
-        //        });
-        //    }
-        //    return contextList;
-        //}
-
-        //action qui retourne le header
-        [AllowAnonymous]
-        public ActionResult _header()
+        private List<SecondaryContexteRealisation> getContexteRealisation(int x)
         {
-            return View();
+            List<SecondaryContexteRealisation> contextList = new List<SecondaryContexteRealisation>();
+            var context = from a in db.ContexteRealisation
+                          where a.idCompetence == x
+                          select a;
+            foreach (ContexteRealisation a in context)
+            {
+                contextList.Add(new SecondaryContexteRealisation
+                {
+                    idContexte = a.idContexte,
+                    idCompetence = a.idCompetence,
+                    contexteRealisation1 = a.contexteRealisation1
+
+                });
+            }
+            return contextList;
         }
+
+        
 
 
         
