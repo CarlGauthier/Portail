@@ -1,12 +1,13 @@
-IF OBJECT_ID ('Programme') IS NOT NULL
-DROP TABLE Programme
+IF OBJECT_ID ('DevisMinistere') IS NOT NULL
+DROP TABLE DevisMinistere
 GO
 CREATE TABLE DevisMinistere
 (
         idDevis			        INT             NOT NULL        IDENTITY(1,1),
 
-		codeSpecialisation      VARCHAR(3)      NOT NULL,
         annee                   CHAR(4)         NOT NULL,
+		codeSpecialisation      VARCHAR(3)      NOT NULL,
+		specialisation			VARCHAR(30)		NULL,
         nbUnite					VARCHAR(6)      NULL,
         nbHeureFrmGenerale      INT             NULL,
         nbHeureFrmSpecifique    INT             NULL,
@@ -28,7 +29,6 @@ CREATE TABLE Programme
 
         nom						VARCHAR(50)     NULL,
 		annee                   CHAR(4)         NOT NULL,
-		specialisation			VARCHAR(30)		NULL,
         dateValidation          DATETIME        NULL,
 
         idDevis        			INT             NOT NULL,		--FK

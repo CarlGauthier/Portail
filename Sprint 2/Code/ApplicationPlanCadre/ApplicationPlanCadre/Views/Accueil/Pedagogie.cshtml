@@ -9,9 +9,9 @@
     <div class="icon-container">
         @if (User.IsInRole("RCP"))
         {
-            <a class="icon" href='@Url.RouteUrl("Index-programme")'>
+            <a class="icon" href='@Url.Action("Index", "DevisMinistere")'>
                 <span class="glyphicon glyphicon-duplicate"></span>
-                <p>Gestion des programmes</p>
+                <p>Gestion des devis ministériels</p>
             </a>
         }
 
@@ -19,14 +19,14 @@
 
         @if (User.IsInRole("RCP") || User.IsInRole("Gestionnaire de stage") || User.IsInRole("Admin") || User.IsInRole("Enseignant"))
         {
-        <a class="icon" href='@Url.RouteUrl("")'>
+        <a class="icon">
             <span class="glyphicon glyphicon-th-list"></span>
             <p>Gestion des plans cadre</p>
         </a>
         }
         @if (User.IsInRole("RCP") || User.IsInRole("Gestionnaire de stage") || User.IsInRole("Admin") || User.IsInRole("Enseignant"))
         {
-            <a class="icon" href='@Url.RouteUrl("")'>
+            <a class="icon">
                 <span class="glyphicon glyphicon-th"></span>
                 <p>Gestion des grilles</p>
             </a>
@@ -34,10 +34,10 @@
 
         @if (User.IsInRole("RCP") || User.IsInRole("Gestionnaire de stage") || User.IsInRole("Admin") || User.IsInRole("Enseignant"))
         {
-                    <a class="icon" href='@Url.RouteUrl("")'>
-                        <span class="glyphicon glyphicon-blackboard"></span>
-                        <p>Gestion des cours</p>
-                    </a>
+            <a class="icon">
+                <span class="glyphicon glyphicon-blackboard"></span>
+                <p>Gestion des cours</p>
+            </a>
         }
     </div>
 </div>

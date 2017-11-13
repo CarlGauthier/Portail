@@ -9,7 +9,7 @@
         @*Les rôles pour le portail pédagique sont à discuter / En attendant tous les rôles y ont accès *@
         @if (User.IsInRole("RCP") || User.IsInRole("Gestionnaire de stage") || User.IsInRole("Admin") || User.IsInRole("Enseignant"))
         {
-            <a class="icon" href='@Url.RouteUrl("Accueil-pedagogie")'>
+            <a class="icon" href='@Url.Action("Pedagogie", "Accueil")'>
                 <span class="glyphicon glyphicon-education"></span>
                 <p>Pédagogie</p>
             </a>
@@ -18,14 +18,14 @@
         
         @if (User.IsInRole("Enseignant")||User.IsInRole("Gestionnaire de stage"))
         {
-            <a class="icon" href='@Url.RouteUrl("index-Stage")'>
+            <a class="icon">
                 <span class="glyphicon glyphicon-briefcase"></span>
                 <p>Stage</p>
             </a>
         }
         @if (User.IsInRole("Admin"))
         {
-            <a class="icon" href='@Url.RouteUrl("creation-programme")'>
+            <a class="icon" href='@Url.Action("Create", "ConsoleDevisMinistere")'>
                 <span class="glyphicon glyphicon-cog"></span>
                 <p>Console d'administration</p>
             </a>

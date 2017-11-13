@@ -1,7 +1,7 @@
-﻿@model ApplicationPlanCadre.Models.Programme
+﻿@model ApplicationPlanCadre.Models.DevisMinistere
 
-<div id="programme">
-    <div id="enoncerProgramme">
+<div id="devisMinistere">
+    <div id="enoncerDevisMinistere">
 
         <table>
             <tr>
@@ -14,7 +14,7 @@
             @foreach (var enonceCompetence in Model.EnonceCompetence)
             {
                 <tr>
-                    <td>@Html.DisplayFor(enc => enonceCompetence.enonceCompetence1)</td>
+                    <td>@Html.DisplayFor(enc => enonceCompetence.description)</td>
                     <td>@Html.DisplayFor(enc => enonceCompetence.codeCompetence)</td>
                     <td>
                         Obligatoire:@Html.DisplayFor(enc => enonceCompetence.obligatoire)
@@ -25,7 +25,7 @@
                         @foreach (var contexteRealisation in enonceCompetence.ContexteRealisation)
                         {
 
-                            @Html.DisplayFor(elc => contexteRealisation.contexteRealisation1)<br />
+                            @Html.DisplayFor(elc => contexteRealisation.description)<br />
                         }
                     </td>
                 </tr>

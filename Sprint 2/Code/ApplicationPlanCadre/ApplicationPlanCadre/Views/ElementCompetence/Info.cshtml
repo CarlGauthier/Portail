@@ -1,17 +1,17 @@
 ﻿@model ApplicationPlanCadre.Models.ElementCompetence
 
 @{
-    ViewBag.Title = Model.element;
+    ViewBag.Title = Model.description;
 }
 
 <div id="super-view">
-    @Html.Action("_TreeView", "Programme")
+    @Html.Action("_TreeView", "DevisMinistere")
 
     <div id="info-display" class="container-fluid">
         <div id="info-header">
             <h3>Élément de compétence</h3>
             <div>
-                <h1>@Html.DisplayFor(model => model.element)</h1>
+                <h1>@Html.DisplayFor(model => model.description)</h1>
             </div>
         </div>
 
@@ -24,7 +24,7 @@
                 <ol type="1">
                     @foreach (var criterePerformance in Model.CriterePerformance.OrderBy(ec => ec.numero))
                     {
-                        <li>@Html.DisplayFor(cp => criterePerformance.criterePerformance1)</li>
+                        <li>@Html.DisplayFor(cp => criterePerformance.description)</li>
                     }
                 </ol>
 
@@ -46,5 +46,5 @@
 <script>
     $(("#el" + @Model.idElement + "item")).addClass('active');
     $(("#enc" + @Model.EnonceCompetence.idCompetence)).collapse('show');
-    $(("#p" + @Model.EnonceCompetence.Programme.idProgramme)).collapse('show');
+    $(("#p" + @Model.EnonceCompetence.DevisMinistere.idDevis)).collapse('show');
 </script>

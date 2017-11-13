@@ -4,17 +4,17 @@
     ViewBag.Title = "Console d'administration";
 }
 
-<div id="console-programme" class="container">
+<div id="console-devisMinistere" class="container">
     <div class="col-md-6">
 
-            @using (Html.BeginForm("Create", "ConsoleProgramme", FormMethod.Post)) 
+            @using (Html.BeginForm("Create", "ConsoleDevisMinistere", FormMethod.Post)) 
             {
                 @Html.AntiForgeryToken()
 
                 <div class="form-horizontal form-box">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    <h3>Ajouter un programme</h3>
+                    <h3>Ajouter un devis ministériel</h3>
                     <hr />
                     <div class="champ">
                         @Html.ValidationMessage("Duplique", new { @class = "text-danger" })

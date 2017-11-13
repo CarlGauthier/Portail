@@ -30,29 +30,29 @@ namespace ApplicationPlanCadre.Controllers
             return View(enonceCompetence);
         }
 
-        public ActionResult Create(int? idProgramme)
+        public ActionResult Create(int? idDevis)
         {
-            if (idProgramme == null)
+            if (idDevis == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Programme programme = db.Programme.Find(idProgramme);
-            if (programme == null)
+            DevisMinistere devisMinistere = db.DevisMinistere.Find(idDevis);
+            if (devisMinistere == null)
             {
                 return HttpNotFound();
             }
             EnonceCompetence enonceCompetence = new EnonceCompetence();
-            enonceCompetence.Programme = programme;
-            enonceCompetence.idProgramme = programme.idProgramme;
+            enonceCompetence.DevisMinistere = devisMinistere;
+            enonceCompetence.idDevis = devisMinistere.idDevis;
             return View(enonceCompetence);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idCompetence,codeCompetence,enonceCompetence1,motClef,obligatoire,actif,commentaire,idProgramme")] EnonceCompetence enonceCompetence)
+        public ActionResult Create([Bind(Include = "idCompetence,codeCompetence,description,motClef,obligatoire,actif,commentaire,idDevis")] EnonceCompetence enonceCompetence)
         {
             bool existe;
-            existe = db.EnonceCompetence.Any(ec => ec.codeCompetence == enonceCompetence.codeCompetence && ec.idProgramme == enonceCompetence.idProgramme);
+            existe = db.EnonceCompetence.Any(ec => ec.codeCompetence == enonceCompetence.codeCompetence && ec.idDevis == enonceCompetence.idDevis);
             Trim(enonceCompetence);
             if (!existe && ModelState.IsValid)
             {
@@ -82,10 +82,10 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idCompetence,codeCompetence,enonceCompetence1,motClef,obligatoire,actif,commentaire,idProgramme")] EnonceCompetence enonceCompetence)
+        public ActionResult Edit([Bind(Include = "idCompetence,codeCompetence,description,motClef,obligatoire,actif,commentaire,idDevis")] EnonceCompetence enonceCompetence)
         {
             bool existe;
-            existe = db.EnonceCompetence.Any(ec => ec.idCompetence != enonceCompetence.idCompetence && ec.codeCompetence == enonceCompetence.codeCompetence && ec.idProgramme == enonceCompetence.idProgramme);
+            existe = db.EnonceCompetence.Any(ec => ec.idCompetence != enonceCompetence.idCompetence && ec.codeCompetence == enonceCompetence.codeCompetence && ec.idDevis == enonceCompetence.idDevis);
             Trim(enonceCompetence);
             if (!existe && ModelState.IsValid)
             {
@@ -123,12 +123,12 @@ namespace ApplicationPlanCadre.Controllers
             db.ContexteRealisation.RemoveRange(enonceCompetence.ContexteRealisation);
             db.EnonceCompetence.Remove(enonceCompetence);
             db.SaveChanges();
-            return RedirectToAction("Info", "Programme", new { idProgramme = enonceCompetence.idProgramme });
+            return RedirectToAction("Info", "DevisMinistere", new { idDevis = enonceCompetence.idDevis });
         }
 
         private void Trim(EnonceCompetence enonceCompetence)
         {
-            if (enonceCompetence.enonceCompetence1 != null) enonceCompetence.enonceCompetence1 = enonceCompetence.enonceCompetence1.Trim();
+            if (enonceCompetence.description != null) enonceCompetence.description = enonceCompetence.description.Trim();
         }
 
         protected override void Dispose(bool disposing)

@@ -73,6 +73,7 @@ input, button {
 
 textarea {
     resize: none;
+    overflow-x: hidden;
 }
 
 .small-input {
