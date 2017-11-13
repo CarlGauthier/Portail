@@ -15,13 +15,19 @@ namespace ApplicationPlanCadre.Controllers
     {
         private BDPlanCadre db = new BDPlanCadre();
 
-        public ActionResult List(int? id)
+        public ActionResult _PartialList(int? idCompetence)
         {
-            if (id == null)
+            EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(idCompetence);
+            return PartialView(enonceCompetence.ContexteRealisation);
+        }
+
+        public ActionResult Create(int? idCompetence)
+        {
+            if (idCompetence == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(id);
+            EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(idCompetence);
             if (enonceCompetence == null)
             {
                 return HttpNotFound();
@@ -32,89 +38,61 @@ namespace ApplicationPlanCadre.Controllers
             return View(contexteRealisation);
         }
 
-        public ActionResult _PartialList(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var contexteRealisation = db.EnonceCompetence.Find(id).ContexteRealisation;
-            if (contexteRealisation == null)
-            {
-                return HttpNotFound();
-            }
-            return PartialView("_PartialList", contexteRealisation);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idContexte,contexteRealisation1,commentaire,idCompetence")] ContexteRealisation contexteRealisation)
         {
+            Trim(contexteRealisation);
             if (ModelState.IsValid)
             {
                 db.ContexteRealisation.Add(contexteRealisation);
                 db.SaveChanges();
+                return RedirectToAction("Create", new { idCompetence = contexteRealisation.idCompetence });
             }
-            return _PartialList(contexteRealisation.idCompetence);
+            contexteRealisation.EnonceCompetence = db.EnonceCompetence.Find(contexteRealisation.idCompetence);
+            return View(contexteRealisation);
         }
 
-        // GET: ContexteRealisation/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? idContexte)
         {
-            if (id == null)
+            if (idContexte == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ContexteRealisation contexteRealisation = db.ContexteRealisation.Find(id);
+            ContexteRealisation contexteRealisation = db.ContexteRealisation.Find(idContexte);
             if (contexteRealisation == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.idCompetence = new SelectList(db.EnonceCompetence, "idCompetence", "codeCompetence", contexteRealisation.idCompetence);
             return View(contexteRealisation);
         }
 
-        // POST: ContexteRealisation/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idContexte,contexteRealisation1,commentaire,idCompetence")] ContexteRealisation contexteRealisation)
         {
+            Trim(contexteRealisation);
             if (ModelState.IsValid)
             {
                 db.Entry(contexteRealisation).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.idCompetence = new SelectList(db.EnonceCompetence, "idCompetence", "codeCompetence", contexteRealisation.idCompetence);
-            return View(contexteRealisation);
-        }
-
-        // GET: ContexteRealisation/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ContexteRealisation contexteRealisation = db.ContexteRealisation.Find(id);
-            if (contexteRealisation == null)
-            {
-                return HttpNotFound();
+                return RedirectToAction("Create", new { idCompetence = contexteRealisation.idCompetence });
             }
             return View(contexteRealisation);
         }
 
-        // POST: ContexteRealisation/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int idContexte)
         {
-            ContexteRealisation contexteRealisation = db.ContexteRealisation.Find(id);
+            ContexteRealisation contexteRealisation = db.ContexteRealisation.Find(idContexte);
             db.ContexteRealisation.Remove(contexteRealisation);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Create", new { idCompetence = contexteRealisation.idCompetence });
+        }
+
+        private void Trim(ContexteRealisation contexteRealisation)
+        {
+            if (contexteRealisation.contexteRealisation1 != null) contexteRealisation.contexteRealisation1 = contexteRealisation.contexteRealisation1.Trim();
         }
 
         protected override void Dispose(bool disposing)

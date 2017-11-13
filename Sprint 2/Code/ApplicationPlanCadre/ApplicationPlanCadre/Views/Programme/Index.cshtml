@@ -12,7 +12,7 @@
             <hr />
             @foreach (var programme in Model)
             {                                       
-                <a class="info-child clearfix" href='@Url.RouteUrl("Info-programme", new { id = programme.idProgramme })'>
+                <a class="info-child clearfix" href='@Url.Action("Info", new { idProgramme = programme.idProgramme })'>
                     <p class="gauche">@Html.DisplayFor(ec => programme.EnteteProgramme.commentaire)</p> 
                     <p class="droite">@Html.DisplayFor(model => programme.codeProgramme)-@Html.DisplayFor(model => programme.annee)-@Html.DisplayFor(model => programme.codeSpecialisation)</p>
                 </a>

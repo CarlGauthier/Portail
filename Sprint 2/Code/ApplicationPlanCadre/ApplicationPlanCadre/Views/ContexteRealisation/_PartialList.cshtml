@@ -1,34 +1,38 @@
 ﻿@model IEnumerable<ApplicationPlanCadre.Models.ContexteRealisation>
 
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.contexteRealisation1)
-        </th>
-        <th class="action-cell-header">
-            <b>Modifier</b>
-        </th>
-        <th class="action-cell-header">
-            <b>Supprimer</b>
-        </th>
-    </tr>
+<div class="crud-list">
 
-    @foreach (var item in Model)
-    {
-        <tr class="valide">
-            <td>
-                @Html.DisplayFor(modelItem => item.contexteRealisation1)
-            </td>
-            <td class="action-cell">
-                <a>
-                    <span class="glyphicon glyphicon-pencil"><!----></span>
-                </a>
-            </td>
-            <td class="action-cell">
-                <a>
-                    <span class="glyphicon glyphicon-trash"><!----></span>
-                </a>
-            </td>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.contexteRealisation1)
+            </th>
+            <th class="action-cell-header">
+                <b>Modifier</b>
+            </th>
+            <th class="action-cell-header">
+                <b>Supprimer</b>
+            </th>
         </tr>
-    }
-</table>
+
+        @foreach (var item in Model)
+        {
+            string dblclickEvent = Url.Action("Edit", new { idContexte = item.idContexte });
+            <tr ondblclick="location.href='@dblclickEvent'" class="valide">
+                <td>
+                    @Html.DisplayFor(modelItem => item.contexteRealisation1)
+                </td>
+                <td class="action-cell">
+                    <a href='@Url.Action("Edit", new { idContexte = item.idContexte })'>
+                        <span class="glyphicon glyphicon-pencil"><!----></span>
+                    </a>
+                </td>
+                <td class="action-cell">
+                    <a href='@Url.Action("Delete", new { idContexte = item.idContexte })'>
+                        <span class="glyphicon glyphicon-trash"><!----></span>
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -4,23 +4,27 @@
     ViewBag.Title = "Énoncé de compétence - création";
 }
 
-
-
 <div class="container">
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.idProgramme)
+        @Html.HiddenFor(model => model.idCompetence)
 
         <div class="form-horizontal form-box single-action">
-            <h1>Créer un énoncé de compétence</h1>
-            <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <h1>Créer un énoncé de compétence</h1>
+
+            <hr />
+
+            <div class="champ">
+                @Html.ValidationMessage("Duplique", new { @class = "text-danger" })
+            </div>
+
             <div class="form-group">
                 @Html.LabelFor(model => model.codeCompetence, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.codeCompetence, new { htmlAttributes = new { @class = "form-control small-input" } })
+                    @Html.EditorFor(model => model.codeCompetence, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
                     @Html.ValidationMessageFor(model => model.codeCompetence, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -28,14 +32,31 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.enonceCompetence1, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.enonceCompetence1, new {@rows = "3", @class = "form-control" })
+                    @Html.TextAreaFor(model => model.enonceCompetence1, new {@rows = "3", @maxlength = "300", @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.enonceCompetence1, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="form-group">
-                <div class="col-md-offset-2">
-                    <input type="submit" value="Suivant" />
-                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "Programme", new { id = Model.idProgramme })'">Retour</div>
+                @Html.LabelFor(model => model.obligatoire, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.CheckBoxFor(model => model.obligatoire, new { @Checked = "checked" })
+                    @Html.ValidationMessageFor(model => model.obligatoire, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.actif, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.actif)
+                    @Html.ValidationMessageFor(model => model.actif, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Suivant" class="fancy-button"/>
+                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "Programme", new { idProgramme = Model.idProgramme })'">Annuler</div>
                 </div>
             </div>
         </div>

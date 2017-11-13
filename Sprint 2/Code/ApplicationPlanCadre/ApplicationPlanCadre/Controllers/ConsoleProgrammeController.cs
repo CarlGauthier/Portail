@@ -11,7 +11,7 @@ using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    [customAuthorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class ConsoleProgrammeController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
@@ -31,13 +31,11 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("Admin-programme", Name = "ajouter-programme")]
         public ActionResult Create([Bind(Include = "codeProgramme, annee, codeSpecialisation")] Programme programme)
         {
-            bool valide, existe;
+            bool existe;
             existe = db.Programme.Any(p => p.codeProgramme == programme.codeProgramme && p.annee == programme.annee && p.codeSpecialisation == programme.codeSpecialisation);
-            valide = !existe && ModelState.IsValid;
-            if (valide)
+            if (!existe && ModelState.IsValid)
             {
                 programme.codeSpecialisation = programme.codeSpecialisation.ToUpper();
                 db.Programme.Add(programme);
@@ -45,11 +43,11 @@ namespace ApplicationPlanCadre.Controllers
                 return RedirectToAction("Create");
             }
             if (existe)
-                ViewBag.messageError = "Erreur, ce programme existe déjà.";
+                ModelState.AddModelError("Duplique", "Erreur, ce programme existe déjà.");
             ViewBag.codeProgramme = GetCodeProgrammeSelectList();
             return View(programme);
         }
-        [Route("Admin-programme/{id:int?}", Name = "edit-programme")]
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -67,13 +65,11 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("Admin-programme/{id:int?}", Name = "EnrEdit-programme")]
         public ActionResult Edit([Bind(Include = "idProgramme, codeProgramme, annee, codeSpecialisation")] Programme programme)
         {
-            bool valide, existe;
+            bool existe;
             existe = db.Programme.Any(p => p.idProgramme != programme.idProgramme && p.codeProgramme == programme.codeProgramme && p.annee == programme.annee && p.codeSpecialisation == programme.codeSpecialisation);
-            valide = !existe && ModelState.IsValid;
-            if (valide)
+            if (!existe && ModelState.IsValid)
             {
                 programme.codeSpecialisation = programme.codeSpecialisation.ToUpper();
                 db.Entry(programme).State = EntityState.Modified;
@@ -81,7 +77,7 @@ namespace ApplicationPlanCadre.Controllers
                 return RedirectToAction("Create");
             }
             if (existe)
-                ViewBag.messageError = "Erreur, ce programme existe déjà.";
+                ModelState.AddModelError("Duplique", "Erreur, ce programme existe déjà.");
             ViewBag.codeProgramme = GetCodeProgrammeSelectList();
             return View(programme);
         }
