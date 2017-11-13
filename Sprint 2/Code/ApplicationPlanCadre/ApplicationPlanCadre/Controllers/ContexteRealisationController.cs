@@ -18,7 +18,7 @@ namespace ApplicationPlanCadre.Controllers
         public ActionResult _PartialList(int? idCompetence)
         {
             EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(idCompetence);
-            return PartialView(enonceCompetence.ContexteRealisation);
+            return PartialView(enonceCompetence.ContexteRealisation.OrderBy(m => m.numero));
         }
 
         public ActionResult Create(int? idCompetence)
@@ -40,7 +40,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idContexte,contexteRealisation1,commentaire,idCompetence")] ContexteRealisation contexteRealisation)
+        public ActionResult Create([Bind(Include = "idContexte,description,commentaire,idCompetence")] ContexteRealisation contexteRealisation)
         {
             Trim(contexteRealisation);
             if (ModelState.IsValid)
@@ -69,7 +69,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idContexte,contexteRealisation1,commentaire,idCompetence")] ContexteRealisation contexteRealisation)
+        public ActionResult Edit([Bind(Include = "idContexte,description,commentaire,idCompetence")] ContexteRealisation contexteRealisation)
         {
             Trim(contexteRealisation);
             if (ModelState.IsValid)
@@ -90,9 +90,62 @@ namespace ApplicationPlanCadre.Controllers
             return RedirectToAction("Create", new { idCompetence = contexteRealisation.idCompetence });
         }
 
+        public ActionResult MoveUp(int idContexte)
+        {
+            return Move(-1, idContexte);
+        }
+
+        public ActionResult MoveDown(int idContexte)
+        {
+            return Move(1, idContexte);
+        }
+
+        private ActionResult Move(int v, int idContexte)
+        {
+            ContexteRealisation contexteRealisation = db.ContexteRealisation.Find(idContexte);
+            IQueryable<ContexteRealisation> query = (from cp in db.ContexteRealisation
+                                                    where cp.idCompetence == contexteRealisation.idCompetence && cp.numero == contexteRealisation.numero + v
+                                                    select cp);
+            if (query.Count() > 0)
+            {
+                ContexteRealisation cpAutre = query.First();
+                contexteRealisation.numero += v;
+                cpAutre.numero -= v;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Create", new { idCompetence = contexteRealisation.idCompetence });
+        }
+
+        private void AssignNo(ContexteRealisation contexteRealisation)
+        {
+            int lastNo = 0;
+            IQueryable<int> query = (from cp in db.ContexteRealisation
+                                     where cp.idCompetence == contexteRealisation.idCompetence
+                                     select cp.numero);
+
+            IEnumerable<int> list = query;
+
+            if (query.Count() > 0)
+            {
+                lastNo = query.Max();
+            }
+            contexteRealisation.numero = lastNo + 1;
+        }
+
+        private void AjustNo(ContexteRealisation contexteRealisation)
+        {
+            IQueryable<ContexteRealisation> query = (from cp in db.ContexteRealisation
+                                                    where cp.idCompetence == contexteRealisation.idCompetence && cp.numero > contexteRealisation.numero
+                                                    select cp);
+            foreach (ContexteRealisation cp in query)
+            {
+                cp.numero--;
+            }
+        }
+
         private void Trim(ContexteRealisation contexteRealisation)
         {
-            if (contexteRealisation.contexteRealisation1 != null) contexteRealisation.contexteRealisation1 = contexteRealisation.contexteRealisation1.Trim();
+            if (contexteRealisation.description != null) contexteRealisation.description = contexteRealisation.description.Trim();
         }
 
         protected override void Dispose(bool disposing)

@@ -1,4 +1,4 @@
-﻿@model ApplicationPlanCadre.Models.Programme
+﻿@model ApplicationPlanCadre.Models.DevisMinistere
 
 @{
     ViewBag.Title = "Details";
@@ -27,9 +27,9 @@
             <label>Conditions particulières : </label>
             @Html.DisplayFor(model => model.condition)
             <br><br>
-            <a href="~/image/programme.pdf" target=_blank>Document du ministère (PDF)</a>
+            <a href="~/image/devisMinistere.pdf" target=_blank>Document du ministère (PDF)</a>
 
-            <!--@Html.ActionLink("Consulter", "ViewPdf", "Programmes")-->
+            <!--@Html.ActionLink("Consulter", "ViewPdf", "DevisMinisteres")-->
         </div>
 
         <div class="col-md-6">
@@ -46,7 +46,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="fancy-button cancel" onclick="location.href='@Url.Action("Index")'">Annuler</div>
-            <input type="submit" value="Modifier" onclick="location.href='@Url.RouteUrl("edit-prog", new { id = Model.idProgramme })'" />
+            <input type="submit" value="Modifier" onclick="location.href='@Url.RouteUrl("edit-prog", new { id = Model.idDevis })'" />
 
         </div>
     </div>
@@ -54,13 +54,13 @@
     <div class="row">
         <h1>Zone compétence</h1>
         <div class="competences">
-            @Html.Action("_PartialEnonceCompetence", new { id = Model.idProgramme })
+            @Html.Action("_PartialEnonceCompetence", new { id = Model.idDevis })
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-2">
-            <input type="submit" value="Valider" onclick="location.href='@Url.Action("ValiderProgramme", "Programme", new { id = Model.idProgramme })'" />
+            <input type="submit" value="Valider" onclick="location.href='@Url.Action("ValiderDevisMinistere", "DevisMinistere", new { id = Model.idDevis })'" />
         </div>
     </div>
 

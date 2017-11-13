@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ApplicationPlanCadre.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="container">
+
+
+    <h1>Liste des utilisateurs</h1>
+
+    <div class="form-group">
+        <a href='@Url.Action("Register", "Account")' class="fancy-button">Crée un utilisateur</a>
+        <a href='@Url.Action("ConsoleAdmin", "Accueil")' class="fancy-button rouge">Terminer</a>
+    </div>
+
+    <hr />
+
+    <div class="crud-list">
+
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.nom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmailConfirmed)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prenom) @Html.DisplayFor(modelItem => item.nom) 
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @foreach(var role in item.Roles)
+                        {
+                            @role.RoleId;
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+</div>

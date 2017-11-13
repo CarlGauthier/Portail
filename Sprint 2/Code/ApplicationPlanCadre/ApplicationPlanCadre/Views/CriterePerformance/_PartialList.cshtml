@@ -8,7 +8,7 @@
                 @Html.DisplayNameFor(model => model.numero)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.criterePerformance1)
+                @Html.DisplayNameFor(model => model.description)
             </th>
             <th class="action-cell-header">
                 <b>Modifier</b>
@@ -24,12 +24,12 @@
         @foreach (var item in Model)
         {
             string dblclickEvent = Url.Action("Edit", new { idCritere = item.idCritere });
-            <tr ondblclick="location.href='@dblclickEvent'" class="valide">
+            <tr ondblclick="location.href='@dblclickEvent'">
                 <td>
                     @Html.DisplayFor(modelItem => item.numero)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.criterePerformance1)
+                    @Html.DisplayFor(modelItem => item.description)
                 </td>
                 <td class="action-cell">
                     <a href='@Url.Action("Edit", new { idCritere = item.idCritere })'>

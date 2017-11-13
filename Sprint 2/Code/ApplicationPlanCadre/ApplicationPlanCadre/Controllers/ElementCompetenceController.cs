@@ -14,7 +14,6 @@ namespace ApplicationPlanCadre.Controllers
     public class ElementCompetenceController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
-        [Route("Element-Competence/{id:int?}",Name ="Info-elementComp")]
         public ActionResult Info(int? idElement)
         {
             if (idElement == null)
@@ -48,7 +47,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idElement,element,numero,motClef,commentaire,idCompetence")] ElementCompetence elementCompetence)
+        public ActionResult Create([Bind(Include = "idElement,description,numero,motClef,commentaire,idCompetence")] ElementCompetence elementCompetence)
         {
             AssignNo(elementCompetence);
             Trim(elementCompetence);
@@ -77,7 +76,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idElement,element,numero,motClef,commentaire,idCompetence")] ElementCompetence elementCompetence)
+        public ActionResult Edit([Bind(Include = "idElement,description,numero,motClef,commentaire,idCompetence")] ElementCompetence elementCompetence)
         {
             Trim(elementCompetence);
             if (ModelState.IsValid)
@@ -182,7 +181,7 @@ namespace ApplicationPlanCadre.Controllers
 
         private void Trim(ElementCompetence elementCompetence)
         {
-            if (elementCompetence.element != null) elementCompetence.element = elementCompetence.element.Trim();
+            if (elementCompetence.description != null) elementCompetence.description = elementCompetence.description.Trim();
         }
 
         protected override void Dispose(bool disposing)

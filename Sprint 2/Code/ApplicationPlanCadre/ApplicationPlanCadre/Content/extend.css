@@ -73,10 +73,15 @@ input, button {
 
 textarea {
     resize: none;
+    overflow-x: hidden;
 }
 
 .small-input {
     width: 100px;
+}
+
+.glyphicon.flip {
+    transform: scale(-1, 1);
 }
 
 .fancy-button {
@@ -162,7 +167,7 @@ input[type="file"] {
     transition: 0.1s;
 }
 
-.crud-list .valide:hover td {
+.crud-list td:hover {
     background-color: #f2f4f7;
 }
 
@@ -179,10 +184,6 @@ input[type="file"] {
 .crud-list .action-cell {
     width: 15%;
     text-align: center;
-    background-color: #e7ecf2;
-}
-
-.crud-list .valide .action-cell {
     background-color: #f2f4f7;
 }
 
