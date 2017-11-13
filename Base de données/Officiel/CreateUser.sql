@@ -100,6 +100,8 @@ CREATE TABLE [dbo].[AspNetUsers](
 	[LockoutEnabled] [bit] NOT NULL,
 	[AccessFailedCount] [int] NOT NULL,
 	[UserName] [nvarchar](256) NOT NULL,
+	[nom] [nvarchar](50) NOT NULL,
+	[prenom] [nvarchar](50) NOT NULL,
  CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

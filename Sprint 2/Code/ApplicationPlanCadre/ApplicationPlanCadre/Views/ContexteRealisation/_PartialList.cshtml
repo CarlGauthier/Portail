@@ -21,9 +21,9 @@
         @foreach (var item in Model.OrderBy(m => m.numero))
         {
             string dblclickEvent = Url.Action("Edit", new { idContexte = item.idContexte });
-            <tr ondblclick="location.href='@dblclickEvent'" class="valide">
+            <tr ondblclick="location.href='@dblclickEvent'">
                 <td>
-                    @item.numero @Html.DisplayFor(modelItem => item.description)
+                    @Html.DisplayFor(modelItem => item.description)
                 </td>
                 <td class="action-cell">
                     <a href='@Url.Action("Edit", new { idContexte = item.idContexte })'>

@@ -23,9 +23,8 @@
         @foreach (var item in Model)
         {
             bool valide = item.EnonceCompetence.Count == 0;
-            string dblclickEvent = valide ? Url.Action("Edit", new { id = item.idDevis }) : @Url.Action("Create");
-            string cssClass = valide ? "valide" : "";
-            <tr ondblclick="location.href='@dblclickEvent'" class="@cssClass">
+            string dblclickEvent = valide ? Url.Action("Edit", new { id = item.idProgramme }) : @Url.Action("Create");
+            <tr ondblclick="location.href='@dblclickEvent'">
                 <td>
                     @Html.DisplayFor(modelItem => item.EnteteProgramme.codeProgramme)
                 </td>

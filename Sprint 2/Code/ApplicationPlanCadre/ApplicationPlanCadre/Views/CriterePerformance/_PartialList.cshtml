@@ -24,7 +24,7 @@
         @foreach (var item in Model)
         {
             string dblclickEvent = Url.Action("Edit", new { idCritere = item.idCritere });
-            <tr ondblclick="location.href='@dblclickEvent'" class="valide">
+            <tr ondblclick="location.href='@dblclickEvent'">
                 <td>
                     @Html.DisplayFor(modelItem => item.numero)
                 </td>

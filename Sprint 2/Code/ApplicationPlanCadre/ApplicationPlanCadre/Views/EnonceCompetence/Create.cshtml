@@ -40,7 +40,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.obligatoire, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-4">
-                    @Html.CheckBoxFor(model => model.obligatoire, new { @Checked = "checked" })
+                    @Html.CheckBoxFor(model => model.obligatoire)
                     @Html.ValidationMessageFor(model => model.obligatoire, "", new { @class = "text-danger" })
                 </div>
             </div>

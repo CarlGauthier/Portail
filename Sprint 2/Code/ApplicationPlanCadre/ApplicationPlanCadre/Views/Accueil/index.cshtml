@@ -3,19 +3,17 @@
 }
 
 <div id="accueil">
-    <h1>Bienvenue!</h1>
+    <h1>Bonjour @ViewBag.prenom!</h1>
     <div class="icon-container">    
         
-        @*Les rôles pour le portail pédagique sont à discuter / En attendant tous les rôles y ont accès *@
-        @if (User.IsInRole("RCP") || User.IsInRole("Gestionnaire de stage") || User.IsInRole("Admin") || User.IsInRole("Enseignant"))
+        @if (User.IsInRole("RCP"))
         {
-            <a class="icon" href='@Url.Action("Pedagogie", "Accueil")'>
-                <span class="glyphicon glyphicon-education"></span>
+            <a class="icon" href='@Url.Action("Pedagogie")'>
+                <span class="glyphicon glyphicon-apple"></span>
                 <p>Pédagogie</p>
             </a>
         }
 
-        
         @if (User.IsInRole("Enseignant")||User.IsInRole("Gestionnaire de stage"))
         {
             <a class="icon">
@@ -23,9 +21,10 @@
                 <p>Stage</p>
             </a>
         }
+
         @if (User.IsInRole("Admin"))
         {
-            <a class="icon" href='@Url.Action("Create", "ConsoleDevisMinistere")'>
+            <a class="icon" href='@Url.Action("ConsoleAdmin")'>
                 <span class="glyphicon glyphicon-cog"></span>
                 <p>Console d'administration</p>
             </a>

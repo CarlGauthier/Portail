@@ -15,6 +15,7 @@ namespace ApplicationPlanCadre.Controllers
     public class DevisMinistereController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
+
         public ActionResult _TreeView()
         {
             var devisMinistere = db.DevisMinistere.ToList();

@@ -15,6 +15,8 @@ namespace ApplicationPlanCadre.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -26,6 +28,12 @@ namespace ApplicationPlanCadre.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
+        }
+
+        public ActionResult Index()
+        {
+            var user = db.Users.ToList();
+            return View(user);
         }
 
         public ApplicationSignInManager SignInManager
@@ -156,24 +164,14 @@ namespace ApplicationPlanCadre.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { nom = model.nom, prenom = model.prenom, UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Envoyer un message électronique avec ce lien
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
-
-                    return RedirectToAction("Index", "Accueil");
+                    return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);
             }
-
-            // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
             return View(model);
         }
 

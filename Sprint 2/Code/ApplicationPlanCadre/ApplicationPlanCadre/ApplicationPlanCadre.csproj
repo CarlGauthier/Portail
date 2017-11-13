@@ -193,7 +193,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccueilController.cs" />
-    <Compile Include="Controllers\ConsoleDevisController.cs" />
+    <Compile Include="Controllers\ConsoleDevisMinistereController.cs" />
     <Compile Include="Controllers\ContexteRealisationController.cs" />
     <Compile Include="Controllers\CriterePerformanceController.cs" />
     <Compile Include="Controllers\ElementCompetenceController.cs" />
@@ -343,6 +343,8 @@
     <Content Include="Views\EnonceCompetence\Delete.cshtml" />
     <Content Include="Views\ElementCompetence\Order.cshtml" />
     <Content Include="Views\ElementCompetence\Delete.cshtml" />
+    <Content Include="Views\Accueil\ConsoleAdmin.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\ConsoleProgramme\_PartialList.cshtml" />
     <Content Include="Views\ConsoleProgramme\Create.cshtml" />
     <Content Include="Views\ConsoleProgramme\Edit.cshtml" />

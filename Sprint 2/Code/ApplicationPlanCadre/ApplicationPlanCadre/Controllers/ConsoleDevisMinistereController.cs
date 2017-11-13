@@ -12,7 +12,7 @@ using ApplicationPlanCadre.Helpers;
 namespace ApplicationPlanCadre.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class ConsoleDevisController : Controller
+    public class ConsoleDevisMinistereController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
 
