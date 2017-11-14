@@ -201,6 +201,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\DevisMinistereController.cs" />
+    <Compile Include="Controllers\PlanCadreController.cs" />
     <Compile Include="Controllers\StageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -348,6 +349,8 @@
     <Content Include="Views\ConsoleProgramme\_PartialList.cshtml" />
     <Content Include="Views\ConsoleProgramme\Create.cshtml" />
     <Content Include="Views\ConsoleProgramme\Edit.cshtml" />
+    <Content Include="Views\PlanCadre\Index.cshtml" />
+    <Content Include="Views\PlanCadre\_TreeView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

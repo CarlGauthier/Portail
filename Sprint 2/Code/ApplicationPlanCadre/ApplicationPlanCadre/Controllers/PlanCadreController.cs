@@ -14,10 +14,18 @@ namespace ApplicationPlanCadre.Controllers
     public class PCInstanceController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
+
+        public ActionResult _TreeView()
+        {
+            var planCadre = db.PlanCadre.ToList();
+
+            return PartialView(planCadre);
+        }
+
         // GET: PCInstance
         public ActionResult Index()
         {
-            return View();
+            return View(db.PlanCadre.ToList());
         }
     }
 }
