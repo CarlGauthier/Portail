@@ -25,6 +25,7 @@ namespace ApplicationPlanCadre.Models
         [StringLength(4)]
         public string annee { get; set; }
 
+        [Display(Name = "Dernière validation")]
         public DateTime? dateValidation { get; set; }
 
         public int idDevis { get; set; }
