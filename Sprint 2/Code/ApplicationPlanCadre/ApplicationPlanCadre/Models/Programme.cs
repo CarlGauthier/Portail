@@ -63,6 +63,7 @@ namespace ApplicationPlanCadre.Models
         [Display(Name = "Document ministériel")]
         public string docMinistere_path { get; set; }
 
+        [Display(Name = "Dernière validation")]
         public DateTime? dateValidation { get; set; }
 
         [Required]
