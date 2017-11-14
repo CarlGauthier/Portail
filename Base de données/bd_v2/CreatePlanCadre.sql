@@ -31,7 +31,9 @@ CREATE TABLE TypePlanCadre
 (
     idType					INT             NOT NULL        IDENTITY(1,1),
 
-    nom			            VARCHAR(20)     NOT NULL,       --FK
+    nom			            VARCHAR(20)     NOT NULL,
+
+	PRIMARY KEY(idType)
 );
 
 IF OBJECT_ID ('PlanCadreElement') IS NOT NULL

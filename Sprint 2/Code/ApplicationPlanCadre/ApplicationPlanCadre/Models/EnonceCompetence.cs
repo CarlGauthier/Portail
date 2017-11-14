@@ -22,15 +22,22 @@ namespace ApplicationPlanCadre.Models
 
         [Required]
         [StringLength(4)]
+        [Display(Name = "Code de la compétence")]
+        [RegularExpression("^[0-9][0-9][0-9][0-9|A-Za-z]$", ErrorMessage = "Le code est invalide, il doit être composé de 3 chiffres suivis d'une lettre ou d'un chiffre.")]
         public string codeCompetence { get; set; }
 
         [Required]
         [StringLength(300)]
+        [Display(Name = "Énoncé de compétence")]
         public string description { get; set; }
 
+        [Display(Name = "Obligatoire")]
         public bool obligatoire { get; set; }
 
+        [Display(Name = "Actif")]
         public bool actif { get; set; }
+
+        public bool specifique { get; set; }
 
         public int idDevis { get; set; }
 

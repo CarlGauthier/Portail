@@ -19,10 +19,13 @@ namespace ApplicationPlanCadre.Models
         public int idProgramme { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Nom")]
         public string nom { get; set; }
 
         [Required]
         [StringLength(4)]
+        [Display(Name = "Année")]
+        [Range(1967, 2199, ErrorMessage = "L'année est invalide. Le programme ne peux avoir été crée avant 1967.")]
         public string annee { get; set; }
 
         [Display(Name = "Dernière validation")]
