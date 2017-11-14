@@ -14,7 +14,7 @@
         <div class="form-horizontal single-action">
 
             <h1>Supprimer un énoncé de compétence</h1>
-            <h3>@Model.enonceCompetence1</h3>
+            <h3>@Model.description</h3>
 
             <hr />
 
@@ -25,7 +25,7 @@
                 @foreach (var elementCompetence in Model.ElementCompetence)
                 {
                     <a class="info-child clearfix" href='@Url.Action("Info", "ElementCompetence", new { idElement = elementCompetence.idElement })'>
-                        <p>@Html.DisplayFor(ec => elementCompetence.element)</p>
+                        <p>@Html.DisplayFor(ec => elementCompetence.description)</p>
                     </a>
                 }
             </div>
@@ -37,7 +37,7 @@
             <div class="form-group">
                 <div class="col-md-12">
                     <a class="fancy-button" href='@Url.Action("DeleteConfirmed", new { idCompetence = Model.idCompetence })'>Confirmer</a>
-                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "Programme", new { idProgramme = Model.idProgramme })'">Annuler</div>
+                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "DevisMinistere", new { idDevis = Model.idDevis })'">Annuler</div>
                 </div>
             </div>
         </div>

@@ -6,9 +6,10 @@ CREATE TABLE EnonceCompetence
 	idCompetence		INT				NOT NULL	IDENTITY(1,1),
 
 	codeCompetence		VARCHAR(4)		NOT NULL,
-	enonceCompetence	VARCHAR(300)	NOT NULL,
+	description			VARCHAR(300)	NOT NULL,
 	obligatoire			BIT				NOT NULL	DEFAULT(1),
 	actif				BIT				NOT NULL	DEFAULT(1),
+	specifique			BIT				NOT NULL	DEFAULT(1),	--Général si 0
 
 	idDevis				INT				NOT NULL,	--FK
 	
@@ -22,7 +23,7 @@ CREATE TABLE ContexteRealisation
 (
 	idContexte			INT				NOT NULL	IDENTITY(1,1),
 
-	contexteRealisation	VARCHAR(300)	NOT NULL,
+	description			VARCHAR(300)	NOT NULL,
 	numero				INT				NOT NULL,
 
 	idCompetence		INT				NOT NULL,	--FK
@@ -37,7 +38,7 @@ CREATE TABLE ElementCompetence
 (
 	idElement			INT				NOT NULL	IDENTITY(1,1),
 
-	element				VARCHAR(300)	NOT NULL,
+	description			VARCHAR(300)	NOT NULL,
 	numero				INT				NOT NULL,
 
 	idCompetence		INT				NOT NULL,	--FK
@@ -52,7 +53,7 @@ CREATE TABLE CriterePerformance
 (
 	idCritere			INT				NOT NULL	IDENTITY(1,1),
 
-	criterePerformance	VARCHAR(300)	NOT NULL,
+	description			VARCHAR(300)	NOT NULL,
 	numero				INT				NOT NULL,
 
 	idElement			INT				NOT NULL,	--FK

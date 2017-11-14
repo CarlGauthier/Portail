@@ -40,7 +40,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idCritere,criterePerformance1,numero,commentaire,idElement")] CriterePerformance criterePerformance)
+        public ActionResult Create([Bind(Include = "idCritere,description,numero,commentaire,idElement")] CriterePerformance criterePerformance)
         {
             AssignNo(criterePerformance);
             Trim(criterePerformance);
@@ -70,7 +70,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idCritere,criterePerformance1,numero,commentaire,idElement")] CriterePerformance criterePerformance)
+        public ActionResult Edit([Bind(Include = "idCritere,description,numero,commentaire,idElement")] CriterePerformance criterePerformance)
         {
             Trim(criterePerformance);
             if (ModelState.IsValid)
@@ -147,7 +147,7 @@ namespace ApplicationPlanCadre.Controllers
 
         private void Trim(CriterePerformance criterePerformance)
         {
-            if (criterePerformance.criterePerformance1 != null) criterePerformance.criterePerformance1 = criterePerformance.criterePerformance1.Trim();
+            if (criterePerformance.description != null) criterePerformance.description = criterePerformance.description.Trim();
         }
 
         protected override void Dispose(bool disposing)

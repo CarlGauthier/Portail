@@ -14,6 +14,7 @@ namespace ApplicationPlanCadre.Models
         {
             ContexteRealisation = new HashSet<ContexteRealisation>();
             ElementCompetence = new HashSet<ElementCompetence>();
+            PlanCadreEnonce = new HashSet<PlanCadreEnonce>();
         }
 
         [Key]
@@ -21,36 +22,27 @@ namespace ApplicationPlanCadre.Models
 
         [Required]
         [StringLength(4)]
-        [Display(Name = "Code de la compétence")]
-        [RegularExpression("^[0-9][0-9][0-9][A-Za-z]$", ErrorMessage = "Le code est invalide, il doit être composé de 3 chiffres suivis d'une lettre.")]
         public string codeCompetence { get; set; }
 
-        [Column("enonceCompetence")]
         [Required]
         [StringLength(300)]
-        [Display(Name = "Description")]
-        public string enonceCompetence1 { get; set; }
+        public string description { get; set; }
 
-        [StringLength(30)]
-        public string motClef { get; set; }
-
-        [Display(Name = "Obligatoire")]
         public bool obligatoire { get; set; }
 
-        [Display(Name = "Actif")]
         public bool actif { get; set; }
 
-        [StringLength(200)]
-        public string commentaire { get; set; }
-
-        public int idProgramme { get; set; }
+        public int idDevis { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContexteRealisation> ContexteRealisation { get; set; }
 
+        public virtual DevisMinistere DevisMinistere { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ElementCompetence> ElementCompetence { get; set; }
 
-        public virtual Programme Programme { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PlanCadreEnonce> PlanCadreEnonce { get; set; }
     }
 }

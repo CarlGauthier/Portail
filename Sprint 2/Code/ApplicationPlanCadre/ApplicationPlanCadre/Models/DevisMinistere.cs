@@ -23,6 +23,13 @@ namespace ApplicationPlanCadre.Models
         [StringLength(4)]
         public string annee { get; set; }
 
+        [Required]
+        [StringLength(3)]
+        public string codeSpecialisation { get; set; }
+
+        [StringLength(30)]
+        public string specialisation { get; set; }
+
         [StringLength(6)]
         public string nbUnite { get; set; }
 

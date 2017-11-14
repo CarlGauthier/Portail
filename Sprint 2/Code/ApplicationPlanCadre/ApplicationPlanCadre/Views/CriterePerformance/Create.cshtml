@@ -13,15 +13,15 @@
 
         <div class="horizontal-form">
 
-            <h1>@Model.ElementCompetence.element</h1>
+            <h1>@Model.ElementCompetence.description</h1>
 
             <hr />
 
             <h3>Ajouter un nouveau critère de performance</h3>
 
             <div class="form-group">
-                @Html.TextAreaFor(model => model.criterePerformance1, new { @rows = "3", @maxlength = "300", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.criterePerformance1, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.description, new { @rows = "3", @maxlength = "300", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <input type="submit" value="Ajouter" class="fancy-button"/>
