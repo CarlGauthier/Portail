@@ -88,7 +88,7 @@ namespace ApplicationPlanCadre.Controllers
             .Select(ep => new
             {
                 codeProgramme = ep.codeProgramme,
-                texte = ep.codeProgramme + " - " + ep.codeProgramme,
+                texte = ep.codeProgramme + " - " + ep.nom,
             })
             .ToList();
             if(codeProgramme != null)

@@ -193,6 +193,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccueilController.cs" />
+    <Compile Include="Controllers\ConsoleProgrammeController.cs" />
     <Compile Include="Controllers\ConsoleDevisMinistereController.cs" />
     <Compile Include="Controllers\ContexteRealisationController.cs" />
     <Compile Include="Controllers\CriterePerformanceController.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\DevisMinistereController.cs" />
+    <Compile Include="Controllers\ProgrammeController.cs" />
     <Compile Include="Controllers\StageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
