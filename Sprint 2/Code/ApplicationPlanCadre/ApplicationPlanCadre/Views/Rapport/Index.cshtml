@@ -1,4 +1,5 @@
-﻿@model ApplicationPlanCadre.Models.Programme
+﻿@model dynamic
+@using ApplicationPlanCadre.Models
 
 @{
     ViewBag.Title = "Rapport";
@@ -19,21 +20,42 @@
 <h1>Rapport</h1>
 
 <h2>Programme</h2>
-@using (Html.BeginForm("RapportProgramme", "Rapport", FormMethod.Post, new { target = "_blank" }))
-{
-    @Html.AntiForgeryToken()
+<table>
+    @foreach (Programme prog in Model.Programme)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(x => prog.nom)
+            </td>
+            <td>
+                <a target="_blank" href='@Url.Action("RapportProgramme", "Rapport",new { id = prog.idProgramme })'>
+                    
+                    <span class="glyphicon glyphicon-file"></span>
+                </a>
+            </td>
+        </tr>
+    }
+</table>
 
-    <div class="form-horizontal">
-        <p class="text-danger">@ViewBag.messageError</p>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="col-md-9 mr-0">
-            @Html.DropDownList("codeProgramme", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.EnteteProgramme, "", new { @class = "text-danger" })
+<h2>Plan cadre</h2>
+<table>
+    @foreach (PlanCadre prog in Model.PlanCadre)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(x =>prog.numeroCours)
+            </td>
+            <td>@Html.DisplayFor(x => prog.titreCours)</td>
+            <td>
+                <a target="_blank" href='@Url.Action("RapportPlanCadre", "Rapport",new { id = prog.idPlanCadre})'>
 
+                    <span class="glyphicon glyphicon-file"></span>
+                </a>
+            </td>
+        </tr>
+    }
+</table>
 
-        </div>
-        <button type="submit" class="btn btn-default">
-            <span class="glyphicon glyphicon-file"></span>
-        </button>
-</div>
+        
+
 }

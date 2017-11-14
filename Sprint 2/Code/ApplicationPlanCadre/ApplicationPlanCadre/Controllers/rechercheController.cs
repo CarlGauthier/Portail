@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using System.Configuration;
 using ApplicationPlanCadre.Helpers;
+using System.Linq.Expressions;
 
 
 
@@ -17,7 +18,7 @@ namespace ApplicationPlanCadre.Controllers
 {
     public class rechercheController : Controller
     {
-
+        private BDPlanCadre db = new BDPlanCadre();
         // GET: recherche
         public ActionResult Index()
         {
@@ -30,205 +31,148 @@ namespace ApplicationPlanCadre.Controllers
             dynamic model = new ExpandoObject();
             if (chkRecherche)
             {
-                model.Programme = getProgramme(searchStr);
-                model.EnonceCompetence = getEnoncerComp(searchStr);
+                model.Programme = getProgram(searchStr);
+                model.EnonceCompetence = getEnonceCompetence(searchStr);
             }
             else
             {
-                model.EnonceCompetence = getEnoncerComp(searchStr);
-                model.ElementCompetence = getElemComp(searchStr);
-                model.EnteteProgramme = getEnteteProg(searchStr);
-                model.Programme = getProgramme(searchStr);
-                model.CriterePerformance = getCritPerf(searchStr);
-                model.ContexteRealisation = getContextReal(searchStr);
+                model.EnonceCompetence = getEnonceCompetence(searchStr);
+                model.ElementCompetence = getElemCompetence(searchStr);
+                
+                model.Programme = getProgram(searchStr);
+                model.CriterePerformance = getCriterePerformance(searchStr);
+                model.ContexteRealisation = getContexteRealisation(searchStr);
+                model.DevisMinistere = getDevis(searchStr);
             }
-            
-            
-            
-            return PartialView("_afficherRecherche",model);
-        }
-        private static List<SecondaryEnonceCompetence> getEnoncerComp(string searchStr)
-        {
-            string strSearch = "\'%" + searchStr + "%\'";
-            List<SecondaryEnonceCompetence> EnoncerCompt = new List<SecondaryEnonceCompetence>();
-            string query = "SELECT idCompetence,codeCompetence,enonceCompetence,commentaire FROM EnonceCompetence WHERE enonceCompetence LIKE " + strSearch + " OR codeCompetence LIKE " + strSearch +" OR commentaire LIKE " + strSearch;
-            string constr = ConfigurationManager.ConnectionStrings["BDPlanCadre"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand(query))
-                {
-                    cmd.Connection=con;
-                    con.Open();
-                    using (SqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        while (sdr.Read())
-                        {
-                            EnoncerCompt.Add(new SecondaryEnonceCompetence
-                            {
-                                idCompetence = Convert.ToInt32(sdr["idCompetence"]),
-                                codeCompetence = sdr["codeCompetence"].ToString().HighlightKeyWords(searchStr, "yellow", false),
-                                enonceCompetence1=sdr["enonceCompetence"].ToString().HighlightKeyWords(searchStr,"yellow",false),//
-                                commentaire=sdr["commentaire"].ToString().HighlightKeyWords(searchStr, "yellow", false)
-                            });
-                        }
-                    }
-                    con.Close();
-                    return EnoncerCompt;
-                }
-            }
-        }
-        private static List<SecondaryElementCompetence>getElemComp(string searchStr)
-        {
-            string strSearch = "\'%" + searchStr + "%\'";
-            List<SecondaryElementCompetence> EnoncerCompt = new List<SecondaryElementCompetence>();
-            string query = "SELECT idElement,element,commentaire FROM ElementCompetence WHERE element LIKE " + strSearch + " OR commentaire LIKE " + strSearch;
-            string constr = ConfigurationManager.ConnectionStrings["BDPlanCadre"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand(query))
-                {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (SqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        while (sdr.Read())
-                        {
-                            EnoncerCompt.Add(new SecondaryElementCompetence
-                            {
-                                idElement = Convert.ToInt32(sdr["idElement"]),
-                                element = sdr["element"].ToString().HighlightKeyWords(searchStr, "yellow", false),
-                                commentaire = sdr["commentaire"].ToString().HighlightKeyWords(searchStr, "yellow", false)
-                            });
-                        }
-                    }
-                    con.Close();
-                    return EnoncerCompt;
-                }
-            }
-        }
-        private static List<SecondaryEnteteProgramme> getEnteteProg(string searchStr)
-        {
-            string strSearch = "\'%" + searchStr + "%\'";
-            List<SecondaryEnteteProgramme> EnoncerCompt = new List<SecondaryEnteteProgramme>();
-            string query = "SELECT codeProgramme,commentaire FROM EnteteProgramme WHERE codeProgramme LIKE " + strSearch + " OR commentaire LIKE " + strSearch;
-            string constr = ConfigurationManager.ConnectionStrings["BDPlanCadre"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand(query))
-                {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (SqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        while (sdr.Read())
-                        {
-                            EnoncerCompt.Add(new SecondaryEnteteProgramme
-                            {
-                                codeProgramme = sdr["codeProgramme"].ToString(),
-                                codeProgrammeSPANNED = sdr["codeProgramme"].ToString().ToString().HighlightKeyWords(searchStr, "yellow", false),
-                                commentaire = sdr["commentaire"].ToString().ToString().HighlightKeyWords(searchStr, "yellow", false)
-                            });
-                        }
-                    }
-                    con.Close();
-                    return EnoncerCompt;
-                }
-            }
+            return PartialView("_afficherRecherche", model);
         }
 
-        private static List<SecondaryProgramme> getProgramme(string searchStr)
+
+            private List<SecondaryDevisMinistere> getDevis(string searchStr)
         {
-            string strSearch = "\'%" + searchStr + "%\'";
-            List<SecondaryProgramme> EnoncerCompt = new List<SecondaryProgramme>();
-            string query = "SELECT idProgramme,annee,nom,codeSpecialisation,specialisation,condition,sanction,commentaire FROM Programme WHERE annee LIKE " + strSearch + " OR nom LIKE " + strSearch + " OR codeSpecialisation LIKE " + strSearch + 
-              " OR specialisation LIKE " + strSearch + " OR condition LIKE " + strSearch + " OR sanction LIKE " + strSearch + " OR commentaire LIKE " + strSearch;
-            string constr = ConfigurationManager.ConnectionStrings["BDPlanCadre"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
+            
+            List<SecondaryDevisMinistere> devisList = new List<SecondaryDevisMinistere>();
+            var devis = from a in db.DevisMinistere
+                        where a.specialisation.Contains(searchStr)||a.codeSpecialisation.Contains(searchStr)||a.codeProgramme.Contains(searchStr)
+                        select a;
+            foreach (DevisMinistere devisMins in devis)
             {
-                using (SqlCommand cmd = new SqlCommand(query))
+                devisList.Add(new SecondaryDevisMinistere
                 {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (SqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        while (sdr.Read())
-                        {
-                            EnoncerCompt.Add(new SecondaryProgramme
-                            {
-                                idProgramme = Convert.ToInt32(sdr["idProgramme"]),
-                                annee = sdr["annee"].ToString().HighlightKeyWords(searchStr, "yellow", false),
-                                nom = sdr["nom"].ToString().HighlightKeyWords(searchStr, "yellow", false),
-                                codeSpecialisation = sdr["codeSpecialisation"].ToString().HighlightKeyWords(searchStr, "yellow", false),
-                                specialisation = sdr["specialisation"].ToString().HighlightKeyWords(searchStr, "yellow", false),
-                                condition = sdr["condition"].ToString().HighlightKeyWords(searchStr, "yellow", false),
-                                sanction = sdr["sanction"].ToString().HighlightKeyWords(searchStr, "yellow", false),
-                                commentaire = sdr["commentaire"].ToString().HighlightKeyWords(searchStr, "yellow", false)
-                            });
-                        }
-                    }
-                    con.Close();
-                    return EnoncerCompt;
-                }
+                    idDevis = devisMins.idDevis,
+                    annee=devisMins.annee.HighlightKeyWords(searchStr, "yellow", false),
+                    codeSpecialisation = devisMins.codeSpecialisation.HighlightKeyWords(searchStr, "yellow", false),
+                    specialisation = devisMins.specialisation.HighlightKeyWords(searchStr, "yellow", false),
+                    nbUnite = devisMins.nbUnite,
+                    nbHeureFrmGenerale = devisMins.nbHeureFrmGenerale,
+                    nbHeureFrmSpecifique = devisMins.nbHeureFrmSpecifique,
+                    condition = devisMins.condition.HighlightKeyWords(searchStr, "yellow", false),
+                    sanction = devisMins.sanction.HighlightKeyWords(searchStr, "yellow", false),
+                    codeProgramme = devisMins.codeProgramme.HighlightKeyWords(searchStr, "yellow", false),
+                    total = Convert.ToInt32((devisMins.nbHeureFrmGenerale + devisMins.nbHeureFrmSpecifique))
+                });
             }
+            return devisList;
         }
-        private static List<SecondaryCriterePerformance> getCritPerf(string searchStr)
+        //
+        private List<SecondaryEnonceCompetence> getEnonceCompetence(string searchStr)
         {
-            string strSearch = "\'%" + searchStr + "%\'";
-            List<SecondaryCriterePerformance> EnoncerCompt = new List<SecondaryCriterePerformance>();
-            string query = "SELECT idCritere,criterePerformance,commentaire FROM CriterePerformance WHERE criterePerformance LIKE " + strSearch + " OR commentaire LIKE " + strSearch;
-            string constr = ConfigurationManager.ConnectionStrings["BDPlanCadre"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
+            List<SecondaryEnonceCompetence> enonComptList = new List<SecondaryEnonceCompetence>();
+            var enonce = from a in db.EnonceCompetence
+                         where a.codeCompetence.Contains(searchStr)||a.description.Contains(searchStr)
+                         select a;
+
+            foreach (EnonceCompetence EnonceCmpt in enonce)
             {
-                using (SqlCommand cmd = new SqlCommand(query))
+                enonComptList.Add(new SecondaryEnonceCompetence
                 {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (SqlDataReader sdr = cmd.ExecuteReader())
-                    {
-                        while (sdr.Read())
-                        {
-                            EnoncerCompt.Add(new SecondaryCriterePerformance
-                            {
-                                idCritere =Convert.ToInt32(sdr["idCritere"]),
-                                criterePerformance1=sdr["criterePerformance"].ToString().HighlightKeyWords(searchStr, "yellow", false),
-                                commentaire = sdr["commentaire"].ToString().HighlightKeyWords(searchStr, "yellow", false)
-                            });
-                        }
-                    }
-                    con.Close();
-                    return EnoncerCompt;
-                }
+                    idCompetence = EnonceCmpt.idCompetence,
+                    idDevis = EnonceCmpt.idDevis,
+                    codeCompetence = EnonceCmpt.codeCompetence.HighlightKeyWords(searchStr, "yellow", false),
+                    description = EnonceCmpt.description.HighlightKeyWords(searchStr, "yellow", false)
+                });
             }
+            return enonComptList;
+        }
+        private List<SecondaryElementCompetence> getElemCompetence(string searchStr)
+        {
+            List<SecondaryElementCompetence> elementList = new List<SecondaryElementCompetence>();
+            var enonce = from a in db.ElementCompetence
+                         where a.description.Contains(searchStr)
+                         orderby a.numero
+                         select a;
+            foreach (ElementCompetence a in enonce)
+            {
+                elementList.Add(new SecondaryElementCompetence
+                {
+                    idElement = a.idElement,
+                    idCompetence = a.idCompetence,
+                    description = a.description.HighlightKeyWords(searchStr, "yellow", false),
+
+                });
+            }
+            return elementList;
         }
 
-        private static List<SecondaryContexteRealisation> getContextReal(string searchStr)
-        {
-            string strSearch = "\'%" + searchStr + "%\'";
-            List<SecondaryContexteRealisation> EnoncerCompt = new List<SecondaryContexteRealisation>();
-            string query = "SELECT idContexte,contexteRealisation,commentaire FROM ContexteRealisation WHERE contexteRealisation LIKE " + strSearch + " OR commentaire LIKE " + strSearch;
-            string constr = ConfigurationManager.ConnectionStrings["BDPlanCadre"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
+            
+            private List<SecondaryProgramme> getProgram(string searchStr)
             {
-                using (SqlCommand cmd = new SqlCommand(query))
+                List<SecondaryProgramme> programme = new List<SecondaryProgramme>();
+                var holding = from a in db.Programme
+                              where a.annee.Contains(searchStr)||a.nom.Contains(searchStr)
+                              select a;
+                foreach (Programme prog in holding)
                 {
-                    cmd.Connection = con;
-                    con.Open();
-                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    programme.Add(new SecondaryProgramme
                     {
-                        while (sdr.Read())
-                        {
-                            EnoncerCompt.Add(new SecondaryContexteRealisation
-                            {
-                                idContexte = Convert.ToInt32(sdr["idContexte"]),
-                                contexteRealisation1 = sdr["contexteRealisation"].ToString().HighlightKeyWords(searchStr, "yellow", false),
-                                commentaire = sdr["commentaire"].ToString().HighlightKeyWords(searchStr, "yellow", false)
-                            });
-                        }
-                    }
-                    con.Close();
-                    return EnoncerCompt;
+                        idProgramme = Convert.ToInt32(prog.idProgramme),
+                        annee = prog.annee.HighlightKeyWords(searchStr, "yellow", false),
+                        nom = prog.nom.HighlightKeyWords(searchStr, "yellow", false),
+                        idDevis = prog.idDevis
+
+                    });
                 }
+                return programme;
             }
+        private List<SecondaryCriterePerformance> getCriterePerformance(string searchStr)
+        {
+            List<SecondaryCriterePerformance> critereList = new List<SecondaryCriterePerformance>();
+            var critere = from a in db.CriterePerformance
+                          where a.description.Contains(searchStr)
+                          orderby a.numero
+                          select a;
+            foreach (CriterePerformance a in critere)
+            {
+                critereList.Add(new SecondaryCriterePerformance
+                {
+                    idCritere = a.idCritere,
+                    idElement = a.idElement,
+                    description = a.description.HighlightKeyWords(searchStr, "yellow", false)
+                });
+            }
+            return critereList;
         }
+        private List<SecondaryContexteRealisation> getContexteRealisation(string searchStr)
+        {
+            List<SecondaryContexteRealisation> contextList = new List<SecondaryContexteRealisation>();
+            var context = from a in db.ContexteRealisation
+                          where a.description.Contains(searchStr)
+                          orderby a.numero
+                          select a;
+            foreach (ContexteRealisation a in context)
+            {
+                contextList.Add(new SecondaryContexteRealisation
+                {
+                    idContexte = a.idContexte,
+                    idCompetence = a.idCompetence,
+                    description = a.description.HighlightKeyWords(searchStr, "yellow", false)
+
+                });
+            }
+            return contextList;
+        }
+
+        
+
     }
 }

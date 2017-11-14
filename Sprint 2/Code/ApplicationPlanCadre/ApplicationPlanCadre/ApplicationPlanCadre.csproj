@@ -228,6 +228,7 @@
     <Compile Include="Models\PlanCadreElement.cs" />
     <Compile Include="Models\PlanCadreEnonce.cs" />
     <Compile Include="Models\Programme.cs" />
+    <Compile Include="Models\SecondaryDevisMinistere.cs" />
     <Compile Include="Models\Session.cs" />
     <Compile Include="Models\SecondaryContexteRealisation.cs" />
     <Compile Include="Models\SecondaryCriterePerformance.cs" />
@@ -377,6 +378,7 @@
     <Content Include="Views\recherche\_afficherRecherche.cshtml" />
     <Content Include="Views\Rapport\RapportProgramme.cshtml" />
     <Content Include="Views\Rapport\Index.cshtml" />
+    <Content Include="Views\Rapport\RapportPlanCadre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

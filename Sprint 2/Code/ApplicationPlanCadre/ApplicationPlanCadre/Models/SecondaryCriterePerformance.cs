@@ -8,8 +8,8 @@ namespace ApplicationPlanCadre.Models
     public class SecondaryCriterePerformance
     {
         public int idCritere { get; set; }
-        public string criterePerformance1 { get; set; }
-        public string commentaire { get; set; }
+        public string description { get; set; }
+        public int numero { get; set; }
         public int idElement { get; set; }
 
         

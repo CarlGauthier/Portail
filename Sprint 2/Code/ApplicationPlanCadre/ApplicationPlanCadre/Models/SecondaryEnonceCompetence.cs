@@ -9,9 +9,9 @@ namespace ApplicationPlanCadre.Models
     {
         public int idCompetence { get; set; }
         public string codeCompetence { get; set; }
-        public string enonceCompetence1 { get; set; }
-        public string commentaire { get; set; }
-        public int idProgramme { get; set; }
+        public string description { get; set; }
+        
+        public int idDevis { get; set; }
 
 
     }
