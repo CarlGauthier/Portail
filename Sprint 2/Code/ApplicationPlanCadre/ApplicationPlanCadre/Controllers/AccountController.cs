@@ -32,8 +32,12 @@ namespace ApplicationPlanCadre.Controllers
 
         public ActionResult Index()
         {
-            var user = db.Users.ToList();
-            return View(user);
+            var users = db.Users.ToList();
+            foreach (var user in users)
+            {
+                user.roleNames = UserManager.GetRoles(user.Id);
+            }
+            return View(users);
         }
 
         public ApplicationSignInManager SignInManager
