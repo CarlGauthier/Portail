@@ -7,10 +7,10 @@
 
 
 <div class="container">
-    <h2>afficherRech</h2>
-    @if ((Model.EnonceCompetence.Count == 0) && (Model.ElementCompetence.Count == 0) && (Model.EnteteProgramme.Count == 0) && (Model.Programme.Count == 0) && (Model.CriterePerformance.Count == 0) && (Model.ContexteRealisation.Count == 0))
+    <h2>Votre Recherche</h2>
+    @if ((Model.EnonceCompetence.Count == 0) && (Model.ElementCompetence.Count == 0) && (Model.DevisMinistere.Count == 0) && (Model.CriterePerformance.Count == 0) && (Model.ContexteRealisation.Count == 0))
     {
-        <p color="red">Aucune information à été trouver</p>
+        <p color="red">Aucune information à été trouvée</p>
     }
     else
     {
@@ -19,18 +19,18 @@
             <h2>Énoncer Compétence</h2>
             <table id="table" class="table">
                 <tr>
-                    <th>idCompétece</th>
+                    
                     <th>Code Compétence</th>
-                    <th>Enoncer Compétence</th>
-                    <th>Commentaires</th>
+                    <th>Énoncer Compétence</th>
+                    
                 </tr>
                 @foreach (SecondaryEnonceCompetence enonceCmpt in Model.EnonceCompetence)
                 {
                     <tr onclick="location.href = '@Url.RouteUrl("Info-enonceCompetence", new { id = enonceCmpt.idCompetence })'">
-                        <td>@enonceCmpt.idCompetence</td>
+                        
                         <td>@Html.Raw(enonceCmpt.codeCompetence)</td>
-                        <td>@Html.Raw(enonceCmpt.enonceCompetence1)</td>
-                        <td>@Html.Raw(enonceCmpt.commentaire)</td>
+                        <td>@Html.Raw(enonceCmpt.description)</td>
+                        
                     </tr>
                 }
             </table>
@@ -42,16 +42,16 @@
                 <h2>Élément Compétence</h2>
                 <table class="table">
                     <tr>
-                        <th>idElement</th>
-                        <th>element</th>
-                        <th>Commentaires</th>
+                        
+                        <th>Description</th>
+                        
                     </tr>
                     @foreach (SecondaryElementCompetence enonceCmpt in Model.ElementCompetence)
                     {
                         <tr onclick="location.href = '@Url.RouteUrl("Info-enonceCompetence", new { id = enonceCmpt.idElement })'">
-                            <td>@Html.Raw(enonceCmpt.idElement)</td>
-                            <td>@Html.Raw(enonceCmpt.element)</td>
-                            <td>@Html.Raw(enonceCmpt.commentaire)</td>
+                            
+                            <td>@Html.Raw(enonceCmpt.description)</td>
+                            
                         </tr>
 
                     }
@@ -61,54 +61,33 @@
         }
 
 
-        if (((IDictionary<string, object>)Model).ContainsKey("EnteteProgramme"))
-        {
-            if (Model.EnteteProgramme.Count != 0)
-            {
-                <h2>Entete Programme</h2>
-                <table class="table">
-                    <tr>
-                        <th>codeProgramme</th>
-                        <th>Commentaires</th>
-                    </tr>
-                    @foreach (SecondaryEnteteProgramme enonceCmpt in Model.EnteteProgramme)
-                    {
-                        <tr @*onclick="location.href = '@Url.RouteUrl("", new { id =})'"*@>
-                            <td>@Html.Raw(enonceCmpt.codeProgrammeSPANNED)</td>
-                            <td>@Html.Raw(enonceCmpt.commentaire)</td>
-                        </tr>
-                    }
-                </table>
-            }
-        }
+        
 
 
-        if (Model.Programme.Count != 0)
+        if (Model.DevisMinistere.Count != 0)
         {
-            <h2>Programme</h2>
+            <h2>Devis ministériel</h2>
             <table class="table">
                 <tr>
-                    <th>idProgramme</th>
+                    
                     <th>annee</th>
-                    <th>nom</th>
                     <th>codeSpecialisation</th>
                     <th>specialisation</th>
                     <th>condition</th>
                     <th>sanction</th>
-                    <th>Commentaires</th>
+                    
                 </tr>
-                @foreach (SecondaryProgramme enonceCmpt in Model.Programme)
+                @foreach (SecondaryDevisMinistere devis in Model.DevisMinistere)
                 {
-                    <tr onclick="location.href = '@Url.RouteUrl("Info-programme", new { id = enonceCmpt.idProgramme })'">
+                    <tr @*onclick="location.href = '@Url.RouteUrl("Info-programme", new { id = devis.idDevis })'"*@>
                         
-                        <td>@enonceCmpt.idProgramme</td>
-                        <td>@Html.Raw(enonceCmpt.annee)</td>
-                        <td>@Html.Raw(enonceCmpt.nom)</td>
-                        <td>@Html.Raw(enonceCmpt.codeSpecialisation)</td>
-                        <td>@Html.Raw(enonceCmpt.specialisation)</td>
-                        <td>@Html.Raw(enonceCmpt.condition)</td>
-                        <td>@Html.Raw(enonceCmpt.sanction)</td>
-                        <td>@Html.Raw(enonceCmpt.commentaire)</td>
+                        
+                        <td>@Html.Raw(devis.annee)</td>
+                        <td>@Html.Raw(devis.codeSpecialisation)</td>
+                        <td>@Html.Raw(devis.specialisation)</td>
+                        <td>@Html.Raw(devis.condition)</td>
+                        <td>@Html.Raw(devis.sanction)</td>
+                        
                     </tr>
                 }
             </table>
@@ -117,19 +96,19 @@
         {
             if (Model.CriterePerformance.Count != 0)
             {
-                <h2>critères de performances</h2>
+                <h2>Critères de performances</h2>
                 <table class="table">
                     <tr>
-                        <th>idCritère</th>
+                        
                         <th>criterePerformance</th>
-                        <th>Commentaires</th>
+                        
                     </tr>
                     @foreach (SecondaryCriterePerformance enonceCmpt in Model.CriterePerformance)
                     {
                         <tr @*onclick="location.href = '@Url.RouteUrl("", new { id = })'"*@>
-                            <td>@enonceCmpt.idCritere</td>
-                            <td>@Html.Raw(enonceCmpt.criterePerformance1)</td>
-                            <td>@Html.Raw(enonceCmpt.commentaire)</td>
+                            
+                            <td>@Html.Raw(enonceCmpt.description)</td>
+                            
                         </tr>
                     }
                 </table>
@@ -142,16 +121,17 @@
                 <h2>Contexte de réalisation</h2>
                 <table class="table">
                     <tr>
-                        <th>idContexte</th>
-                        <th>ContexteRealisation</th>
-                        <th>Commentaires</th>
+                        
+                        <th>Contexte de Réalisation</th>
+                        
                     </tr>
                     @foreach (SecondaryContexteRealisation enonceCmpt in Model.ContexteRealisation)
                     {
                         <tr @*onclick="location.href = '@Url.RouteUrl("", new { id = })'"*@>
-                            <td>@enonceCmpt.idContexte</td>
-                            <td>@Html.Raw(enonceCmpt.contexteRealisation1)</td>
-                            <td>@Html.Raw(enonceCmpt.commentaire)</td>
+                            
+
+                            <td>@Html.Raw(enonceCmpt.description)</td>
+                            
                         </tr>
                     }
                 </table>

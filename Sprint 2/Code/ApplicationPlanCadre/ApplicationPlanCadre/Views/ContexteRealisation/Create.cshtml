@@ -1,0 +1,37 @@
+﻿@model ApplicationPlanCadre.Models.ContexteRealisation
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="container">
+
+    @using (Html.BeginForm("Create", "ContexteRealisation"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.idCompetence)
+
+        <div class="horizontal-form">
+
+            <h1>@Model.EnonceCompetence.description</h1>
+
+            <hr />
+
+            <h3>Ajouter un nouveau contexte de réalisation</h3>
+
+            <div class="form-group">
+                @Html.TextAreaFor(model => model.description, new { @rows = "3", @maxlength = "300", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ajouter" class="fancy-button"/>
+                <a href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = Model.idCompetence })' class="fancy-button rouge">Terminer</a>
+            </div>
+        </div>
+    }
+    
+    <hr />
+
+    @Html.Action("_PartialList")
+
+</div>

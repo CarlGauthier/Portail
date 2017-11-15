@@ -1,0 +1,101 @@
+﻿@model ApplicationPlanCadre.Models.DevisMinistere
+
+@{
+    ViewBag.Title = Model.EnteteProgramme.nom;
+}
+
+<div id="super-view">
+    @Html.Action("_TreeView")
+
+    <div id="info-display" class="container-fluid">
+        <div id="info-header">
+            <h3>Devis ministériel</h3>
+            <h1>@Html.DisplayFor(model => model.EnteteProgramme.nom)</h1>
+            <hr />
+            <h3><b>@Html.DisplayNameFor(model => model.specialisation) : </b>@Html.DisplayFor(model => model.specialisation)</h3>
+            <h3>@Html.DisplayFor(model => model.codeProgramme)-@Html.DisplayFor(model => model.annee)-@Html.DisplayFor(model => model.codeSpecialisation)</h3>
+        </div>
+
+        <div id="info-detail">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="champ">
+                        <label>@Html.DisplayNameFor(model => model.sanction)</label>
+                        <p>@Html.DisplayFor(model => model.sanction)</p>
+                    </div>
+
+                    <div class="champ">
+                        <label>@Html.DisplayNameFor(model => model.nbUnite)</label>
+                        <p>@Html.DisplayFor(model => model.nbUnite) unités</p>
+                    </div>
+                    
+                    <div class="champ">
+                        <label>@Html.DisplayNameFor(model => model.condition)</label>
+                        <p>@Html.DisplayFor(model => model.condition)</p>
+                    </div>
+
+                    @if (Model.docMinistere != null)
+                    {
+                        <div class="champ">
+                            <a class="fancy-button rouge" href='@Url.Content("~/Files/Document ministériel/" + Model.docMinistere)' target="_blank">
+                                <span>@Html.DisplayFor(model => Model.docMinistere)</span> <span class="glyphicon glyphicon-file"><!----></span>
+                            </a>
+                        </div>
+                    }
+                    
+                </div>
+
+                <div class="col-md-6">
+
+                    <fieldset>
+                        <legend>Heures</legend>
+                        <div class="champ">
+                            <label>@Html.DisplayNameFor(model => model.nbHeureFrmGenerale)</label>
+                            <p>@Html.DisplayFor(model => model.nbHeureFrmGenerale) h</p>
+                        </div>
+
+                        <div class="champ">
+                            <label>@Html.DisplayNameFor(model => model.nbHeureFrmSpecifique)</label>
+                            <p>@Html.DisplayFor(model => model.nbHeureFrmSpecifique) h</p>
+                        </div>
+
+                        <div class="champ">
+                            <label>Total</label>
+                            <p>@Html.ViewData["total"] h</p>
+                        </div>
+                    </fieldset>
+
+                </div>
+            </div>
+
+            @if (Model.EnonceCompetence.Count > 0)
+            {
+                <hr />
+                <h2>Énoncés de compétence</h2>
+
+                foreach (var enonceCompetence in Model.EnonceCompetence)
+                {
+                    <a class="info-child clearfix" href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = enonceCompetence.idCompetence })'>
+                        <p class="gauche">@Html.DisplayFor(p => enonceCompetence.description)</p>
+                        <p class="droite">@Html.DisplayFor(p => enonceCompetence.codeCompetence)</p>
+                    </a>
+                }
+            }
+
+            <hr />
+
+            <h2>Options</h2>
+
+            <div class="champ">
+                <a class="fancy-button" href='@Url.Action("Edit", new { id = Model.idDevis })'><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
+                <a class="fancy-button" href='@Url.Action("Create", "EnonceCompetence", new { idDevis = Model.idDevis })'><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un énoncé</a>
+                <a class="fancy-button rouge" href='@Url.Action("Index", "DevisMinistere")'>Retour</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    $(("#p" + @Model.idDevis + "item")).addClass('active');
+</script>

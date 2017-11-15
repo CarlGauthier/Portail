@@ -3,14 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    [Authorize]
     public class AccueilController : Controller
     {
-        // GET: Accueil
+        [Authorize]
         public ActionResult Index()
+        {
+            ViewBag.prenom = HttpContext.GetOwinContext()
+                .GetUserManager<ApplicationUserManager>()
+                .FindById(User.Identity.GetUserId()).prenom;
+            return View();
+        }
+
+        [Authorize(Roles = "RCP")]
+        public ActionResult Pedagogie()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult ConsoleAdmin()
         {
             return View();
         }

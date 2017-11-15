@@ -4,13 +4,13 @@
     <table>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.EnteteProgramme.codeProgramme)
+                @Html.DisplayNameFor(model => model.nom)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.annee)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.specialisation)
+                @Html.DisplayNameFor(model => model.idDevis)
             </th>
             <th class="action-cell-header">
                 <b>Modifier</b>
@@ -22,48 +22,35 @@
 
         @foreach (var item in Model)
         {
-            bool valide = item.EnonceCompetence.Count == 0;
+            bool valide = item.PlanCadre.Count() == 0;
             string dblclickEvent = valide ? Url.Action("Edit", new { id = item.idProgramme }) : @Url.Action("Create");
-            string cssClass = valide ? "valide" : "";
-            <tr ondblclick="location.href='@dblclickEvent'" class="@cssClass">
+            <tr ondblclick="location.href='@dblclickEvent'">
                 <td>
-                    @Html.DisplayFor(modelItem => item.EnteteProgramme.codeProgramme)
+                    @Html.DisplayFor(modelItem => item.nom)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.annee)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.codeSpecialisation)
+                    @Html.DisplayFor(modelItem => item.DevisMinistere.codeProgramme)-@Html.DisplayFor(modelItem => item.DevisMinistere.annee)-@Html.DisplayFor(modelItem => item.DevisMinistere.codeSpecialisation)
                 </td>
                 <td class="action-cell">
                     @if (valide)
                     {
-                        <button onclick="location.href='@Url.RouteUrl("edit-programme", new { id = item.idProgramme })'">
+                        <a href='@Url.Action("Edit", new { idProgramme = item.idProgramme })'>
                             <span class="glyphicon glyphicon-pencil"><!----></span>
-                        </button>
+                        </a>
                     }
                 </td>
                 <td class="action-cell">
                     @if(valide)
                     {
-                        <button onclick="location.href='@Url.Action("DeleteConfirmed", new { id = item.idProgramme })'">
+                        <a href='@Url.Action("DeleteConfirmed", new { idProgramme = item.idProgramme })'>
                             <span class="glyphicon glyphicon-trash"><!----></span>
-                        </button>
+                        </a>
                     }
                 </td>
             </tr>
         }
     </table>
 </div>
-
-@*<script src="../../Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    function deleteOnClick() {
-        $.get('@Url.Action("_PartialList", "Programme")', function (data) {
-            $('#tableProgramme').replaceWith(data);
-        });
-        $.ajax({
-            url: $(this).attr("href"),
-        });
-    }
-</script>*@

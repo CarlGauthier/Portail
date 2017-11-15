@@ -1,39 +1,64 @@
 ﻿@model ApplicationPlanCadre.Models.EnonceCompetence
 
 @{
-    ViewBag.Title = Model.enonceCompetence1;
+    ViewBag.Title = Model.description;
 }
 
 <div id="super-view">
-    @Html.Action("_TreeView", "Programme")
+    @Html.Action("_TreeView", "DevisMinistere")
 
     <div id="info-display" class="container-fluid">
         <div id="info-header">
             <h3>Énoncé de compétence</h3>
-            @*<div>
-                <h1>@Html.DisplayFor(model => model.codeCompetence) - @Html.DisplayFor(model => model.enonceCompetence1)</h1>
-                <div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "EnonceCompetence")'"><span class="glyphicon glyphicon-pencil"></span> Modifier</div>
-            </div>*@
+            <div>
+                <h1>@Html.DisplayFor(model => model.codeCompetence) - @Html.DisplayFor(model => model.description)</h1>
+                @*<div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "EnonceCompetence")'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>*@
+            </div>
         </div>
 
         <div id="info-detail">
-            <h2>Contextes de réalisations</h2>
-            <ul>
-                @foreach (var contexteRealisation in Model.ContexteRealisation)
-                {
-                    <li>@Html.DisplayFor(ec => contexteRealisation.contexteRealisation1)</li>
-                }
-            </ul>
 
-            <hr />
-            <h2>Éléments de compétence</h2>
-
-            @foreach (var elementCompetence in Model.ElementCompetence)
+            @if (Model.ContexteRealisation.Count > 0)
             {
-                <a class="info-child clearfix" href='@Url.RouteUrl("Info-elementComp", new { id = elementCompetence.idElement })'>
-                    <p>@Html.DisplayFor(ec => elementCompetence.element)</p>
-                </a>
+                <h2>Contextes de réalisations</h2>
+                <ul>
+                    @foreach (var contexteRealisation in Model.ContexteRealisation.OrderBy(m => m.numero))
+                    {
+                        <li>@Html.DisplayFor(ec => contexteRealisation.description)</li>
+                    }
+                </ul>
+
+                <hr />
             }
+
+            @if (Model.ElementCompetence.Count > 0)
+            {
+                
+                <h2>Éléments de compétence</h2>
+
+                foreach (var elementCompetence in Model.ElementCompetence.OrderBy(ec => ec.numero))
+                {
+                    <a class="info-child clearfix" href='@Url.Action("Info", "ElementCompetence", new { idElement = elementCompetence.idElement })'>
+                        <p class="gauche">@Html.DisplayFor(ec => elementCompetence.description)</p>
+                        <p class="droite">@Html.DisplayFor(ec => elementCompetence.numero)</p>
+                    </a>
+                }
+
+                <hr />
+            }
+
+            <h2>Options</h2>
+
+            <div class="champ">
+                <a class="fancy-button" onclick="location.href='@Url.Action("Edit", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
+                <a class="fancy-button" onclick="location.href='@Url.Action("Create", "ElementCompetence", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un élément</a>
+                <a class="fancy-button" onclick="location.href='@Url.Action("Delete", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-trash"><!----></span> Supprimer l'énoncé</a>
+                @if (Model.ElementCompetence.Count() > 1)
+                {
+                    <a class="fancy-button" onclick="location.href='@Url.Action("Order", "ElementCompetence", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-sort"><!----></span> Changer l'ordre des éléments</a>
+                }
+                <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "DevisMinistere", new { idDevis = Model.idDevis })'">Retour</a>
+            </div>
 
         </div>
     </div>
@@ -41,5 +66,5 @@
 
 <script>
     $(("#enc" + @Model.idCompetence + "item")).addClass('active');
-    $(("#p" + @Model.Programme.idProgramme)).collapse('show');
+    $(("#p" + @Model.DevisMinistere.idDevis)).collapse('show');
 </script>

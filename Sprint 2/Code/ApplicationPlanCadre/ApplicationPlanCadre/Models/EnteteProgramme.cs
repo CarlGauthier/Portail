@@ -12,7 +12,7 @@ namespace ApplicationPlanCadre.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EnteteProgramme()
         {
-            Programme = new HashSet<Programme>();
+            DevisMinistere = new HashSet<DevisMinistere>();
         }
 
         [Key]
@@ -20,11 +20,12 @@ namespace ApplicationPlanCadre.Models
         [Display(Name = "Code")]
         public string codeProgramme { get; set; }
 
+        [Required]
         [StringLength(200)]
-        [Display(Name = "Commentaire")]
-        public string commentaire { get; set; }
+        [Display(Name = "Nom")]
+        public string nom { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Programme> Programme { get; set; }
+        public virtual ICollection<DevisMinistere> DevisMinistere { get; set; }
     }
 }

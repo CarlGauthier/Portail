@@ -13,22 +13,13 @@ namespace ApplicationPlanCadre.Controllers
     public class ProgrammeController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
-        public ActionResult _TreeView()
-        {
-            var programme = db.Programme
-                          .Include(p => p.EnonceCompetence)
-                          .ToList();
-            return PartialView(programme);
-        }
 
-        [Route("Programme", Name = "Index-programme")]
         public ActionResult Index()
         {
             return View(db.Programme.ToList());
         }
 
-        [Route("Programme/{id:int?}", Name = "Info-programme")]
-        public ActionResult Info(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -39,20 +30,17 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.total = programme.nbHeurefrmGenerale + programme.nbHeurefrmSpecifique;
-            //ViewBag.dateValidation = checkValidation(programme);
             return View(programme);
         }
 
         public ActionResult Create()
         {
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idProgramme,annee,nom,nbUnite,codeSpecialisation,specialisation,nbHeurefrmGenerale,nbHeurefrmSpecifique,condition,sanction,commentaire,docMinistere_path,dateValidation,codeProgramme")] Programme programme)
+        public ActionResult Create([Bind(Include = "idProgramme,nom,annee,dateValidation,idDevis")] Programme programme)
         {
             if (ModelState.IsValid)
             {
@@ -60,12 +48,9 @@ namespace ApplicationPlanCadre.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire", programme.codeProgramme);
             return View(programme);
         }
 
-        [Route("Programme/editer/{id:int?}", Name = "Edit-prog")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,14 +62,12 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire", programme.codeProgramme);
             return View(programme);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("Programme/editer/{id:int?}", Name = "Enredit-prog")]
-        public ActionResult Edit([Bind(Include = "idProgramme, codeProgramme, annee, codeSpecialisation, nom, dateValidation, docMinistere_path, specialisation, sanction, nbUnite, condition, nbHeurefrmGenerale,nbHeurefrmSpecifique")] Programme programme)
+        public ActionResult Edit([Bind(Include = "idProgramme,nom,annee,dateValidation,idDevis")] Programme programme)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +75,6 @@ namespace ApplicationPlanCadre.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire", programme.codeProgramme);
             return View(programme);
         }
 
@@ -128,44 +110,5 @@ namespace ApplicationPlanCadre.Controllers
             }
             base.Dispose(disposing);
         }
-
-        public ActionResult ValiderProgramme(int? id)
-        {
-            var programme = db.Programme.Include(p => p.EnteteProgramme);
-            Programme program = db.Programme.Find(id);
-
-            var dateTime = DateTime.Now;
-            var date = dateTime.Date;
-            program.dateValidation = date;
-
-            db.Entry(program).State = EntityState.Modified;
-            db.SaveChanges();
-
-            return RedirectToAction("Details", new { id = id });
-        }
-
-        public string checkValidation(Programme programme)
-        {
-            string statut;
-            if (programme.dateValidation == null)
-            {
-                statut = "Programme non enregistré.";
-            }
-            else
-            {
-                string date = programme.dateValidation.ToString();
-                date = date.Substring(0, 10);
-                statut = "Programme enregistré le " + date + ".";
-            }
-            return statut;
-        }
-
-        public ActionResult _PartialEnonceCompetence(int? id)
-        {
-            var programme = db.Programme.Include(p => p.EnteteProgramme).SingleOrDefault(x => x.idProgramme == id);
-            return PartialView(programme);
-        }
-
-       
     }
 }

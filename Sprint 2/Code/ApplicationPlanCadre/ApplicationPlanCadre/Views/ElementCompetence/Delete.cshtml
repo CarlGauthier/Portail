@@ -1,0 +1,28 @@
+﻿@model ApplicationPlanCadre.Models.ElementCompetence
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="container">
+
+    <div class="form-horizontal single-action">
+
+        <h1>Supprimer un élément de compétence</h1>
+        <h3>@Model.description</h3>
+
+        <hr />
+
+        <div class="col-md-12">
+            <p>Êtes vous certain de vouloir supprimer cette compétence?</p>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <a class="fancy-button" href='@Url.Action("DeleteConfirmed", new { idElement = Model.idElement })'>Confirmer</a>
+                <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "EnonceCompetence", new { idElement = Model.idElement })'">Annuler</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
