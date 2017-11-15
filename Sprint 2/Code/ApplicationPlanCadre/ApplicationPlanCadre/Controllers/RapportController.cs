@@ -34,7 +34,8 @@ namespace ApplicationPlanCadre.Controllers
                 planList.Add(new PlanCadre {
                     numeroCours=plan.numeroCours,
                     titreCours=plan.titreCours,
-                    idPlanCadre=plan.idPlanCadre
+                    idPlanCadre=plan.idPlanCadre,
+                    idType=plan.idType,
                 });
             }
             return planList;
@@ -58,15 +59,23 @@ namespace ApplicationPlanCadre.Controllers
         }
         public ActionResult RapportPlanCadre (int id)
         {
+            dynamic model = new ExpandoObject();
             List<PlanCadre> planListHolder = new List<PlanCadre>();
             planListHolder.AddRange(getPlanCadre(id));
-            
 
-            return new ViewAsPdf("RapportProgramme")
+            model.PlanCadre = planListHolder;
+            string customSwitches = string.Format("--print-media-type --allow {0} --header-html {0} --header-spacing -10",
+            Url.Action("header", "Document", new { area = "" }, "https"));
+
+            return new ViewAsPdf("RapportPlanCadre")
             {
-                //CustomSwitches = customSwitches,
+                CustomSwitches = customSwitches,
                 PageSize = Size.A4
             };
+        }
+        public ActionResult Header()
+        {
+            return View("header");
         }
         public ActionResult RapportProgramme(int id)
         {
@@ -75,9 +84,7 @@ namespace ApplicationPlanCadre.Controllers
             
             List<SecondaryEnonceCompetence> enonceComptListHolder = new List<SecondaryEnonceCompetence>();
             List<SecondaryElementCompetence> elemCompListHolder = new List<SecondaryElementCompetence>();
-            
             List<SecondaryContexteRealisation> contextRealListHolder = new List<SecondaryContexteRealisation>();
-            
             List<SecondaryDevisMinistere> devisListHolder = new List<SecondaryDevisMinistere>();
 
             model.Programme = getProgram(id);

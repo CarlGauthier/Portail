@@ -382,6 +382,7 @@
     <Content Include="Views\Rapport\RapportProgramme.cshtml" />
     <Content Include="Views\Rapport\Index.cshtml" />
     <Content Include="Views\Rapport\RapportPlanCadre.cshtml" />
+    <Content Include="Views\Rapport\header.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
