@@ -5,12 +5,11 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Net;
-using System.Net.Mail;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ApplicationPlanCadre.Models;
+using ApplicationPlanCadre.Helpers;
 using System.Web.Security;
 
 namespace ApplicationPlanCadre.Controllers
@@ -171,12 +170,12 @@ namespace ApplicationPlanCadre.Controllers
         {
             if (ModelState.IsValid)
             {
-                string psw = GeneratePassword();
+                model.psw = GeneratePassword();
                 var user = new ApplicationUser { nom = model.nom, prenom = model.prenom, UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, psw);
+                var result = await UserManager.CreateAsync(user, model.psw);
                 if (result.Succeeded)
                 {
-                    SendActivationMail(psw);
+                    new MailHelper().SendActivationMail(model);
                     return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);
@@ -186,31 +185,7 @@ namespace ApplicationPlanCadre.Controllers
 
         private string GeneratePassword()
         {
-            return Membership.GeneratePassword(10, 2);
-        }
-
-        private async void SendActivationMail(string psw)
-        {
-            var message = new MailMessage();
-            message.To.Add(new MailAddress("gauthiercarl1@gmail.com"));  // replace with valid value 
-            message.From = new MailAddress("portaildonotreply@outlook.com");  // replace with valid value
-            message.Subject = "ApplicationPlanCadreCourriel";
-            message.Body = "<p>Wouah mais quel courriel! Voici le mdp: " + psw + "</p>";
-            message.IsBodyHtml = true;
-
-            using (var smtp = new SmtpClient())
-            {
-                var credential = new NetworkCredential
-                {
-                    UserName = "equipe1@dicj.info",
-                    Password = "equipe1"
-                };
-                smtp.Credentials = credential;
-                smtp.Host = "mail.dicj.info";
-                smtp.Port = 465;
-                smtp.EnableSsl = true;
-                await smtp.SendMailAsync(message);
-            }
+            return Membership.GeneratePassword(10, 0);
         }
 
         //
