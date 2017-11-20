@@ -199,9 +199,11 @@
     <Compile Include="Controllers\ElementCompetenceController.cs" />
     <Compile Include="Controllers\EnonceCompetenceController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\InstanceProgrammePCController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\DevisMinistereController.cs" />
     <Compile Include="Controllers\PlanCadreController.cs" />
+    <Compile Include="Controllers\PlanCadreEnonceController.cs" />
     <Compile Include="Controllers\StageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -351,6 +353,8 @@
     <Content Include="Views\ConsoleProgramme\Edit.cshtml" />
     <Content Include="Views\PlanCadre\Index.cshtml" />
     <Content Include="Views\PlanCadre\_TreeView.cshtml" />
+    <Content Include="Views\PlanCadre\PlanCadreDetail1.cshtml" />
+    <Content Include="Views\InstanceProgrammePC\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

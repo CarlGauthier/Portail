@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ApplicationPlanCadre.Models.Programme>
+
+@{
+    ViewBag.Title = "InstanceProgramme";
+}
+
+<div id="super-view">
+    @*@Html.Action("_TreeView")*@
+    <div id="info-display" class="container-fluid">
+        <div id="info-detail">
+            <h1>Plan Cadre</h1>
+            <hr />
+            @foreach (var programme in Model)
+            {
+                <a class="info-child clearfix" href='@Url.Action("Index","PlanCadre", new { idProgramme = programme.idProgramme })'>
+                    <p class="gauche">@Html.DisplayFor(model => programme.nom)</p>
+                    <p class="droite">@Html.DisplayFor(model => programme.DevisMinistere.EnteteProgramme.codeProgramme)-@Html.DisplayFor(model => programme.annee)-@Html.DisplayFor(model => programme.DevisMinistere.codeSpecialisation)</p>
+                </a>
+            }
+        </div>
+    </div>
+</div>
+

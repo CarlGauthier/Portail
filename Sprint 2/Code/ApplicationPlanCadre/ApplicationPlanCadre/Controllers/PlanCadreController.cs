@@ -11,7 +11,7 @@ using ApplicationPlanCadre.Models;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    public class PCInstanceController : Controller
+    public class PlanCadreController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
 
@@ -26,6 +26,20 @@ namespace ApplicationPlanCadre.Controllers
         public ActionResult Index()
         {
             return View(db.PlanCadre.ToList());
+        }
+
+        public ActionResult PlanCadreDetail1(int? idPlanCadre)
+        {
+            if (idPlanCadre == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PlanCadre planCadre = db.PlanCadre.Find(idPlanCadre);
+            if (planCadre == null)
+            {
+                return HttpNotFound();
+            }
+            return View(planCadre);
         }
     }
 }

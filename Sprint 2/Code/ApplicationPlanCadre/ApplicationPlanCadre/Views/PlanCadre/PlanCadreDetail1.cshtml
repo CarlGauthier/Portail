@@ -1,0 +1,66 @@
+﻿@model ApplicationPlanCadre.Models.PlanCadre
+
+@{
+    ViewBag.Title = "PlanCadreDetails";
+}
+
+<div id="super-view">
+    @Html.Action("_TreeView")
+
+    <div id="info-display" class="container-fluid">
+        <div id="info-header">
+            <h1>Programme</h1>
+            <h3>@Html.DisplayFor(model => Model.Programme.nom)</h3>
+            <h3>@Html.DisplayFor(model => Model.Programme.DevisMinistere.EnteteProgramme.codeProgramme)-@Html.DisplayFor(model => Model.Programme.DevisMinistere.annee)-@Html.DisplayFor(model => Model.Programme.DevisMinistere.codeSpecialisation)</h3>
+
+            <hr />
+            <h2>Cour</h2>
+            <p>@Html.DisplayFor(model => Model.titreCours)</p>
+            <p>@Html.DisplayFor(model => Model.nbHeureTheorie)-@Html.DisplayFor(model => Model.nbHeurePratique)-@Html.DisplayFor(model => Model.nbHeureDevoir)</p>
+            <p>@Html.DisplayFor(model => Model.numeroCours)</p>
+        </div>
+
+        <div id="info-detail">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="champ">
+                        <h2>Compétences</h2>
+                        @foreach (var competence in Model.PlanCadreEnonce)
+                        {
+                            @*Faire transformer en bouton.<a class="info-child clearfix" href='@Url.Action("PlanCadreDetail1", new { idPlanCadre = planCadre.idPlanCadre })'>*@
+                                <label>@Html.DisplayFor(model => competence.EnonceCompetence.description)</label>
+                                <p>&emsp;@Html.DisplayNameFor(model => competence.ponderationEnHeure): @Html.DisplayFor(model => competence.ponderationEnHeure)</p>
+                            @*</a>*@
+                        }
+                    </div>
+
+                    <div class="champ">
+                        <h2>Indication pédagogique</h2>
+                        <p>@Html.DisplayFor(model => Model.indicationPedago)</p>
+                    </div>
+
+                    <div class="champ">
+                        <h2>Éléments de connaissances</h2>
+                        <p>@Html.DisplayFor(model => Model.elementsConnaissance)</p>
+                    </div>
+
+                    <div class="champ">
+                        <h2>Activités d'apprentissage suggérées</h2>
+                        <p>@Html.DisplayFor(model => Model.activiteApprentissage)</p>
+                    </div>
+
+                    <div class="champ">
+                        <h2>Environement physique</h2>
+                        <p>@Html.DisplayFor(model => Model.environnementPhys)</p>
+                    </div>
+
+                    <div class="champ">
+                        <h2>Ressources</h2>
+                        <p>@Html.DisplayFor(model => Model.ressource)</p>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
