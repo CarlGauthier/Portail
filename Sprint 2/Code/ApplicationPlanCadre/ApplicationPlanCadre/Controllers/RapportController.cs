@@ -16,6 +16,7 @@ namespace ApplicationPlanCadre.Controllers
     public class RapportController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
+        
         // GET: Rapport
         public ActionResult Index()
         {
@@ -61,22 +62,71 @@ namespace ApplicationPlanCadre.Controllers
         {
             dynamic model = new ExpandoObject();
             List<PlanCadre> planListHolder = new List<PlanCadre>();
+            List<SecondaryProgramme> progListHolder = new List<SecondaryProgramme>();
+            List<SecondaryDevisMinistere> devisListHolder = new List<SecondaryDevisMinistere>();
+            List<PlanCadreEnonce> planCadreEnonceHolder = new List<PlanCadreEnonce>();
+            List<SecondaryEnonceCompetence> enonceComptListHolder = new List<SecondaryEnonceCompetence>();
+            List<SecondaryContexteRealisation> contextRealListHolder = new List<SecondaryContexteRealisation>();
+            List<SecondaryElementCompetence> elementComptHolder = new List<SecondaryElementCompetence>();
+            List<SecondaryCriterePerformance> criterePerfHolder = new List<SecondaryCriterePerformance>();
+
+
+
             planListHolder.AddRange(getPlanCadre(id));
+            foreach(PlanCadre a in planListHolder) // start de la boucle
+            {
+                progListHolder.AddRange(getProgram(a.idProgramme)); //cherche tout les programmes relier au plan cadre (1)
+                planCadreEnonceHolder.AddRange(getPlanCadreEnonce(a.idPlanCadre)); // va chercher l'enonce du plan cadre
+                foreach (SecondaryProgramme b in progListHolder) // pour chaque programme cherche son devis
+                {
+                    devisListHolder.AddRange(getDevis(a.idProgramme));
+                }
+                foreach(PlanCadreEnonce c in planCadreEnonceHolder)// va chercher chaque enonce compétence du plancadre
+                {
+                    enonceComptListHolder.AddRange(getEnonceCompetence(c.idCompetence));
+                    
+                }
+                foreach(SecondaryEnonceCompetence d in enonceComptListHolder)// va chercher les contexte de réalisation pour chaque enonce de competence
+                {
+                    contextRealListHolder.AddRange(getContexteRealisation(d.idCompetence));
+                    elementComptHolder.AddRange(getElemCompetence(d.idCompetence));
+                    
+                }
+                foreach(SecondaryElementCompetence e in elementComptHolder)
+                {
+                    criterePerfHolder.AddRange(getCriterePerformance(e.idElement));
+                }
+                
+            }
+            
 
             model.PlanCadre = planListHolder;
-            string customSwitches = string.Format("--print-media-type --allow {0} --header-html {0} --header-spacing -10",
-            Url.Action("header", "Document", new { area = "" }, "https"));
+            model.Programme = progListHolder;
+            model.DevisMinistere = devisListHolder;
+            model.PlanCadreEnonce = planCadreEnonceHolder;
+            model.EnonceCompetence = enonceComptListHolder;
+            model.ContexteRealisation = contextRealListHolder;
+            model.ElementCompetence = elementComptHolder;
+            model.CriterePerformance = criterePerfHolder;
 
-            return new ViewAsPdf("RapportPlanCadre")
+            string header = Server.MapPath("~/Views/static/header.html");
+            string footer = Server.MapPath("~/Views/static/footer.html");
+            string customSwitches = string.Format(
+                                  "--header-html  \"{0}\" " +
+                                  "--header-spacing \"3\" " +
+                                  "--footer-html \"{1}\" " +
+                                  "--footer-spacing \"10\" " +
+                                  "--footer-font-size \"10\" " +
+                                  "--header-font-size \"10\" ", header, footer);
+
+            return new ViewAsPdf("RapportPlanCadre",model)
             {
                 CustomSwitches = customSwitches,
-                PageSize = Size.A4
+                PageSize = Size.A4,
+                PageOrientation = Orientation.Landscape
             };
         }
-        public ActionResult Header()
-        {
-            return View("header");
-        }
+        
         public ActionResult RapportProgramme(int id)
         {
              
@@ -86,6 +136,8 @@ namespace ApplicationPlanCadre.Controllers
             List<SecondaryElementCompetence> elemCompListHolder = new List<SecondaryElementCompetence>();
             List<SecondaryContexteRealisation> contextRealListHolder = new List<SecondaryContexteRealisation>();
             List<SecondaryDevisMinistere> devisListHolder = new List<SecondaryDevisMinistere>();
+            
+
 
             model.Programme = getProgram(id);
             
@@ -99,6 +151,7 @@ namespace ApplicationPlanCadre.Controllers
                     {
                         elemCompListHolder.AddRange(getElemCompetence(enonceCompt.idCompetence));
                         contextRealListHolder.AddRange(getContexteRealisation(enonceCompt.idCompetence));
+                        
                     }
                 }
             }
@@ -106,10 +159,12 @@ namespace ApplicationPlanCadre.Controllers
             model.EnonceCompetence = enonceComptListHolder;
             model.ElementCompetence = elemCompListHolder;
             model.ContexteRealisation = contextRealListHolder;
+            
 
             string header = Server.MapPath("~/Views/static/header.html");
             string footer = Server.MapPath("~/Views/static/footer.html");
-            string customSwitches = string.Format("--header-html  \"{0}\" " +
+            string customSwitches = string.Format(
+                                  "--header-html  \"{0}\" " +
                                   "--header-spacing \"0\" " +
                                   "--footer-html \"{1}\" " +
                                   "--footer-spacing \"10\" " +
@@ -197,6 +252,7 @@ namespace ApplicationPlanCadre.Controllers
                     idElement=a.idElement,
                     idCompetence=a.idCompetence,
                     description =a.description,
+                    numeros= a.numero
                     
                  });
             }
@@ -204,23 +260,43 @@ namespace ApplicationPlanCadre.Controllers
                 
 
         }
-        //private List<SecondaryCriterePerformance>getCriterePerformance(int x)
-        //{
-        //    List<SecondaryCriterePerformance> critereList = new List<SecondaryCriterePerformance>();
-        //    var critere = from a in db.CriterePerformance
-        //                  where a.idElement == x
-        //                  select a;
-        //    foreach(CriterePerformance a in critere)
-        //    {
-        //        critereList.Add(new SecondaryCriterePerformance
-        //        {
-        //            idCritere = a.idCritere,
-        //            idElement =a.idElement,
-        //            criterePerformance1 =a.criterePerformance1
-        //        });
-        //    }
-        //    return critereList;
-        //}
+        private List<SecondaryCriterePerformance> getCriterePerformance(int x)
+        {
+            List<SecondaryCriterePerformance> critereList = new List<SecondaryCriterePerformance>();
+            var critere = from a in db.CriterePerformance
+                          where a.idElement == x
+                          orderby a.numero
+                          select a;
+            foreach (CriterePerformance a in critere)
+            {
+                critereList.Add(new SecondaryCriterePerformance
+                {
+                    idCritere = a.idCritere,
+                    idElement = a.idElement,
+                    description = a.description,
+                    numero = a.numero,
+                });
+            }
+            return critereList;
+        }
+        private List<PlanCadreEnonce>getPlanCadreEnonce(int x)
+        {
+            List<PlanCadreEnonce> planCadreEnonceList = new List<PlanCadreEnonce>();
+            var planCadreEnonce = from a in db.PlanCadreEnonce
+                                  where a.idPlanCadre == x
+                                  select a;
+            foreach(PlanCadreEnonce a in planCadreEnonce)
+            {
+                planCadreEnonceList.Add(new PlanCadreEnonce
+                {
+                    idPlanCadre = a.idPlanCadre,
+                    idPlanCadreEnonce = a.idPlanCadreEnonce,
+                    idCompetence = a.idCompetence,
+                    ponderationEnHeure = a.ponderationEnHeure
+                });
+            }
+            return planCadreEnonceList;
+        }
         private List<SecondaryContexteRealisation> getContexteRealisation(int x)
         {
             List<SecondaryContexteRealisation> contextList = new List<SecondaryContexteRealisation>();
