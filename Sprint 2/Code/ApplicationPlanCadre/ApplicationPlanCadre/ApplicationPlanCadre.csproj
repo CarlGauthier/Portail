@@ -355,6 +355,7 @@
     <Content Include="Views\PlanCadre\_TreeView.cshtml" />
     <Content Include="Views\PlanCadre\PlanCadreDetail1.cshtml" />
     <Content Include="Views\InstanceProgrammePC\Index.cshtml" />
+    <Content Include="Views\PlanCadre\CompetencePC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -24,12 +24,16 @@ namespace ApplicationPlanCadre.Controllers
         }
 
         // GET: PCInstance
-        public ActionResult Index()
+        public ActionResult IndexFabrice()
         {
             return View(db.PlanCadre.ToList());
         }
 
+<<<<<<< HEAD
         public ActionResult PlanCadreDetail1(int id)
+=======
+        public ActionResult PlanCadreDetail(int? idPlanCadre)
+>>>>>>> ca8fdcec1c4b3e9df69f99aa5a78375e05c58fff
         {
             dynamic model = new ExpandoObject();
             List<PlanCadre> planListHolder = new List<PlanCadre>();

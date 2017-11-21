@@ -130,6 +130,35 @@
     @Html.Action("_TreeView")
 
     <div id="info-display" class="container-fluid">
+<<<<<<< HEAD:Sprint 2/Code/ApplicationPlanCadre/ApplicationPlanCadre/Views/PlanCadre/PlanCadreDetail1.cshtml
+=======
+        <div id="info-header">
+            <h1>Programme</h1>
+            <h3>@Html.DisplayFor(model => Model.Programme.nom)</h3>
+            <h3>@Html.DisplayFor(model => Model.Programme.DevisMinistere.EnteteProgramme.codeProgramme)-@Html.DisplayFor(model => Model.Programme.DevisMinistere.annee)-@Html.DisplayFor(model => Model.Programme.DevisMinistere.codeSpecialisation)</h3>
+
+            <hr />
+            <h2>Cour</h2>
+            <p>@Html.DisplayFor(model => Model.titreCours)</p>
+            <p>@Html.DisplayFor(model => Model.nbHeureTheorie)-@Html.DisplayFor(model => Model.nbHeurePratique)-@Html.DisplayFor(model => Model.nbHeureDevoir)</p>
+            <p>@Html.DisplayFor(model => Model.numeroCours)</p>
+        </div>
+
+        <div id="info-detail">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="champ">
+                        <h2>Compétences</h2>
+                        @foreach (var competence in Model.PlanCadreEnonce)
+                        {
+                            <a class="info-child clearfix" href='@Url.Action("CompetencePC","PlanCadreEnonce", new { idPlanCadre = competence.idPlanCadreEnonce })'>
+                                <label>@Html.DisplayFor(model => competence.EnonceCompetence.description)</label>
+                            </a>
+             
+                            <p>&emsp;@Html.DisplayNameFor(model => competence.ponderationEnHeure): @Html.DisplayFor(model => competence.ponderationEnHeure)</p>
+                        }
+                    </div>
+>>>>>>> ca8fdcec1c4b3e9df69f99aa5a78375e05c58fff:Sprint 2/Code/ApplicationPlanCadre/ApplicationPlanCadre/Views/PlanCadre/PlanCadreDetailFabrice.cshtml
 
 
 
