@@ -351,9 +351,9 @@
     <Content Include="Views\ConsoleProgramme\_PartialList.cshtml" />
     <Content Include="Views\ConsoleProgramme\Create.cshtml" />
     <Content Include="Views\ConsoleProgramme\Edit.cshtml" />
-    <Content Include="Views\PlanCadre\Index.cshtml" />
+    <Content Include="Views\PlanCadre\IndexFabrice.cshtml" />
     <Content Include="Views\PlanCadre\_TreeView.cshtml" />
-    <Content Include="Views\PlanCadre\PlanCadreDetail1.cshtml" />
+    <Content Include="Views\PlanCadre\PlanCadreDetailFabrice.cshtml" />
     <Content Include="Views\InstanceProgrammePC\Index.cshtml" />
     <Content Include="Views\PlanCadre\CompetencePC.cshtml" />
   </ItemGroup>
