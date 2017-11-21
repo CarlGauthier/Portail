@@ -1,0 +1,326 @@
+﻿@model dynamic
+@using ApplicationPlanCadre.Models
+@{
+    ViewBag.Title = "RapportPlanCadre";
+    bool rowspanDone = false;
+}
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        font-size: 15px;
+    }
+
+    table {
+        page-break-before: auto;
+        width: 100%;
+        margin-top: 25px;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: always;
+    }
+
+    td {
+        page-break-inside: avoid;
+        page-break-before: auto
+    }
+
+    thead {
+        display: table-header-group;
+        font-weight: bold;
+        background-color: rgba(87, 85, 91, 0.5);
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+
+    div {
+        page-break-after: auto
+    }
+
+    .divtop {
+        width: 100%;
+        background-color: red;
+    }
+
+    .pdf {
+        width: 100%;
+    }
+
+    .entete {
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+    .entete-left {
+        display: inline;
+        box-sizing: border-box;
+        width: 50%;
+        float: left;
+        margin: 0px;
+    }
+
+    .entete-right {
+        display: inline;
+        box-sizing: border-box;
+        width: 50%;
+        float: right;
+        margin: 0px;
+    }
+
+    .inner-left {
+        display: inline;
+        box-sizing: border-box;
+        float: left;
+        margin: 0px;
+    }
+
+    .inner-right {
+        display: inline;
+        box-sizing: border-box;
+        float: left;
+        margin-left: 10px;
+    }
+
+    .inner2-left {
+        display: inline;
+        box-sizing: border-box;
+        float: right;
+        margin-left: 10px;
+    }
+
+    .inner2-right {
+        display: inline;
+        box-sizing: border-box;
+        float: right;
+        margin: 0px;
+    }
+
+    .critere-left {
+        display: inline;
+        box-sizing: border-box;
+        float: left;
+        margin: 0px;
+        width: 4%;
+        margin-right: 15px;
+    }
+
+    .critere-right {
+        display: inline;
+        box-sizing: border-box;
+        margin: 0px;
+        float: left;
+        width: 90%;
+    }
+
+
+    .corps {
+        padding-top: 25px;
+    }
+
+    #clear {
+        clear: both;
+    }
+</style>
+
+<div id="super-view">
+    @Html.Action("_TreeView")
+
+    <div id="info-display" class="container-fluid">
+
+
+
+
+
+    <div class="pdf">
+        @foreach (PlanCadre planCadre in Model.PlanCadre)
+        {
+
+            foreach (Programme programme in Model.Programme)
+            {
+                foreach (DevisMinistere devisMinistere in Model.DevisMinistere)
+                {
+               <!-- barre top -->
+
+                    <div class="divtop">
+                        @Html.DisplayFor(x => programme.nom)
+                        <br />
+                        @Html.DisplayFor(x => devisMinistere.specialisation)
+                    </div>
+            <!-- début de l'entête -->
+                    <div class="entete">
+                        <div class="entete-left">
+                            <br />
+
+                            <div class="inner-left">
+                                Titre du cours :
+                                <br />
+                                Pondération :
+                            </div>
+                            <div class="inner-right">
+                                @Html.DisplayFor(x => planCadre.titreCours)
+                                <br />
+                                @Html.DisplayFor(x => planCadre.nbHeureTheorie) - @Html.DisplayFor(x => planCadre.nbHeurePratique) - @Html.DisplayFor(x => planCadre.nbHeureDevoir)
+                            </div>
+                        </div>
+                        <div class="entete-right">
+                            <br />
+                            <div class="inner2-left">
+                                @Html.DisplayFor(x => planCadre.numeroCours)
+                                <br />
+                                @Html.DisplayFor(x => devisMinistere.codeProgramme).@Html.DisplayFor(x => devisMinistere.codeSpecialisation)
+                            </div>
+                            <div class="inner2-right">
+                                Numéro du cours :
+                                <br />
+                                Programme :
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="clear"></div>
+
+
+            <!-- début du corps du plan cadre-->
+                    <div class="corps">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td style="width:20%;">
+                                        Objectif - Énoncé des compétences
+                                    </td>
+                                    <td style="width:45%;">
+                                        Standard - Contexte de réalisation
+                                    </td>
+                                    <td>
+                                        Indication pédagogiques, s'il y a lieu
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                        @foreach (PlanCadreEnonce a in Model.PlanCadreEnonce)
+                        {
+                            foreach (EnonceCompetence b in Model.EnonceCompetence)
+                            {
+                                if (a.idCompetence == b.idCompetence)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(x => b.description) (@Html.DisplayFor(x => b.codeCompetence))
+                                            <br />
+                                            <br />
+                                            @Html.DisplayFor(x => a.ponderationEnHeure) heures
+                                        </td>
+                                        <td>
+                                            @foreach (ContexteRealisation c in Model.ContexteRealisation)
+                                            {
+                                                if (b.idCompetence == c.idCompetence)
+                                                {
+                                                    <div style="margin-top:10px;">
+                                                        @Html.Raw("-")@Html.DisplayFor(x => c.description)
+                                                        
+                                                    </div>
+
+                                                }
+                                            }
+                                        </td>
+                                        @if (rowspanDone != true)
+                                        {
+                                            <td rowspan="2">
+                                                @Html.DisplayFor(x => planCadre.indicationPedago)
+                                            </td>
+                                            rowspanDone = true;
+                                        }
+                                        
+                                    </tr>
+                                }
+                            }
+                        }
+                            </tbody>
+                        </table>
+
+                        @foreach (PlanCadreEnonce a in Model.PlanCadreEnonce)
+                        {
+                <!-- Affichage en boucle des tableau des ennoncer compétence-->
+                            foreach (EnonceCompetence b in Model.EnonceCompetence)
+                            {
+                                if (a.idCompetence == b.idCompetence)
+                                {
+
+                                    <div style="margin-top:50px;">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td colspan="4">
+                                                        @Html.DisplayFor(x => b.description) (@Html.DisplayFor(x => b.codeCompetence))
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Les éléments de compétence
+                                                    </td>
+                                                    <td>
+                                                        Critères de performance
+                                                    </td>
+                                                    <td>
+                                                        Éléments de connaissances
+                                                    </td>
+                                                    <td>
+                                                        Activités d'apprentissage suggérées
+                                                    </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (ElementCompetence elementCompt in Model.ElementCompetence)
+                                    {
+                                        if (b.idCompetence == elementCompt.idCompetence)
+                                        {
+                                                        <tr>
+                                                            <td width="25%">
+                                                                @Html.DisplayFor(x => elementCompt.numero)<span>. </span>@Html.DisplayFor(x => elementCompt.description)
+                                                                <br />
+                                                            </td>
+                                                            <td width="35%">
+
+                                                                @foreach (CriterePerformance criterePerf in Model.CriterePerformance)
+                                                                {
+                                                                    if (elementCompt.idElement == criterePerf.idElement)
+                                                                    {
+
+                                                                        <div style="margin-top:15px;">
+                                                                            <div class="critere-left">
+                                                                                @Html.DisplayFor(x => elementCompt.numero)<span>.</span>@Html.DisplayFor(x => criterePerf.numero)
+                                                                            </div>
+                                                                            <div class="critere-right">
+                                                                                @Html.DisplayFor(x => criterePerf.description)
+                                                                            </div>
+                                                                            <div id="clear"></div>
+                                                                        </div>
+                                                                    }
+                                                                }
+
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                }
+                            }
+
+                        }
+                    </div>
+                }
+            }
+        }
+    </div>
+    </div>
+</div>
+
