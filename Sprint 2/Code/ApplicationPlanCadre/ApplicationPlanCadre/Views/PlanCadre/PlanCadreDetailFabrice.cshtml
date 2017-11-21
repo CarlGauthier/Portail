@@ -27,10 +27,11 @@
                         <h2>Compétences</h2>
                         @foreach (var competence in Model.PlanCadreEnonce)
                         {
-                            @*Faire transformer en bouton.<a class="info-child clearfix" href='@Url.Action("PlanCadreDetail1", new { idPlanCadre = planCadre.idPlanCadre })'>*@
+                            <a class="info-child clearfix" href='@Url.Action("CompetencePC","PlanCadreEnonce", new { idPlanCadre = competence.idPlanCadreEnonce })'>
                                 <label>@Html.DisplayFor(model => competence.EnonceCompetence.description)</label>
-                                <p>&emsp;@Html.DisplayNameFor(model => competence.ponderationEnHeure): @Html.DisplayFor(model => competence.ponderationEnHeure)</p>
-                            @*</a>*@
+                            </a>
+             
+                            <p>&emsp;@Html.DisplayNameFor(model => competence.ponderationEnHeure): @Html.DisplayFor(model => competence.ponderationEnHeure)</p>
                         }
                     </div>
 

@@ -23,12 +23,12 @@ namespace ApplicationPlanCadre.Controllers
         }
 
         // GET: PCInstance
-        public ActionResult Index()
+        public ActionResult IndexFabrice()
         {
             return View(db.PlanCadre.ToList());
         }
 
-        public ActionResult PlanCadreDetail1(int? idPlanCadre)
+        public ActionResult PlanCadreDetail(int? idPlanCadre)
         {
             if (idPlanCadre == null)
             {
