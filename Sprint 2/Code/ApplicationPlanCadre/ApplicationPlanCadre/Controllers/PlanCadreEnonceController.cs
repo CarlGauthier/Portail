@@ -29,10 +29,5 @@ namespace ApplicationPlanCadre.Controllers
         }
 
 
-        public ActionResult CompetencePC(int idPlanCadre)
-        {
-            PlanCadreEnonce planCadre = from a in db.PlanCadreEnonce where idPlanCadre == a.idPlanCadreEnonce select a;
-            return View(planCadre);
-        }
     }
 }

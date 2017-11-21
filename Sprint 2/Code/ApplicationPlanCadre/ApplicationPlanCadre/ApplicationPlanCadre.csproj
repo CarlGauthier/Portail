@@ -353,11 +353,8 @@
     <Content Include="Views\ConsoleProgramme\Edit.cshtml" />
     <Content Include="Views\PlanCadre\IndexFabrice.cshtml" />
     <Content Include="Views\PlanCadre\_TreeView.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\PlanCadre\PlanCadreDetailFabrice.cshtml" />
-=======
     <Content Include="Views\PlanCadre\PlanCadreDetail.cshtml" />
->>>>>>> 01a094ed68e1cef58de9e860ff86db842d3bf6ef
     <Content Include="Views\InstanceProgrammePC\Index.cshtml" />
     <Content Include="Views\PlanCadre\CompetencePC.cshtml" />
     <Content Include="Views\PlanCadre\IndexFabrice.cshtml" />
