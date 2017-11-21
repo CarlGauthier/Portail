@@ -28,9 +28,13 @@ namespace ApplicationPlanCadre.Controllers
         {
             return View(db.PlanCadre.ToList());
         }
+        public ActionResult Index()
+        {
+            return View(db.PlanCadre.ToList());
+        }
 
 
-        
+
 
         public ActionResult PlanCadreDetail(int id)
 
