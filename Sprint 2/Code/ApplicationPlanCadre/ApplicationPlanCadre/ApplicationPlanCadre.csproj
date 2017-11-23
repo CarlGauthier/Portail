@@ -212,6 +212,8 @@
     <Compile Include="Controllers\RapportController.cs" />
     <Compile Include="Controllers\RechercheController.cs" />
     <Compile Include="Controllers\PlanCadreController.cs" />
+    <Compile Include="Controllers\PlanCadreEnonceController.cs" />
+    <Compile Include="Controllers\ProgrammeController.cs" />
     <Compile Include="Controllers\StageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -387,8 +389,11 @@
     <Content Include="Views\Rapport\RapportProgramme.cshtml" />
     <Content Include="Views\Rapport\Index.cshtml" />
     <Content Include="Views\Rapport\RapportPlanCadre.cshtml" />
+    <Content Include="Views\Programme\_TreeView.cshtml" />
+    <Content Include="Views\PlanCadre\PlanCadreDetail.cshtml" />
     <Content Include="Views\PlanCadre\Index.cshtml" />
-    <Content Include="Views\PlanCadre\_TreeView.cshtml" />
+    <Content Include="Views\PlanCadre\Create.cshtml" />
+    <Content Include="Views\Programme\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

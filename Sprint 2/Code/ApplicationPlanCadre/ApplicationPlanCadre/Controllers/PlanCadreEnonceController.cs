@@ -11,26 +11,23 @@ using ApplicationPlanCadre.Models;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    public class ProgrammeController : Controller
+    public class PlanCadreEnonceController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
 
         public ActionResult _TreeView()
         {
-            var programme = db.Programme.ToList();
+            var planCadre = db.PlanCadre.ToList();
 
-            return PartialView(programme);
+            return PartialView(planCadre);
         }
-		
-        // GET: Programme
+
+        // GET: PlanCadreEnonce
         public ActionResult Index()
         {
-            return View(db.Programme.ToList());
+            return View();
         }
 
-        public ActionResult Info(int? idProgramme)
-        {
-            return View( db.Programme.Find(idProgramme));
-        }
+
     }
 }
