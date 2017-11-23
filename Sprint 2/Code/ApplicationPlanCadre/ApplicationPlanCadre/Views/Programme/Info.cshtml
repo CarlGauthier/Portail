@@ -1,7 +1,7 @@
 ﻿@model ApplicationPlanCadre.Models.Programme
 
 @{
-    ViewBag.Title = "Plan cadre";
+    ViewBag.Title = "Info";
 }
 
 <div id="super-view">
@@ -11,11 +11,11 @@
 
         </div>
 
-        <h1>Plan cadre Alpha</h1>
+        <h1>Liste des plans cadres</h1>
 
         @foreach (var planCadre in Model.PlanCadre)
         {
-            <a class="info-child clearfix" href='@Url.Action("PlanCadreDetail", new { id = planCadre.idPlanCadre })'>
+            <a class="info-child clearfix" href='@Url.Action("info", "PlanCadre", new { id = planCadre.idPlanCadre })'>
                 <p class="gauche">@Html.DisplayFor(ec => planCadre.titreCours)</p>
                 <p class="droite">@Html.DisplayFor(model => planCadre.Programme.idProgramme)-@Html.DisplayFor(model => planCadre.Programme.annee)-@Html.DisplayFor(model => planCadre.Programme.DevisMinistere.codeSpecialisation)</p>
             </a>

@@ -352,10 +352,8 @@
     <Content Include="Views\ConsoleProgramme\Create.cshtml" />
     <Content Include="Views\ConsoleProgramme\Edit.cshtml" />
     <Content Include="Views\Programme\_TreeView.cshtml" />
-    <Content Include="Views\PlanCadre\PlanCadreDetail.cshtml" />
+    <Content Include="Views\PlanCadre\Info.cshtml" />
     <Content Include="Views\Programme\Index.cshtml" />
-    <Content Include="Views\PlanCadre\CompetencePC.cshtml" />
-    <Content Include="Views\PlanCadre\Index.cshtml" />
     <Content Include="Views\PlanCadre\Create.cshtml" />
     <Content Include="Views\Programme\Info.cshtml" />
   </ItemGroup>

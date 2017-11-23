@@ -1,5 +1,4 @@
 ﻿@model ApplicationPlanCadre.Models.PlanCadre
-@using ApplicationPlanCadre.Models
 @{
     ViewBag.Title = "PlanCadre";
     bool rowspanDone = false;
@@ -127,7 +126,7 @@
 </style>
 
 <div id="super-view">
-    @Html.Action("_TreeView")
+    @Html.Action("_TreeView", "Programme")
 
     <div id="info-display" class="container-fluid">
         <div class="pdf">
@@ -191,20 +190,20 @@
                     </thead>
                     <tbody>
 
-                        @foreach (PlanCadreEnonce a in Model.PlanCadreEnonce)
+                        @foreach (var planCadreEnonce in Model.PlanCadreEnonce)
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(x => a.EnonceCompetence.description) (@Html.DisplayFor(x => a.EnonceCompetence.codeCompetence))
+                                    @Html.DisplayFor(x => planCadreEnonce.EnonceCompetence.description) (@Html.DisplayFor(x => planCadreEnonce.EnonceCompetence.codeCompetence))
                                     <br />
                                     <br />
-                                    @Html.DisplayFor(x => a.ponderationEnHeure) heures
+                                    @Html.DisplayFor(x => planCadreEnonce.ponderationEnHeure) heures
                                 </td>
                                 <td>
-                                    @foreach (ContexteRealisation c in a.EnonceCompetence.ContexteRealisation)
+                                    @foreach (var contexteRealisation in planCadreEnonce.EnonceCompetence.ContexteRealisation)
                                     {
 
-                                        @Html.Raw("-")@Html.DisplayFor(x => c.description)
+                                        @Html.Raw("-")@Html.DisplayFor(x => contexteRealisation.description)
                                         <br />
                                                     <br />
                                     }

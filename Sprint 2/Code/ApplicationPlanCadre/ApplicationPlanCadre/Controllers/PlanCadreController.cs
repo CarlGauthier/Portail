@@ -44,14 +44,10 @@ namespace ApplicationPlanCadre.Controllers
             return View(planCadre);
         }
 
-        public ActionResult PlanCadreDetail(int id)
-
+        public ActionResult Info(int? id)
         {
-            
             return View(db.PlanCadre.Find(id));
         }
-
-        
 
         public ActionResult Create()
         {
