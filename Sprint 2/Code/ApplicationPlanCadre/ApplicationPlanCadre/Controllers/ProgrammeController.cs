@@ -21,10 +21,14 @@ namespace ApplicationPlanCadre.Controllers
             return PartialView(programme);
         }
         // GET: Programme
-
-        public ActionResult PlanCadre()
+        public ActionResult Index()
         {
-            return View("PlanCadre", db.Programme.ToList());
+            return View(db.Programme.ToList());
+        }
+
+        public ActionResult Info(int? idProgramme)
+        {
+            return View( db.Programme.Find(idProgramme));
         }
     }
 }
