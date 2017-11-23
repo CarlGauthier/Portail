@@ -25,20 +25,6 @@ namespace ApplicationPlanCadre.Models
         public string Purpose { get; set; }
     }
 
-    public class SetPasswordViewModel
-    {
-        [Required]
-        [StringLength(100, ErrorMessage = "Le {0} doit compter au moins {2} caractères.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Nouveau mot de passe")]
-        public string NewPassword { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirmer le nouveau mot de passe")]
-        [Compare("NewPassword", ErrorMessage = "Le nouveau mot de passe et le mot de passe de confirmation ne correspondent pas.")]
-        public string ConfirmPassword { get; set; }
-    }
-
     public class ChangePasswordViewModel
     {
         [Required]
@@ -58,29 +44,8 @@ namespace ApplicationPlanCadre.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class AddPhoneNumberViewModel
+    public class EditUserViewModel
     {
-        [Required]
-        [Phone]
-        [Display(Name = "Numéro de téléphone")]
-        public string Number { get; set; }
-    }
 
-    public class VerifyPhoneNumberViewModel
-    {
-        [Required]
-        [Display(Name = "Code")]
-        public string Code { get; set; }
-
-        [Required]
-        [Phone]
-        [Display(Name = "Numéro de téléphone")]
-        public string PhoneNumber { get; set; }
-    }
-
-    public class ConfigureTwoFactorViewModel
-    {
-        public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
 }

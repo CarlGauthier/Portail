@@ -31,6 +31,7 @@ namespace ApplicationPlanCadre.Models
         [Display(Name = "Dernière validation")]
         public DateTime? dateValidation { get; set; }
 
+        [Display(Name = "Dévis ministériel")]
         public int idDevis { get; set; }
 
         public virtual DevisMinistere DevisMinistere { get; set; }

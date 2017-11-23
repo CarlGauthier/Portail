@@ -209,6 +209,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\customAuthorize.cs" />
+    <Compile Include="Helpers\highlightHelper.cs" />
+    <Compile Include="Helpers\PasswordGenerator.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BDPlanCadre.cs" />
     <Compile Include="Models\ContexteRealisation.cs" />
@@ -326,7 +328,6 @@
     <Content Include="Views\ConsoleDevisMinistere\Create.cshtml" />
     <Content Include="Views\ConsoleDevisMinistere\_PartialList.cshtml" />
     <Content Include="Views\Shared\_ConsoleNav.cshtml" />
-    <Content Include="Views\DevisMinistere\Details.cshtml" />
     <Content Include="Views\DevisMinistere\Edit.cshtml" />
     <Content Include="Views\DevisMinistere\_PartialEnonceCompetence.cshtml" />
     <Content Include="Views\DevisMinistere\_TreeView.cshtml" />
@@ -352,6 +353,12 @@
     <Content Include="Views\ConsoleProgramme\_PartialList.cshtml" />
     <Content Include="Views\ConsoleProgramme\Create.cshtml" />
     <Content Include="Views\ConsoleProgramme\Edit.cshtml" />
+    <Content Include="Views\Upload\UploadFile.cshtml" />
+    <Content Include="Views\Recherche\Recherche.cshtml" />
+    <Content Include="Views\Recherche\_AfficherRecherche.cshtml" />
+    <Content Include="Views\Rapport\RapportProgramme.cshtml" />
+    <Content Include="Views\Rapport\Index.cshtml" />
+    <Content Include="Views\Rapport\RapportPlanCadre.cshtml" />
     <Content Include="Views\PlanCadre\Index.cshtml" />
     <Content Include="Views\PlanCadre\_TreeView.cshtml" />
   </ItemGroup>

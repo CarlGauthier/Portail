@@ -3,18 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApplicationPlanCadre.Models
 {
-    public class ExternalLoginConfirmationViewModel
-    {
-        [Required]
-        [Display(Name = "Courriel")]
-        public string Email { get; set; }
-    }
-
-    public class ExternalLoginListViewModel
-    {
-        public string ReturnUrl { get; set; }
-    }
-
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
@@ -35,7 +23,6 @@ namespace ApplicationPlanCadre.Models
 
         [Display(Name = "Mémoriser ce navigateur ?")]
         public bool RememberBrowser { get; set; }
-
         public bool RememberMe { get; set; }
     }
 
@@ -71,7 +58,7 @@ namespace ApplicationPlanCadre.Models
         [StringLength(50)]
         [Display(Name = "Prénom")]
         public string prenom { get; set; }
-
+		
         [Required]
         [EmailAddress]
         [Display(Name = "Courriel")]

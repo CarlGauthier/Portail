@@ -1,16 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Mvc;
+using System.Data;
+using System.Data.Entity;
+using System.IO;
 using System.Net;
-using System.Net.Mail;
+using System.Web.Mvc;
+using ApplicationPlanCadre.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using ApplicationPlanCadre.Models;
+using ApplicationPlanCadre.Helpers;
 using System.Web.Security;
 
 namespace ApplicationPlanCadre.Controllers
@@ -43,6 +47,37 @@ namespace ApplicationPlanCadre.Controllers
             return View(users);
         }
 
+        public ActionResult Edit(ApplicationUser user)
+        {
+            if (user.Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser devisMinistere = UserManager.FindById(user.Id);
+            if (devisMinistere == null)
+            {
+                return HttpNotFound();
+            }
+            return View(devisMinistere);
+        }
+
+        public ActionResult Edit([Bind(Include = "")] ApplicationUser user)
+        {
+            if (docMinistere != null)
+            {
+                if (!UploadFile(docMinistere, devisMinistere))
+                    ModelState.AddModelError("PDF", "Le fichier doit être de type PDF.");
+            }
+            Trim(devisMinistere);
+            if (ModelState.IsValid)
+            {
+                db.Entry(devisMinistere).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Info", "DevisMinistere", new { idDevis = devisMinistere.idDevis });
+            }
+            return View(devisMinistere);
+        }
+
         public ApplicationSignInManager SignInManager
         {
             get
@@ -73,6 +108,7 @@ namespace ApplicationPlanCadre.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Login(string returnUrl)
         {
+            string psw = new PasswordGenerator().GeneratePassword(10);
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Accueil");
@@ -171,46 +207,17 @@ namespace ApplicationPlanCadre.Controllers
         {
             if (ModelState.IsValid)
             {
-                string psw = GeneratePassword();
+                model.password = new PasswordGenerator().GeneratePassword(10);
                 var user = new ApplicationUser { nom = model.nom, prenom = model.prenom, UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, psw);
+                var result = await UserManager.CreateAsync(user, model.password);
                 if (result.Succeeded)
                 {
-                    SendActivationMail(psw);
+                    new MailHelper().SendActivationMail(model);
                     return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);
             }
             return View(model);
-        }
-
-        private string GeneratePassword()
-        {
-            return Membership.GeneratePassword(10, 2);
-        }
-
-        private async void SendActivationMail(string psw)
-        {
-            var message = new MailMessage();
-            message.To.Add(new MailAddress("gauthiercarl1@gmail.com"));  // replace with valid value 
-            message.From = new MailAddress("portaildonotreply@outlook.com");  // replace with valid value
-            message.Subject = "ApplicationPlanCadreCourriel";
-            message.Body = "<p>Wouah mais quel courriel! Voici le mdp: " + psw + "</p>";
-            message.IsBodyHtml = true;
-
-            using (var smtp = new SmtpClient())
-            {
-                var credential = new NetworkCredential
-                {
-                    UserName = "equipe1@dicj.info",
-                    Password = "equipe1"
-                };
-                smtp.Credentials = credential;
-                smtp.Host = "mail.dicj.info";
-                smtp.Port = 465;
-                smtp.EnableSsl = true;
-                await smtp.SendMailAsync(message);
-            }
         }
 
         //
@@ -336,94 +343,6 @@ namespace ApplicationPlanCadre.Controllers
             var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
-        }
-
-        //
-        // POST: /Account/SendCode
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SendCode(SendCodeViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            // Générer le jeton et l'envoyer
-            if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
-            {
-                return View("Error");
-            }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
-        }
-
-        //
-        // GET: /Account/ExternalLoginCallback
-        [AllowAnonymous]
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
-        {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            if (loginInfo == null)
-            {
-                return RedirectToAction("Login");
-            }
-
-            // Connecter cet utilisateur à ce fournisseur de connexion externe si l'utilisateur possède déjà une connexion
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
-                case SignInStatus.Failure:
-                default:
-                    // Si l'utilisateur n'a pas de compte, invitez alors celui-ci à créer un compte
-                    ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
-            }
-        }
-
-        //
-        // POST: /Account/ExternalLoginConfirmation
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Manage");
-            }
-
-            if (ModelState.IsValid)
-            {
-                // Obtenez des informations sur l’utilisateur auprès du fournisseur de connexions externe
-                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-                if (info == null)
-                {
-                    return View("ExternalLoginFailure");
-                }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user);
-                if (result.Succeeded)
-                {
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
-                    if (result.Succeeded)
-                    {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
-                    }
-                }
-                AddErrors(result);
-            }
-
-            ViewBag.ReturnUrl = returnUrl;
-            return View(model);
         }
 
         //

@@ -77,7 +77,7 @@ namespace ApplicationPlanCadre.Controllers
             .Select(dm => new
             {
                 idDevis = dm.idDevis,
-                texte = dm.codeProgramme + "-" + dm.annee + "-" + dm.codeSpecialisation,
+                texte = dm.codeProgramme + "-" + dm.annee + "-" + dm.codeSpecialisation + " • " + dm.specialisation,
             })
             .ToList();
             if(idDevis != null)

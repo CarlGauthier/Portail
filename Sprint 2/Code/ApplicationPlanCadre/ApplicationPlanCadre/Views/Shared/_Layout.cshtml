@@ -33,15 +33,12 @@
                         <p>Pédagogie</p>
                     </a>
                 }
-
         
-                @if (User.IsInRole("Enseignant")||User.IsInRole("Gestionnaire de stage"))
-                {
-                    <a class="tuile">
-                        <span class="glyphicon glyphicon-briefcase"></span>
-                        <p>Stage</p>
-                    </a>
-                }
+                <a class="tuile" href='@Url.Action("Index", "Rapport")'>
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                    <p>Rapport</p>
+                </a>
+
                 @if (User.IsInRole("Admin"))
                 {
                     <a class="tuile" href='@Url.Action("ConsoleAdmin", "Accueil")'>
