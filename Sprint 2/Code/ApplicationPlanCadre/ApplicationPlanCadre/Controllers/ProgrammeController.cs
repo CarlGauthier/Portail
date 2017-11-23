@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ApplicationPlanCadre.Models;
+using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
@@ -16,6 +17,9 @@ namespace ApplicationPlanCadre.Controllers
 
         public ActionResult Index()
         {
+            //test
+            List<Programme> test = new List<Programme>();
+            test=getProgramme.ById(1);
             return View(db.Programme.ToList());
         }
 

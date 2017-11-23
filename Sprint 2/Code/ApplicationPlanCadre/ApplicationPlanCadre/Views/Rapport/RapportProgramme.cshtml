@@ -1,4 +1,5 @@
-﻿@model dynamic
+﻿@*@model dynamic*@
+@model ApplicationPlanCadre.Models.Programme
 @using ApplicationPlanCadre.Models
 
 @{
@@ -130,8 +131,7 @@
 
 <div class="pdf">
 <div class="info-Programme">
-    @foreach (SecondaryProgramme prog in Model.Programme)
-    {
+    
 
         <div class="entete">
            
@@ -144,53 +144,52 @@
             <br />
             <span class="soustitre" style="font-size:45px;">Nom</span>
             <br />
-            <span class="nom">@Html.DisplayFor(x => prog.nom)</span>
+            <span class="nom">@Html.DisplayFor(x => Model.nom)</span>
             <br />
-            @foreach (SecondaryDevisMinistere devis in Model.DevisMinistere)
-            {
+            
                 <span class="soustitre" style="font-size:35px;">Identifiant</span>
                 <br />
-                <span class="codeSpecialisation"> @Html.DisplayFor(x => devis.codeProgramme)-@Html.DisplayFor(x => devis.codeSpecialisation)-@Html.DisplayFor(x => prog.annee)</span>
+                <span class="codeSpecialisation"> @Html.DisplayFor(x => Model.DevisMinistere.codeProgramme)-@Html.DisplayFor(x => Model.DevisMinistere.codeSpecialisation)-@Html.DisplayFor(x => Model.annee)</span>
                 <br />
                 <span class="soustitre" style="font-size:35px;">Spécialisation</span>
                 <br />
-                <span class="specialisation">@Html.DisplayFor(x => devis.specialisation)</span>
+                <span class="specialisation">@Html.DisplayFor(x => Model.DevisMinistere.specialisation)</span>
                     <br />
-            }
+            
 
         </div>
-        foreach (SecondaryDevisMinistere devis in Model.DevisMinistere)
-        {
+        
+        
             <div class="info-left">
                 <span class="soustitre">Sanction</span>
                 <br />
-                <span class="data">@Html.DisplayFor(x => devis.sanction)</span>
+                <span class="data">@Html.DisplayFor(x => Model.DevisMinistere.sanction)</span>
                 <br />
                 <span class="soustitre">Nombre d'unités</span>
                 <br />
-                <span class="data">@Html.DisplayFor(x => devis.nbUnite) unités</span>
+                <span class="data">@Html.DisplayFor(x => Model.DevisMinistere.nbUnite) unités</span>
                 <br />
                 <span class="soustitre">Condition d'admission</span>
                 <br />
-                <span class="data">@Html.DisplayFor(x => devis.condition)</span>
+                <span class="data">@Html.DisplayFor(x => Model.DevisMinistere.condition)</span>
             </div>
             <div class="info-right">
                 <span class="soustitre">Heures de la formation gérérale</span>
                 <br />
-                <span class="data">@Html.DisplayFor(x => devis.nbHeureFrmGenerale) h</span>
+                <span class="data">@Html.DisplayFor(x => Model.DevisMinistere.nbHeureFrmGenerale) h</span>
                 <br />
                 <span class="soustitre">Heures de la formation spécifique</span>
                 <br />
-                <span class="data">@Html.DisplayFor(x => devis.nbHeureFrmSpecifique) h</span>
+                <span class="data">@Html.DisplayFor(x => Model.DevisMinistere.nbHeureFrmSpecifique)</span>
                 <br />
                 <span class="soustitre">Total</span>
                 <br />
-                <span class="data">@Html.DisplayFor(x => devis.total) h</span>
+                @*<span class="data">@Html.DisplayFor(x => Model.DevisMinistere) h</span>*@
                 <br />
             </div>
-        }
+        
 
-    }
+    
 
 </div>
 
@@ -214,7 +213,7 @@
         
         
         
-        @foreach (SecondaryEnonceCompetence enonceCmpt in Model.EnonceCompetence)
+        @foreach (EnonceCompetence enonceCmpt in Model.DevisMinistere.EnonceCompetence)
         {
             <tr>
                 <td>
@@ -230,7 +229,7 @@
                            <span class="context">Contextes de réalisations</span>
                             <ul>
                                 
-                                @foreach (SecondaryContexteRealisation contexteReal in Model.ContexteRealisation)
+                                @foreach (ContexteRealisation contexteReal in enonceCmpt.ContexteRealisation)
                                 {
                                     if (enonceCmpt.idCompetence == contexteReal.idCompetence)
                                     {
@@ -249,7 +248,7 @@
                             <span class="elemCompt">Élements de compétences</span>
                             <ul>
                                 
-                                @foreach (SecondaryElementCompetence element in Model.ElementCompetence)
+                                @foreach (ElementCompetence element in enonceCmpt.ElementCompetence)
                                 {
 
                                     if (element.idCompetence == enonceCmpt.idCompetence)
