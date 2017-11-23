@@ -29,21 +29,6 @@ namespace ApplicationPlanCadre.Controllers
             return View(db.PlanCadre.ToList());
         }
 
-
-        public ActionResult Create(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PlanCadre planCadre = db.PlanCadre.Find(id);
-            if (planCadre == null)
-            {
-                return HttpNotFound();
-            }
-            return View(planCadre);
-        }
-
         public ActionResult Info(int? id)
         {
             return View(db.PlanCadre.Find(id));
@@ -51,7 +36,6 @@ namespace ApplicationPlanCadre.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.PlanCadre = new SelectList(db.PlanCadre, "idPlanCadre", "titreCours");
             return View();
         }
     }

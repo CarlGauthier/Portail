@@ -215,7 +215,7 @@
                     </tbody>
                 </table>
 
-                @foreach (PlanCadreEnonce a in Model.PlanCadreEnonce)
+                @foreach (var planCadreEnonce in Model.PlanCadreEnonce)
                 {
                 <!-- Affichage en boucle des tableau des ennoncer compétence-->
                     <div style="margin-top:50px;">
@@ -223,7 +223,7 @@
                             <thead>
                                 <tr>
                                     <td colspan="4">
-                                        @Html.DisplayFor(x => a.EnonceCompetence.description) (@Html.DisplayFor(x => a.EnonceCompetence.codeCompetence))
+                                        @Html.DisplayFor(x => planCadreEnonce.EnonceCompetence.description) (@Html.DisplayFor(x => planCadreEnonce.EnonceCompetence.codeCompetence))
                                     </td>
                                 </tr>
                                 <tr>
@@ -242,28 +242,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (ElementCompetence elementCompt in a.EnonceCompetence.ElementCompetence)
+                                @foreach (var planCadreElement in Model.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == planCadreEnonce.idCompetence))
                                 {
                                     //if (b.idCompetence == elementCompt.idCompetence)
                                     //{
                                     <tr>
                                         <td width="25%">
-                                            @Html.DisplayFor(x => elementCompt.numero)<span>. </span>@Html.DisplayFor(x => elementCompt.description)
+                                            @Html.DisplayFor(x => planCadreElement.ElementCompetence.numero)<span>. </span>@Html.DisplayFor(x => planCadreElement.ElementCompetence.description)
                                             <br />
                                         </td>
                                         <td width="35%">
 
-                                            @foreach (CriterePerformance criterePerf in elementCompt.CriterePerformance)
+                                            @foreach (var criterePerformance in planCadreElement.ElementCompetence.CriterePerformance)
                                             {
-                                                if (elementCompt.idElement == criterePerf.idElement)
+                                                if (planCadreElement.ElementCompetence.idElement == criterePerformance.idElement)
                                                 {
 
                                                     <div style="margin-top:15px;">
                                                         <div class="critere-left">
-                                                            @Html.DisplayFor(x => elementCompt.numero)<span>.</span>@Html.DisplayFor(x => criterePerf.numero)
+                                                            @Html.DisplayFor(x => planCadreElement.ElementCompetence.numero)<span>.</span>@Html.DisplayFor(x => criterePerformance.numero)
                                                         </div>
                                                         <div class="critere-right">
-                                                            @Html.DisplayFor(x => criterePerf.description)
+                                                            @Html.DisplayFor(x => criterePerformance.description)
                                                         </div>
                                                         <div id="clear"></div>
                                                     </div>
