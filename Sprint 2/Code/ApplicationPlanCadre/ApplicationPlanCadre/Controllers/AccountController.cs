@@ -14,6 +14,7 @@ using ApplicationPlanCadre.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using ApplicationPlanCadre.Models;
 using ApplicationPlanCadre.Helpers;
 using System.Web.Security;
 
@@ -219,7 +220,7 @@ namespace ApplicationPlanCadre.Controllers
             }
             return View(model);
         }
-
+		
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

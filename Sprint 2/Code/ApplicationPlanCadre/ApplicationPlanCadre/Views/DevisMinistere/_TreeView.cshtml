@@ -18,7 +18,7 @@
         </div>
         <div id=@p_id class="collapse">
             <div class="tree-view-item-container">
-                <div class="tree-view-header">Énoncés de compétences</div>
+                <div class="tree-view-header">Énoncés de compétence</div>
                 @foreach (var enonceCompetence in devisMinistere.EnonceCompetence.OrderBy(ec => ec.codeCompetence))
                 {
                     string enc_id = "enc" + enonceCompetence.idCompetence.ToString();
@@ -36,7 +36,7 @@
                     </div>
                     <div id=@enc_id class="collapse">
                         <div class="tree-view-item-container">
-                            <div class="tree-view-header">Éléments de compétences</div>
+                            <div class="tree-view-header">Éléments de compétence</div>
                             @foreach (var elementCompetence in enonceCompetence.ElementCompetence.OrderBy(elc => elc.numero))
                             {
                                 string el_item = "el" + elementCompetence.idElement.ToString() + "item";

@@ -167,14 +167,6 @@ namespace ApplicationPlanCadre.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<PlanCadre>()
-                .Property(e => e.elementsConnaissance)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PlanCadre>()
-                .Property(e => e.activiteApprentissage)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PlanCadre>()
                 .Property(e => e.environnementPhys)
                 .IsUnicode(false);
 
@@ -196,6 +188,14 @@ namespace ApplicationPlanCadre.Models
                 .HasMany(e => e.PlanCadreEnonce)
                 .WithRequired(e => e.PlanCadre)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PlanCadreElement>()
+                .Property(e => e.elementsConnaissance)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PlanCadreElement>()
+                .Property(e => e.activiteApprentissage)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Programme>()
                 .Property(e => e.nom)

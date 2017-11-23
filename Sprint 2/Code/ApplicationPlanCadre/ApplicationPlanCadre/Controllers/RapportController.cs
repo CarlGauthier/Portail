@@ -39,7 +39,7 @@ namespace ApplicationPlanCadre.Controllers
             }
             return planList;
         }
-
+		
         private List<Programme> GetCodeProgrammeSelectList()
         {
             List<Programme> progList = new List<Programme>();
@@ -54,7 +54,7 @@ namespace ApplicationPlanCadre.Controllers
             }
             return progList;
         }
-
+		
         public ActionResult RapportPlanCadre (int id)
         {
             List<PlanCadre> planListHolder = new List<PlanCadre>();
@@ -152,6 +152,7 @@ namespace ApplicationPlanCadre.Controllers
                     sanction = devisMins.sanction,
                     codeProgramme = devisMins.codeProgramme,
                     total = Convert.ToInt32((devisMins.nbHeureFrmGenerale + devisMins.nbHeureFrmSpecifique))
+                    total =Convert.ToInt32((devisMins.nbHeureFrmGenerale + devisMins.nbHeureFrmSpecifique))
                 });
             }
             return devisList;
@@ -194,7 +195,7 @@ namespace ApplicationPlanCadre.Controllers
             }
             return elementList;
         }
-
+		
         private List<SecondaryContexteRealisation> getContexteRealisation(int x)
         {
             List<SecondaryContexteRealisation> contextList = new List<SecondaryContexteRealisation>();

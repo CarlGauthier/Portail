@@ -11,7 +11,7 @@ using ApplicationPlanCadre.Models;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    public class PCInstanceController : Controller
+    public class PlanCadreController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
 
