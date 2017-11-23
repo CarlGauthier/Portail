@@ -10,7 +10,7 @@ using System.Data.Entity;
 using ApplicationPlanCadre.Models;
 using Rotativa;
 using Rotativa.Options;
-using ApplicationPlanCadre.Helpers;
+
 
 namespace ApplicationPlanCadre.Controllers
 {
