@@ -19,6 +19,22 @@ namespace ApplicationPlanCadre.Models
         [Key]
         public int idDevis { get; set; }
 
+        public string nom
+        {
+            get
+            {
+                return codeDevis + " • " + specialisation;
+            }
+        }
+
+        public string codeDevis
+        {
+            get
+            {
+                return this.EnteteProgramme.codeProgramme + "-" + annee + "-" + codeSpecialisation;
+            }
+        }
+
         [Required]
         [StringLength(4)]
         [Display(Name = "Année")]
