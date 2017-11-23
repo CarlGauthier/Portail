@@ -24,17 +24,13 @@ namespace ApplicationPlanCadre.Controllers
         }
 
         // GET: PCInstance
-        public ActionResult IndexFabrice()
-        {
-            return View(db.PlanCadre.ToList());
-        }
         public ActionResult Index()
         {
             return View(db.PlanCadre.ToList());
         }
 
 
-        public ActionResult PlanCadreDetailFabrice(int id)
+        public ActionResult Create(int id)
         {
             if (id == null)
             {
@@ -270,6 +266,12 @@ namespace ApplicationPlanCadre.Controllers
                 });
             }
             return planList;
+        }
+
+        public ActionResult Create()
+        {
+            ViewBag.PlanCadre = new SelectList(db.PlanCadre, "idPlanCadre", "titreCours");
+            return View();
         }
     }
 }

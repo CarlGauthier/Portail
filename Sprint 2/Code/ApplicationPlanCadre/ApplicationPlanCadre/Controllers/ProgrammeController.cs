@@ -11,7 +11,7 @@ using ApplicationPlanCadre.Models;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    public class InstanceProgrammePCController : Controller
+    public class ProgrammeController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
         public ActionResult _TreeView()
@@ -20,11 +20,11 @@ namespace ApplicationPlanCadre.Controllers
 
             return PartialView(programme);
         }
+        // GET: Programme
 
-        // GET: InstancePrograme
-        public ActionResult Index()
+        public ActionResult PlanCadre()
         {
-            return View("Index",db.Programme.ToList());
+            return View("PlanCadre", db.Programme.ToList());
         }
     }
 }

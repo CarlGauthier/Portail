@@ -14,16 +14,17 @@
             <h3>@Html.DisplayFor(model => Model.Programme.DevisMinistere.EnteteProgramme.codeProgramme)-@Html.DisplayFor(model => Model.Programme.DevisMinistere.annee)-@Html.DisplayFor(model => Model.Programme.DevisMinistere.codeSpecialisation)</h3>
 
             <hr />
-            <h2>Cour</h2>
-            <p>@Html.DisplayFor(model => Model.titreCours)</p>
-            <p>@Html.DisplayFor(model => Model.nbHeureTheorie)-@Html.DisplayFor(model => Model.nbHeurePratique)-@Html.DisplayFor(model => Model.nbHeureDevoir)</p>
-            <p>@Html.DisplayFor(model => Model.numeroCours)</p>
         </div>
 
         <div id="info-detail">
             <div class="row">
                 <div class="col-md-6">
                     <div class="champ">
+                        <h2>Cour</h2>
+                        <p>@Html.DisplayFor(model => Model.titreCours)</p>
+                        <p>@Html.DisplayFor(model => Model.nbHeureTheorie)-@Html.DisplayFor(model => Model.nbHeurePratique)-@Html.DisplayFor(model => Model.nbHeureDevoir)</p>
+                        <p>@Html.DisplayFor(model => Model.numeroCours)</p>
+
                         <h2>Compétences</h2>
                         @foreach (var competence in Model.PlanCadreEnonce)
                         {
@@ -33,9 +34,7 @@
 
                             <p>&emsp;@Html.DisplayNameFor(model => competence.ponderationEnHeure): @Html.DisplayFor(model => competence.ponderationEnHeure)</p>
                         }
-                    </div>
-
-                    <div class="champ">
+                    </div>                   <div class="champ">
                         <h2>Indication pédagogique</h2>
                         <p>@Html.DisplayFor(model => Model.indicationPedago)</p>
                     </div>
