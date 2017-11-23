@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ApplicationPlanCadre.Models.PlanCadre>
 
 <div id="tree-view">
-    @*<div class="tree-view-header">Plan cadre</div>
+    <div class="tree-view-header">Plan cadre</div>
     @foreach (var planCadre in Model.OrderBy(m => m.idProgramme))
     {
         string p_id = "p" + planCadre.idPlanCadre.ToString();
@@ -13,37 +13,36 @@
             else {
                 <div class="no-button"><!----></div> }
             <a href='@Url.Action("Info", "DevisMinistere", new { idPlanCadre = planCadre.idPlanCadre })'>
-                @Html.DisplayFor(p => planCadre.Programme.idProgramme)-@Html.DisplayFor(model => planCadre.Programme.annee)-@Html.DisplayFor(model => planCadre.Programme.DevisMinistere.codeSpecialisation) • 
                 @Html.DisplayFor(p => planCadre.titreCours)
             </a>
         </div>
         <div id=@p_id class="collapse">
             <div class="tree-view-item-container">
-                <div class="tree-view-header">Compétence du Plan Cadre</div>
+                <div class="tree-view-header">Énoncés de compétence</div>
                 @foreach (var planCadreEnonce in planCadre.PlanCadreEnonce.OrderBy(ec => ec.idPlanCadreEnonce))
                 {
                     string enc_id = "enc" + planCadreEnonce.idPlanCadreEnonce.ToString();
                     string enc_item = enc_id + "item";
                     string enc_target = "#" + enc_id;
                     <div id=@enc_item class="tree-view-item">
-                        @if (planCadreEnonce.ElementCompetence.Count > 0) {
+                        @if (planCadre.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == planCadreEnonce.idCompetence).Count() > 0) {
                             <div class="collapse-button" data-toggle="collapse" data-target=@enc_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
                         else { 
                             <div class="no-button"><!----></div> }
-                        <a href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = enonceCompetence.idCompetence })'>
-                            @Html.DisplayFor(enc => enonceCompetence.codeCompetence) • 
-                            @Html.DisplayFor(enc => enonceCompetence.description)
+                        <a href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = planCadreEnonce.idCompetence })'>
+                            @Html.DisplayFor(enc => planCadreEnonce.EnonceCompetence.codeCompetence) • 
+                            @Html.DisplayFor(enc => planCadreEnonce.EnonceCompetence.description)
                         </a>
                     </div>
                     <div id=@enc_id class="collapse">
                         <div class="tree-view-item-container">
-                            <div class="tree-view-header">Éléments de compétences</div>
-                            @foreach (var elementCompetence in enonceCompetence.ElementCompetence.OrderBy(elc => elc.numero))
+                            <div class="tree-view-header">Éléments de compétence</div>
+                            @foreach (var planCadreElement in planCadre.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == planCadreEnonce.idCompetence))
                             {
-                                string el_item = "el" + elementCompetence.idElement.ToString() + "item";
+                                string el_item = "el" + planCadreElement.idElement.ToString() + "item";
                                 <div id=@el_item class="tree-view-item">
                                     <div class="no-button"><!----></div>
-                                    <a href='@Url.Action("Info", "ElementCompetence", new { idElement = elementCompetence.idElement })'>@Html.DisplayFor(elc => elementCompetence.description)</a>
+                                    <a href='@Url.Action("Info", "ElementCompetence", new { idElement = planCadreElement.idElement })'>@Html.DisplayFor(elc => planCadreElement.ElementCompetence.description)</a>
                                 </div>
                             }
                         </div>
@@ -52,5 +51,5 @@
                 }
             </div>
         </div>
-    }*@
+    }
 </div>

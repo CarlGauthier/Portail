@@ -10,8 +10,6 @@ CREATE TABLE PlanCadre
     prealableAbs            VARCHAR(300)    NULL,
     prealableRel            VARCHAR(300)    NULL,
     indicationPedago        TEXT			NULL,
-    elementsConnaissance    TEXT			NULL,
-    activiteApprentissage   TEXT			NULL,
     environnementPhys       TEXT			NULL,
 	ressource               TEXT			NULL,
 	nbHeureTheorie          INT             NULL,
@@ -42,6 +40,9 @@ GO
 CREATE TABLE PlanCadreElement
 (
     idPlanCadreElement      INT             NOT NULL        IDENTITY(1,1),
+
+	elementsConnaissance    TEXT			NULL,
+    activiteApprentissage   TEXT			NULL,
 
     idPlanCadre             INT             NOT NULL,       --FK
     idElement               INT             NOT NULL,       --FK
