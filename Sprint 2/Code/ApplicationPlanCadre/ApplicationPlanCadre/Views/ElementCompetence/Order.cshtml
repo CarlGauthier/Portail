@@ -16,7 +16,7 @@
                     @Html.DisplayNameFor(model => Model.ElementCompetence.First().numero)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => Model.ElementCompetence.First().element)
+                    @Html.DisplayNameFor(model => Model.ElementCompetence.First().description)
                 </th>
                 <th class="action-cell-header">
                     <b>Déplacer</b>
@@ -30,7 +30,7 @@
                         @Html.DisplayFor(el => elementCompetence.numero)
                     </td>
                     <td>
-                        @Html.DisplayFor(el => elementCompetence.element)
+                        @Html.DisplayFor(el => elementCompetence.description)
                     </td>
                     <td class="action-cell">
                         <a href='@Url.Action("MoveUp", "ElementCompetence", new { idElement = elementCompetence.idElement })'>

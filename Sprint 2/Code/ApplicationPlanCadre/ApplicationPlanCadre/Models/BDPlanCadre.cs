@@ -20,6 +20,7 @@ namespace ApplicationPlanCadre.Models
         public virtual DbSet<EnonceCompetence> EnonceCompetence { get; set; }
         public virtual DbSet<EnteteProgramme> EnteteProgramme { get; set; }
         public virtual DbSet<GrilleCours> GrilleCours { get; set; }
+        public virtual DbSet<TypePlanCadre> TypePlanCadre { get; set; }
         public virtual DbSet<PlanCadre> PlanCadre { get; set; }
         public virtual DbSet<Programme> Programme { get; set; }
         public virtual DbSet<Session> Session { get; set; }
@@ -140,6 +141,11 @@ namespace ApplicationPlanCadre.Models
                 .WithRequired(e => e.GrilleCours)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<TypePlanCadre>()
+                .HasMany(e => e.PlanCadre)
+                .WithRequired(e => e.TypePlanCadre)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<PlanCadre>()
                 .Property(e => e.numeroCours)
                 .IsUnicode(false);
@@ -158,14 +164,6 @@ namespace ApplicationPlanCadre.Models
 
             modelBuilder.Entity<PlanCadre>()
                 .Property(e => e.indicationPedago)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PlanCadre>()
-                .Property(e => e.elementsConnaissance)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PlanCadre>()
-                .Property(e => e.activiteApprentissage)
                 .IsUnicode(false);
 
             modelBuilder.Entity<PlanCadre>()
@@ -190,6 +188,14 @@ namespace ApplicationPlanCadre.Models
                 .HasMany(e => e.PlanCadreEnonce)
                 .WithRequired(e => e.PlanCadre)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PlanCadreElement>()
+                .Property(e => e.elementsConnaissance)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PlanCadreElement>()
+                .Property(e => e.activiteApprentissage)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Programme>()
                 .Property(e => e.nom)

@@ -21,6 +21,7 @@ namespace ApplicationPlanCadre.Models
 
         [Required]
         [StringLength(300)]
+        [Display(Name = "Élément de compétence")]
         public string description { get; set; }
 
         [Display(Name = "Numéro")]

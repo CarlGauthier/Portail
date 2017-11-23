@@ -19,10 +19,10 @@
             <hr />
 
             <div class="form-group">
-                @Html.LabelFor(model => model.element, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.element, new { @rows = "3", @maxlength = "300", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.element, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.description, new { @rows = "3", @maxlength = "300", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
                 </div>
             </div>
 

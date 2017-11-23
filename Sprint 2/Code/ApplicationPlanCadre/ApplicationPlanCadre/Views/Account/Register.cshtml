@@ -17,33 +17,21 @@
             <hr />
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <div class="col-md-6">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                <div class="col-md-4">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                </div>
-
-                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                <div class="col-md-4">
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="form-group">
                 @Html.LabelFor(m => m.prenom, new { @class = "col-md-2 control-label" })
                 <div class="col-md-4">
                     @Html.TextBoxFor(m => m.prenom, new { @class = "form-control" })
                 </div>
 
-                @Html.LabelFor(m => m.nom, new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(m => m.nom, new { @class = "col-md-1 control-label" })
                 <div class="col-md-4">
                     @Html.TextBoxFor(m => m.nom, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                 </div>
             </div>
 

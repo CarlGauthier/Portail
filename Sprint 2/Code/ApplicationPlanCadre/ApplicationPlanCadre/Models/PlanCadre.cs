@@ -56,6 +56,8 @@ namespace ApplicationPlanCadre.Models
 
         public int idProgramme { get; set; }
 
+        public int idType { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cours> Cours { get; set; }
 
@@ -66,5 +68,7 @@ namespace ApplicationPlanCadre.Models
         public virtual ICollection<PlanCadreEnonce> PlanCadreEnonce { get; set; }
 
         public virtual Programme Programme { get; set; }
+
+        public virtual TypePlanCadre TypePlanCadre { get; set; }
     }
 }

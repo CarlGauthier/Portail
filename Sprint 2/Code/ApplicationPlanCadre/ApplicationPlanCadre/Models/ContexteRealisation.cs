@@ -14,6 +14,7 @@ namespace ApplicationPlanCadre.Models
 
         [Required]
         [StringLength(300)]
+        [Display(Name = "Contexte de réalisation")]
         public string description { get; set; }
 
         public int numero { get; set; }

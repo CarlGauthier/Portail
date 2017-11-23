@@ -10,8 +10,6 @@ CREATE TABLE PlanCadre
     prealableAbs            VARCHAR(300)    NULL,
     prealableRel            VARCHAR(300)    NULL,
     indicationPedago        TEXT			NULL,
-    elementsConnaissance    TEXT			NULL,
-    activiteApprentissage   TEXT			NULL,
     environnementPhys       TEXT			NULL,
 	ressource               TEXT			NULL,
 	nbHeureTheorie          INT             NULL,
@@ -19,8 +17,21 @@ CREATE TABLE PlanCadre
 	nbHeureDevoir           INT             NULL,
 
     idProgramme				INT             NOT NULL,       --FK
+	idType					INT				NOT NULL,		--FK
 
     PRIMARY KEY(idPlanCadre)
+);
+
+IF OBJECT_ID ('TypePlanCadre') IS NOT NULL
+DROP TABLE TypePlanCadre
+GO
+CREATE TABLE TypePlanCadre
+(
+    idType					INT             NOT NULL        IDENTITY(1,1),
+
+    nom			            VARCHAR(20)     NOT NULL,
+
+	PRIMARY KEY(idType)
 );
 
 IF OBJECT_ID ('PlanCadreElement') IS NOT NULL
@@ -29,6 +40,9 @@ GO
 CREATE TABLE PlanCadreElement
 (
     idPlanCadreElement      INT             NOT NULL        IDENTITY(1,1),
+
+	elementsConnaissance    TEXT			NULL,
+    activiteApprentissage   TEXT			NULL,
 
     idPlanCadre             INT             NOT NULL,       --FK
     idElement               INT             NOT NULL,       --FK

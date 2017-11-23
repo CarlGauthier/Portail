@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ApplicationPlanCadre.Models;
+using ApplicationPlanCadre.Helpers;
+using System.Web.Security;
 
 namespace ApplicationPlanCadre.Controllers
 {
@@ -32,8 +34,12 @@ namespace ApplicationPlanCadre.Controllers
 
         public ActionResult Index()
         {
-            var user = db.Users.ToList();
-            return View(user);
+            var users = db.Users.ToList();
+            foreach (var user in users)
+            {
+                user.roleNames = UserManager.GetRoles(user.Id);
+            }
+            return View(users);
         }
 
         public ApplicationSignInManager SignInManager
@@ -164,15 +170,22 @@ namespace ApplicationPlanCadre.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.psw = GeneratePassword();
                 var user = new ApplicationUser { nom = model.nom, prenom = model.prenom, UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var result = await UserManager.CreateAsync(user, model.psw);
                 if (result.Succeeded)
                 {
+                    new MailHelper().SendActivationMail(model);
                     return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);
             }
             return View(model);
+        }
+
+        private string GeneratePassword()
+        {
+            return Membership.GeneratePassword(10, 0);
         }
 
         //

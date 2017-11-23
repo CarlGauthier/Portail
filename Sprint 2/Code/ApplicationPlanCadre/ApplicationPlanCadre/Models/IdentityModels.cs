@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
@@ -19,6 +20,9 @@ namespace ApplicationPlanCadre.Models
         [StringLength(50)]
         [Display(Name = "Prénom")]
         public string prenom { get; set; }
+
+        [Display(Name = "Rôles")]
+        public IEnumerable<string> roleNames { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

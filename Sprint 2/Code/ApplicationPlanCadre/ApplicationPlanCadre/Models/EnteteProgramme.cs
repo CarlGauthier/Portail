@@ -17,10 +17,12 @@ namespace ApplicationPlanCadre.Models
 
         [Key]
         [StringLength(3)]
+        [Display(Name = "Code")]
         public string codeProgramme { get; set; }
 
         [Required]
         [StringLength(200)]
+        [Display(Name = "Nom")]
         public string nom { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
