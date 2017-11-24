@@ -208,7 +208,6 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\DevisMinistereController.cs" />
-    <Compile Include="Controllers\ProgrammeController.cs" />
     <Compile Include="Controllers\RapportController.cs" />
     <Compile Include="Controllers\RechercheController.cs" />
     <Compile Include="Controllers\PlanCadreController.cs" />
@@ -382,13 +381,10 @@
     <Content Include="Views\ConsoleProgramme\_PartialList.cshtml" />
     <Content Include="Views\ConsoleProgramme\Create.cshtml" />
     <Content Include="Views\ConsoleProgramme\Edit.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Programme\_TreeView.cshtml" />
     <Content Include="Views\PlanCadre\Info.cshtml" />
     <Content Include="Views\Programme\Index.cshtml" />
     <Content Include="Views\PlanCadre\Create.cshtml" />
-    <Content Include="Views\Programme\Info.cshtml" />
-=======
     <Content Include="Views\Programme\Info.cshtml" />
     <Content Include="Views\Upload\UploadFile.cshtml" />
     <Content Include="Views\Recherche\Recherche.cshtml" />
@@ -398,7 +394,7 @@
     <Content Include="Views\Rapport\RapportPlanCadre.cshtml" />
     <Content Include="Views\PlanCadre\Index.cshtml" />
     <Content Include="Views\PlanCadre\_TreeView.cshtml" />
->>>>>>> b7dcd330ece5bd82c19f5010f781f089e6bd1908
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

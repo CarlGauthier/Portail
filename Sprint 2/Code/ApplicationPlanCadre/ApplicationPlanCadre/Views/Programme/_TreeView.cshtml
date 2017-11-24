@@ -2,6 +2,7 @@
 
 <div id="tree-view">
     <div class="tree-view-header">Plan cadre</div>
+    @*
     @foreach (var planCadre in Model.OrderBy(m => m.idProgramme))
     {
         string p_id = "p" + planCadre.idPlanCadre.ToString();
@@ -27,10 +28,10 @@
                     <div id=@enc_item class="tree-view-item">
                         @if (planCadre.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == planCadreEnonce.idCompetence).Count() > 0) {
                             <div class="collapse-button" data-toggle="collapse" data-target=@enc_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
-                        else { 
+                        else {
                             <div class="no-button"><!----></div> }
                         <a href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = planCadreEnonce.idCompetence })'>
-                            @Html.DisplayFor(enc => planCadreEnonce.EnonceCompetence.codeCompetence) • 
+                            @Html.DisplayFor(enc => planCadreEnonce.EnonceCompetence.codeCompetence) •
                             @Html.DisplayFor(enc => planCadreEnonce.EnonceCompetence.description)
                         </a>
                     </div>
@@ -50,6 +51,8 @@
 
                 }
             </div>
+
         </div>
     }
+    *@
 </div>

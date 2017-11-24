@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-<<<<<<< HEAD
 using System.IO;
-=======
->>>>>>> b7dcd330ece5bd82c19f5010f781f089e6bd1908
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,7 +14,6 @@ namespace ApplicationPlanCadre.Controllers
     public class ProgrammeController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
-<<<<<<< HEAD
         public ActionResult _TreeView()
         {
             var programme = db.Programme.ToList();
@@ -25,22 +21,14 @@ namespace ApplicationPlanCadre.Controllers
             return PartialView(programme);
         }
         // GET: Programme
-=======
-
->>>>>>> b7dcd330ece5bd82c19f5010f781f089e6bd1908
         public ActionResult Index()
         {
             return View(db.Programme.ToList());
         }
-
-<<<<<<< HEAD
         public ActionResult Info(int? idProgramme)
         {
             return View( db.Programme.Find(idProgramme));
         }
-    }
-}
-=======
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -134,4 +122,3 @@ namespace ApplicationPlanCadre.Controllers
         }
     }
 }
->>>>>>> b7dcd330ece5bd82c19f5010f781f089e6bd1908
