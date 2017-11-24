@@ -37,12 +37,6 @@ namespace ApplicationPlanCadre.Models
         public string indicationPedago { get; set; }
 
         [Column(TypeName = "text")]
-        public string elementsConnaissance { get; set; }
-
-        [Column(TypeName = "text")]
-        public string activiteApprentissage { get; set; }
-
-        [Column(TypeName = "text")]
         public string environnementPhys { get; set; }
 
         [Column(TypeName = "text")]
