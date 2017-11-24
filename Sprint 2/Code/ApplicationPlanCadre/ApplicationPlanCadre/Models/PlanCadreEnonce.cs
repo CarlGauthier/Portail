@@ -31,5 +31,10 @@ namespace ApplicationPlanCadre.Models
         public virtual EnonceCompetence EnonceCompetence { get; set; }
 
         public virtual PlanCadre PlanCadre { get; set; }
+
+        public ICollection<PlanCadreElement> GetPlanCadreElements()
+        {
+            return PlanCadre.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == planCadreEnonce.idCompetence);
+        }
     }
 }
