@@ -214,6 +214,7 @@ namespace ApplicationPlanCadre.Controllers
         //    }
         //    return critereList;
         //}
+
         private List<SecondaryContexteRealisation> getContexteRealisation(int x)
         {
             List<SecondaryContexteRealisation> contextList = new List<SecondaryContexteRealisation>();
@@ -233,39 +234,10 @@ namespace ApplicationPlanCadre.Controllers
             }
             return contextList;
         }
+
         private List<PlanCadre> getPlanCadre(int id)
         {
-            List<PlanCadre> planList = new List<PlanCadre>();
-            var liste = from a in db.PlanCadre
-                        where id==a.idPlanCadre
-                        select a;
-            foreach (PlanCadre plan in liste)
-            {
-                planList.Add(new PlanCadre
-                {
-                    idPlanCadre = plan.idPlanCadre,
-                    numeroCours = plan.numeroCours,
-                    titreCours = plan.titreCours,
-                    prealableAbs = plan.prealableAbs,
-                    prealableRel = plan.prealableRel,
-                    indicationPedago = plan.indicationPedago,
-                    elementsConnaissance = plan.elementsConnaissance,
-                    activiteApprentissage = plan.activiteApprentissage,
-                    environnementPhys = plan.environnementPhys,
-                    ressource = plan.ressource,
-                    nbHeureTheorie = plan.nbHeureTheorie,
-                    nbHeurePratique = plan.nbHeurePratique,
-                    nbHeureDevoir = plan.nbHeureDevoir,
-                    idProgramme = plan.idProgramme,
-                    
-                });
-            }
-            return planList;
+            return db.PlanCadre.ToList();
         }
-
-        
-
-
-        
     }
 }
