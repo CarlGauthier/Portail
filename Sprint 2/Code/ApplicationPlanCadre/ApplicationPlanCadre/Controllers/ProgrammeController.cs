@@ -17,9 +17,8 @@ namespace ApplicationPlanCadre.Controllers
 
         public ActionResult Index()
         {
-            //test
-            List<Programme> test = new List<Programme>();
-            test=getProgramme.ById(1);
+            
+            
             return View(db.Programme.ToList());
         }
 

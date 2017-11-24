@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "RapportPlanCadre";
     Layout = null;
-
+    string carriageReturnText;
 }
 
 <style>
@@ -166,7 +166,7 @@
            
             <!-- début du corps du plan cadre-->
             <div class="corps">
-                <table>
+                <table style="margin-bottom:400px">
                     <thead>
                         <tr>
                             <td style="width:20%;">
@@ -236,8 +236,7 @@
                             <tbody>
                                 @foreach (ElementCompetence elementCompt in a.EnonceCompetence.ElementCompetence)
                                 {
-                                    //if (b.idCompetence == elementCompt.idCompetence)
-                                    //{
+                                    
                                         <tr>
                                             <td width="25%">
                                                 @Html.DisplayFor(x => elementCompt.numero)<span>. </span>@Html.DisplayFor(x => elementCompt.description)
@@ -245,24 +244,42 @@
                                             </td>
                                             <td width="35%">
 
-                                                    @foreach (CriterePerformance criterePerf in elementCompt.CriterePerformance)
+                                                @foreach (CriterePerformance criterePerf in elementCompt.CriterePerformance)
+                                                {
+                                                    if (elementCompt.idElement == criterePerf.idElement)
                                                     {
-                                                        if (elementCompt.idElement == criterePerf.idElement)
-                                                        {
 
-                                                            <div style="margin-top:15px;">
-                                                                <div class="critere-left">
-                                                                    @Html.DisplayFor(x => elementCompt.numero)<span>.</span>@Html.DisplayFor(x => criterePerf.numero)
-                                                                </div>
-                                                                <div class="critere-right">
-                                                                    @Html.DisplayFor(x => criterePerf.description)
-                                                                </div>
-                                                                <div id="clear"></div>
+                                                        <div style="margin-top:15px;">
+                                                            <div class="critere-left">
+                                                                @Html.DisplayFor(x => elementCompt.numero)<span>.</span>@Html.DisplayFor(x => criterePerf.numero)
                                                             </div>
-                                                        }
+                                                            <div class="critere-right">
+                                                                @Html.DisplayFor(x => criterePerf.description)
+                                                            </div>
+                                                            <div id="clear"></div>
+                                                        </div>
                                                     }
-
+                                                }
                                             </td>
+
+                                                @foreach (PlanCadreElement planCadreElement in elementCompt.PlanCadreElement)
+                                                {
+                                                    if (elementCompt.idElement == planCadreElement.idElement)
+                                                    {
+                                                        if (planCadreElement.elementsConnaissance != null)
+                                                        {
+                                                            carriageReturnText = planCadreElement.elementsConnaissance.ToString();
+                                                            carriageReturnText = carriageReturnText.Replace("\r\n", "<br>");
+                                                            carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp");
+                                                            <td>
+                                                                @Html.Raw(carriageReturnText)
+                                                            </td> 
+                                                        }
+
+                                                    }
+                                                }
+
+                                            
                                         </tr>
                                     }
                                 
