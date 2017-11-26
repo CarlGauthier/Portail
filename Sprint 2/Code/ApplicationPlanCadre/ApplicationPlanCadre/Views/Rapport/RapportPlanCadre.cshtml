@@ -242,7 +242,7 @@
                                                 @Html.DisplayFor(x => elementCompt.numero)<span>. </span>@Html.DisplayFor(x => elementCompt.description)
                                                 <br />
                                             </td>
-                                            <td width="35%">
+                                            <td width="25%">
 
                                                 @foreach (CriterePerformance criterePerf in elementCompt.CriterePerformance)
                                                 {
@@ -269,12 +269,20 @@
                                                         if (planCadreElement.elementsConnaissance != null)
                                                         {
                                                             carriageReturnText = planCadreElement.elementsConnaissance.ToString();
-                                                            carriageReturnText = carriageReturnText.Replace("\r\n", "<br>");
-                                                            carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp");
+                                                            carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
+                                                            carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
                                                             <td>
                                                                 @Html.Raw(carriageReturnText)
                                                             </td> 
+                                                            carriageReturnText = planCadreElement.activiteApprentissage.ToString();
+                                                            carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
+                                                            carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
+                                                            <td>
+                                                                @Html.Raw(carriageReturnText)
+
+                                                            </td>
                                                         }
+
 
                                                     }
                                                 }
