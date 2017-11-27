@@ -215,7 +215,9 @@
 }
 
 #tree-view {
-    min-height: calc(100vh - 50px);
+    position: fixed;
+    overflow-y: scroll;
+    height: calc(100vh - 50px);
     width: 450px;
     border-right: 1px solid #929ab1;
     background-color: #e7ecf2;
@@ -288,11 +290,8 @@
     color: #929ab1;
 }
 
-#super-view {
-    display: flex;
-}
-
 #super-view #info-display {
+    margin-left: 450px;
     padding: 0;
     width: calc(100% - 450px);
 }
@@ -351,6 +350,7 @@
 #console-devisMinistere {
     margin-top: 100px;
 }
+
 .stylish-input-group .input-group-addon {
     background: white !important;
 }

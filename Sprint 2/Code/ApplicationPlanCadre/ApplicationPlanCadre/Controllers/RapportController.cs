@@ -21,11 +21,9 @@ namespace ApplicationPlanCadre.Controllers
         // GET: Rapport
         public ActionResult Index()
         {
-            dynamic model = new ExpandoObject();
-            model.Programme = GetCodeProgrammeSelectList();
-            model.PlanCadre = getPlanCadreSelectList();
-            return View(model);
+            return View(db.PlanCadre.ToList());
         }
+<<<<<<< HEAD
         private List<PlanCadre> getPlanCadreSelectList()
         {
             List<PlanCadre> planList = new List<PlanCadre>();
@@ -101,5 +99,7 @@ namespace ApplicationPlanCadre.Controllers
 
 
 
+=======
+>>>>>>> 127151d2bc3fe6b8906e54abb46db01d91429575
     }
 }

@@ -1,0 +1,29 @@
+﻿@model ApplicationPlanCadre.Models.Programme
+
+@{
+    ViewBag.Title = "Info";
+}
+
+<div id="super-view">
+    @Html.Action("_TreeView")
+    <div id="info-display" class="container-fluid">
+        <div id="info-detail">
+
+        </div>
+
+        <h1>Liste des plans cadres</h1>
+
+        @foreach (var planCadre in Model.PlanCadre)
+        {
+            <a class="info-child clearfix" href='@Url.Action("info", "PlanCadre", new { id = planCadre.idPlanCadre })'>
+                <p class="gauche">@Html.DisplayFor(ec => planCadre.titreCours)</p>
+                <p class="droite">@Html.DisplayFor(model => planCadre.Programme.idProgramme)-@Html.DisplayFor(model => planCadre.Programme.annee)-@Html.DisplayFor(model => planCadre.Programme.DevisMinistere.codeSpecialisation)</p>
+            </a>
+        }
+
+        <hr />
+        <h1>Modification</h1>
+        <a class="fancy-button" href='@Url.Action("Create", "PlanCadre", new {id = Model.PlanCadre})'><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un plan cadre</a>
+
+    </div>
+</div>
