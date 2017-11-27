@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    <a href="@Url.Action("LogOff", "Account", new { id = "logoutForm"})"><span class="glyphicon glyphicon-log-out"></span></a>
-    <a href="@Url.Action("LogOff", "Account", new { id = "logoutForm"})"><span class="glyphicon glyphicon-log-out"></span></a>
+    <div id="logoutForm">
+        <a href="@Url.Action("LogOff", "Account", new { id = "logoutForm"})"><span class="glyphicon glyphicon-log-out"></span></a>
+        <a href="@Url.Action("LogOff", "Account", new { id = "logoutForm"})"><span class="glyphicon glyphicon-log-out"></span></a>
+    </div>
 }
