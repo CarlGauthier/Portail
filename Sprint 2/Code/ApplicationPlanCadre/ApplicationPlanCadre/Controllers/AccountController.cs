@@ -54,12 +54,12 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser devisMinistere = UserManager.FindById(userId);
-            if (devisMinistere == null)
+            ApplicationUser user = UserManager.FindById(userId);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(devisMinistere);
+            return View(user);
         }
 
         public ApplicationSignInManager SignInManager
