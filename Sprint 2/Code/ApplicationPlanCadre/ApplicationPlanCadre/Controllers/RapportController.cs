@@ -21,42 +21,13 @@ namespace ApplicationPlanCadre.Controllers
         // GET: Rapport
         public ActionResult Index()
         {
-            return View(db.PlanCadre.ToList());
-        }
-<<<<<<< HEAD
-        private List<PlanCadre> getPlanCadreSelectList()
-        {
-            List<PlanCadre> planList = new List<PlanCadre>();
-            var liste = from a in db.PlanCadre
-                        select a;
-            foreach(PlanCadre plan in liste )
-            {
-                planList.Add(new PlanCadre {
-                    numeroCours=plan.numeroCours,
-                    titreCours=plan.titreCours,
-                    idPlanCadre=plan.idPlanCadre,
-                    idType=plan.idType,
-                });
-            }
-            return planList;
-        }
-        private List<Programme> GetCodeProgrammeSelectList()
-        {
-            List<Programme> progList = new List<Programme>();
-            var liste = from a in db.Programme
-                       select a;
-            foreach(Programme prog in liste)
-            {
-                progList.Add(new Programme {
-                    nom = prog.nom,
-                    idProgramme=prog.idProgramme
-                });
-            }
-            return progList;
+            dynamic model = new ExpandoObject();
+            model.Programme = db.Programme.ToList();
+            model.PlanCadre = db.PlanCadre.ToList();
             
-            
-            
+            return View(model);
         }
+
         public ActionResult RapportPlanCadre (int id)
         {
             string header = Server.MapPath("~/Views/static/header.html");
@@ -94,12 +65,5 @@ namespace ApplicationPlanCadre.Controllers
                 PageSize = Size.A4
             };
         }
-        
-        
-
-
-
-=======
->>>>>>> 127151d2bc3fe6b8906e54abb46db01d91429575
     }
 }
