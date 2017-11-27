@@ -22,6 +22,17 @@ namespace ApplicationPlanCadre.Models
         [Display(Name = "Nom")]
         public string nom { get; set; }
 
+        public string description
+        {
+            get
+            {
+                if (nom != null)
+                    return nom + " • " + DevisMinistere.specialisation;
+                else
+                    return DevisMinistere.specialisation;
+            }
+        }
+
         [Required]
         [StringLength(4)]
         [Display(Name = "Année")]

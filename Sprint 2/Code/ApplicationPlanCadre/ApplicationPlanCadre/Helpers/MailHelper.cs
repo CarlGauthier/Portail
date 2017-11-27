@@ -34,10 +34,10 @@ namespace ApplicationPlanCadre.Helpers
 
         private string BuildActivationMail(RegisterViewModel user)
         {
-            return "<p> Bonjour " + user.prenom + ",</p>" +
+            return "<p> Bonjour " + user.Prenom + ",</p>" +
                 "<p>Un compte à été crée pour vous, rendez vous sur Portail afin de vous connectez avec les informations suivantes:</p>" +
                 "<p><b> Courriel: </b>" + user.Email + "<br>" +
-                "<b> Mot de passe: </b>" + user.password + "</p>" +
+                "<b> Mot de passe: </b>" + user.Password + "</p>" +
                 "<p>Vous devrez changer votre mot de passe afin d'activer le compte.</p>" +
                 "<p>Cordialement,</p>" +
                 "<p>L'équipe de Portail</p>";

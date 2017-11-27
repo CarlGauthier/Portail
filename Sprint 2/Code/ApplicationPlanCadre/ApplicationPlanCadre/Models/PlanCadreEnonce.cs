@@ -5,6 +5,7 @@ namespace ApplicationPlanCadre.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     [Table("PlanCadreEnonce")]
     public partial class PlanCadreEnonce
@@ -32,9 +33,9 @@ namespace ApplicationPlanCadre.Models
 
         public virtual PlanCadre PlanCadre { get; set; }
 
-        public ICollection<PlanCadreElement> GetPlanCadreElements()
+        public IEnumerable<PlanCadreElement> GetPlanCadreElements()
         {
-            return PlanCadre.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == planCadreEnonce.idCompetence);
+            return PlanCadre.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == idCompetence);
         }
     }
 }

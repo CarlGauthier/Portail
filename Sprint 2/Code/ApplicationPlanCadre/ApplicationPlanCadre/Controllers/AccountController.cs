@@ -48,33 +48,16 @@ namespace ApplicationPlanCadre.Controllers
             return View(users);
         }
 
-        public ActionResult Edit(ApplicationUser user)
+        public ActionResult Edit(string userId)
         {
-            if (user.Id == null)
+            if (userId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser devisMinistere = UserManager.FindById(user.Id);
+            ApplicationUser devisMinistere = UserManager.FindById(userId);
             if (devisMinistere == null)
             {
                 return HttpNotFound();
-            }
-            return View(devisMinistere);
-        }
-
-        public ActionResult Edit([Bind(Include = "")] ApplicationUser user)
-        {
-            if (docMinistere != null)
-            {
-                if (!UploadFile(docMinistere, devisMinistere))
-                    ModelState.AddModelError("PDF", "Le fichier doit être de type PDF.");
-            }
-            Trim(devisMinistere);
-            if (ModelState.IsValid)
-            {
-                db.Entry(devisMinistere).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Info", "DevisMinistere", new { idDevis = devisMinistere.idDevis });
             }
             return View(devisMinistere);
         }
@@ -208,9 +191,9 @@ namespace ApplicationPlanCadre.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.password = new PasswordGenerator().GeneratePassword(10);
-                var user = new ApplicationUser { nom = model.nom, prenom = model.prenom, UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.password);
+                model.Password = new PasswordGenerator().GeneratePassword(10);
+                var user = new ApplicationUser { nom = model.Nom, prenom = model.Prenom, UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     new MailHelper().SendActivationMail(model);
