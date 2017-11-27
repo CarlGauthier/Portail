@@ -22,6 +22,32 @@ CREATE TABLE PlanCadre
     PRIMARY KEY(idPlanCadre)
 );
 
+IF OBJECT_ID ('PlanCadrePrealable') IS NOT NULL
+DROP TABLE PlanCadrePrealable
+GO
+CREATE TABLE PlanCadrePrealable
+(
+    idPlanCadrePrealable	INT             NOT NULL        IDENTITY(1,1),
+
+    idPlanCadre			    INT				NOT NULL,		--FK
+	idPrealable			    INT				NOT NULL,		--FK
+	idStatus				INT				NOT NULL,		--FK
+
+	PRIMARY KEY(idPlanCadrePrealable)
+);
+
+IF OBJECT_ID ('StatusPrealable') IS NOT NULL
+DROP TABLE StatusPrealable
+GO
+CREATE TABLE StatusPrealable
+(
+    idStatus				INT             NOT NULL        IDENTITY(1,1),
+
+    status					VARCHAR(20)		NOT NULL,
+
+	PRIMARY KEY(idStatus)
+);
+
 IF OBJECT_ID ('TypePlanCadre') IS NOT NULL
 DROP TABLE TypePlanCadre
 GO
