@@ -10,52 +10,53 @@
 </style>
 
 
-<div>
-    <br />
-    <br />
-    <br />
-</div>
+    <div>
+        <br />
+        <br />
+        <br />
+    </div>
 
 
-@using (Ajax.BeginForm("Rechercher", "recherche", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "resultArea" }, new { defaultbutton ="searchBtn"}))
-{
-    
+    @using (Ajax.BeginForm("Rechercher", "recherche", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "resultArea" }, new { defaultbutton = "searchBtn" }))
+    {
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                <div id="imaginary_container">
-                    <div class="input-group stylish-input-group">
-                        <input type="text" class="form-control" placeholder="Search" id="Stxt" name="searchStr">
-                        <span class="input-group-addon">
-                            <button type="submit" id="searchBtn">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                       </div>
-                    @Html.CheckBox("chkRecherche")Seulement Programme et compétence
-                    @*<input type="checkbox" name="chkRecherche" value="true"> Seulement Programme et compétence*@
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div id="imaginary_container">
+                        <div class="input-group stylish-input-group">
+                            <input type="text" class="form-control" placeholder="Search" id="Stxt" name="searchStr">
+                            <span class="input-group-addon">
+                                <button type="submit" id="searchBtn">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                        @Html.CheckBox("chkRecherche")Seulement Programme et compétence
+                        @*<input type="checkbox" name="chkRecherche" value="true"> Seulement Programme et compétence*@
+                    </div>
                 </div>
             </div>
+            <div>
+
+            </div>
         </div>
-        <div>
-            
-        </div>
+    };
+    <script type="text/javascript">
+        $(document).bind('keydown', function (e) {
+            if (e.which === 13) { // return
+                $('#searchBtn').trigger('click');
+            }
+        });
+    </script>
+
+
+
+    <div id="resultArea">
+
     </div>
-};
-<script type="text/javascript">
-    $(document).bind('keydown', function (e) {
-        if (e.which === 13) { // return
-            $('#searchBtn').trigger('click');
-        }
-    });
-</script>
 
-
-
-<div id="resultArea">
-
-</div>
 
 
 
