@@ -4,6 +4,7 @@
     ViewBag.Title = "RapportPlanCadre";
     Layout = null;
     string carriageReturnText;
+    bool rowspanIndicationPedago = false;
 }
 
 <style>
@@ -48,7 +49,7 @@
     .divtop{
         
         width:100%;
-        background-color:red;
+        font-size:75px;
     }
     .pdf{
         
@@ -202,6 +203,14 @@
                                              }
                                             
                                         </td>
+                                         @if (rowspanIndicationPedago != true)
+                                         {
+                                            <td rowspan="2">
+                                                @Html.DisplayFor(x => Model.indicationPedago)
+                                            </td>
+                                             rowspanIndicationPedago = true;
+                                         }
+                                        
                                     </tr>
                          }
                          
@@ -239,7 +248,7 @@
                                 {
                                     
                                         <tr>
-                                            <td width="25%">
+                                            <td width="20%">
                                                 @Html.DisplayFor(x => elementCompt.numero)<span>. </span>@Html.DisplayFor(x => elementCompt.description)
                                                 <br />
                                             </td>
@@ -272,7 +281,7 @@
                                                             carriageReturnText = planCadreElement.elementsConnaissance.ToString();
                                                             carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
                                                             carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
-                                                            <td>
+                                                            <td width="30%">
                                                                 @Html.Raw(carriageReturnText)
                                                             </td> 
                                                             carriageReturnText = planCadreElement.activiteApprentissage.ToString();
@@ -296,6 +305,41 @@
                     </div>
 
             }
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            Environement physique
+                        </td>
+                        <td>
+                            Ressources didactiques suggérées
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="45%">
+                            @{ 
+                                carriageReturnText = Model.environnementPhys.ToString(); ;
+                                carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
+                                carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
+                            }
+                            @Html.Raw(carriageReturnText)
+                            
+                        </td>
+                        <td>
+                            @{
+                                carriageReturnText = Model.ressource.ToString(); ;
+                                carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
+                                carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
+                            }
+                            @Html.Raw(carriageReturnText)
+
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         
 
     

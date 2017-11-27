@@ -28,7 +28,7 @@
             <hr />
             @foreach (PlanCadre planCadre in Model.PlanCadre)
             {
-                <a class="info-child clearfix" target="_blank" href='@Url.Action("RapportPlanCadre", "Rapport",new { id = planCadre.idPlanCadre})})'>
+                <a class="info-child clearfix" target="_blank" href='@Url.Action("RapportPlanCadre", "Rapport",new { id = planCadre.idPlanCadre})'>
                     <p class="gauche">@Html.DisplayFor(x => planCadre.titreCours)</p>
                     <p class="droite">@Html.DisplayFor(x => planCadre.numeroCours)</p>
                 </a>
@@ -37,7 +37,7 @@
             <hr />
             @foreach (Programme prog in Model.Programme)
             {
-                <a class="info-child clearfix" target="_blank" href='@Url.Action("RapportProgramme", "Rapport",new { id = prog.idProgramme })})'>
+                <a class="info-child clearfix" target="_blank" href='@Url.Action("RapportProgramme", "Rapport",new { id = prog.idProgramme })'>
                     <p class="gauche">@Html.DisplayFor(x => prog.nom)</p>
                     <p class="droite"></p>
                 </a>
