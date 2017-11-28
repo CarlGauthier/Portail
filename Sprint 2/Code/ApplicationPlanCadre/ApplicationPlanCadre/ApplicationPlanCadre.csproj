@@ -236,9 +236,11 @@
     <Compile Include="Models\PlanCadre.cs" />
     <Compile Include="Models\PlanCadreElement.cs" />
     <Compile Include="Models\PlanCadreEnonce.cs" />
+    <Compile Include="Models\PlanCadrePrealable.cs" />
     <Compile Include="Models\Programme.cs" />
     <Compile Include="Models\SecondaryDevisMinistere.cs" />
     <Compile Include="Models\Session.cs" />
+    <Compile Include="Models\StatusPrealable.cs" />
     <Compile Include="Models\TypePlanCadre.cs" />
     <Compile Include="Models\SecondaryContexteRealisation.cs" />
     <Compile Include="Models\SecondaryCriterePerformance.cs" />
@@ -384,6 +386,7 @@
     <Content Include="Views\Programme\_TreeView.cshtml" />
     <Content Include="Views\Programme\Info.cshtml" />
     <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
