@@ -1,66 +1,105 @@
 ﻿@model ApplicationPlanCadre.Models.PlanCadre
 
 @{
-    ViewBag.Title = "PlanCadreDetails";
+    ViewBag.Title = "Plan cadre - création";
 }
 
-<div id="super-view">
-    @Html.Action("_TreeView")
+<div class="container">
 
-    <div id="info-display" class="container-fluid">
-        <div id="info-header">
-            <h1>Programme</h1>
-            <h3>@Html.DisplayFor(model => Model.Programme.nom)</h3>
-            <h3>@Html.DisplayFor(model => Model.Programme.DevisMinistere.EnteteProgramme.codeProgramme)-@Html.DisplayFor(model => Model.Programme.DevisMinistere.annee)-@Html.DisplayFor(model => Model.Programme.DevisMinistere.codeSpecialisation)</h3>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.idPlanCadre)
+        @Html.HiddenFor(model => model.idProgramme)
+
+        <div class="form-horizontal form-box single-action">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <h1>Créer un plan cadre</h1>
+
+            @Html.DisplayFor(model => model.Programme.nom) &nbsp @Html.DisplayFor(model => model.Programme.DevisMinistere.codeProgramme)
 
             <hr />
-        </div>
 
-        <div id="info-detail">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="champ">
-                        <h2>Cour</h2>
-                        <p>@Html.DisplayFor(model => Model.titreCours)</p>
-                        <p>@Html.DisplayFor(model => Model.nbHeureTheorie)-@Html.DisplayFor(model => Model.nbHeurePratique)-@Html.DisplayFor(model => Model.nbHeureDevoir)</p>
-                        <p>@Html.DisplayFor(model => Model.numeroCours)</p>
+            <div class="champ">
+                @Html.ValidationMessage("Duplique", new { @class = "text-danger" })
+            </div>
 
-                        <h2>Compétences</h2>
-                        @foreach (var competence in Model.PlanCadreEnonce)
-                        {
-                            <a class="info-child clearfix" href='@Url.Action("CompetencePC","PlanCadreEnonce", new { idPlanCadre = competence.idPlanCadreEnonce })'>
-                                <label>@Html.DisplayFor(model => competence.EnonceCompetence.description)</label>
-                            </a>
+            <div class="form-group">
+                @Html.LabelFor(model => model.titreCours, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.titreCours, new { htmlAttributes = new { @maxlength = "150", @class = "form-control small-input" } })
+                    @Html.ValidationMessageFor(model => model.titreCours, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-                            <p>&emsp;@Html.DisplayNameFor(model => competence.ponderationEnHeure): @Html.DisplayFor(model => competence.ponderationEnHeure)</p>
-                        }
-                    </div>                   <div class="champ">
-                        <h2>Indication pédagogique</h2>
-                        <p>@Html.DisplayFor(model => Model.indicationPedago)</p>
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.nbHeureTheorie, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.nbHeureTheorie, new { @maxlength = "2", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.nbHeureTheorie, "", new { @class = "text-danger" })
+                </div>
 
-                    <div class="champ">
-                        <h2>Éléments de connaissances</h2>
-                        <p>@Html.DisplayFor(model => Model.elementsConnaissance)</p>
-                    </div>
+                @Html.LabelFor(model => model.nbHeurePratique, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.nbHeurePratique, new { @maxlength = "2", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.nbHeurePratique, "", new { @class = "text-danger" })
+                </div>
 
-                    <div class="champ">
-                        <h2>Activités d'apprentissage suggérées</h2>
-                        <p>@Html.DisplayFor(model => Model.activiteApprentissage)</p>
-                    </div>
+                @Html.LabelFor(model => model.nbHeureDevoir, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.nbHeureDevoir, new {  @maxlength = "2", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.nbHeureDevoir, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-                    <div class="champ">
-                        <h2>Environement physique</h2>
-                        <p>@Html.DisplayFor(model => Model.environnementPhys)</p>
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.numeroCours, htmlAttributes: new { @class = "control-label col-md-2" })@*faire une auto completion, numero programme au debut automatique,  et jq a la fin automatique (jq=jonquiere)*@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.numeroCours, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
+                    @Html.ValidationMessageFor(model => model.numeroCours, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-                    <div class="champ">
-                        <h2>Ressources</h2>
-                        <p>@Html.DisplayFor(model => Model.ressource)</p>
-                    </div>
+            <hr />@*drop down list Enonce competence*@
+
+
+
+
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.indicationPedago, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.indicationPedago, new { htmlAttributes = new { @class = "form-control small-input" } })
+                    @Html.ValidationMessageFor(model => model.indicationPedago, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.environnementPhys, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.environnementPhys, new { htmlAttributes = new { @class = "form-control small-input" } })
+                    @Html.ValidationMessageFor(model => model.environnementPhys, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ressource, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ressource, new { htmlAttributes = new {  @class = "form-control small-input" } })
+                    @Html.ValidationMessageFor(model => model.ressource, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*ajouter le type (contributive, spécifique, generale)*@
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Suivant" class="fancy-button" />
+                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "Programme", new { idProgramme = Model.idProgramme })'">Annuler</div>
                 </div>
             </div>
         </div>
-    </div>
+    }
 </div>
-

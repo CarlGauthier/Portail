@@ -42,11 +42,8 @@ namespace ApplicationPlanCadre.Controllers
                 return HttpNotFound();
             }
             EnonceCompetence enonceCompetence = new EnonceCompetence();
-	        enonceCompetence.DevisMinistere = devisMinistere;
-            enonceCompetence.idDevis = devisMinistere.idDevis;
             enonceCompetence.obligatoire = true;
             enonceCompetence.actif = true;
-            enonceCompetence.DevisMinistere = devisMinistere;
             enonceCompetence.idDevis = devisMinistere.idDevis;
             return View(enonceCompetence);
         }

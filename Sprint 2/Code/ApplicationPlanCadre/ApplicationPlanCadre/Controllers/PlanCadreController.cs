@@ -34,9 +34,39 @@ namespace ApplicationPlanCadre.Controllers
             return View(db.PlanCadre.Find(id));
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Programme programme = db.Programme.Find(id);
+            if (programme == null)
+            {
+                return HttpNotFound();
+            }
+            PlanCadre planCadre = new PlanCadre();
+            planCadre.idProgramme = programme.idProgramme;
+            return View(planCadre);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "idPlanCadre,numeroCours,titreCours,indicationPedago,environementPhys,ressource,nbHeureTheorie,nbHeurePratique,nbHeureDevoir,idProgramme")] PlanCadre planCadre)
+        {
+            bool existe;
+            existe = db.PlanCadre.Any(pc => pc.titreCours == planCadre.titreCours && pc.idProgramme == planCadre.idProgramme);
+            //Trim();
+            if (!existe && ModelState.IsValid)
+            {
+                planCadre.titreCours = planCadre.titreCours.ToUpper();
+                db.PlanCadre.Add(planCadre);
+                db.SaveChanges();
+                return RedirectToAction("info", "Programme", new { idProgramme = planCadre.idProgramme });
+            }
+            if (existe)
+                ModelState.AddModelError("Duplique", "Erreur, un plan cadre avec ce nom existe déjà.");
+            return View(planCadre);
         }
     }
 }
