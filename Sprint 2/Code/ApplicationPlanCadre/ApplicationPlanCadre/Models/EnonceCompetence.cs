@@ -20,6 +20,11 @@ namespace ApplicationPlanCadre.Models
         [Key]
         public int idCompetence { get; set; }
 
+        public string nom
+        {
+            get { return codeCompetence + " • " + description; }
+        }
+
         [Required]
         [StringLength(4)]
         [Display(Name = "Code de la compétence")]

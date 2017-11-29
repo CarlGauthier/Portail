@@ -14,45 +14,53 @@
     <section id="layout">
         <header>
             <div class="fluid-container">
-                <div id="layout-head" class="clearfix">
+                <div class="layout-head clearfix">
+
                     <div id="nav-button" data-toggle="collapse" data-target="#nav" class="layout-button"><span class="glyphicon glyphicon-th-large"></span></div>
+
                     <a href='@Url.Action("Index", "Accueil")'><div class="header-logo"><!----></div></a>
+
                     @Html.Partial("_LoginPartial")
+
                 </div>
             </div>
             <nav id="nav" class="collapse">
                 <div class="tuile-container">
-                <a class="tuile" href='@Url.Action("Index", "Accueil")'>
-                    <span class="glyphicon glyphicon-home"></span>
-                    <p>Accueil</p>
-                </a>
-                @if (User.IsInRole("RCP"))
-                {
-                    <a class="tuile" href='@Url.Action("Pedagogie", "Accueil")'>
-                        <span class="glyphicon glyphicon-apple"></span>
-                        <p>Pédagogie</p>
-                    </a>
-                }
-        
-                <a class="tuile" href='@Url.Action("Index", "Rapport")'>
-                    <span class="glyphicon glyphicon-folder-open"></span>
-                    <p>Rapport</p>
-                </a>
 
-                @if (User.IsInRole("Admin"))
-                {
-                    <a class="tuile" href='@Url.Action("ConsoleAdmin", "Accueil")'>
-                        <span class="glyphicon glyphicon-cog"></span>
-                        <p>Console d'administration</p>
+                    <a class="tuile" href='@Url.Action("Index", "Accueil")'>
+                        <span class="glyphicon glyphicon-home"></span>
+                        <p>Accueil</p>
                     </a>
-                }
+
+                    @if (User.IsInRole("RCP"))
+                    {
+                        <a class="tuile" href='@Url.Action("Pedagogie", "Accueil")'>
+                            <span class="glyphicon glyphicon-apple"></span>
+                            <p>Pédagogie</p>
+                        </a>
+                    }
+        
+                    <a class="tuile" href='@Url.Action("Index", "Rapport")'>
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <p>Rapport</p>
+                    </a>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="tuile" href='@Url.Action("ConsoleAdmin", "Accueil")'>
+                            <span class="glyphicon glyphicon-cog"></span>
+                            <p>Console d'administration</p>
+                        </a>
+                    }
 
                 </div>
             </nav>
         </header>
     </section>
     <section id="page-content">
+
         @RenderBody()
+
     </section>
 </body>
 </html>

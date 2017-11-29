@@ -36,15 +36,6 @@ a:hover {
     text-decoration: none;
 }
 
-.horizontal-form {
-    padding-top: 25px;
-    text-align: left;
-}
-
-.control-label {
-    text-align: left;
-}
-
 legend {
     margin: 0;
     margin-bottom: 19px;
@@ -57,10 +48,10 @@ input, button {
     outline: 0;
 }
 
-.form-control {
+input[type="text"] {
+    box-sizing: border-box;
+    padding: 7px;
     border: 1px solid #929ab1;
-    border-radius: 0;
-    box-shadow: none;
 }
 
 .form-group {
@@ -76,16 +67,11 @@ textarea {
     overflow-x: hidden;
 }
 
-.small-input {
-    width: 100px;
-}
-
 .glyphicon.flip {
     transform: scale(-1, 1);
 }
 
 .fancy-button {
-    margin: 5px 0;
     padding: 5px 10px;
     display: inline-block;
     border: 2px solid;
@@ -192,8 +178,16 @@ input[type="file"] {
     text-align: center;
 }
 
-.champ {
-    margin: 20px 15px;
+.field {
+    margin: 20px 0;
+}
+
+.field label {
+    vertical-align: super;
+}
+
+.small-input {
+    width: 100px;
 }
 
 .stylish-input-group .input-group-addon {

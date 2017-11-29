@@ -18,10 +18,6 @@
     width: 100%;
 }
 
-#portail #forgot-password {
-    text-align: center;
-}
-
 #portail #submit {
     text-align: center;
     margin: 25px;
@@ -58,7 +54,7 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-#layout #layout-head {
+#layout .layout-head {
     background-color: #083a7c;
 }
 
@@ -220,7 +216,7 @@
     }
 }
 
-#tree-view {
+.tree-view {
     position: fixed;
     overflow-y: scroll;
     height: calc(100vh - 50px);
@@ -229,62 +225,62 @@
     background-color: #e7ecf2;
 }
 
-#tree-view .tree-view-header {
+.tree-view .tree-view-header {
     padding: 10px 5px 10px 35px;
     font-weight: bold;
     border-bottom: 1px solid #ffffff;
     background-color: #f2f4f7;
 }
 
-#tree-view .tree-view-item {
+.tree-view .tree-view-item {
     border-bottom: 1px solid #ffffff;
     display: flex;
     background-color: #e7ecf2;
 }
 
-#tree-view .tree-view-item.active {
+.tree-view .tree-view-item.active {
     color: #ffffff;
     background-color: #0d5ec9;
 }
 
-#tree-view .tree-view-item.active a {
+.tree-view .tree-view-item.active a {
     color: #ffffff;
 }
 
-#tree-view .tree-view-item.active a:hover {
+.tree-view .tree-view-item.active a:hover {
     color: #ffffff;
 }
 
-#tree-view .tree-view-item-container {
+.tree-view .tree-view-item-container {
     padding-left: 30px;
     background-color: #ffffff;
 }
 
-#tree-view .collapse-button {
+.tree-view .collapse-button {
     cursor: pointer;
     transition: 0.1s;
 }
 
-#tree-view .collapse-button:hover {
+.tree-view .collapse-button:hover {
     color: #ffffff;
     background-color: #929ab1;
 }
 
-#tree-view .collapse-button .glyphicon {
+.tree-view .collapse-button .glyphicon {
     margin-top: 15px;
     padding: 0 10px;
     font-size: 10px;
 }
 
-#tree-view .collapse-button[aria-expanded='true'] .glyphicon {
+.tree-view .collapse-button[aria-expanded='true'] .glyphicon {
     transform: rotate(90deg);
 }
 
-#tree-view .no-button {
+.tree-view .no-button {
     padding-left: 30px;
 }
 
-#tree-view .tree-view-item a {
+.tree-view .tree-view-item a {
     padding: 10px 5px;
     color: #000000;
     text-decoration: none;
@@ -292,31 +288,26 @@
     transition: 0.1s;
 }
 
-#tree-view .tree-view-item a:hover {
+.tree-view .tree-view-item a:hover {
     color: #929ab1;
 }
 
-#super-view #info-display {
+.super-view #info-display {
     margin-left: 450px;
     padding: 0;
     width: calc(100% - 450px);
 }
 
-#super-view #info-header {
+.super-view #info-header {
     padding: 20px;
     background-color: #f2f4f7;
 }
 
-#super-view #info-header h1 {
+.super-view #info-header h1 {
     display: inline-block;
 }
 
-#super-view .edit {
-    display: inline-block;
-    vertical-align: 3px;
-}
-
-#super-view #info-detail {
+.super-view #info-detail {
     margin: 0;
     padding: 20px;
 }
@@ -351,33 +342,4 @@
     width: 100px;
     text-align: right;
     font-weight: bold;
-}
-
-#console-devisMinistere {
-    margin-top: 100px;
-}
-
-.stylish-input-group .input-group-addon {
-    background: white !important;
-}
-
-.stylish-input-group .form-control {
-    border-right: 0;
-    box-shadow: 0 0 0;
-    border-color: #ccc;
-}
-
-.stylish-input-group button {
-    border: 0;
-    background: transparent;
-}
-
-span.markBlue {
-    background: blue;
-    color: white;
-}
-mark {
-    background: orange;
-    color: inherit;
-    padding: 0;
 }
