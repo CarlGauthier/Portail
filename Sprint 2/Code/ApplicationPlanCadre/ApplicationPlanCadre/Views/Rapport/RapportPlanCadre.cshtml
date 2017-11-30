@@ -1,10 +1,13 @@
 ﻿@model ApplicationPlanCadre.Models.PlanCadre
 @using ApplicationPlanCadre.Models
+@using System.Linq;
 @{
     ViewBag.Title = "RapportPlanCadre";
     Layout = null;
     string carriageReturnText;
     bool rowspanIndicationPedago = false;
+    bool titrePrealableAbso = true;
+    bool titrePrealableRel = true;
 }
 
 <style>
@@ -97,6 +100,10 @@
         float: right;
         margin: 0px;
     }
+    .prealable-right{
+        
+    }
+
     .critere-left {
         display: inline;
         box-sizing: border-box;
@@ -118,6 +125,10 @@
     .corps{
         padding-top:25px;
         
+    }
+    .line-prealable{
+        margin-top:5px;
+        margin-bottom:5px;
     }
     #clear {
         clear: both;
@@ -206,7 +217,41 @@
                                          @if (rowspanIndicationPedago != true)
                                          {
                                             <td rowspan="2">
-                                                @Html.DisplayFor(x => Model.indicationPedago)
+                                                
+                                                    <div class="prealableA">
+                                                        <div class="prealable-left">
+                                                            @if (ViewData["listPcPrealableA"] != null)
+                                                            {
+                                                                <div>Préalable absolu à:</div>
+                                                            }
+                                                        </div>
+                                                        <div class="prealable-right">
+                                                            @foreach (PlanCadre pc in ViewData["listPcPrealableA"] as List<PlanCadre>)
+                                                            {
+                                                                <div class="line-prealable">@Html.DisplayFor(x => pc.titreCours) @Html.DisplayFor(x => pc.numeroCours)</div>
+                                                                
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="prealable-absolu">
+                                                        <div class="prealable-left">
+                                                            @if (a.PlanCadre.PlanCadrePrealable != null)
+                                                            {
+                                                                <span>Préalable absolu :</span>
+                                                            }
+                                                        </div>
+                                                        <div class="prealable-right">
+                                                            @foreach (PlanCadrePrealable prealable in a.PlanCadre.PlanCadrePrealable)
+                                                            {
+                                                                if (prealable.idStatus == 2)
+                                                                {
+                                                                    <div class="line-prealable">@Html.DisplayFor(x => prealable.Prealable.titreCours) @Html.Raw(" (")@Html.DisplayFor(x => prealable.Prealable.numeroCours)@Html.Raw(")")</div>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                  @Html.DisplayFor(x => Model.indicationPedago)
                                             </td>
                                              rowspanIndicationPedago = true;
                                          }
