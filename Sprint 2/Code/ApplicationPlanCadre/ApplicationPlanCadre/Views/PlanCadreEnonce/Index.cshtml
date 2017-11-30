@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ApplicationPlanCadre.Models.Programme>
+
+@{
+    ViewBag.Title = "PlanCadreEnonce";
+}
+
+<div id="super-view">
+    @Html.Action("_TreeView")
+    <div id="info-display" class="container-fluid">
+        <div id="info-detail">
+            <h1>Selection des énonces de competences</h1>
+
+
+
+            <hr />
+            <h1>Modification</h1>
+            <a class="fancy-button rouge" onclick="location.href='@Url.Action("Pedagogie", "Accueil")'">Retour</a>
+
+        </div>
+    </div>
+</div>
+

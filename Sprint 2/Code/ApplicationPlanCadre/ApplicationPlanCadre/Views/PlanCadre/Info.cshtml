@@ -133,9 +133,9 @@
             <!-- barre top -->
 
             <div class="divtop">
-                @Html.DisplayFor(x => Model.Programme.nom)@*nom programme*@
+                @Html.DisplayFor(x => Model.Programme.nom)
                 <br />
-                @Html.DisplayFor(x => Model.Programme.DevisMinistere.specialisation)@*devis specialisation*@
+                @Html.DisplayFor(x => Model.Programme.DevisMinistere.specialisation)
             </div>
             <!-- début de l'entête -->
             <div class="entete">
@@ -148,7 +148,7 @@
                         Pondération :
                     </div>
                     <div class="inner-right">
-                        @Html.DisplayFor(x => Model.titreCours)@*titre cours*@
+                        @Html.DisplayFor(x => Model.titreCours)
                         <br />
                         @Html.DisplayFor(x => Model.nbHeureTheorie) - @Html.DisplayFor(x => Model.nbHeurePratique) - @Html.DisplayFor(x => Model.nbHeureDevoir)
                     </div>
@@ -158,7 +158,7 @@
                     <div class="inner2-left">
                         @Html.DisplayFor(x => Model.numeroCours)
                         <br />
-                        @Html.DisplayFor(x => Model.Programme.DevisMinistere.codeProgramme)@*code programme devis*@.@Html.DisplayFor(x => Model.Programme.DevisMinistere.codeSpecialisation)
+                        @Html.DisplayFor(x => Model.Programme.DevisMinistere.codeProgramme).@Html.DisplayFor(x => Model.Programme.DevisMinistere.codeSpecialisation)
                     </div>
                     <div class="inner2-right">
                         Numéro du cours :
@@ -279,26 +279,16 @@
                     </div>
 
                 }
-
-
-
-
             </div>
-
-
-
         </div>
 
+        <hr />
 
+        <h1>Modification</h1>
+        <a class="fancy-button"@* href='@Url.Action("Edit", new { id = Model.idDevis })'*@><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
+        <a class="fancy-button" @*onclick="location.href='@Url.Action("Delete", new { idCompetence = Model.idCompetence })'"*@><span class="glyphicon glyphicon-trash"><!----></span> Supprimer</a>
+        <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "Programme", new { idProgramme = Model.idProgramme })'">Retour</a>
 
-
-
-
-
-
-
-
-    
     </div>
 </div>
 

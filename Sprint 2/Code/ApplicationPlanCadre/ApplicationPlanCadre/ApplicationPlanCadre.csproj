@@ -392,9 +392,8 @@
     <Content Include="Views\Rapport\RapportProgramme.cshtml" />
     <Content Include="Views\Rapport\Index.cshtml" />
     <Content Include="Views\Rapport\RapportPlanCadre.cshtml" />
-    <Content Include="Views\PlanCadre\Index.cshtml" />
     <Content Include="Views\PlanCadre\_TreeView.cshtml" />
-
+    <Content Include="Views\PlanCadreEnonce\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
