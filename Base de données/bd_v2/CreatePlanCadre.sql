@@ -22,6 +22,32 @@ CREATE TABLE PlanCadre
     PRIMARY KEY(idPlanCadre)
 );
 
+IF OBJECT_ID ('PlanCadrePrealable') IS NOT NULL
+DROP TABLE PlanCadrePrealable
+GO
+CREATE TABLE PlanCadrePrealable
+(
+    idPlanCadrePrealable	INT             NOT NULL        IDENTITY(1,1),
+
+    idPlanCadre			    INT				NOT NULL,		--FK
+	idPrealable			    INT				NOT NULL,		--FK
+	idStatus				INT				NOT NULL,		--FK
+
+	PRIMARY KEY(idPlanCadrePrealable)
+);
+
+IF OBJECT_ID ('StatusPrealable') IS NOT NULL
+DROP TABLE StatusPrealable
+GO
+CREATE TABLE StatusPrealable
+(
+    idStatus				INT             NOT NULL        IDENTITY(1,1),
+
+    status					VARCHAR(20)		NOT NULL,
+
+	PRIMARY KEY(idStatus)
+);
+
 IF OBJECT_ID ('TypePlanCadre') IS NOT NULL
 DROP TABLE TypePlanCadre
 GO
@@ -40,10 +66,15 @@ GO
 CREATE TABLE PlanCadreElement
 (
     idPlanCadreElement      INT             NOT NULL        IDENTITY(1,1),
-	
-	idElementConnaissance	INT				NOT NULL,		--FK
+
+	elementsConnaissance    TEXT			NULL,
+    activiteApprentissage   TEXT			NULL,
+
     idPlanCadre             INT             NOT NULL,       --FK
     idElement               INT             NOT NULL,       --FK
+	idElementConnaissance	INT				NOT NULL,		--FK
+
+	PRIMARY KEY(idPlanCadreElement)
 );
 
 IF OBJECT_ID ('PlanCadreEnonce') IS NOT NULL
@@ -57,12 +88,9 @@ CREATE TABLE PlanCadreEnonce
 
     idPlanCadre             INT             NOT NULL,       --FK
     idCompetence			INT				NOT NULL,       --FK
+
+	PRIMARY KEY(idPlanCadreEnonce)
 );
-
-
-
-
-
 
 IF OBJECT_ID ('ElementConnaissance') IS NOT NULL
 DROP TABLE ElementConnaissance
@@ -72,7 +100,9 @@ CREATE TABLE ElementConnaissance
     idElementConnaissance	INT             NOT NULL        IDENTITY(1,1),
 	description				TEXT            NOT NULL,
 
-    idActiviteApprentissage	INT				NOT NULL,		--FK
+    idActivite				INT				NOT NULL,		--FK
+
+	PRIMARY KEY(idElementConnaissance)
 );
 
 IF OBJECT_ID ('ActiviteApprentissage') IS NOT NULL
@@ -80,8 +110,8 @@ DROP TABLE ActiviteApprentissage
 GO
 CREATE TABLE ActiviteApprentissage
 (
-    idActiviteApprentissage	INT             NOT NULL        IDENTITY(1,1),
+    idActivite				INT             NOT NULL        IDENTITY(1,1),
 	description				TEXT            NOT NULL,
 
-    
+	PRIMARY KEY(idActivite)
 );
