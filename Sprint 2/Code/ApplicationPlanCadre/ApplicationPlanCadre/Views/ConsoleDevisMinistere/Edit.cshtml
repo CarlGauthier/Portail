@@ -11,7 +11,7 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.idDevis)
 
-        <div class="form-horizontal form-box single-action">
+        <div class="form-horizontal form-box single">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <h3>Modification d'un devisMinistere</h3>
             <hr />

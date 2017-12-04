@@ -11,36 +11,57 @@ namespace ApplicationPlanCadre.Helpers
 {
     public class MailHelper
     {
+        SmtpClient client;
+
         public MailHelper()
         {
-
-        }
-
-        public void SendActivationMail(RegisterViewModel user)
-        {
-            SmtpClient client = new SmtpClient();
+            client = new SmtpClient();
             client.Port = 587;
             client.Host = "mail.dicj.info";
             client.Timeout = 10000;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
             client.Credentials = new System.Net.NetworkCredential("equipe1@dicj.info", "equipe1");
-            string subject = "Bienvenue sur Portail!";
-            string body = BuildActivationMail(user);
-            MailMessage message = new MailMessage("portaildonotreply@dicj.info", "gauthiercarl1@gmail.com", subject, body);
+        }
+
+        public void SendActivationMail(ApplicationUser user, string password)
+        {
+            SendMail(user, "Bienvenue sur Portail!", BuildActivationMail(user, password));
+        }
+
+        public void SendEditMail(ApplicationUser user, string password)
+        {
+            SendMail(user, "Modification de votre compte sur portail", BuildEditMail(user, password));
+        }
+
+        private void SendMail(ApplicationUser user, string subject, string body)
+        {
+            MailMessage message = new MailMessage("portaildonotreply@dicj.info", user.Email, subject, body);
             message.IsBodyHtml = true;
             client.Send(message);
         }
 
-        private string BuildActivationMail(RegisterViewModel user)
+        private string BuildActivationMail(ApplicationUser user, string password)
         {
-            return "<p> Bonjour " + user.Prenom + ",</p>" +
-                "<p>Un compte à été crée pour vous, rendez vous sur Portail afin de vous connectez avec les informations suivantes:</p>" +
-                "<p><b> Courriel: </b>" + user.Email + "<br>" +
-                "<b> Mot de passe: </b>" + user.Password + "</p>" +
+            return "<p> Bonjour " + user.prenom + ",</p>" +
+                "<p>Un compte à été crée pour vous, rendez vous sur Portail afin de vous connectez avec les informations ci dessous.</p>" +
                 "<p>Vous devrez changer votre mot de passe afin d'activer le compte.</p>" +
                 "<p>Cordialement,</p>" +
-                "<p>L'équipe de Portail</p>";
+                "<p>L'équipe de Portail</p>" +
+                "<p><b> Courriel: </b>" + user.Email + "<br>" +
+                "<b> Mot de passe: </b>" + password + "</p>";
+        }
+
+        private string BuildEditMail(ApplicationUser user, string password)
+        {
+            return "<p> Bonjour " + user.prenom + ",</p>" +
+                "<p>Des informations ont été modifié sur votre compte et il a été nécessaire de réinitialiser votre mot de passe.</p>" +
+                "<p>Vous devez vous connecter avec les informations ci dessous</p>" +
+                "<p>Vous allez pouvoir changer votre mot de passe une fois connecté.</p>" +
+                "<p>Cordialement,</p>" +
+                "<p>L'équipe de Portail</p>" +
+                "<p><b> Courriel: </b>" + user.Email + "<br>" +
+                "<b> Mot de passe: </b>" + password + "</p>";
         }
     }
 }

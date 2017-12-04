@@ -4,18 +4,18 @@
     ViewBag.Title = Model.description;
 }
 
-<div id="super-view">
+<div class="super-view">
     @Html.Action("_TreeView", "DevisMinistere")
 
-    <div id="info-display" class="container-fluid">
-        <div id="info-header">
+    <div class="info-display container-fluid">
+        <div class="info-header">
             <h3>Élément de compétence</h3>
             <div>
                 <h1>@Html.DisplayFor(model => model.description)</h1>
             </div>
         </div>
 
-        <div id="info-detail">
+        <div class="info-detail">
 
             @if (Model.CriterePerformance.Count > 0)
             {

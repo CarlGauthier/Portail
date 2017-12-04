@@ -138,8 +138,8 @@ input[type="file"] {
     margin: auto;
 }
 
-.single-action {
-    margin-top: 75px;
+.single {
+    margin-top: 100px;
 }
 
 .crud-list {
@@ -220,4 +220,28 @@ mark {
     background: orange;
     color: inherit;
     padding: 0;
+}
+
+.child-container {
+    margin: 5px 15px;
+}
+
+.child {
+    margin: 5px 0;
+    padding: 10px 15px;
+    width: 300px;
+    background-color: #929ab1;
+    color: #ffffff;
+}
+
+.child p {
+    float: left;
+    margin: 0;
+}
+
+.child .glyphicon {
+    position: relative;
+    top: 3px;
+    float: right;
+    cursor: pointer;
 }

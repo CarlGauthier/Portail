@@ -44,9 +44,18 @@ namespace ApplicationPlanCadre.Controllers
             return View(planCadre);
         }
 
-        public ActionResult Info(int? id)
+        public ActionResult Info(int? idPlanCadre)
         {
-            return View(db.PlanCadre.Find(id));
+            if (idPlanCadre == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PlanCadre planCadre = db.PlanCadre.Find(idPlanCadre);
+            if (planCadre == null)
+            {
+                return HttpNotFound();
+            }
+            return View(planCadre);
         }
 
         public ActionResult Create()
