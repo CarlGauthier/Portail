@@ -1,0 +1,276 @@
+﻿@model dynamic
+@using ApplicationPlanCadre.Models
+
+@{
+    ViewBag.Title = "RapportProgramme";
+    Layout = null;
+
+}
+
+<style type="text/css">
+        table {
+            table-layout: fixed;
+            width: 100%;
+            overflow-x: visible;
+
+        }
+        table, thead, th, td {
+            
+            border-collapse: collapse;
+            border-spacing: 0px;
+        }
+        td{
+           border-bottom:2px dashed black;
+        }
+       
+        th, td {
+            padding: 10px;
+
+        }
+    .element {
+        font-size: 25px;
+        margin-left: 25px;
+        text-align: left;
+        word-wrap: break-word;
+    }
+        .enonce {
+                font-size: 40px;
+                text-align:left;
+                
+        }
+       .pdf{
+           margin-top:100px;
+        }
+
+        table { page-break-before:auto }
+        tr    { page-break-inside:avoid; page-break-after:always; }
+        td    { page-break-inside:avoid; page-break-before:auto }
+        thead { display:table-header-group }
+        tfoot { display:table-footer-group }
+        div   { page-break-after: auto   }
+
+
+
+        .info-left{
+            display: block;
+            width: 50%;
+            float: left;
+        }
+        
+        
+        .nom {
+        font-size: 45px;
+        
+
+    }
+    .codeSpecialisation, .specialisation {
+        font-size: 35px;
+    }
+    .context, .elemCompt {
+        font-size: 30px;
+        font-weight: bold;
+    }.entete {
+        margin-bottom: 25px;
+    }
+     .titre{
+         font-size:40px;
+         width:100%;
+         
+        
+         
+     }
+        
+       
+        .soustitre,.enonce,.titre {
+            font-weight: bold;
+        }
+        .info-left, .info-right {
+            font-size: 30px;
+            margin-bottom:25px;
+        }
+        .enonce-left {
+            display: inline;
+            box-sizing: border-box;
+           
+            width: 50%;
+            float: left;
+            margin: 0px;
+            
+        }
+        .enonce-right {
+            display: inline;
+            box-sizing: border-box;
+            
+            width: 50%;
+            float: right;
+            margin: 0px;
+        }
+        
+        .contain {
+        
+            width: 100%;
+            margin: auto;
+        }
+        #clear {
+            clear: both;
+        }
+        li{
+            margin-bottom:10px;
+        }
+        
+        
+    
+       
+
+    
+ </style>
+
+
+
+
+
+<div class="pdf">
+<div class="info-Programme">
+    @foreach (SecondaryProgramme prog in Model.Programme)
+    {
+
+        <div class="entete">
+           
+            <div style="text-align:center;">
+                <br />
+                <span class="titre">Rapport de programme</span>
+            </div>
+              
+            <br />
+            <br />
+            <span class="soustitre" style="font-size:45px;">Nom</span>
+            <br />
+            <span class="nom">@Html.DisplayFor(x => prog.nom)</span>
+            <br />
+            @foreach (SecondaryDevisMinistere devis in Model.DevisMinistere)
+            {
+                <span class="soustitre" style="font-size:35px;">Identifiant</span>
+                <br />
+                <span class="codeSpecialisation"> @Html.DisplayFor(x => devis.codeProgramme)-@Html.DisplayFor(x => devis.codeSpecialisation)-@Html.DisplayFor(x => prog.annee)</span>
+                <br />
+                <span class="soustitre" style="font-size:35px;">Spécialisation</span>
+                <br />
+                <span class="specialisation">@Html.DisplayFor(x => devis.specialisation)</span>
+                    <br />
+            }
+
+        </div>
+        foreach (SecondaryDevisMinistere devis in Model.DevisMinistere)
+        {
+            <div class="info-left">
+                <span class="soustitre">Sanction</span>
+                <br />
+                <span class="data">@Html.DisplayFor(x => devis.sanction)</span>
+                <br />
+                <span class="soustitre">Nombre d'unités</span>
+                <br />
+                <span class="data">@Html.DisplayFor(x => devis.nbUnite) unités</span>
+                <br />
+                <span class="soustitre">Condition d'admission</span>
+                <br />
+                <span class="data">@Html.DisplayFor(x => devis.condition)</span>
+            </div>
+            <div class="info-right">
+                <span class="soustitre">Heures de la formation gérérale</span>
+                <br />
+                <span class="data">@Html.DisplayFor(x => devis.nbHeureFrmGenerale) h</span>
+                <br />
+                <span class="soustitre">Heures de la formation spécifique</span>
+                <br />
+                <span class="data">@Html.DisplayFor(x => devis.nbHeureFrmSpecifique) h</span>
+                <br />
+                <span class="soustitre">Total</span>
+                <br />
+                <span class="data">@Html.DisplayFor(x => devis.total) h</span>
+                <br />
+            </div>
+        }
+
+    }
+
+</div>
+
+            
+        
+
+
+
+    <table cellspacing="0"> 
+        <thead>
+            <tr>
+                <th style="border-bottom:5px solid black;"></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th style="border-top:5px solid black;"></th>
+            </tr>
+        </tfoot>
+       
+        
+        
+        
+        @foreach (SecondaryEnonceCompetence enonceCmpt in Model.EnonceCompetence)
+        {
+            <tr>
+                <td>
+                    @*<div class="contain">*@
+                    <div style="width:100%">
+                        <span class="enonce">
+                            @Html.DisplayFor(x => enonceCmpt.codeCompetence) - @Html.DisplayFor(x => enonceCmpt.description)
+                        </span>
+                        <br />
+                        <br />
+                    </div>
+                        <div class="enonce-left">
+                           <span class="context">Contextes de réalisations</span>
+                            <ul>
+                                
+                                @foreach (SecondaryContexteRealisation contexteReal in Model.ContexteRealisation)
+                                {
+                                    if (enonceCmpt.idCompetence == contexteReal.idCompetence)
+                                    {
+                                        <li class="element">
+                                            @Html.DisplayFor(x => contexteReal.description)
+                                        </li>
+                                        
+
+                                    }
+                                }
+                            </ul>
+                           
+                        </div>
+                    
+                        <div class="enonce-right">
+                            <span class="elemCompt">Élements de compétences</span>
+                            <ul>
+                                
+                                @foreach (SecondaryElementCompetence element in Model.ElementCompetence)
+                                {
+
+                                    if (element.idCompetence == enonceCmpt.idCompetence)
+                                    {
+                                        <li class="element">
+                                            @Html.DisplayFor(x => element.description)
+                                        </li>
+                                        
+                                    }
+
+                                }
+                                </ul>
+                           </div>
+                        @*<div id="clear"></div>*@
+                    @*</div>*@
+                </td>
+            </tr>
+        }
+        <tbody/>
+    </table>
+</div>
+
+
