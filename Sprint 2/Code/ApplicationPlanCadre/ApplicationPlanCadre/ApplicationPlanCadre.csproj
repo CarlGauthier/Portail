@@ -199,6 +199,9 @@
     <Compile Include="Controllers\ElementCompetenceController.cs" />
     <Compile Include="Controllers\EnonceCompetenceController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\GrilleCoursController.cs" />
+    <Compile Include="Controllers\GrilleCoursEnonceController.cs" />
+    <Compile Include="Models\GrilleCoursViewModel.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\DevisMinistereController.cs" />
     <Compile Include="Controllers\StageController.cs" />
@@ -349,6 +352,20 @@
     <Content Include="Views\ConsoleProgramme\_PartialList.cshtml" />
     <Content Include="Views\ConsoleProgramme\Create.cshtml" />
     <Content Include="Views\ConsoleProgramme\Edit.cshtml" />
+    <Content Include="Views\GrilleCours\Create.cshtml" />
+    <Content Include="Views\GrilleCours\Delete.cshtml" />
+    <Content Include="Views\GrilleCours\Details.cshtml" />
+    <Content Include="Views\GrilleCours\Edit.cshtml" />
+    <Content Include="Views\GrilleCours\Index.cshtml" />
+    <Content Include="Views\GrilleCours\_TreeView.cshtml" />
+    <Content Include="Views\GrilleCours\TreeView.cshtml" />
+    <Content Include="Views\GrilleCours\Info.cshtml" />
+    <Content Include="Views\GrilleCoursEnonce\GetEnonceModel.cshtml" />
+    <Content Include="Views\GrilleCours\_Heure.cshtml" />
+    <Content Include="Views\GrilleCours\_Structure.cshtml" />
+    <Content Include="Views\GrilleCours\InfoHeure.cshtml" />
+    <Content Include="Views\GrilleCours\_Prealable.cshtml" />
+    <Content Include="Views\GrilleCours\InfoPrealable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ApplicationPlanCadre.Models.GrilleCours>
+
+@{
+    ViewBag.Title = "Gestion des grilles";
+}
+
+
+<div id="super-view">    
+    @Html.Action("_TreeView")
+    <div id="info-display" class="container-fluid">
+        <div id="info-header">
+
+            <h1>Gestion des grilles</h1>
+            @* Avec les routes
+                <div class="fancy-button edit" onclick="location.href='@Url.RouteUrl("create-grilleCours")'"><span class="glyphicon glyphicon-plus"><!----></span> Ajouter</div>
+            *@
+            <div class="fancy-button edit" onclick="location.href='@Url.Action("Create","grilleCours")'"><span class="glyphicon glyphicon-plus"><!----></span> Ajouter</div>
+
+
+            <hr />
+            @foreach (var grille in Model)
+                {
+                @*<a class="info-child clearfix" href='@Url.RouteUrl("Info-grille", new { id = grille.Id })'>*@
+                <a class="info-child clearfix" href='@Url.Action("Info","grilleCours", new { id=grille.idGrille })'>
+                    <p class="gauche">@Html.DisplayFor(Model => grille.idGrille) -@Html.DisplayFor(model => grille.nom)</p>
+                    <p class="droite">(420-2001-AA)</p>
+                </a>
+            }        
+        </div>
+    </div>
+</div>
+
+

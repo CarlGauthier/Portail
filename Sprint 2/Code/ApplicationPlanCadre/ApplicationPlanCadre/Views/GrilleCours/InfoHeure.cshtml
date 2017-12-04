@@ -1,0 +1,85 @@
+﻿@model ApplicationPlanCadre.Models.GrilleCours
+
+@*
+    @model dynamic
+    @using ApplicationPlanCadre.Models
+*@
+
+    @{
+
+        // En attendant la nouvelle version
+
+        string[] tabCours = new string[16];
+        tabCours[0] = "JBB - Pgrm et intro aux objets";
+        tabCours[1] = "JAC - Info et techno";
+        tabCours[2] = "KCC - Conc. interfaces";
+        tabCours[3] = "JCC - Install et config";
+        tabCours[4] = "JDB - POO Concept";
+        tabCours[5] = "KAC - Conc. t manip. des BD";
+        tabCours[6] = "JJA - Pgm mobile";
+        tabCours[7] = "JFB - Sys. Expl";
+        tabCours[8] = "KBB - POO Concepts";
+        tabCours[9] = "KGB - Gest. et exploit. des BD";
+        tabCours[10] = "KNA - CONC. App mobile";
+        tabCours[11] = "KPA - Sys Expl Mobile";
+        tabCours[12] = "KEB - POO Intermédiare";
+        tabCours[13] = "KDB - Gestion et exploitation des BD";
+        tabCours[14] = "KQA - Dev App. Mobile";
+        tabCours[15] = "KFB - Réseaux";
+        //Ajouter les sessions 5 et 6.
+
+        //En attendant de pouvoir récupérer cette liste via une requête ou dans la table. 
+        string[] tabSession = { "I", "II", "IIII", "IV", "V", "VI" };
+
+
+        List<String> listeConpetences = new List<string>();
+        
+
+        var listeCompetences = ViewBag.List;
+
+        
+        string[] tabCoursFG = new string[6];
+        tabCoursFG[0] = "601-101-MQ - Écriture et littérature";
+        tabCoursFG[1] = "601-102-MQ - Écriture et littérature";
+        tabCoursFG[2] = "340-101-MQ - Philosophie et rationalité";
+        tabCoursFG[3] = "109-101-MQ - Activité physique";
+        tabCoursFG[3] = "109-102-MQ - Activité physique";
+        tabCoursFG[4] = "604-100-MQ - Anglais de base";
+
+    }
+
+    <div id="super-view">
+        @Html.Action("_TreeView")
+
+        <div id="info-display" class="container-fluid">
+            <div id="info-header">
+                <h3>Grille de cours</h3> @* Mettre du code plus propre *@
+            <div>
+                <h1>@ViewBag.nom</h1>
+                @*<div class="fancy-button edit" onclick="location.href='@Url.RouteUrl("Edit-grilleCours",new {id=Model.Id})'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>*@
+                <div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "grilleCours", new { id = Model.idGrille })'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>
+                <div class="fancy-button edit" onclick="location.href='@Url.Action("Delete", "grilleCours", new { id = Model.idGrille })'"><span class="glyphicon glyphicon-trash"><!----></span> Supprimer</div>
+
+                @*<a href="#fg" class="btn btn-primary" data-toggle="collapse" id="collapse">Afficher les cours de formation générale</a>*@
+            </div>
+            <hr />
+            <div id="select-grille">
+                <div class="row">
+                    <div class="col-sm-4" id="hover-grille" onclick="location.href='@Url.Action("Info", "grilleCours", new { id = Model.idGrille })'"><h3>Structure</h3></div>
+                    <div class="col-sm-4" id="selected-grille"><h3>Heure</h3></div>
+                    <div class="col-sm-4" id="hover-grille" onclick="location.href='@Url.Action("InfoPrealable", "grilleCours", new { id = Model.idGrille })'"><h3>Préalable</h3></div>
+                </div>
+            </div>
+            <hr />
+        </div>
+         @Html.Action("_Heure")
+
+
+</div>
+</div>
+ 
+
+
+
+
+
