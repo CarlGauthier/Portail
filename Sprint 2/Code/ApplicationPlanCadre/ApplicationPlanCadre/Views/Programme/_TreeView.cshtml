@@ -1,54 +1,78 @@
 ﻿@model IEnumerable<ApplicationPlanCadre.Models.Programme>
 
 <div id="tree-view">
-    <div class="tree-view-header">Plan cadre</div>
-    @*
-    @foreach (var planCadre in Model.OrderBy(m => m.idProgramme))
+    <div class="tree-view-header">Programme</div>
+    @foreach (var programme in Model)
     {
-        string p_id = "p" + planCadre.idPlanCadre.ToString();
+        string p_id = "p" + programme.idProgramme.ToString();
         string p_item = p_id + "item";
         string p_target = "#" + p_id;
-        <div id=@p_item class="tree-view-item">
-            @if (planCadre.PlanCadreEnonce.Count > 0) {
+        <div id="p_item" class="tree-view-item">
+            @if (programme.PlanCadre.Count() > 0)
+            {
                 <div class="collapse-button" data-toggle="collapse" data-target=@p_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
-            else {
+            else
+            {
                 <div class="no-button"><!----></div> }
-            <a href='@Url.Action("Info", "DevisMinistere", new { idPlanCadre = planCadre.idPlanCadre })'>
-                @Html.DisplayFor(p => planCadre.titreCours)
+            <a href='@Url.Action("Info", "Programme", new { idProgramme = programme.idProgramme })'>
+                @Html.DisplayFor(p => programme.description)
             </a>
         </div>
-        <div id=@p_id class="collapse">
+        <div id="@p_id" class="collapse">
             <div class="tree-view-item-container">
-                <div class="tree-view-header">Énoncés de compétence</div>
-                @foreach (var planCadreEnonce in planCadre.PlanCadreEnonce.OrderBy(ec => ec.idPlanCadreEnonce))
+                <div class="tree-view-header">Plan cadre</div>
+                @foreach (var planCadre in programme.PlanCadre)
                 {
-                    string enc_id = "enc" + planCadreEnonce.idPlanCadreEnonce.ToString();
-                    string enc_item = enc_id + "item";
-                    string enc_target = "#" + enc_id;
-                    <div id=@enc_item class="tree-view-item">
-                        @if (planCadre.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == planCadreEnonce.idCompetence).Count() > 0) {
-                            <div class="collapse-button" data-toggle="collapse" data-target=@enc_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
-                        else {
+                    string pc_id = "pc" + planCadre.idPlanCadre.ToString();
+                    string pc_item = pc_id + "item";
+                    string pc_target = "#" + pc_id;
+                    <div id=@pc_item class="tree-view-item">
+                        @if (planCadre.PlanCadreEnonce.Count > 0)
+                    {
+                            <div class="collapse-button" data-toggle="collapse" data-target=@pc_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
+                    else
+                    {
                             <div class="no-button"><!----></div> }
-                        <a href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = planCadreEnonce.idCompetence })'>
-                            @Html.DisplayFor(enc => planCadreEnonce.EnonceCompetence.codeCompetence) •
-                            @Html.DisplayFor(enc => planCadreEnonce.EnonceCompetence.description)
+                        <a href='@Url.Action("Info", "DevisMinistere", new { idPlanCadre = planCadre.idPlanCadre })'>
+                            @Html.DisplayFor(p => planCadre.titreCours)
                         </a>
                     </div>
-                    <div id=@enc_id class="collapse">
+                    <div id=@pc_id class="collapse">
                         <div class="tree-view-item-container">
-                            <div class="tree-view-header">Éléments de compétence</div>
-                            @foreach (var planCadreElement in planCadre.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == planCadreEnonce.idCompetence))
+                            <div class="tree-view-header">Énoncés de compétence</div>
+                            @foreach (var planCadreEnonce in planCadre.PlanCadreEnonce.OrderBy(ec => ec.idPlanCadreEnonce))
                             {
-                                string el_item = "el" + planCadreElement.idElement.ToString() + "item";
-                                <div id=@el_item class="tree-view-item">
-                                    <div class="no-button"><!----></div>
-                                    <a href='@Url.Action("Info", "ElementCompetence", new { idElement = planCadreElement.idElement })'>@Html.DisplayFor(elc => planCadreElement.ElementCompetence.description)</a>
+                                string enc_id = "enc" + planCadreEnonce.idPlanCadreEnonce.ToString();
+                                string enc_item = enc_id + "item";
+                                string enc_target = "#" + enc_id;
+                                <div id=@enc_item class="tree-view-item">
+                                    @if (planCadre.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == planCadreEnonce.idCompetence).Count() > 0)
+                                    {
+                                        <div class="collapse-button" data-toggle="collapse" data-target=@enc_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
+                                    else
+                                    {
+                                        <div class="no-button"><!----></div> }
+                                    <a href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = planCadreEnonce.idCompetence })'>
+                                        @Html.DisplayFor(enc => planCadreEnonce.EnonceCompetence.codeCompetence) •
+                                        @Html.DisplayFor(enc => planCadreEnonce.EnonceCompetence.description)
+                                    </a>
+                                </div>
+                                <div id=@enc_id class="collapse">
+                                    <div class="tree-view-item-container">
+                                        <div class="tree-view-header">Éléments de compétence</div>
+                                        @foreach (var planCadreElement in planCadreEnonce.GetPlanCadreElements())
+                                        {
+                                            string el_item = "el" + planCadreElement.idElement.ToString() + "item";
+                                            <div id=@el_item class="tree-view-item">
+                                                <div class="no-button"><!----></div>
+                                                <a href='@Url.Action("Info", "ElementCompetence", new { idElement = planCadreElement.idElement })'>@Html.DisplayFor(elc => planCadreElement.ElementCompetence.description)</a>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
                             }
                         </div>
                     </div>
-
                 }
             </div>
 

@@ -28,8 +28,8 @@
                 <th>
                     @Html.DisplayNameFor(model => model.roleNames)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EmailConfirmed)
+                <th class="action-cell-header">
+                    <b>Modifier</b>
                 </th>
             </tr>
 
@@ -55,8 +55,10 @@
                             @Html.Raw(name)@Html.Raw(", ")
                         }
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                    <td class="action-cell">
+                        <a href='@Url.Action("Edit", new { userId = item.Id })'>
+                            <span class="glyphicon glyphicon-pencil"><!----></span>
+                        </a>
                     </td>
                 </tr>
             }
