@@ -277,7 +277,6 @@
                             </tbody>
                         </table>
                     </div>
-
                 }
             </div>
         </div>
@@ -285,7 +284,7 @@
         <hr />
 
         <h1>Modification</h1>
-        <a class="fancy-button"@* href='@Url.Action("Edit", new { id = Model.idDevis })'*@><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
+        <a class="fancy-button" href='@Url.Action("Edit", new { id = Model.idPlanCadre })'><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
         <a class="fancy-button" @*onclick="location.href='@Url.Action("Delete", new { idCompetence = Model.idCompetence })'"*@><span class="glyphicon glyphicon-trash"><!----></span> Supprimer</a>
         <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "Programme", new { idProgramme = Model.idProgramme })'">Retour</a>
 
