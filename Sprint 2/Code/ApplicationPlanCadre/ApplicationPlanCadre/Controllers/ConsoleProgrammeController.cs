@@ -18,88 +18,76 @@ namespace ApplicationPlanCadre.Controllers
 
         public ActionResult _PartialList()
         {
-            var programme = db.Programme.Include(p => p.EnteteProgramme);
-            return PartialView(programme.ToList());
+            return PartialView(db.Programme.ToList());
         }
 
-        [Route("Admin-programme", Name = "creation-programme")]
         public ActionResult Create()
         {
-            ViewBag.codeProgramme = GetCodeProgrammeSelectList();
+            ViewBag.idDevis = GetDevisSelectList();
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "codeProgramme, annee, codeSpecialisation")] Programme programme)
+        public ActionResult Create([Bind(Include = "idProgramme,nom,annee,dateValidation,idDevis")] Programme programme)
         {
-            bool existe;
-            existe = db.Programme.Any(p => p.codeProgramme == programme.codeProgramme && p.annee == programme.annee && p.codeSpecialisation == programme.codeSpecialisation);
-            if (!existe && ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                programme.codeSpecialisation = programme.codeSpecialisation.ToUpper();
                 db.Programme.Add(programme);
                 db.SaveChanges();
                 return RedirectToAction("Create");
             }
-            if (existe)
-                ModelState.AddModelError("Duplique", "Erreur, ce programme existe déjà.");
-            ViewBag.codeProgramme = GetCodeProgrammeSelectList();
+            ViewBag.idDevis = GetDevisSelectList();
             return View(programme);
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? idProgramme)
         {
-            if (id == null)
+            if (idProgramme == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Programme programme = db.Programme.Find(id);
+            Programme programme = db.Programme.Find(idProgramme);
             if (programme == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.codeProgramme = GetCodeProgrammeSelectList(programme.codeProgramme);
+            ViewBag.idDevis = GetDevisSelectList(programme.idDevis);
             return View(programme);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idProgramme, codeProgramme, annee, codeSpecialisation")] Programme programme)
+        public ActionResult Edit([Bind(Include = "idProgramme,nom,annee,dateValidation,idDevis")] Programme programme)
         {
-            bool existe;
-            existe = db.Programme.Any(p => p.idProgramme != programme.idProgramme && p.codeProgramme == programme.codeProgramme && p.annee == programme.annee && p.codeSpecialisation == programme.codeSpecialisation);
-            if (!existe && ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                programme.codeSpecialisation = programme.codeSpecialisation.ToUpper();
                 db.Entry(programme).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Create");
             }
-            if (existe)
-                ModelState.AddModelError("Duplique", "Erreur, ce programme existe déjà.");
-            ViewBag.codeProgramme = GetCodeProgrammeSelectList();
+            ViewBag.idDevis = GetDevisSelectList(programme.idDevis);
             return View(programme);
         }
 
-        private SelectList GetCodeProgrammeSelectList(string codeProgramme = null)
+        private SelectList GetDevisSelectList(int? idDevis = null)
         {
             var liste =
-            db.EnteteProgramme
-            .Select(ep => new
+            db.DevisMinistere
+            .Select(dm => new
             {
-                codeProgramme = ep.codeProgramme,
-                texte = ep.codeProgramme + " - " + ep.commentaire,
+                idDevis = dm.idDevis,
+                texte = dm.codeProgramme + "-" + dm.annee + "-" + dm.codeSpecialisation + " • " + dm.specialisation,
             })
             .ToList();
-            if(codeProgramme != null)
-                return new SelectList(liste, "codeProgramme", "texte", codeProgramme);
-            return new SelectList(liste, "codeProgramme", "texte");
+            if(idDevis != null)
+                return new SelectList(liste, "idDevis", "texte", idDevis);
+            return new SelectList(liste, "idDevis", "texte");
         }
 
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int idProgramme)
         {
-            Programme Programme = db.Programme.Find(id);
+            Programme Programme = db.Programme.Find(idProgramme);
             db.Programme.Remove(Programme);
             db.SaveChanges();
             return RedirectToAction("Create");

@@ -9,6 +9,7 @@ CREATE TABLE EnonceCompetence
 	description			VARCHAR(300)	NOT NULL,
 	obligatoire			BIT				NOT NULL	DEFAULT(1),
 	actif				BIT				NOT NULL	DEFAULT(1),
+	specifique			BIT				NOT NULL	DEFAULT(1),	--Général si 0
 
 	idDevis				INT				NOT NULL,	--FK
 	

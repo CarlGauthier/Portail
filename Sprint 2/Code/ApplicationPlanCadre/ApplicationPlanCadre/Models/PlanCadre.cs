@@ -13,8 +13,10 @@ namespace ApplicationPlanCadre.Models
         public PlanCadre()
         {
             Cours = new HashSet<Cours>();
+            PlanCadrePrealable = new HashSet<PlanCadrePrealable>();
             PlanCadreElement = new HashSet<PlanCadreElement>();
             PlanCadreEnonce = new HashSet<PlanCadreEnonce>();
+            Prealable = new HashSet<PlanCadrePrealable>();
         }
 
         [Key]
@@ -37,12 +39,6 @@ namespace ApplicationPlanCadre.Models
         public string indicationPedago { get; set; }
 
         [Column(TypeName = "text")]
-        public string elementsConnaissance { get; set; }
-
-        [Column(TypeName = "text")]
-        public string activiteApprentissage { get; set; }
-
-        [Column(TypeName = "text")]
         public string environnementPhys { get; set; }
 
         [Column(TypeName = "text")]
@@ -56,8 +52,13 @@ namespace ApplicationPlanCadre.Models
 
         public int idProgramme { get; set; }
 
+        public int idType { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cours> Cours { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PlanCadrePrealable> PlanCadrePrealable { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlanCadreElement> PlanCadreElement { get; set; }
@@ -65,6 +66,11 @@ namespace ApplicationPlanCadre.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlanCadreEnonce> PlanCadreEnonce { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PlanCadrePrealable> Prealable { get; set; }
+
         public virtual Programme Programme { get; set; }
+
+        public virtual TypePlanCadre TypePlanCadre { get; set; }
     }
 }

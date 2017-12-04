@@ -167,7 +167,7 @@ input[type="file"] {
     transition: 0.1s;
 }
 
-.crud-list td:hover {
+.crud-list tr:hover td {
     background-color: #f2f4f7;
 }
 
@@ -194,4 +194,30 @@ input[type="file"] {
 
 .champ {
     margin: 20px 15px;
+}
+
+.stylish-input-group .input-group-addon {
+    background: white !important;
+}
+
+.stylish-input-group .form-control {
+    border-right: 0;
+    box-shadow: 0 0 0;
+    border-color: #ccc;
+}
+
+.stylish-input-group button {
+    border: 0;
+    background: transparent;
+}
+
+span.markBlue {
+    background: blue;
+    color: white;
+}
+
+mark {
+    background: orange;
+    color: inherit;
+    padding: 0;
 }

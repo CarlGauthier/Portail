@@ -6,7 +6,6 @@
 
 <div class="container">
 
-
     <h1>Liste des utilisateurs</h1>
 
     <div class="form-group">
@@ -27,7 +26,10 @@
                     @Html.DisplayNameFor(model => model.Email)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.EmailConfirmed)
+                    @Html.DisplayNameFor(model => model.roleNames)
+                </th>
+                <th class="action-cell-header">
+                    <b>Modifier</b>
                 </th>
             </tr>
 
@@ -41,10 +43,22 @@
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
                     <td>
-                        @foreach(var role in item.Roles)
+                        @for (int i = 0; i < item.roleNames.Count(); i++)
                         {
-                            @role.RoleId;
+                            string name = item.roleNames.ElementAt(i);
+
+                            if (i == item.roleNames.Count() - 1)
+                            {
+                                @Html.Raw(name)
+                                break;
+                            }
+                            @Html.Raw(name)@Html.Raw(", ")
                         }
+                    </td>
+                    <td class="action-cell">
+                        <a href='@Url.Action("Edit", new { userId = item.Id })'>
+                            <span class="glyphicon glyphicon-pencil"><!----></span>
+                        </a>
                     </td>
                 </tr>
             }
