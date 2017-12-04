@@ -51,7 +51,8 @@ namespace ApplicationPlanCadre.Controllers
                                   "--footer-html \"{1}\" " +
                                   "--footer-spacing \"10\" " +
                                   "--footer-font-size \"10\" " +
-                                  "--header-font-size \"10\" ", header, footer);
+                                  "--header-font-size \"10\" "+
+                                  "--disable-smart-shrinking", header, footer);
 
             return new ViewAsPdf("RapportPlanCadre", db.PlanCadre.Find(id))
             {

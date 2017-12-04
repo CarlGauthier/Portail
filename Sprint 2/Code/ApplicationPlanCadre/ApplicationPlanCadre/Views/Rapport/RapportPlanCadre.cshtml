@@ -6,28 +6,33 @@
     Layout = null;
     string carriageReturnText;
     bool rowspanIndicationPedago = false;
+    bool rowspanActiviteApprentissage = false;
     bool titrePrealableAbso = true;
     bool titrePrealableRel = true;
+    int nbCompetence = Model.PlanCadreEnonce.Count();
+    string keep="";
+    int counter = 0;
+    
 }
 
 <style>
     table, th, td {
         border: 1px solid black;
         border-collapse: collapse;
-        font-size: 25px;
-        
+        font-size: 18px;
+
     }
     table {
-        page-break-before: auto;
+        /*page-break-before: avoid;*/
         width:100%;
         margin-top:25px;
-        
-        
+
+
     }
 
     tr {
         page-break-inside: avoid;
-        page-break-after: always;
+        page-break-after: auto;
     }
 
     td {
@@ -39,7 +44,8 @@
     thead {
         display: table-header-group;
         font-weight:bold;
-         
+
+
     }
 
     tfoot {
@@ -50,14 +56,14 @@
         page-break-after: auto
     }
     .divtop{
-        
+
         width:100%;
-        font-size:75px;
+        font-size:55px;
     }
     .pdf{
-        
+
         width:100%;
-     }
+    }
     .entete {
         font-size: 25px;
         font-weight: bold;
@@ -101,7 +107,7 @@
         margin: 0px;
     }
     .prealable-right{
-        
+
     }
 
     .critere-left {
@@ -111,7 +117,7 @@
         margin: 0px;
         width:4%;
         margin-right:15px;
-        
+
     }
     .critere-right {
         display: inline;
@@ -124,15 +130,15 @@
     
     .corps{
         padding-top:25px;
-        
+
     }
     .line-prealable{
         margin-top:5px;
         margin-bottom:5px;
     }
-    #clear {
-        clear: both;
-    }
+#clear {
+    clear: both;
+}
 </style>
 <div class="pdf">
             <!-- barre top -->
@@ -179,7 +185,7 @@
            
             <!-- début du corps du plan cadre-->
             <div class="corps">
-                <table style="margin-bottom:400px">
+                <table style="margin-bottom:25px">
                     <thead>
                         <tr>
                             <td style="width:20%;">
@@ -216,41 +222,74 @@
                                         </td>
                                          @if (rowspanIndicationPedago != true)
                                          {
-                                            <td rowspan="2">
-                                                
-                                                    <div class="prealableA">
-                                                        <div class="prealable-left">
-                                                            @if (ViewData["listPcPrealableA"] != null)
+                                            <td rowspan=@Html.Raw(nbCompetence)>
+                                                @if (ViewData["listPcPrealableA"] != null)
+                                                {
+                                                    foreach (PlanCadre pc in ViewData["listPcPrealableA"] as List<PlanCadre>)
+                                                    {
+                                                        foreach (PlanCadrePrealable prealable in pc.PlanCadrePrealable)
+                                                        {
+                                                            if (prealable.idStatus == 2)
                                                             {
-                                                                <div>Préalable absolu à:</div>
+                                                                <div class="prealableA">
+                                                                    <div class="prealable-left">
+                                                                        <div>Préalable absolu à:</div>
+                                                                    </div>
+                                                                    <div class="prealable-right">
+                                                                        <div class="line-prealable">@Html.DisplayFor(x => pc.titreCours) @Html.DisplayFor(x => pc.numeroCours)</div>
+                                                                    </div>
+                                                                </div>
                                                             }
-                                                        </div>
-                                                        <div class="prealable-right">
-                                                            @foreach (PlanCadre pc in ViewData["listPcPrealableA"] as List<PlanCadre>)
+                                                            else
                                                             {
-                                                                <div class="line-prealable">@Html.DisplayFor(x => pc.titreCours) @Html.DisplayFor(x => pc.numeroCours)</div>
-                                                                
-                                                            }
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                    <div class="prealable-absolu">
-                                                        <div class="prealable-left">
-                                                            @if (a.PlanCadre.PlanCadrePrealable != null)
-                                                            {
-                                                                <span>Préalable absolu :</span>
-                                                            }
-                                                        </div>
-                                                        <div class="prealable-right">
-                                                            @foreach (PlanCadrePrealable prealable in a.PlanCadre.PlanCadrePrealable)
-                                                            {
-                                                                if (prealable.idStatus == 2)
+                                                                if (prealable.idStatus == 1)
                                                                 {
-                                                                    <div class="line-prealable">@Html.DisplayFor(x => prealable.Prealable.titreCours) @Html.Raw(" (")@Html.DisplayFor(x => prealable.Prealable.numeroCours)@Html.Raw(")")</div>
+                                                                    <div class="prealableA">
+                                                                        <div class="prealable-left">
+                                                                            <div>Préalable Relatif à:</div>
+                                                                        </div>
+                                                                        <div class="prealable-right">
+                                                                            <div class="line-prealable">@Html.DisplayFor(x => pc.titreCours) @Html.DisplayFor(x => pc.numeroCours)</div>
+                                                                        </div>
+                                                                    </div>
                                                                 }
+
                                                             }
+                                                        }
+                                                    }
+                                                }
+
+                                                <div class="clearfix"></div>
+                                                  @foreach (PlanCadrePrealable prealable in a.PlanCadre.PlanCadrePrealable)
+                                                  {
+                                                      if (prealable.idStatus == 2)
+                                                      {
+                                                        <div class="prealableA">
+                                                            <div class="prealable-left">
+                                                                <div>Préalable absolu :</div>
+                                                            </div>
+                                                            <div class="prealable-right">
+                                                                <div class="line-prealable">@Html.DisplayFor(x => prealable.Prealable.titreCours) @Html.Raw(" (")@Html.DisplayFor(x => prealable.Prealable.numeroCours)@Html.Raw(")")</div>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                      }
+                                                      else
+                                                      {
+                                                          if (prealable.idStatus == 1)
+                                                          {
+                                                            <div class="prealableA">
+                                                                <div class="prealable-left">
+                                                                    <div>Préalable relatif :</div>
+                                                                </div>
+                                                                <div class="prealable-right">
+                                                                    <div class="line-prealable">@Html.DisplayFor(x => prealable.Prealable.titreCours) @Html.Raw(" (")@Html.DisplayFor(x => prealable.Prealable.numeroCours)@Html.Raw(")")</div>
+                                                                </div>
+                                                            </div>
+                                                          }
+                                                      }
+                                                  }
+
+
                                                   @Html.DisplayFor(x => Model.indicationPedago)
                                             </td>
                                              rowspanIndicationPedago = true;
@@ -265,6 +304,7 @@
     @foreach (PlanCadreEnonce a in Model.PlanCadreEnonce)
     {
                 <!-- Affichage en boucle des tableau des ennoncer compétence-->
+                
                     <div style="margin-top:50px;">
                         <table>
                             <thead>
@@ -289,24 +329,46 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (ElementCompetence elementCompt in a.EnonceCompetence.ElementCompetence)
+                                @foreach (PlanCadreElement element in a.PlanCadre.PlanCadreElement)
                                 {
-                                    
+                                    if (a.EnonceCompetence.idCompetence == element.ElementCompetence.idCompetence)
+                                    {
+                                        if (counter == 0)
+                                        {
+                                            keep = element.activiteApprentissage.ToString();
+                                            counter++;
+                                        }
+                                        else
+                                        {
+                                            if(element.activiteApprentissage != null)
+                                            {
+                                                if (keep.Equals(element.activiteApprentissage.ToString()))
+                                                {
+                                                    counter++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                @foreach (PlanCadreElement element in a.PlanCadre.PlanCadreElement)
+                                {
+                                    if(a.EnonceCompetence.idCompetence == element.ElementCompetence.idCompetence)
+                                    { 
                                         <tr>
                                             <td width="20%">
-                                                @Html.DisplayFor(x => elementCompt.numero)<span>. </span>@Html.DisplayFor(x => elementCompt.description)
+                                                @Html.DisplayFor(x => element.ElementCompetence.numero)<span>. </span>@Html.DisplayFor(x => element.ElementCompetence.description)
                                                 <br />
                                             </td>
                                             <td width="25%">
 
-                                                @foreach (CriterePerformance criterePerf in elementCompt.CriterePerformance)
+                                                @foreach (CriterePerformance criterePerf in element.ElementCompetence.CriterePerformance)
                                                 {
-                                                    if (elementCompt.idElement == criterePerf.idElement)
+                                                    if (element.idElement == criterePerf.idElement)
                                                     {
 
                                                         <div style="margin-top:15px;">
                                                             <div class="critere-left">
-                                                                @Html.DisplayFor(x => elementCompt.numero)<span>.</span>@Html.DisplayFor(x => criterePerf.numero)
+                                                                @Html.DisplayFor(x => element.ElementCompetence.numero)<span>.</span>@Html.DisplayFor(x => criterePerf.numero)
                                                             </div>
                                                             <div class="critere-right">
                                                                 @Html.DisplayFor(x => criterePerf.description)
@@ -316,40 +378,48 @@
                                                     }
                                                 }
                                             </td>
+                                                 @if (element.elementsConnaissance != null)
+                                                 {
+                                                     carriageReturnText = element.elementsConnaissance.ToString();
+                                                     carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
+                                                     carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
+                                                    <td width="30%">
+                                                        @Html.Raw(carriageReturnText)
+                                                    </td>
+                                                     carriageReturnText = element.activiteApprentissage.ToString();
+                                                     carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
+                                                     carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
+                                                     if ((rowspanActiviteApprentissage !=true)&&(counter>1))
+                                                     {
 
-                                                @foreach (PlanCadreElement planCadreElement in elementCompt.PlanCadreElement)
-                                                {
-                                                    if (elementCompt.idElement == planCadreElement.idElement)
-                                                    {
-                                                        if (planCadreElement.elementsConnaissance != null)
-                                                        {
-                                                            carriageReturnText = planCadreElement.elementsConnaissance.ToString();
-                                                            carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
-                                                            carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
-                                                            <td width="30%">
-                                                                @Html.Raw(carriageReturnText)
-                                                            </td> 
-                                                            carriageReturnText = planCadreElement.activiteApprentissage.ToString();
-                                                            carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
-                                                            carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
-                                                            <td>
-                                                                @Html.Raw(carriageReturnText)
-                                                            </td>
-                                                        }
+                                                      <td rowspan=@Html.Raw(counter)>
+                                                            @Html.Raw(carriageReturnText)
+                                                     </td>
+                                                         rowspanActiviteApprentissage = true;
+                                                     }
+                                                     else
+                                                     {
+                                                         if(rowspanActiviteApprentissage != true)
+                                                         { 
+                                                        <td>
+                                                            @Html.Raw(carriageReturnText)
+                                                        </td>
+                                                         }
+                                                     }
 
 
-                                                    }
-                                                }
 
-                                            
+                                                 }
                                         </tr>
                                     }
+                                }
                                 
                             </tbody>
                         </table>
                     </div>
-
-            }
+        counter = 0;
+        rowspanActiviteApprentissage = false;
+    }
             <table>
                 <thead>
                     <tr>
