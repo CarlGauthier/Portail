@@ -222,12 +222,14 @@
     <Compile Include="Helpers\highlightHelper.cs" />
     <Compile Include="Helpers\PasswordGenerator.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActiviteApprentissage.cs" />
     <Compile Include="Models\BDPlanCadre.cs" />
     <Compile Include="Models\ContexteRealisation.cs" />
     <Compile Include="Models\Cours.cs" />
     <Compile Include="Models\CriterePerformance.cs" />
     <Compile Include="Models\DevisMinistere.cs" />
     <Compile Include="Models\ElementCompetence.cs" />
+    <Compile Include="Models\ElementConnaissance.cs" />
     <Compile Include="Models\EnonceCompetence.cs" />
     <Compile Include="Models\EnteteProgramme.cs" />
     <Compile Include="Models\GrilleCours.cs" />
