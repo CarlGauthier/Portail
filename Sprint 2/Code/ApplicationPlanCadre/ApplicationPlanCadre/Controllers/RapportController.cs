@@ -73,7 +73,7 @@ namespace ApplicationPlanCadre.Controllers
                                   "--footer-spacing \"10\" " +
                                   "--footer-font-size \"10\" " +
                                   "--header-font-size \"10\" ", header, footer);
-            return new ViewAsPdf("RapportProgramme", db.Programme.Find(db.PlanCadre.Find(id)))
+            return new ViewAsPdf("RapportProgramme", db.Programme.Find(id))
             {
                 CustomSwitches = customSwitches,
                 PageSize = Size.A4

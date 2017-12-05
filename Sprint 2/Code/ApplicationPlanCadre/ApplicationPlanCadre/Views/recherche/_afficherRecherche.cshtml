@@ -11,7 +11,7 @@
         <h1>Résultat</h1>
 
 
-        @if ((Model.EnonceCompetence.Count == 0) && (Model.ElementCompetence.Count == 0) && (Model.DevisMinistere.Count == 0) && (Model.CriterePerformance.Count == 0) && (Model.ContexteRealisation.Count == 0))
+        @if ((Model.EnonceCompetence.Count == 0) && (Model.ElementCompetence == null) && (Model.DevisMinistere.Count == 0) && (Model.CriterePerformance.Count == 0) && (Model.ContexteRealisation.Count == 0))
         {
             <p color="red">Aucune information à été trouvée</p>
         }
@@ -23,7 +23,7 @@
                 <hr />
                 foreach (SecondaryEnonceCompetence enonceCmpt in Model.EnonceCompetence)
                 {
-                    <a class="info-child clearfix" @Url.Action()>
+                    <a class="info-child clearfix" href="@Url.Action("Info","EnonceCompetence", new { idCompetence = enonceCmpt.idCompetence })">
                         <p>@Html.Raw(enonceCmpt.codeCompetence)</p>
                         <p>@Html.Raw(enonceCmpt.description)</p>
                     </a>
@@ -38,25 +38,28 @@
                     <hr />
                     foreach (SecondaryElementCompetence elementCompt in Model.ElementCompetence)
                     {
-                        <a class="info-child clearfix" @Url.Action()>
+                        <a class="info-child clearfix" href="@Url.Action("Info","ElementCompetence", new { idElement = elementCompt.idElement })">
                             <p>@Html.Raw(elementCompt.description)</p>
                         </a>
                     }
                 }
             }
-            if (Model.DevisMinistere.Count != 0)
+            if (((IDictionary<string, object>)Model).ContainsKey("DevisMinistere"))
             {
+                if (Model.DevisMinistere.Count != 0)
+                {
                 <h2>Devis ministériel</h2>
                 <hr />
-                foreach (SecondaryDevisMinistere devis in Model.DevisMinistere)
-                {
-                    <a class="info-child clearfix" @Url.Action()>
+                    foreach (SecondaryDevisMinistere devis in Model.DevisMinistere)
+                    {
+                    <a class="info-child clearfix" href="@Url.Action("Info","DevisMinistere", new { idDevis = devis.idDevis })">
                         <p>@Html.Raw(devis.annee)</p>
                         <p>@Html.Raw(devis.codeSpecialisation)</p>
                         <p>@Html.Raw(devis.specialisation)</p>
                         <p>@Html.Raw(devis.condition)</p>
                         <p>@Html.Raw(devis.sanction)</p>
                     </a>
+                    }
                 }
 
             }
@@ -72,7 +75,7 @@
                         foreach (SecondaryContexteRealisation contexteReal in Model.ContexteRealisation)
                         {
 
-                            <a class="info-child clearfix" @Url.Action()>
+                            <a class="info-child clearfix" href="@Url.Action("Info","EnonceCompetence", new { idCompetence = contexteReal.idCompetence})">
                                 <p>@Html.Raw(contexteReal.description)</p>
                             </a>
                         }
