@@ -53,7 +53,7 @@
 #layout header {
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
@@ -91,7 +91,7 @@
     transition: 0.1s;
 }
 
-#layout .layout-button span {
+#layout .layout-button .glyphicon {
     position: relative;
     top: 10px;
 }
@@ -223,8 +223,9 @@
 #tree-view {
     position: fixed;
     overflow-y: scroll;
+    z-index: 1;
     height: calc(100vh - 50px);
-    width: 450px;
+    width: 300px;
     border-right: 1px solid #929ab1;
     background-color: #e7ecf2;
 }
@@ -296,27 +297,27 @@
     color: #929ab1;
 }
 
-#super-view #info-display {
-    margin-left: 450px;
+.super-view .info-display {
+    margin-left: 300px;
     padding: 0;
-    width: calc(100% - 450px);
+    width: calc(100% - 300px);
 }
 
-#super-view #info-header {
+.super-view .info-header {
     padding: 20px;
     background-color: #f2f4f7;
 }
 
-#super-view #info-header h1 {
+.super-view .info-header h1 {
     display: inline-block;
 }
 
-#super-view .edit {
+.super-view .edit {
     display: inline-block;
     vertical-align: 3px;
 }
 
-#super-view #info-detail {
+.super-view .info-detail {
     margin: 0;
     padding: 20px;
 }

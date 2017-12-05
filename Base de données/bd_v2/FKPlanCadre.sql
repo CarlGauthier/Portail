@@ -19,8 +19,14 @@ ADD FOREIGN KEY(idPlanCadre) REFERENCES PlanCadre(idPlanCadre)
 ALTER TABLE PlanCadreElement
 ADD FOREIGN KEY(idElement) REFERENCES ElementCompetence(idElement)
 
+ALTER TABLE PlanCadreElement
+ADD FOREIGN KEY(idElementConnaissance) REFERENCES ElementConnaissance(idElementConnaissance)
+
 ALTER TABLE PlanCadreEnonce
 ADD FOREIGN KEY(idPlanCadre) REFERENCES PlanCadre(idPlanCadre)
 
 ALTER TABLE PlanCadreEnonce
 ADD FOREIGN KEY(idCompetence) REFERENCES EnonceCompetence(idCompetence)
+
+ALTER TABLE ElementConnaissance
+ADD FOREIGN KEY (idActivite) REFERENCES ActiviteApprentissage(idActivite)

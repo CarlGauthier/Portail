@@ -125,10 +125,11 @@
     }
 </style>
 
-<div id="super-view">
-    @Html.Action("_TreeView", "Programme")
+@Html.Action("_TreeView", "Programme")
 
-    <div id="info-display" class="container-fluid">
+<div class="super-view">
+
+    <div class="info-display container-fluid">
         <div class="pdf">
             <!-- barre top -->
 
@@ -205,7 +206,7 @@
 
                                         @Html.Raw("-")@Html.DisplayFor(x => contexteRealisation.description)
                                         <br />
-                                                    <br />
+                                        <br />
                                     }
 
                                 </td>
@@ -215,7 +216,7 @@
                     </tbody>
                 </table>
 
-                @foreach (PlanCadreEnonce a in Model.PlanCadreEnonce)
+                @foreach (var a in Model.PlanCadreEnonce)
                 {
                 <!-- Affichage en boucle des tableau des ennoncer compétence-->
                     <div style="margin-top:50px;">
@@ -242,7 +243,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (ElementCompetence elementCompt in a.EnonceCompetence.ElementCompetence)
+                                @foreach (var elementCompt in a.EnonceCompetence.ElementCompetence)
                                 {
                                     //if (b.idCompetence == elementCompt.idCompetence)
                                     //{
@@ -253,7 +254,7 @@
                                         </td>
                                         <td width="35%">
 
-                                            @foreach (CriterePerformance criterePerf in elementCompt.CriterePerformance)
+                                            @foreach (var criterePerf in elementCompt.CriterePerformance)
                                             {
                                                 if (elementCompt.idElement == criterePerf.idElement)
                                                 {

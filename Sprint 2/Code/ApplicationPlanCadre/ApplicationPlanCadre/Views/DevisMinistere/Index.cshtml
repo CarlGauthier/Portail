@@ -4,10 +4,11 @@
     ViewBag.Title = "Devis ministériels";
 }
 
-<div id="super-view">
-    @Html.Action("_TreeView")
-    <div id="info-display" class="container-fluid">
-        <div id="info-detail">
+@Html.Action("_TreeView")
+
+<div class="super-view">
+    <div class="info-display container-fluid">
+        <div class="info-detail">
             <h1>Devis ministériels</h1>
             <hr />
             @foreach (var devisMinistere in Model)

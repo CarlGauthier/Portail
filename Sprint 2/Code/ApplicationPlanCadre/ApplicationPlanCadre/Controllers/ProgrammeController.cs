@@ -29,11 +29,19 @@ namespace ApplicationPlanCadre.Controllers
 
         public ActionResult Info(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Programme programme = db.Programme.Find(id);
+
+            if (idProgramme == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Programme programme = db.Programme.Find(idProgramme);
+
             if (programme == null)
             {
                 return HttpNotFound();
