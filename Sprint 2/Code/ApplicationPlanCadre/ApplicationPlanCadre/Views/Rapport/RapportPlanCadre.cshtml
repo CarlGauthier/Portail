@@ -9,25 +9,37 @@
     bool rowspanActiviteApprentissage = false;
     bool titrePrealableAbso = true;
     bool titrePrealableRel = true;
+    int idElementConnaissanceHold = 0;
+    int idActiviteApprentissageHold = 0;
     int nbCompetence = Model.PlanCadreEnonce.Count();
     string keep="";
     int counter = 0;
-    
+
 }
 
 <style>
     table, th, td {
-        border: 1px solid black;
+        
         border-collapse: collapse;
         font-size: 18px;
 
     }
+    .td-no-borderTopBot {
+        border-top-style: none;
+        border-bottom-style: none;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+    }
+    .td-borderTopOnly {
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+    }
     table {
         /*page-break-before: avoid;*/
-        width:100%;
-        margin-top:25px;
-
-
+        width: 100%;
+        margin-top: 25px;
+        border: 1px solid black;
     }
 
     tr {
@@ -205,10 +217,10 @@
                         {
                             <tr>
                                  <td>
-                                            @Html.DisplayFor(x => a.EnonceCompetence.description) (@Html.DisplayFor(x => a.EnonceCompetence.codeCompetence))
-                                            <br />
-                                            <br />
-                                            @Html.DisplayFor(x => a.ponderationEnHeure) heures
+                                      @Html.DisplayFor(x => a.EnonceCompetence.description) (@Html.DisplayFor(x => a.EnonceCompetence.codeCompetence))
+                                      <br />
+                                      <br />
+                                      @Html.DisplayFor(x => a.ponderationEnHeure) heures
                                  </td>
                                         <td>
                                             @foreach(ContexteRealisation c in a.EnonceCompetence.ContexteRealisation)
@@ -294,11 +306,9 @@
                                             </td>
                                              rowspanIndicationPedago = true;
                                          }
-                                        
                                     </tr>
                          }
-                         
-                    </tbody>
+                      </tbody>
                 </table>
                 
     @foreach (PlanCadreEnonce a in Model.PlanCadreEnonce)
@@ -377,39 +387,27 @@
                                                         </div>
                                                     }
                                                 }
-                                            </td>
-                                                 @if (element.elementsConnaissance != null)
+                                                </td>
+                                                @*si element connaissance et pareille a celui d'en haut *@
+                                                 @if(idElementConnaissanceHold == 1)
                                                  {
-                                                     carriageReturnText = element.elementsConnaissance.ToString();
-                                                     carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
-                                                     carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
-                                                    <td width="30%">
-                                                        @Html.Raw(carriageReturnText)
-                                                    </td>
-                                                     carriageReturnText = element.activiteApprentissage.ToString();
-                                                     carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
-                                                     carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
-                                                     if ((rowspanActiviteApprentissage !=true)&&(counter>1))
-                                                     {
-
-                                                      <td rowspan=@Html.Raw(counter)>
-                                                            @Html.Raw(carriageReturnText)
-                                                     </td>
-                                                         rowspanActiviteApprentissage = true;
-                                                     }
-                                                     else
-                                                     {
-                                                         if(rowspanActiviteApprentissage != true)
-                                                         { 
-                                                        <td>
-                                                            @Html.Raw(carriageReturnText)
-                                                        </td>
-                                                         }
-                                                     }
-
-
-
+                                                     <td class="td-no-borderTopBot"></td>
                                                  }
+                                                 else
+                                                 {
+                                                     <td class="td-borderTopOnly"></td>
+                                                 }
+                                                
+                                                @*si activiteApprentissage et pareille a celui d'en haut *@
+                                                @if (idActiviteApprentissageHold == 1)
+                                                {
+                                                    <td class="td-no-borderTopBot"><!--Empty--></td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="td-borderTopOnly"></td>
+                                                }
+
                                         </tr>
                                     }
                                 }
@@ -417,8 +415,7 @@
                             </tbody>
                         </table>
                     </div>
-        counter = 0;
-        rowspanActiviteApprentissage = false;
+       
     }
             <table>
                 <thead>
