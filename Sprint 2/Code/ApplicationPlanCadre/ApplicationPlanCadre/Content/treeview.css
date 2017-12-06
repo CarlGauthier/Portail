@@ -2,9 +2,10 @@
     position: fixed;
     overflow-x: hidden;
     overflow-y: scroll;
+    z-index: 1;
     padding-right: 15px;
     height: calc(100vh - 50px);
-    width: 450px;
+    width: 350px;
     color: #ddd;
     background-color: #333333;
 }
@@ -12,18 +13,16 @@
 .tree-view .tree-view-header {
     padding: 10px 5px 10px 35px;
     font-weight: bold;
-    color: #ddd;
     border-bottom: 2px solid #000;
     background-color: #4C4C4C;
 }
 
 .tree-view .tree-view-item-container {
     padding-left: 30px;
-    background-color: #333333;
 }
 
 .tree-view .tree-view-item {
-    border-top: 1px solid #333333;
+    border-top: 1px solid #333;
     display: flex;
     overflow: hidden;
     background-color: #5C5C5C;
@@ -31,7 +30,7 @@
 
 .tree-view .tree-view-item a {
     padding: 10px 5px;
-    color: #dddddd;
+    color: #ddd;
     text-decoration: none;
     cursor: pointer;
     transition: 0.1s;
@@ -39,24 +38,6 @@
 
 .tree-view .tree-view-item a:hover {
     color: #fff;
-}
-
-.tree-view .tree-view-item.active {
-    color: #333;
-    background-color: #ddd;
-}
-
-.tree-view .collapse-button {
-    cursor: pointer;
-    transition: 0.1s;
-}
-
-.tree-view .tree-view-item.active a {
-    color: #333;
-}
-
-.tree-view .tree-view-item.active a:hover {
-    color: #333;
 }
 
 .tree-view .collapse-button {
@@ -69,7 +50,8 @@
 }
 
 .tree-view .collapse-button .glyphicon {
-    margin-top: 15px;
+    position: relative;
+    top: 10px;
     padding: 0 10px;
     font-size: 10px;
 }
@@ -80,4 +62,21 @@
 
 .tree-view .no-button {
     padding-left: 30px;
+}
+
+.tree-view .tree-view-item.active {
+    color: #333;
+    background-color: #ddd;
+}
+
+.tree-view .tree-view-item.active a {
+    color: #333;
+}
+
+.tree-view .tree-view-item.active a:hover {
+    color: #333;
+}
+
+.tree-view .tree-view-item.active .collapse-button:hover {
+    background-color: #fff;
 }

@@ -65,11 +65,11 @@ namespace ApplicationPlanCadre.Models
 
         [StringLength(300)]
         [Display(Name = "Type de condition")]
-        public string condition { get; set; }
+        public string condition { get; set; } = "N/A";
 
         [StringLength(50)]
         [Display(Name = "Sanction")]
-        public string sanction { get; set; }
+        public string sanction { get; set; } = "N/A";
 
         [StringLength(200)]
         [Display(Name = "Document ministériel")]

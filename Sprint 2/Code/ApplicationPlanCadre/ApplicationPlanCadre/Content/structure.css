@@ -41,9 +41,12 @@
 #layout header {
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#layout .main {
     background-color: #333333;
 }
 
@@ -97,7 +100,7 @@
 
 #layout .tuile-container {
     padding: 10px;
-    background-color: #0a4696;
+    background-color: rgba(0,0,0,0.5);
 }
 
 #layout .tuile {
@@ -111,14 +114,14 @@
     text-decoration: none;
     font-size: 12px;
     color: #ffffff;
-    background-color: #0d5ec9;
+    background-color: #0078d7;
     user-select: none;
     cursor: pointer;
     transition: 0.1s;
 }
 
 #layout .tuile:hover {
-    background-color: #083a7c;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.3) inset;
 }
 
 #layout .tuile:active {
@@ -203,56 +206,4 @@
         width: 140px;
         height: 180px;
     }
-}
-
-.super-view #info-display {
-    margin-left: 450px;
-    padding: 0;
-    width: calc(100% - 450px);
-}
-
-.super-view #info-header {
-    padding: 20px;
-    background-color: #f2f4f7;
-}
-
-.super-view #info-header h1 {
-    display: inline-block;
-}
-
-.super-view #info-detail {
-    margin: 0;
-    padding: 20px;
-}
-
-.info-child {
-    margin: 15px;
-    display: block;
-    width: 600px;
-    border-left: 7px solid #0d5ec9;
-    text-decoration: none;
-    color: #000000;
-    background-color: #e7ecf2;
-    cursor: pointer;
-    transition: 0.1s;
-}
-
-.info-child p {
-    margin: 10px 15px;
-}
-
-.info-child:hover {
-    background-color: #f2f4f7;
-}
-
-.info-child .gauche {
-    float: left;
-    width: 400px;
-}
-
-.info-child .droite {
-    float: right;
-    width: 100px;
-    text-align: right;
-    font-weight: bold;
 }

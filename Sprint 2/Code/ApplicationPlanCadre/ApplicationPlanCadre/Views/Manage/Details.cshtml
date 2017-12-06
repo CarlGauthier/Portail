@@ -1,0 +1,27 @@
+﻿@model ApplicationPlanCadre.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Information sur l'utilisateur";
+}
+
+<div class="container single">
+
+    <h1>@Html.DisplayFor(m => m.prenom) @Html.DisplayFor(m => m.nom)</h1>
+
+    <hr />
+
+    <div class="champ">
+        <label>@Html.DisplayNameFor(m => m.Email)</label>
+        <p>@Html.DisplayFor(model => model.Email)</p>
+    </div>
+
+    <div class="champ">
+        <label>@Html.DisplayNameFor(m => m.roles)</label>
+        <p>@Html.DisplayFor(m => m.roles)</p>
+    </div>
+
+    <div class="champ">
+        <a href='@Url.Action("ChangePassword", "Manage")'>Changer mon mot de passe</a>
+    </div>
+
+</div>

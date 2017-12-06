@@ -28,8 +28,9 @@ namespace ApplicationPlanCadre
                         "~/Content/extend.css",
                         "~/Content/table.css",
                         "~/Content/treeview.css",
+                        "~/Content/superview.css",
                         "~/Content/perfect-scrollbar.css",
-                        "~/Content/site.css"));
+                        "~/Content/structure.css"));
         }
     }
 }

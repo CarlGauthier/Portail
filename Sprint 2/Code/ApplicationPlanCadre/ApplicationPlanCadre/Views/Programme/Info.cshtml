@@ -4,14 +4,13 @@
     ViewBag.Title = "Info";
 }
 
-<div id="super-view">
-    @Html.Action("_TreeView")
-    <div id="info-display" class="container-fluid">
-        <div id="info-detail">
+@Html.Action("_TreeView")
 
+<div class="super-view">
+    <div class="info-display container-fluid">
+        <div class="info-detail">
+            <h1>Liste des plans cadres</h1>
         </div>
-
-        <h1>Liste des plans cadres</h1>
 
         @foreach (var planCadre in Model.PlanCadre)
         {

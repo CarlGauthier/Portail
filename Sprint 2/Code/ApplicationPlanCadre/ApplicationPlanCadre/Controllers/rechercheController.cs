@@ -48,7 +48,7 @@ namespace ApplicationPlanCadre.Controllers
         }
 
 
-            private List<SecondaryDevisMinistere> getDevis(string searchStr)
+        private List<SecondaryDevisMinistere> getDevis(string searchStr)
         {
             
             List<SecondaryDevisMinistere> devisList = new List<SecondaryDevisMinistere>();
@@ -64,8 +64,8 @@ namespace ApplicationPlanCadre.Controllers
                     codeSpecialisation = devisMins.codeSpecialisation.HighlightKeyWords(searchStr, "yellow", false),
                     specialisation = devisMins.specialisation.HighlightKeyWords(searchStr, "yellow", false),
                     nbUnite = devisMins.nbUnite,
-                    nbHeureFrmGenerale = devisMins.nbHeureFrmGenerale,
-                    nbHeureFrmSpecifique = devisMins.nbHeureFrmSpecifique,
+                    //nbHeureFrmGenerale = devisMins.nbHeureFrmGenerale,
+                    //nbHeureFrmSpecifique = devisMins.nbHeureFrmSpecifique,
                     condition = devisMins.condition.HighlightKeyWords(searchStr, "yellow", false),
                     sanction = devisMins.sanction.HighlightKeyWords(searchStr, "yellow", false),
                     codeProgramme = devisMins.codeProgramme.HighlightKeyWords(searchStr, "yellow", false),
@@ -114,26 +114,25 @@ namespace ApplicationPlanCadre.Controllers
             return elementList;
         }
 
-            
-            private List<SecondaryProgramme> getProgram(string searchStr)
+        private List<SecondaryProgramme> getProgram(string searchStr)
+        {
+            List<SecondaryProgramme> programme = new List<SecondaryProgramme>();
+            var holding = from a in db.Programme
+                            where a.annee.Contains(searchStr)||a.nom.Contains(searchStr)
+                            select a;
+            foreach (Programme prog in holding)
             {
-                List<SecondaryProgramme> programme = new List<SecondaryProgramme>();
-                var holding = from a in db.Programme
-                              where a.annee.Contains(searchStr)||a.nom.Contains(searchStr)
-                              select a;
-                foreach (Programme prog in holding)
+                programme.Add(new SecondaryProgramme
                 {
-                    programme.Add(new SecondaryProgramme
-                    {
-                        idProgramme = Convert.ToInt32(prog.idProgramme),
-                        annee = prog.annee.HighlightKeyWords(searchStr, "yellow", false),
-                        nom = prog.nom.HighlightKeyWords(searchStr, "yellow", false),
-                        idDevis = prog.idDevis
+                    idProgramme = Convert.ToInt32(prog.idProgramme),
+                    annee = prog.annee.HighlightKeyWords(searchStr, "yellow", false),
+                    nom = prog.nom.HighlightKeyWords(searchStr, "yellow", false),
+                    idDevis = prog.idDevis
 
-                    });
-                }
-                return programme;
+                });
             }
+            return programme;
+        }
         private List<SecondaryCriterePerformance> getCriterePerformance(string searchStr)
         {
             List<SecondaryCriterePerformance> critereList = new List<SecondaryCriterePerformance>();
@@ -171,8 +170,5 @@ namespace ApplicationPlanCadre.Controllers
             }
             return contextList;
         }
-
-        
-
     }
 }

@@ -131,7 +131,15 @@ input[type="file"] {
     margin: 40px;
     padding: 40px;
     background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.margin-auto {
+    margin: auto;
+}
+
+.single {
+    margin-top: 100px;
 }
 
 .form-box header {
@@ -139,7 +147,7 @@ input[type="file"] {
     margin-bottom: 0;
     padding: 20px 40px;
     color: #fff;
-    background-color: #4997ff;
+    background-color: #0078d7;
 }
 
 .field-box {
@@ -184,4 +192,28 @@ mark {
     background: orange;
     color: inherit;
     padding: 0;
+}
+
+.child-container {
+    margin: 5px 15px;
+}
+
+.child {
+    margin: 5px 0;
+    padding: 10px 15px;
+    width: 300px;
+    background-color: #929ab1;
+    color: #ffffff;
+}
+
+.child p {
+    float: left;
+    margin: 0;
+}
+
+.child .glyphicon {
+    position: relative;
+    top: 3px;
+    float: right;
+    cursor: pointer;
 }

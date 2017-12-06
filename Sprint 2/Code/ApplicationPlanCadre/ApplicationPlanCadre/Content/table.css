@@ -30,7 +30,7 @@ table.cool-table tr:last-child td:last-child {
 }
 
 table.cool-table td {
-    color: #C9C9C9;
+    color: #dddddd;
     background-color: #5C5C5C;
     border-top: 1px solid #707070;
     transition: 0.1s;
@@ -51,7 +51,7 @@ table.cool-table a {
     width: calc(100% + 40px);
     background: none;
     border: none;
-    color: #C9C9C9;
+    color: #dddddd;
     transition: 0.1s;
 }
 

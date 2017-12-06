@@ -47,20 +47,6 @@ namespace ApplicationPlanCadre.Controllers
             return View(users);
         }
 
-        public ActionResult Edit(string userId)
-        {
-            if (userId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ApplicationUser user = UserManager.FindById(userId);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
         public ApplicationSignInManager SignInManager
         {
             get
@@ -147,12 +133,52 @@ namespace ApplicationPlanCadre.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Password = new PasswordGenerator().GeneratePassword(10);
+                string password = new PasswordGenerator().GeneratePassword(10);
                 var user = new ApplicationUser { nom = model.Nom, prenom = model.Prenom, UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var result = await UserManager.CreateAsync(user, password);
                 if (result.Succeeded)
                 {
-                    new MailHelper().SendActivationMail(model);
+                    new MailHelper().SendActivationMail(user, password);
+                    return RedirectToAction("Index", "Account");
+                }
+                AddErrors(result);
+            }
+            return View(model);
+        }
+
+        public ActionResult Edit(string userId)
+        {
+            if (userId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser user = UserManager.FindById(userId);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = UserManager.SetEmail(model.UserId, model.Email);
+                if (!result.Succeeded)
+                {
+                    AddErrors(result);
+                }
+                var user = UserManager.FindById(model.UserId);
+                user.prenom = model.Prenom;
+                user.nom = model.Nom;
+                result = UserManager.Update(user);
+                if (result.Succeeded)
+                {
+                    string password = new PasswordGenerator().GeneratePassword(10);
+                    new MailHelper().SendEditMail(user, password);
                     return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);

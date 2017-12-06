@@ -1,0 +1,51 @@
+﻿.super-view {
+    margin-left: 350px;
+    padding: 40px;
+    width: calc(100% - 350px);
+    min-height: calc(100vh - 50px);
+    background-color: #fff;
+}
+
+.super-view header {
+    margin: -40px;
+    margin-bottom: 0;
+    padding: 20px 40px;
+    color: #fff;
+    background-color: #0078d7;
+}
+
+.super-view header hr {
+    border-bottom-color: #fff;
+}
+
+.info-child {
+    margin: 15px;
+    display: block;
+    width: 600px;
+    border-left: 7px solid #0d5ec9;
+    text-decoration: none;
+    color: #000000;
+    background-color: #e7ecf2;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.info-child p {
+    margin: 10px 15px;
+}
+
+.info-child:hover {
+    background-color: #f2f4f7;
+}
+
+.info-child .gauche {
+    float: left;
+    width: 400px;
+}
+
+.info-child .droite {
+    float: right;
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
+}

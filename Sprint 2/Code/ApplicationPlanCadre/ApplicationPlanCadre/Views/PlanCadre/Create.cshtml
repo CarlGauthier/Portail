@@ -4,7 +4,7 @@
     ViewBag.Title = "PlanCadreDetails";
 }
 
-<div id="super-view">
+<div class="super-view">
     @Html.Action("_TreeView")
 
     <div id="info-display" class="container-fluid">
@@ -37,16 +37,6 @@
                     </div>                   <div class="champ">
                         <h2>Indication pédagogique</h2>
                         <p>@Html.DisplayFor(model => Model.indicationPedago)</p>
-                    </div>
-
-                    <div class="champ">
-                        <h2>Éléments de connaissances</h2>
-                        <p>@Html.DisplayFor(model => Model.elementsConnaissance)</p>
-                    </div>
-
-                    <div class="champ">
-                        <h2>Activités d'apprentissage suggérées</h2>
-                        <p>@Html.DisplayFor(model => Model.activiteApprentissage)</p>
                     </div>
 
                     <div class="champ">

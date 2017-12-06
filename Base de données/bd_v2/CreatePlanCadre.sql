@@ -7,8 +7,6 @@ CREATE TABLE PlanCadre
 
     numeroCours             VARCHAR(10)     NULL,
     titreCours              VARCHAR(150)    NOT NULL,
-    prealableAbs            VARCHAR(300)    NULL,
-    prealableRel            VARCHAR(300)    NULL,
     indicationPedago        TEXT			NULL,
     environnementPhys       TEXT			NULL,
 	ressource               TEXT			NULL,
@@ -65,13 +63,12 @@ DROP TABLE PlanCadreElement
 GO
 CREATE TABLE PlanCadreElement
 (
+    
     idPlanCadreElement      INT             NOT NULL        IDENTITY(1,1),
-
-	elementsConnaissance    TEXT			NULL,
-    activiteApprentissage   TEXT			NULL,
 
     idPlanCadre             INT             NOT NULL,       --FK
     idElement               INT             NOT NULL,       --FK
+	idElementConnaissance	INT				NOT NULL,		--FK
 );
 
 IF OBJECT_ID ('PlanCadreEnonce') IS NOT NULL
@@ -85,4 +82,27 @@ CREATE TABLE PlanCadreEnonce
 
     idPlanCadre             INT             NOT NULL,       --FK
     idCompetence			INT				NOT NULL,       --FK
+);
+IF OBJECT_ID ('ElementConnaissance') IS NOT NULL
+DROP TABLE ElementConnaissance
+GO
+CREATE TABLE ElementConnaissance
+(
+    idElementConnaissance				INT             NOT NULL        IDENTITY(1,1),
+	description							TEXT            NOT NULL,
+
+    idActiviteApprentissage				INT				NOT NULL,		--FK
+
+	PRIMARY KEY(idElementConnaissance)
+);
+
+IF OBJECT_ID ('ActiviteApprentissage') IS NOT NULL
+DROP TABLE ActiviteApprentissage
+GO
+CREATE TABLE ActiviteApprentissage
+(
+    idActiviteApprentissage					INT             NOT NULL        IDENTITY(1,1),
+	description								TEXT            NOT NULL,
+
+	PRIMARY KEY(idActiviteApprentissage)
 );
