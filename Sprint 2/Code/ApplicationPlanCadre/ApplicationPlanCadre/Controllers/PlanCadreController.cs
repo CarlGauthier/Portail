@@ -29,11 +29,6 @@ namespace ApplicationPlanCadre.Controllers
             return View(db.PlanCadre.ToList());
         }
 
-        public ActionResult Info(int? id)
-        {
-            return View(db.PlanCadre.Find(id));
-        }
-
         public ActionResult Create(int? id)
         {
             if (id == null)
@@ -69,13 +64,13 @@ namespace ApplicationPlanCadre.Controllers
             return View(planCadre);
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? idPlanCadre)
         {
-            if (id == null)
+            if (idPlanCadre == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PlanCadre planCadre = db.PlanCadre.Find(id);
+            PlanCadre planCadre = db.PlanCadre.Find(idPlanCadre);
             if (planCadre == null)
             {
                 return HttpNotFound();
@@ -88,26 +83,26 @@ namespace ApplicationPlanCadre.Controllers
         public ActionResult Edit([Bind(Include = "idPlanCadre,numeroCours,titreCours,indicationPedago,environementPhys,ressource,nbHeureTheorie,nbHeurePratique,nbHeureDevoir,idProgramme")] PlanCadre planCadre)
         {
             bool existe;
-            existe = db.PlanCadre.Any(pc => pc.titreCours == planCadre.titreCours && pc.idProgramme == planCadre.idProgramme);
+            existe = db.PlanCadre.Any(pc => pc.titreCours != planCadre.titreCours && pc.idProgramme == planCadre.idProgramme);
             //Trim();
             if (!existe && ModelState.IsValid)
             {
                 db.Entry(planCadre).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("info", "Programme", new { idProgramme = planCadre.idProgramme });
+                return RedirectToAction("info", new { idPlanCadre = planCadre.idPlanCadre });
             }
             if (existe)
                 ModelState.AddModelError("Duplique", "Erreur, un plan cadre avec ce nom existe déjà.");
             return View(planCadre);
         }
 
-        public ActionResult Delete(int? id)
+        public ActionResult Info(int? idPlanCadre)
         {
-            if (id == null)
+            if (idPlanCadre == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PlanCadre planCadre = db.PlanCadre.Find(id);
+            PlanCadre planCadre = db.PlanCadre.Find(idPlanCadre);
             if (planCadre == null)
             {
                 return HttpNotFound();
@@ -115,18 +110,6 @@ namespace ApplicationPlanCadre.Controllers
             return View(planCadre);
         }
 
-        public ActionResult DeleteConfirmed(int idCompetence)
-        {
-            PlanCadre planCadre = db.PlanCadre.Find(idCompetence);
-            foreach (PlanCadre pc in planCadre.Cours)
-            {
-                db.CriterePerformance.RemoveRange(pc.CriterePerformance);
-            }
-            db.ElementCompetence.RemoveRange(enonceCompetence.ElementCompetence);
-            db.ContexteRealisation.RemoveRange(enonceCompetence.ContexteRealisation);
-            db.EnonceCompetence.Remove(enonceCompetence);
-            db.SaveChanges();
-            return RedirectToAction("Info", "DevisMinistere", new { idDevis = enonceCompetence.idDevis });
-        }
+        
     }
 }

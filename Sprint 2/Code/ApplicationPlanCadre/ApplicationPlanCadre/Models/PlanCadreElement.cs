@@ -29,7 +29,14 @@ namespace ApplicationPlanCadre.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int idElement { get; set; }
 
+        [Key]
+        [Column(Order = 3)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int idElementConnaissance { get; set; }
+
         public virtual ElementCompetence ElementCompetence { get; set; }
+
+        public virtual ElementConnaissance ElementConnaissance { get; set; }
 
         public virtual PlanCadre PlanCadre { get; set; }
     }

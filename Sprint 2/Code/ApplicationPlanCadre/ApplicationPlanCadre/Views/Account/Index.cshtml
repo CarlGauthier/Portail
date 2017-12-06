@@ -9,7 +9,7 @@
     <h1>Liste des utilisateurs</h1>
 
     <div class="form-group">
-        <a href='@Url.Action("Register", "Account")' class="fancy-button">Crée un utilisateur</a>
+        <a href='@Url.Action("Register", "Account")' class="fancy-button">Créer un utilisateur</a>
         <a href='@Url.Action("ConsoleAdmin", "Accueil")' class="fancy-button rouge">Terminer</a>
     </div>
 
@@ -26,7 +26,7 @@
                     @Html.DisplayNameFor(model => model.Email)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.roleNames)
+                    @Html.DisplayNameFor(model => model.roles)
                 </th>
                 <th class="action-cell-header">
                     <b>Modifier</b>
@@ -43,17 +43,7 @@
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
                     <td>
-                        @for (int i = 0; i < item.roleNames.Count(); i++)
-                        {
-                            string name = item.roleNames.ElementAt(i);
-
-                            if (i == item.roleNames.Count() - 1)
-                            {
-                                @Html.Raw(name)
-                                break;
-                            }
-                            @Html.Raw(name)@Html.Raw(", ")
-                        }
+                        @Html.DisplayFor(modelItem => item.roles)
                     </td>
                     <td class="action-cell">
                         <a href='@Url.Action("Edit", new { userId = item.Id })'>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -50,6 +51,21 @@ namespace ApplicationPlanCadre.Controllers
             }
         }
 
+        public ActionResult Details(string userId)
+        {
+            if (userId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser user = UserManager.FindById(userId);
+            user.roleNames = UserManager.GetRoles(user.Id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
         public ActionResult ChangePassword()
         {
             return View();
@@ -71,7 +87,7 @@ namespace ApplicationPlanCadre.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Details", new { userId = User.Identity.GetUserId() });
             }
             AddErrors(result);
             return View(model);

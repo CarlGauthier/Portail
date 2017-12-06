@@ -35,11 +35,29 @@ namespace ApplicationPlanCadre.Models
         [EmailAddress]
         [Display(Name = "Courriel")]
         public string Email { get; set; }
+    }
+
+    public class EditUserViewModel
+    {
+        [Required]
+        public string UserId { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe")]
-        public string Password { get; set; }
+        [StringLength(50)]
+        [Display(Name = "Prénom")]
+        public string Prenom { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Nom")]
+        public string Nom { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Courriel")]
+        public string Email { get; set; }
+
+        [Display(Name = "Rôles")]
+        public IEnumerable<string> Roles { get; set; }
     }
 }

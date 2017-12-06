@@ -11,7 +11,7 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.idCompetence)
 
-        <div class="form-horizontal form-box single-action">
+        <div class="form-horizontal form-box single">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <h1>Créer un énoncé de compétence</h1>
 

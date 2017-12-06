@@ -21,8 +21,25 @@ namespace ApplicationPlanCadre.Models
         [Display(Name = "Prénom")]
         public string prenom { get; set; }
 
-        [Display(Name = "Rôles")]
+        //Les rôles doivent être donnés au model par AccountController ou ManageController afin de pouvoir être utilisé.
+        
         public IEnumerable<string> roleNames { get; set; }
+
+        [Display(Name = "Rôles")]
+        public string roles
+        {
+            get
+            {
+                string line = "";
+                foreach(string role in roleNames)
+                {
+                    line += role + ", ";
+                }
+                if(line != "")
+                    return line.Remove(line.Length - 2, 2);
+                return "Error";
+            }
+        }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

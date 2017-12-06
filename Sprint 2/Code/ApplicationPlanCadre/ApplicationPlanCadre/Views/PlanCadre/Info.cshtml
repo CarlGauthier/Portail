@@ -125,10 +125,11 @@
     }
 </style>
 
-<div id="super-view">
-    @Html.Action("_TreeView", "Programme")
+@Html.Action("_TreeView", "Programme")
 
-    <div id="info-display" class="container-fluid">
+<div class="super-view">
+
+    <div class="info-display container-fluid">
         <div class="pdf">
             <!-- barre top -->
 
@@ -205,7 +206,7 @@
 
                                         @Html.Raw("-")@Html.DisplayFor(x => contexteRealisation.description)
                                         <br />
-                                                    <br />
+                                        <br />
                                     }
 
                                 </td>
@@ -214,8 +215,8 @@
 
                     </tbody>
                 </table>
-
                 @foreach (var planCadreEnonce in Model.PlanCadreEnonce)
+
                 {
                 <!-- Affichage en boucle des tableau des ennoncer compétence-->
                     <div style="margin-top:50px;">
@@ -243,6 +244,7 @@
                             </thead>
                             <tbody>
                                 @foreach (var planCadreElement in Model.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == planCadreEnonce.idCompetence))
+
                                 {
                                     //if (b.idCompetence == elementCompt.idCompetence)
                                     //{
@@ -252,7 +254,6 @@
                                             <br />
                                         </td>
                                         <td width="35%">
-
                                             @foreach (var criterePerformance in planCadreElement.ElementCompetence.CriterePerformance)
                                             {
                                                 if (planCadreElement.ElementCompetence.idElement == criterePerformance.idElement)
@@ -284,8 +285,7 @@
         <hr />
 
         <h1>Modification</h1>
-        <a class="fancy-button" href='@Url.Action("Edit", new { id = Model.idPlanCadre })'><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
-        <a class="fancy-button" @*onclick="location.href='@Url.Action("Delete", new { idCompetence = Model.idCompetence })'"*@><span class="glyphicon glyphicon-trash"><!----></span> Supprimer</a>
+        <a class="fancy-button" href='@Url.Action("Edit", new { idPlanCadre = Model.idPlanCadre })'><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
         <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "Programme", new { idProgramme = Model.idProgramme })'">Retour</a>
 
     </div>

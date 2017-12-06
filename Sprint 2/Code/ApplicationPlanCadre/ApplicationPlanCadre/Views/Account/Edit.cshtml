@@ -1,5 +1,4 @@
-﻿@model ApplicationPlanCadre.Models.ApplicationUser
-
+﻿@model ApplicationPlanCadre.Models.EditUserViewModel
 @{
     ViewBag.Title = "Edit";
 }
@@ -9,23 +8,23 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.UserId)
 
-        <div class="form-horizontal form-box single-action">
+        <div class="form-horizontal form-box single">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <h1>Créer un nouvel utilisateur</h1>
+            <h1>Modifier un utilisateur</h1>
 
             <hr />
 
             <div class="form-group">
-                @Html.LabelFor(m => m.prenom, new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(m => m.Prenom, new { @class = "col-md-2 control-label" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.prenom, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
                 </div>
 
-                @Html.LabelFor(m => m.nom, new { @class = "col-md-1 control-label" })
+                @Html.LabelFor(m => m.Nom, new { @class = "col-md-1 control-label" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.nom, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
                 </div>
             </div>
 
@@ -37,9 +36,9 @@
             </div>
 
             <div class="form-group">
-                <div class="col-md-offset-3 col-md-9">
+                <div class="col-md-offset-2 col-md-9">
                     <input type="submit" value="Confirmer" class="fancy-button" />
-                    <a href='@Url.Action("Create")' class="fancy-button rouge">Annuler</a>
+                    <a href='@Url.Action("Index")' class="fancy-button rouge">Annuler</a>
                 </div>
             </div>
         </div>
