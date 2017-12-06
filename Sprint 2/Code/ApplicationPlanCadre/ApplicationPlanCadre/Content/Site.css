@@ -5,45 +5,37 @@
     background-size: cover;
 }
 
-#portail #main {
-    min-height: 100vh;
-    background-color: #e7ecf2;
+#portail {
+    padding: 0;
+    background-image: url(../Content/Images/cegep.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
-#portail #login {
+#portail .main {
+    min-height: 100vh;
+    background-image: url(../Content/Images/cegep-frost.jpg);
+    background-color: #fff;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#portail .login {
     min-height: calc(100vh - 175px);
 }
 
-#portail #portail-logo {
+#portail .logo {
     width: 100%;
 }
 
-#portail #submit {
-    text-align: center;
-    margin: 25px;
-}
-
-#portail #associes {
+#portail .associes {
     height: 100px;
 }
 
-#portail #associes a img {
+#portail .associes a img {
     width: 100%;
-}
-
-@media screen and (max-width: 767px) {
-
-    #portail #image {
-        min-height: 100px;
-    }
-
-    #portail #login {
-        min-height: 0;
-    }
-
-    #portail #main {
-        min-height: calc(100vh - 100px);
-    }
 }
 
 #layout header {
@@ -211,82 +203,6 @@
         width: 140px;
         height: 180px;
     }
-}
-
-.tree-view {
-    position: fixed;
-    overflow-y: scroll;
-    height: calc(100vh - 50px);
-    width: 450px;
-    border-right: 1px solid #929ab1;
-    background-color: #e7ecf2;
-}
-
-.tree-view .tree-view-header {
-    padding: 10px 5px 10px 35px;
-    font-weight: bold;
-    border-bottom: 1px solid #ffffff;
-    background-color: #f2f4f7;
-}
-
-.tree-view .tree-view-item {
-    border-bottom: 1px solid #ffffff;
-    display: flex;
-    background-color: #e7ecf2;
-}
-
-.tree-view .tree-view-item.active {
-    color: #ffffff;
-    background-color: #0d5ec9;
-}
-
-.tree-view .tree-view-item.active a {
-    color: #ffffff;
-}
-
-.tree-view .tree-view-item.active a:hover {
-    color: #ffffff;
-}
-
-.tree-view .tree-view-item-container {
-    padding-left: 30px;
-    background-color: #ffffff;
-}
-
-.tree-view .collapse-button {
-    cursor: pointer;
-    transition: 0.1s;
-}
-
-.tree-view .collapse-button:hover {
-    color: #ffffff;
-    background-color: #929ab1;
-}
-
-.tree-view .collapse-button .glyphicon {
-    margin-top: 15px;
-    padding: 0 10px;
-    font-size: 10px;
-}
-
-.tree-view .collapse-button[aria-expanded='true'] .glyphicon {
-    transform: rotate(90deg);
-}
-
-.tree-view .no-button {
-    padding-left: 30px;
-}
-
-.tree-view .tree-view-item a {
-    padding: 10px 5px;
-    color: #000000;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.1s;
-}
-
-.tree-view .tree-view-item a:hover {
-    color: #929ab1;
 }
 
 .super-view #info-display {

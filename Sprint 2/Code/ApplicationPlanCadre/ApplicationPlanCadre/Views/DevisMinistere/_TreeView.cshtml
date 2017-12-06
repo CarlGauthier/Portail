@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<ApplicationPlanCadre.Models.DevisMinistere>
 
 <div class="tree-view">
+
     <div class="tree-view-header">Devis ministériels</div>
     @foreach (var devisMinistere in Model.OrderBy(e => e.codeProgramme))
     {
@@ -70,3 +71,8 @@
         </div>
     }
 </div>
+
+<script src="@Url.Content("~/Scripts/perfect-scrollbar.js")"></script>
+<script>
+    var ps = new PerfectScrollbar('.tree-view');
+</script>

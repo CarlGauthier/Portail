@@ -19,7 +19,7 @@
 
                 <h1>@ViewBag.Title</h1>
 
-                <h3>@Html.DisplayFor(e => e.nom)</h3>
+                <h3>@Html.DisplayFor(m => m.nom)</h3>
 
             </header>
 
@@ -35,32 +35,32 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.sanction)
-                        @Html.TextBoxFor(model => model.sanction, new { @maxlength = "50", @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.sanction, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.sanction)
+                        @Html.TextBoxFor(m => m.sanction, new { @maxlength = "50", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.sanction, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.nbUnite)
-                        @Html.TextBoxFor(model => model.nbUnite, new { @maxlength = "6", @class = "form-control small" })
-                        @Html.ValidationMessageFor(model => model.nbUnite, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.nbUnite)
+                        @Html.TextBoxFor(m => m.nbUnite, new { @maxlength = "6", @class = "form-control small" })
+                        @Html.ValidationMessageFor(m => m.nbUnite, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.condition)
-                        @Html.TextBoxFor(model => model.condition, new { @maxlength = "300", @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.condition, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.condition)
+                        @Html.TextBoxFor(m => m.condition, new { @maxlength = "300", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.condition, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="element">
-                        @Html.LabelFor(model => model.docMinistere)
+                        @Html.LabelFor(m => m.docMinistere)
 
                         <input type="file" id="pdf" name="docMinistere" class="inputfile" accept="application/pdf" />
 
                         <label for="pdf" class="file-button fancy-button rouge">
                             <span class="upload glyphicon glyphicon-download-alt"><!----></span>
                             <span class="filename">
-                                @(Model.docMinistere == null ? @Html.Raw("Téléverser un PDF") : @Html.DisplayFor(model => model.docMinistere))
+                                @(Model.docMinistere == null ? @Html.Raw("Téléverser un PDF") : @Html.DisplayFor(m => m.docMinistere))
                             </span>
                         </label>
 
@@ -77,15 +77,15 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.nbHeureFrmGenerale)
-                            @Html.TextBoxFor(model => model.nbHeureFrmGenerale, new { @type = "number", @min = "0", @step = "10", @maxlength = "4", @class = "form-control small" })
-                            @Html.ValidationMessageFor(model => model.nbHeureFrmGenerale, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.nbHeureFrmGenerale)
+                            @Html.TextBoxFor(m => m.nbHeureFrmGenerale, new { @type = "number", @min = "0", @step = "10", @maxlength = "4", @class = "form-control small" })
+                            @Html.ValidationMessageFor(m => m.nbHeureFrmGenerale, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.nbHeureFrmSpecifique)
-                            @Html.TextBoxFor(model => model.nbHeureFrmSpecifique, new { @type="number", @min = "0", @step = "10", @maxlength = "4", @class = "form-control small" })
-                            @Html.ValidationMessageFor(model => model.nbHeureFrmSpecifique, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.nbHeureFrmSpecifique)
+                            @Html.TextBoxFor(m => m.nbHeureFrmSpecifique, new { @type="number", @min = "0", @step = "10", @maxlength = "4", @class = "form-control small" })
+                            @Html.ValidationMessageFor(m => m.nbHeureFrmSpecifique, "", new { @class = "text-danger" })
                         </div>
 
                     </div>

@@ -1,55 +1,53 @@
 ﻿@model ApplicationPlanCadre.Models.DevisMinistere
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Modification d'un devis ministériel";
 }
 
-<div class="container">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.idDevis)
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.idDevis)
+    <div class="container">
+        <div class="form-box row">
 
-        <div class="form-horizontal form-box single-action">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <h3>Modification d'un devisMinistere</h3>
-            <hr />
-            <div class="champ">
+            <header>
+
+                <h1>@ViewBag.Title</h1>
+
+            </header>
+
+            <div class="col-md-8">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.ValidationMessage("Duplique", new { @class = "text-danger" })
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.EnteteProgramme, htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    @Html.DropDownList("codeProgramme", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.EnteteProgramme, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.codeProgramme)
+                    @Html.DropDownList("codeProgramme", null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.codeProgramme, "", new { @class = "text-danger" })
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.annee, htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    @Html.EditorFor(model => model.annee, new { htmlAttributes = new { @class = "form-control small-input", @maxlength = 4, @onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);" } })
-                    @Html.ValidationMessageFor(model => model.annee, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.annee)
+                    @Html.TextBoxFor(m => m.annee, new { @class = "form-control small", @maxlength = 4, @onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);" })
+                    @Html.ValidationMessageFor(m => m.annee, "", new { @class = "text-danger" })
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.codeSpecialisation, htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    @Html.EditorFor(model => model.codeSpecialisation, new { htmlAttributes = new { @class = "form-control small-input", @maxlength = 2 } })
-                    @Html.ValidationMessageFor(model => model.codeSpecialisation, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.codeSpecialisation)
+                    @Html.TextBoxFor(m => m.codeSpecialisation, new { @class = "form-control small", @maxlength = 2 })
+                    @Html.ValidationMessageFor(m => m.codeSpecialisation, "", new { @class = "text-danger" })
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-3 col-md-9">
+                <div class="element">
                     <input type="submit" value="Confirmer" class="fancy-button" />
                     <a href='@Url.Action("Create")' class="fancy-button rouge">Annuler</a>
                 </div>
-            </div>
-        </div>
-    }
 
-</div>
+            </div>
+
+        </div>
+    </div>
+}

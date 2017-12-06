@@ -4,17 +4,19 @@
     ViewBag.Title = Model.EnteteProgramme.nom;
 }
 
+@Html.Action("_TreeView")
+
 <div class="super-view">
-    @Html.Action("_TreeView")
 
     <div id="info-display" class="container-fluid">
-        <div id="info-header">
+
+        <header>
             <h3>Devis ministériel</h3>
             <h1>@Html.DisplayFor(model => model.EnteteProgramme.nom)</h1>
             <hr />
             <h3><b>@Html.DisplayNameFor(model => model.specialisation) : </b>@Html.DisplayFor(model => model.specialisation)</h3>
             <h3>@Html.DisplayFor(model => model.codeProgramme)-@Html.DisplayFor(model => model.annee)-@Html.DisplayFor(model => model.codeSpecialisation)</h3>
-        </div>
+        </header>
 
         <div id="info-detail">
             <div class="row">
