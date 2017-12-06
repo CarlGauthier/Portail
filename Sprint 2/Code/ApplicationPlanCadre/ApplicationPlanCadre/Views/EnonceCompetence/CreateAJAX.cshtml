@@ -1,0 +1,266 @@
+﻿@model ApplicationPlanCadre.Models.EnonceCompetenceAJAX
+
+@{
+    ViewBag.Title = "CreateAJAX";
+}
+
+<h2>CreateAJAX</h2>
+
+<div class="container">
+    <div id="enonceCompetence" class="form-box">
+
+        <div class="form-horizontal">
+            @Html.HiddenFor(model => model.enonce.idCompetence)
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.enonce.codeCompetence, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.enonce.codeCompetence, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
+                    @Html.ValidationMessageFor(model => model.enonce.codeCompetence, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.enonce.description, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextAreaFor(model => model.enonce.description, new { @rows = "3", @maxlength = "300", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.enonce.description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.enonce.obligatoire, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.CheckBoxFor(model => model.enonce.obligatoire, new { @Checked = "checked" })
+                    @Html.ValidationMessageFor(model => model.enonce.obligatoire, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.enonce.actif, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.CheckBoxFor(model => model.enonce.actif, new { @Checked = "checked" })
+                    @Html.ValidationMessageFor(model => model.enonce.actif, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        @*-------------------------SECTION CONTEXTE-------------------------*@
+        <div id="idContext" class="form-group">
+            <h4>Contexte de Realisation</h4>
+
+            <button type="button" onclick="showForm('contexte')" id="btncontexte">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            <div id="contexteForm">
+                <div class="form-group">
+                    <div class="col-md-9">
+                        <input type="text" name="contexte" id="contexte" maxlength="300" class="form-control" />
+                    </div>
+                </div>
+                <input type="button" class="fancy-button" id="ajoutContexte" value="Ajouter contexte" onclick="AJAX('/EnonceCompetence/ContexteTemporaire')" />
+            </div>         
+        </div>
+        <div id="listContext"></div>
+            
+        @*-------------------------SECTION ELEMENT-------------------------*@
+        <div id="idElement" class="form-group">
+            <h4>Element de Competence</h4>
+
+            <button type="button" onclick="showForm('element')" id='btnelement'>
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            <div id="elementForm">
+                <div class="form-group">
+                    <div class="col-md-9">
+                        <input type="text" name="element" id="element" maxlength="300" class="form-control"/>
+                    </div>
+                </div>
+                <input type="button" class="fancy-button" Value="Ajouter l'element" onclick="AJAX('/EnonceCompetence/ElementTemporaire')" />
+            </div>
+        </div>
+        <div id="listElement"></div>
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Enregistrer" class="fancy-button" onclick="create()"/>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+<script type="text/javascript">
+
+    function AJAX(Url, critereID) {
+       
+        
+        var tabData = [];
+        var liste = "";
+        var form_data = new FormData();
+        var dataType = "";
+        switch (Url) {
+            case "/EnonceCompetence/ContexteTemporaire":
+                var listAll = $(".contexte");
+                    for (var i = 0; i < listAll.length; i++) {
+                        liste = { value: listAll[i].innerHTML, name: "contexte"};
+                        tabData.push(liste);
+                }
+                    liste = { value: $("#contexte").val(), name: "contexte" };
+                    if (liste.value != "")
+                    {
+                        tabData.push(liste);
+                    }
+                    tabData = JSON.stringify(tabData);
+                    form_data.append('contexte', tabData);
+                    dataType = "contexte";
+                break;
+
+            case "/EnonceCompetence/ElementTemporaire":
+                var listAll = $(".element");
+                for (var i = 0; i < listAll.length; i++) {
+                    var listcritere = $(".critere" + i);
+                    liste = { value: listAll[i].innerHTML, name: "element" };
+                    tabData.push(liste);
+                    for (var j = 0; j < listcritere.length; j++) {
+                        liste = { value: listcritere[j].innerHTML, name: "critere" + i};
+                        tabData.push(liste);
+                    }
+                }
+                liste = { value: $("#element").val(), name: "element" };
+                if (liste.value != "") {
+                    tabData.push(liste);
+                }
+                tabData = JSON.stringify(tabData);
+                form_data.append('element', tabData);
+                dataType = "element";
+                break;
+
+            default:
+                var listAll = $(".critere" + critereID);
+                for (var i = 0; i < listAll.length; i++) {
+                    liste = { value: listAll[i].innerHTML, name: "critere" + i };
+                    tabData.push(liste);
+                }
+                liste = { value: $("#critere" + critereID).val(), name: "critere" };
+                if (liste.value != "") {
+                    tabData.push(liste);
+                }
+                tabData = JSON.stringify(tabData);
+                form_data.append('critere', tabData);
+                dataType = "critere";
+        }
+        $.ajax({
+            type: 'Post',
+            url: Url,
+            data: form_data,
+            dataType: 'json',
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                CreerListe(dataType, data, critereID);
+            }
+        });
+    }
+
+
+    function CreerListe(type, data, critereID) {
+        switch (type){ 
+            case "contexte":
+                var contexteRealisation = JSON.parse(data)
+                var html = "";
+                $("#listContext").empty();
+                html = html + "<ul>";
+                for (var i = 0; i < contexteRealisation.length; i++) {
+                        html = html + "<li class='contexte' >" + contexteRealisation[i].value + "</li>";
+                }
+                html = html + "</ul>";
+                $("#listContext").append(html);  
+                hideForm("contexte");
+                break;
+
+            case "element":
+                var elementCompetence = JSON.parse(data)
+                var html = "";
+                $("#listElement").empty();
+                html = html + "<ul>";
+                for (var i = 0; i < elementCompetence.length; i++) {
+                    if (elementCompetence[i].name == "element") {
+                        html = html + "<li class='element' >" + elementCompetence[i].value + "</li>";
+                        html = html + "<div id='idElement' class='form-group'>"
+                        html = html + "<button type='button' onclick='showForm(&#39critere" + [i] + "&#39)' id='btncritere" + [i] + "'><span class='glyphicon glyphicon-plus'></span></button>"
+                        html = html + "<div class='critereForm' id='critere" + [i] + "Form' style='display:none'><div class='form- group'><div class='col- md - 9'><input type='text' maxlength='300' class='form-control' id='critere" + [i] + "' />"
+                        html = html + "</div></div><input type='button' class='fancy-button' id='ajoutCritere' Value='Ajouter un critere' onclick=AJAX('/EnonceCompetence/CritereTemporaire'" + ',' + [i] + ") /></div></div>"
+                        html = html + "<div id='listCritere" + [i] + "'><ul>";
+                        for (var j = 0; j < elementCompetence.length; j++) {
+                            if (elementCompetence[j].name == "critere" + i) {
+                                html = html + "<li class='critere" + i + "' >" + elementCompetence[j].value + "</li>";
+                            }
+                        }
+                        html = html + "</ul></div>";
+                    }
+                }
+                html = html + "</ul>";
+                $("#listElement").append(html);
+                hideForm("element");
+                break;
+            default:
+                var criterePerformance = JSON.parse(data)
+                var html = "";
+                $("#listCritere" + critereID).empty();
+                html = html + "<ul>";
+                for (var i = 0; i < criterePerformance.length; i++) {
+                    html = html + "<li class='critere" + critereID + "' >" + criterePerformance[i].value + "</li>";
+                }
+                html = html + "</ul>";
+                $("#listCritere" + critereID).append(html);  
+                hideForm("critere" + critereID);
+        }
+    }
+
+    function showForm(dataType) {
+        document.getElementById(dataType + "Form").style.display = "block";
+        document.getElementById("btn" + dataType).style.display = "none";
+    }
+    function hideForm(dataType) {
+        document.getElementById(dataType + "Form").style.display = "none";
+        document.getElementById("btn" + dataType).style.display = "block";
+        document.getElementById(dataType).value = "";
+    }
+
+    function create() {
+        var tabData = [];
+        var liste = "";
+        var form_data = new FormData();
+        var listAll = $(".contexte");
+        for (var i = 0; i < listAll.length; i++) {
+            liste = { value: listAll[i].innerHTML, name: "contexte" };
+            tabData.push(liste);
+        }
+        listAll = $(".element");
+        for (var i = 0; i < listAll.length; i++) {
+            liste = { value: listAll[i].innerHTML, name: "element" };
+            tabData.push(liste);
+            var listcritere = $(".critere" + i);
+            for (var j = 0; j < listcritere.length; j++) {
+                liste = { value: listcritere[j].innerHTML, name: "critere" + i };
+                tabData.push(liste);
+            }
+        }
+        tabData = JSON.stringify(tabData);
+        form_data.append('contexteElementCritere', tabData);
+    
+        $.ajax({
+            type: 'Post',
+            url: '/EnonceCompetence/Create',
+            data: form_data,
+            dataType: 'json',
+            cache: false,
+            processData: false,
+
+        });
+    }
+</script>

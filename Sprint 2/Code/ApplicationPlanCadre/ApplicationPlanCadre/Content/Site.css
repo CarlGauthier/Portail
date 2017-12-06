@@ -375,3 +375,8 @@ mark {
     color: inherit;
     padding: 0;
 }
+
+#contexteForm,
+#elementForm {
+    display: none;
+}
