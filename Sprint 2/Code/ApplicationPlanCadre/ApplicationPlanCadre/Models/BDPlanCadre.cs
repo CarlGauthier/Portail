@@ -154,14 +154,6 @@ namespace ApplicationPlanCadre.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<PlanCadre>()
-                .Property(e => e.prealableAbs)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PlanCadre>()
-                .Property(e => e.prealableRel)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PlanCadre>()
                 .Property(e => e.indicationPedago)
                 .IsUnicode(false);
 
