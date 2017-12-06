@@ -100,5 +100,33 @@ namespace ApplicationPlanCadre.Controllers
                 ModelState.AddModelError("Duplique", "Erreur, un plan cadre avec ce nom existe déjà.");
             return View(planCadre);
         }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PlanCadre planCadre = db.PlanCadre.Find(id);
+            if (planCadre == null)
+            {
+                return HttpNotFound();
+            }
+            return View(planCadre);
+        }
+
+        public ActionResult DeleteConfirmed(int idCompetence)
+        {
+            PlanCadre planCadre = db.PlanCadre.Find(idCompetence);
+            foreach (PlanCadre pc in planCadre.Cours)
+            {
+                db.CriterePerformance.RemoveRange(pc.CriterePerformance);
+            }
+            db.ElementCompetence.RemoveRange(enonceCompetence.ElementCompetence);
+            db.ContexteRealisation.RemoveRange(enonceCompetence.ContexteRealisation);
+            db.EnonceCompetence.Remove(enonceCompetence);
+            db.SaveChanges();
+            return RedirectToAction("Info", "DevisMinistere", new { idDevis = enonceCompetence.idDevis });
+        }
     }
 }
