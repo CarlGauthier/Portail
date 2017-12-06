@@ -241,13 +241,7 @@ namespace ApplicationPlanCadre.Models
                 .WithRequired(e => e.TypePlanCadre)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<PlanCadreElement>()
-                .Property(e => e.elementsConnaissance)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PlanCadreElement>()
-                .Property(e => e.activiteApprentissage)
-                .IsUnicode(false);
+            
 
             modelBuilder.Entity<ActiviteApprentissage>()
                 .Property(e => e.description)

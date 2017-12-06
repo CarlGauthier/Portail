@@ -13,11 +13,7 @@ namespace ApplicationPlanCadre.Models
         [Column(Order = 0)]
         public int idPlanCadreElement { get; set; }
 
-        [Column(TypeName = "text")]
-        public string elementsConnaissance { get; set; }
-
-        [Column(TypeName = "text")]
-        public string activiteApprentissage { get; set; }
+        
 
         [Key]
         [Column(Order = 1)]

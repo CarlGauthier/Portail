@@ -35,6 +35,7 @@
         border-left: 1px solid black;
         border-right: 1px solid black;
     }
+    
     table {
         /*page-break-before: avoid;*/
         width: 100%;
@@ -200,13 +201,13 @@
                 <table style="margin-bottom:25px">
                     <thead>
                         <tr>
-                            <td style="width:20%;">
+                            <td class="td-borderTopOnly" style="width:20%;">
                                 Objectif - Énoncé des compétences
                             </td>
-                            <td style="width:45%;">
+                            <td class="td-borderTopOnly"style="width:45%;">
                                 Standard - Contexte de réalisation
                             </td>
-                            <td>
+                            <td class="td-borderTopOnly">
                                 Indication pédagogiques, s'il y a lieu
                             </td>
                         </tr>
@@ -216,13 +217,13 @@
                         @foreach (PlanCadreEnonce a in Model.PlanCadreEnonce)
                         {
                             <tr>
-                                 <td>
+                                 <td class="td-borderTopOnly">
                                       @Html.DisplayFor(x => a.EnonceCompetence.description) (@Html.DisplayFor(x => a.EnonceCompetence.codeCompetence))
                                       <br />
                                       <br />
                                       @Html.DisplayFor(x => a.ponderationEnHeure) heures
                                  </td>
-                                        <td>
+                                        <td class="td-borderTopOnly">
                                             @foreach(ContexteRealisation c in a.EnonceCompetence.ContexteRealisation)
                                             {
                                                
@@ -234,7 +235,7 @@
                                         </td>
                                          @if (rowspanIndicationPedago != true)
                                          {
-                                            <td rowspan=@Html.Raw(nbCompetence)>
+                                            <td rowspan=@Html.Raw(nbCompetence) class="td-borderTopOnly">
                                                 @if (ViewData["listPcPrealableA"] != null)
                                                 {
                                                     foreach (PlanCadre pc in ViewData["listPcPrealableA"] as List<PlanCadre>)
@@ -319,18 +320,18 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <td colspan="4">
+                                    <td colspan="4" class="td-borderTopOnly">
                                         @Html.DisplayFor(x => a.EnonceCompetence.description) (@Html.DisplayFor(x => a.EnonceCompetence.codeCompetence))
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="td-borderTopOnly">
                                         Les éléments de compétence
                                     </td>
-                                    <td>
+                                    <td class="td-borderTopOnly">
                                         Critères de performance
                                     </td>
-                                    <td>
+                                    <td class="td-borderTopOnly">
                                         Éléments de connaissances
                                     </td>
                                     <td>
@@ -339,37 +340,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (PlanCadreElement element in a.PlanCadre.PlanCadreElement)
-                                {
-                                    if (a.EnonceCompetence.idCompetence == element.ElementCompetence.idCompetence)
-                                    {
-                                        if (counter == 0)
-                                        {
-                                            keep = element.activiteApprentissage.ToString();
-                                            counter++;
-                                        }
-                                        else
-                                        {
-                                            if(element.activiteApprentissage != null)
-                                            {
-                                                if (keep.Equals(element.activiteApprentissage.ToString()))
-                                                {
-                                                    counter++;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                               
                                 @foreach (PlanCadreElement element in a.PlanCadre.PlanCadreElement)
                                 {
                                     if(a.EnonceCompetence.idCompetence == element.ElementCompetence.idCompetence)
                                     { 
                                         <tr>
-                                            <td width="20%">
+                                            <td width="20%" class="td-borderTopOnly">
                                                 @Html.DisplayFor(x => element.ElementCompetence.numero)<span>. </span>@Html.DisplayFor(x => element.ElementCompetence.description)
                                                 <br />
                                             </td>
-                                            <td width="25%">
+                                            <td width="25%" class="td-borderTopOnly">
 
                                                 @foreach (CriterePerformance criterePerf in element.ElementCompetence.CriterePerformance)
                                                 {
@@ -389,23 +370,32 @@
                                                 }
                                                 </td>
                                                 @*si element connaissance et pareille a celui d'en haut *@
-                                                 @if(idElementConnaissanceHold == 1)
+                                                 @if(idElementConnaissanceHold == element.ElementConnaissance.idElementConnaissance)
                                                  {
                                                      <td class="td-no-borderTopBot"></td>
                                                  }
                                                  else
                                                  {
-                                                     <td class="td-borderTopOnly"></td>
+                                                     carriageReturnText = element.ElementConnaissance.description ;
+                                                     carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
+                                                     carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
+                                                     <td class="td-borderTopOnly">@Html.Raw(carriageReturnText)</td>
+                                                     idElementConnaissanceHold = element.ElementConnaissance.idElementConnaissance;
                                                  }
                                                 
                                                 @*si activiteApprentissage et pareille a celui d'en haut *@
-                                                @if (idActiviteApprentissageHold == 1)
+                                                @if (idActiviteApprentissageHold == element.ElementConnaissance.ActiviteApprentissage.idActiviteApprentissage)
                                                 {
                                                     <td class="td-no-borderTopBot"><!--Empty--></td>
                                                 }
                                                 else
                                                 {
-                                                    <td class="td-borderTopOnly"></td>
+                                                    carriageReturnText = element.ElementConnaissance.ActiviteApprentissage.description;
+                                                    carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
+                                                    carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
+                                                    <td class="td-borderTopOnly">@Html.Raw(carriageReturnText)</td>
+                                                    idActiviteApprentissageHold = element.ElementConnaissance.ActiviteApprentissage.idActiviteApprentissage;
+
                                                 }
 
                                         </tr>
@@ -420,17 +410,17 @@
             <table>
                 <thead>
                     <tr>
-                        <td>
+                        <td class="td-borderTopOnly">
                             Environement physique
                         </td>
-                        <td>
+                        <td class="td-borderTopOnly">
                             Ressources didactiques suggérées
                         </td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td width="45%">
+                        <td width="45%" class="td-borderTopOnly">
                             @{ 
                                 carriageReturnText = Model.environnementPhys.ToString(); ;
                                 carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
@@ -439,7 +429,7 @@
                             @Html.Raw(carriageReturnText)
                             
                         </td>
-                        <td>
+                        <td class="td-borderTopOnly">
                             @{
                                 carriageReturnText = Model.ressource.ToString(); ;
                                 carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
