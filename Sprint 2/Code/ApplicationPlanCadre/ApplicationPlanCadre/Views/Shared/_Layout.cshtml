@@ -13,16 +13,14 @@
 <body>
     <section id="layout">
         <header>
-            <div class="fluid-container">
-                <div class="layout-head clearfix">
+            <div class="clearfix">
 
-                    <div id="nav-button" data-toggle="collapse" data-target="#nav" class="layout-button"><span class="glyphicon glyphicon-th-large"></span></div>
+                <div id="nav-button" data-toggle="collapse" data-target="#nav" class="layout-button"><span class="glyphicon glyphicon-th-large"></span></div>
 
-                    <a href='@Url.Action("Index", "Accueil")'><div class="header-logo"><!----></div></a>
+                <a href='@Url.Action("Index", "Accueil")'><div class="logo"><!----></div></a>
 
-                    @Html.Partial("_LoginPartial")
+                @Html.Partial("_LoginPartial")
 
-                </div>
             </div>
             <nav id="nav" class="collapse">
                 <div class="tuile-container">

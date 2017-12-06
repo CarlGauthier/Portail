@@ -23,7 +23,9 @@ namespace ApplicationPlanCadre.Models
         {
             get
             {
-                return codeDevis + " • " + specialisation;
+                if(specialisation != null)
+                    return codeDevis + " • " + specialisation;
+                return codeDevis;
             }
         }
 
@@ -31,7 +33,7 @@ namespace ApplicationPlanCadre.Models
         {
             get
             {
-                return this.EnteteProgramme.codeProgramme + "-" + annee + "-" + codeSpecialisation;
+                return EnteteProgramme.codeProgramme + "-" + annee + "-" + codeSpecialisation;
             }
         }
 

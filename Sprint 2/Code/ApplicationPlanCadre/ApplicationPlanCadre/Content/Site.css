@@ -52,13 +52,10 @@
     z-index: 1;
     width: 100%;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    background-color: #333333;
 }
 
-#layout .layout-head {
-    background-color: #083a7c;
-}
-
-#layout .header-logo {
+#layout .logo {
     position: absolute;
     display: inline-block;
     margin-left: auto;
@@ -66,15 +63,15 @@
     left: 0;
     right: 0;
     vertical-align: top;
-    width: 420px;
+    width: 150px;
     height: 50px;
-    background: url(Images/cj-layout.png) center center no-repeat;
+    background: url(Images/portail-layout.svg) center center no-repeat;
     background-size: contain;
 }
 
 #layout #nav-button {
     float: left;
-    background-color: #0d5ec9;
+    background-color: #000;
 }
 
 #layout .layout-button {
@@ -87,7 +84,7 @@
     transition: 0.1s;
 }
 
-#layout .layout-button span {
+#layout .layout-button .glyphicon {
     position: relative;
     top: 10px;
 }
@@ -99,7 +96,7 @@
 #layout #logoutForm .layout-button {
     float: right;
     background-color: transparent;
-    border-left: 1px solid #0d5ec9;
+    border-left: 2px solid #000;
 }
 
 #layout #nav-button:hover, #layout #logoutForm .layout-button:hover {

@@ -85,6 +85,7 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idDevis, codeProgramme, annee, codeSpecialisation, nom, dateValidation, docMinistere, specialisation, sanction, nbUnite, condition, nbHeurefrmGenerale,nbHeurefrmSpecifique")] DevisMinistere devisMinistere, HttpPostedFileBase docMinistere)
         {
+            devisMinistere.EnteteProgramme = db.EnteteProgramme.Find(devisMinistere.codeProgramme);
             if (docMinistere != null)
             {
                 if(!UploadFile(docMinistere, devisMinistere))

@@ -1,23 +1,15 @@
-﻿.row-eq-height {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-}
-
-@media screen and (max-width: 767px) {
-
-    .row-eq-height {
-        display: block;
-    }
-}
-
-body {
-    font-family: Segoe UI, Calibri, Sans-Serif;
+﻿body {
+    min-height: calc(100vh - 50px);
+    font-family: Calibri, Sans-Serif;
+    font-size: 175%;
+    background-image: url(../Content/Images/watermark.png);
+    background-color: #f2f2f2;
+    background-repeat: no-repeat;
+    background-position: bottom left;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    margin: 5px 15px;
+    margin: 5px 0;
     line-height: 50px;
     font-family: Segoe UI Light, Calibri Light, Sans-Serif;
 }
@@ -27,35 +19,52 @@ li {
 }
 
 hr {
-    color: #929ab1;
     border: none;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #929ab1;
 }
 
 a:hover {
     text-decoration: none;
 }
 
-legend {
-    margin: 0;
-    margin-bottom: 19px;
-    padding: 0 15px;
-    font-family: Segoe UI Light, Calibri Light, Sans-Serif;
-    border-bottom: 1px solid #929ab1;
-}
-
 input, button {
     outline: 0;
 }
 
-input[type="text"] {
-    box-sizing: border-box;
-    padding: 7px;
-    border: 1px solid #929ab1;
+.form-group {
+    margin: 10px 0;
+    padding: 0;
 }
 
-.form-group {
-    padding: 0 15px;
+.form-control {
+    margin: 0;
+    display: block;
+    box-sizing: border-box;
+    padding: 7px;
+    width: 100%;
+    height: initial;
+    box-shadow: initial;
+    font-size: initial;
+    color: initial;
+    border-radius: initial;
+    border: none;
+    border-bottom: 2px solid #929ab1;
+    background-color: #f2f2f2;
+}
+
+.form-control:focus {
+    outline: 0;
+    border: none;
+    border-bottom: 2px solid gold;
+    box-shadow: initial;
+}
+
+.form-control.small {
+    width: 25%;
+}
+
+label {
+    display: block;
 }
 
 .text-danger {
@@ -79,7 +88,7 @@ textarea {
     text-align: center;
     color: #083a7c;
     background-color: transparent;
-    font-size: 18px;
+    font-size: 1.2em;
     cursor: pointer;
     transition: 0.1s;
 }
@@ -114,10 +123,28 @@ input[type="file"] {
 }
 
 .form-box {
-    margin: 0 15px;
-    padding: 20px;
-    border: 1px solid #929ab1;
-    background-color: #eef2f6;
+    margin: 15px;
+    padding: 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+}
+
+.form-box header {
+    margin: -40px;
+    margin-bottom: 0;
+    padding: 20px 40px;
+    color: #fff;
+    background-color: #4997ff;
+}
+
+.field-box {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: #f2f2f2;
+}
+
+.field-box .form-control {
+    background-color: #fff;
 }
 
 .margin-auto {
@@ -178,16 +205,12 @@ input[type="file"] {
     text-align: center;
 }
 
-.field {
+.element {
     margin: 20px 0;
 }
 
-.field label {
-    vertical-align: super;
-}
-
-.small-input {
-    width: 100px;
+label {
+    display: block;
 }
 
 .stylish-input-group .input-group-addon {
