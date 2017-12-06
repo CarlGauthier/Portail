@@ -212,6 +212,7 @@
     <Compile Include="Controllers\RapportController.cs" />
     <Compile Include="Controllers\RechercheController.cs" />
     <Compile Include="Controllers\PlanCadreController.cs" />
+    <Compile Include="Controllers\PlanCadreEnonceController.cs" />
     <Compile Include="Controllers\StageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,13 +220,16 @@
     <Compile Include="Helpers\MailHelper.cs" />
     <Compile Include="Helpers\customAuthorize.cs" />
     <Compile Include="Helpers\highlightHelper.cs" />
+    <Compile Include="Helpers\PasswordGenerator.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActiviteApprentissage.cs" />
     <Compile Include="Models\BDPlanCadre.cs" />
     <Compile Include="Models\ContexteRealisation.cs" />
     <Compile Include="Models\Cours.cs" />
     <Compile Include="Models\CriterePerformance.cs" />
     <Compile Include="Models\DevisMinistere.cs" />
     <Compile Include="Models\ElementCompetence.cs" />
+    <Compile Include="Models\ElementConnaissance.cs" />
     <Compile Include="Models\EnonceCompetence.cs" />
     <Compile Include="Models\EnonceCompetenceAJAX.cs" />
     <Compile Include="Models\EnteteProgramme.cs" />
@@ -235,9 +239,11 @@
     <Compile Include="Models\PlanCadre.cs" />
     <Compile Include="Models\PlanCadreElement.cs" />
     <Compile Include="Models\PlanCadreEnonce.cs" />
+    <Compile Include="Models\PlanCadrePrealable.cs" />
     <Compile Include="Models\Programme.cs" />
     <Compile Include="Models\SecondaryDevisMinistere.cs" />
     <Compile Include="Models\Session.cs" />
+    <Compile Include="Models\StatusPrealable.cs" />
     <Compile Include="Models\TypePlanCadre.cs" />
     <Compile Include="Models\SecondaryContexteRealisation.cs" />
     <Compile Include="Models\SecondaryCriterePerformance.cs" />
@@ -327,37 +333,19 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Accueil\Index.cshtml" />
-    <Content Include="Views\Stage\indexStage.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\DevisMinistere\Index.cshtml" />
     <Content Include="Views\ConsoleDevisMinistere\Edit.cshtml" />
     <Content Include="Views\ConsoleDevisMinistere\Create.cshtml" />
     <Content Include="Views\ConsoleDevisMinistere\_PartialList.cshtml" />
-    <Content Include="Views\Shared\_ConsoleNav.cshtml" />
-    <Content Include="Views\DevisMinistere\Details.cshtml" />
     <Content Include="Views\DevisMinistere\Edit.cshtml" />
-    <Content Include="Views\DevisMinistere\_PartialEnonceCompetence.cshtml" />
     <Content Include="Views\DevisMinistere\_TreeView.cshtml" />
     <Content Include="Views\EnonceCompetence\Info.cshtml" />
     <Content Include="Views\ElementCompetence\Info.cshtml" />
@@ -381,8 +369,6 @@
     <Content Include="Views\ConsoleProgramme\_PartialList.cshtml" />
     <Content Include="Views\ConsoleProgramme\Create.cshtml" />
     <Content Include="Views\ConsoleProgramme\Edit.cshtml" />
-    <Content Include="Views\Programme\Info.cshtml" />
-    <Content Include="Views\Upload\UploadFile.cshtml" />
     <Content Include="Views\Recherche\Recherche.cshtml" />
     <Content Include="Views\Recherche\_AfficherRecherche.cshtml" />
     <Content Include="Views\Rapport\RapportProgramme.cshtml" />
@@ -391,6 +377,13 @@
     <Content Include="Views\PlanCadre\Index.cshtml" />
     <Content Include="Views\PlanCadre\_TreeView.cshtml" />
     <Content Include="Views\EnonceCompetence\CreateAJAX.cshtml" />
+    <Content Include="Views\PlanCadre\Info.cshtml" />
+    <Content Include="Views\Programme\Index.cshtml" />
+    <Content Include="Views\PlanCadre\Create.cshtml" />
+    <Content Include="Views\Programme\_TreeView.cshtml" />
+    <Content Include="Views\Programme\Info.cshtml" />
+    <Content Include="Views\Manage\Details.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

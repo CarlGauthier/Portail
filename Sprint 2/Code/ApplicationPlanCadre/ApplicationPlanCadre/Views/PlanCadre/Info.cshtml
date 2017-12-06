@@ -1,0 +1,305 @@
+﻿@model ApplicationPlanCadre.Models.PlanCadre
+@{
+    ViewBag.Title = "PlanCadre";
+    bool rowspanDone = false;
+}
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        font-size: 15px;
+    }
+
+    table {
+        page-break-before: auto;
+        width: 100%;
+        margin-top: 25px;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: always;
+    }
+
+    td {
+        page-break-inside: avoid;
+        page-break-before: auto
+    }
+
+    thead {
+        display: table-header-group;
+        font-weight: bold;
+        background-color: rgba(87, 85, 91, 0.5);
+    }
+
+    tfoot {
+        display: table-footer-group
+    }
+
+    div {
+        page-break-after: auto
+    }
+
+    .divtop {
+        width: 100%;
+        background-color: red;
+    }
+
+    .pdf {
+        width: 100%;
+    }
+
+    .entete {
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+    .entete-left {
+        display: inline;
+        box-sizing: border-box;
+        width: 50%;
+        float: left;
+        margin: 0px;
+    }
+
+    .entete-right {
+        display: inline;
+        box-sizing: border-box;
+        width: 50%;
+        float: right;
+        margin: 0px;
+    }
+
+    .inner-left {
+        display: inline;
+        box-sizing: border-box;
+        float: left;
+        margin: 0px;
+    }
+
+    .inner-right {
+        display: inline;
+        box-sizing: border-box;
+        float: left;
+        margin-left: 10px;
+    }
+
+    .inner2-left {
+        display: inline;
+        box-sizing: border-box;
+        float: right;
+        margin-left: 10px;
+    }
+
+    .inner2-right {
+        display: inline;
+        box-sizing: border-box;
+        float: right;
+        margin: 0px;
+    }
+
+    .critere-left {
+        display: inline;
+        box-sizing: border-box;
+        float: left;
+        margin: 0px;
+        width: 4%;
+        margin-right: 15px;
+    }
+
+    .critere-right {
+        display: inline;
+        box-sizing: border-box;
+        margin: 0px;
+        float: left;
+        width: 90%;
+    }
+
+
+    .corps {
+        padding-top: 25px;
+    }
+
+    #clear {
+        clear: both;
+    }
+</style>
+
+@Html.Action("_TreeView", "Programme")
+
+<div class="super-view">
+
+    <div class="info-display container-fluid">
+        <div class="pdf">
+            <!-- barre top -->
+
+            <div class="divtop">
+                @Html.DisplayFor(x => Model.Programme.nom)@*nom programme*@
+                <br />
+                @Html.DisplayFor(x => Model.Programme.DevisMinistere.specialisation)@*devis specialisation*@
+            </div>
+            <!-- début de l'entête -->
+            <div class="entete">
+                <div class="entete-left">
+                    <br />
+
+                    <div class="inner-left">
+                        Titre du cours :
+                        <br />
+                        Pondération :
+                    </div>
+                    <div class="inner-right">
+                        @Html.DisplayFor(x => Model.titreCours)@*titre cours*@
+                        <br />
+                        @Html.DisplayFor(x => Model.nbHeureTheorie) - @Html.DisplayFor(x => Model.nbHeurePratique) - @Html.DisplayFor(x => Model.nbHeureDevoir)
+                    </div>
+                </div>
+                <div class="entete-right">
+                    <br />
+                    <div class="inner2-left">
+                        @Html.DisplayFor(x => Model.numeroCours)
+                        <br />
+                        @Html.DisplayFor(x => Model.Programme.DevisMinistere.codeProgramme)@*code programme devis*@.@Html.DisplayFor(x => Model.Programme.DevisMinistere.codeSpecialisation)
+                    </div>
+                    <div class="inner2-right">
+                        Numéro du cours :
+                        <br />
+                        Programme :
+
+                    </div>
+
+                </div>
+            </div>
+            <div id="clear"></div>
+
+
+            <!-- début du corps du plan cadre-->
+            <div class="corps">
+                <table>
+                    <thead>
+                        <tr>
+                            <td style="width:20%;">
+                                Objectif - Énoncé des compétences
+                            </td>
+                            <td style="width:45%;">
+                                Standard - Contexte de réalisation
+                            </td>
+                            <td>
+                                Indication pédagogiques, s'il y a lieu
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var planCadreEnonce in Model.PlanCadreEnonce)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(x => planCadreEnonce.EnonceCompetence.description) (@Html.DisplayFor(x => planCadreEnonce.EnonceCompetence.codeCompetence))
+                                    <br />
+                                    <br />
+                                    @Html.DisplayFor(x => planCadreEnonce.ponderationEnHeure) heures
+                                </td>
+                                <td>
+                                    @foreach (var contexteRealisation in planCadreEnonce.EnonceCompetence.ContexteRealisation)
+                                    {
+
+                                        @Html.Raw("-")@Html.DisplayFor(x => contexteRealisation.description)
+                                        <br />
+                                        <br />
+                                    }
+
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+                @foreach (var a in Model.PlanCadreEnonce)
+                {
+                <!-- Affichage en boucle des tableau des ennoncer compétence-->
+                    <div style="margin-top:50px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td colspan="4">
+                                        @Html.DisplayFor(x => a.EnonceCompetence.description) (@Html.DisplayFor(x => a.EnonceCompetence.codeCompetence))
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Les éléments de compétence
+                                    </td>
+                                    <td>
+                                        Critères de performance
+                                    </td>
+                                    <td>
+                                        Éléments de connaissances
+                                    </td>
+                                    <td>
+                                        Activités d'apprentissage suggérées
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var elementCompt in a.EnonceCompetence.ElementCompetence)
+                                {
+                                    //if (b.idCompetence == elementCompt.idCompetence)
+                                    //{
+                                    <tr>
+                                        <td width="25%">
+                                            @Html.DisplayFor(x => elementCompt.numero)<span>. </span>@Html.DisplayFor(x => elementCompt.description)
+                                            <br />
+                                        </td>
+                                        <td width="35%">
+
+                                            @foreach (var criterePerf in elementCompt.CriterePerformance)
+                                            {
+                                                if (elementCompt.idElement == criterePerf.idElement)
+                                                {
+
+                                                    <div style="margin-top:15px;">
+                                                        <div class="critere-left">
+                                                            @Html.DisplayFor(x => elementCompt.numero)<span>.</span>@Html.DisplayFor(x => criterePerf.numero)
+                                                        </div>
+                                                        <div class="critere-right">
+                                                            @Html.DisplayFor(x => criterePerf.description)
+                                                        </div>
+                                                        <div id="clear"></div>
+                                                    </div>
+                                                }
+                                            }
+
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                }
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+</div>
+

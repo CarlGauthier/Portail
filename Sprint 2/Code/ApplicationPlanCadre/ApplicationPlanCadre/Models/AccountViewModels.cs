@@ -3,49 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApplicationPlanCadre.Models
 {
-    public class ExternalLoginConfirmationViewModel
-    {
-        [Required]
-        [Display(Name = "Courriel")]
-        public string Email { get; set; }
-    }
-
-    public class ExternalLoginListViewModel
-    {
-        public string ReturnUrl { get; set; }
-    }
-
-    public class SendCodeViewModel
-    {
-        public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
-        public string ReturnUrl { get; set; }
-        public bool RememberMe { get; set; }
-    }
-
-    public class VerifyCodeViewModel
-    {
-        [Required]
-        public string Provider { get; set; }
-
-        [Required]
-        [Display(Name = "Code")]
-        public string Code { get; set; }
-        public string ReturnUrl { get; set; }
-
-        [Display(Name = "Mémoriser ce navigateur ?")]
-        public bool RememberBrowser { get; set; }
-
-        public bool RememberMe { get; set; }
-    }
-
-    public class ForgotViewModel
-    {
-        [Required]
-        [Display(Name = "Courriel")]
-        public string Email { get; set; }
-    }
-
     public class LoginViewModel
     {
         [Required]
@@ -67,47 +24,40 @@ namespace ApplicationPlanCadre.Models
         [Required]
         [StringLength(50)]
         [Display(Name = "Nom")]
-        public string nom { get; set; }
+        public string Nom { get; set; }
 
         [Required]
         [StringLength(50)]
         [Display(Name = "Prénom")]
-        public string prenom { get; set; }
-
-        public string psw { get; set; }
-
+        public string Prenom { get; set; }
+		
         [Required]
         [EmailAddress]
         [Display(Name = "Courriel")]
         public string Email { get; set; }
     }
 
-    public class ResetPasswordViewModel
+    public class EditUserViewModel
     {
+        [Required]
+        public string UserId { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Prénom")]
+        public string Prenom { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Nom")]
+        public string Nom { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Courriel")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe")]
-        public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirmer le mot de passe")]
-        [Compare("Password", ErrorMessage = "Le nouveau mot de passe et le mot de passe de confirmation ne correspondent pas.")]
-        public string ConfirmPassword { get; set; }
-
-        public string Code { get; set; }
-    }
-
-    public class ForgotPasswordViewModel
-    {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "E-mail")]
-        public string Email { get; set; }
+        [Display(Name = "Rôles")]
+        public IEnumerable<string> Roles { get; set; }
     }
 }

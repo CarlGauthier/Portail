@@ -53,7 +53,7 @@
 #layout header {
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
@@ -76,31 +76,37 @@
     background-size: contain;
 }
 
-#layout button {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    border: none;
-    color: #ffffff;
-    transition: 0.1s;
-}
-
 #layout #nav-button {
     float: left;
     background-color: #0d5ec9;
+}
+
+#layout .layout-button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+#layout .layout-button .glyphicon {
+    position: relative;
+    top: 10px;
 }
 
 #layout #logoutForm {
     float: right;
 }
 
-#layout #logoutForm button {
+#layout #logoutForm .layout-button {
     float: right;
     background-color: transparent;
     border-left: 1px solid #0d5ec9;
 }
 
-#layout #nav-button:hover, #layout #logoutForm button:hover {
+#layout #nav-button:hover, #layout #logoutForm .layout-button:hover {
     background-color: #0d5ec9;
 }
 
@@ -215,8 +221,11 @@
 }
 
 #tree-view {
-    min-height: calc(100vh - 50px);
-    width: 450px;
+    position: fixed;
+    overflow-y: scroll;
+    z-index: 1;
+    height: calc(100vh - 50px);
+    width: 300px;
     border-right: 1px solid #929ab1;
     background-color: #e7ecf2;
 }
@@ -288,30 +297,27 @@
     color: #929ab1;
 }
 
-#super-view {
-    display: flex;
-}
-
-#super-view #info-display {
+.super-view .info-display {
+    margin-left: 300px;
     padding: 0;
-    width: calc(100% - 450px);
+    width: calc(100% - 300px);
 }
 
-#super-view #info-header {
+.super-view .info-header {
     padding: 20px;
     background-color: #f2f4f7;
 }
 
-#super-view #info-header h1 {
+.super-view .info-header h1 {
     display: inline-block;
 }
 
-#super-view .edit {
+.super-view .edit {
     display: inline-block;
     vertical-align: 3px;
 }
 
-#super-view #info-detail {
+.super-view .info-detail {
     margin: 0;
     padding: 20px;
 }
@@ -351,6 +357,7 @@
 #console-devisMinistere {
     margin-top: 100px;
 }
+
 .stylish-input-group .input-group-addon {
     background: white !important;
 }

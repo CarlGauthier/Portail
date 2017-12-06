@@ -20,12 +20,16 @@ namespace ApplicationPlanCadre.Models
         public virtual DbSet<EnonceCompetence> EnonceCompetence { get; set; }
         public virtual DbSet<EnteteProgramme> EnteteProgramme { get; set; }
         public virtual DbSet<GrilleCours> GrilleCours { get; set; }
-        public virtual DbSet<TypePlanCadre> TypePlanCadre { get; set; }
         public virtual DbSet<PlanCadre> PlanCadre { get; set; }
+        public virtual DbSet<PlanCadrePrealable> PlanCadrePrealable { get; set; }
         public virtual DbSet<Programme> Programme { get; set; }
         public virtual DbSet<Session> Session { get; set; }
+        public virtual DbSet<StatusPrealable> StatusPrealable { get; set; }
+        public virtual DbSet<TypePlanCadre> TypePlanCadre { get; set; }
         public virtual DbSet<PlanCadreElement> PlanCadreElement { get; set; }
         public virtual DbSet<PlanCadreEnonce> PlanCadreEnonce { get; set; }
+        public virtual DbSet<ActiviteApprentissage> ActiviteApprentissage { get; set; }
+        public virtual DbSet<ElementConnaissance> ElementConnaissance { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -141,11 +145,6 @@ namespace ApplicationPlanCadre.Models
                 .WithRequired(e => e.GrilleCours)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<TypePlanCadre>()
-                .HasMany(e => e.PlanCadre)
-                .WithRequired(e => e.TypePlanCadre)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<PlanCadre>()
                 .Property(e => e.numeroCours)
                 .IsUnicode(false);
@@ -180,6 +179,12 @@ namespace ApplicationPlanCadre.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<PlanCadre>()
+                .HasMany(e => e.PlanCadrePrealable)
+                .WithRequired(e => e.PlanCadre)
+                .HasForeignKey(e => e.idPlanCadre)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PlanCadre>()
                 .HasMany(e => e.PlanCadreElement)
                 .WithRequired(e => e.PlanCadre)
                 .WillCascadeOnDelete(false);
@@ -189,13 +194,11 @@ namespace ApplicationPlanCadre.Models
                 .WithRequired(e => e.PlanCadre)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<PlanCadreElement>()
-                .Property(e => e.elementsConnaissance)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PlanCadreElement>()
-                .Property(e => e.activiteApprentissage)
-                .IsUnicode(false);
+            modelBuilder.Entity<PlanCadre>()
+                .HasMany(e => e.Prealable)
+                .WithRequired(e => e.Prealable)
+                .HasForeignKey(e => e.idPrealable)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Programme>()
                 .Property(e => e.nom)
@@ -218,6 +221,50 @@ namespace ApplicationPlanCadre.Models
             modelBuilder.Entity<Session>()
                 .HasMany(e => e.Cours)
                 .WithRequired(e => e.Session)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<StatusPrealable>()
+                .Property(e => e.status)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<StatusPrealable>()
+                .HasMany(e => e.PlanCadrePrealable)
+                .WithRequired(e => e.StatusPrealable)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TypePlanCadre>()
+                .Property(e => e.nom)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<TypePlanCadre>()
+                .HasMany(e => e.PlanCadre)
+                .WithRequired(e => e.TypePlanCadre)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PlanCadreElement>()
+                .Property(e => e.elementsConnaissance)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PlanCadreElement>()
+                .Property(e => e.activiteApprentissage)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ActiviteApprentissage>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ActiviteApprentissage>()
+                .HasMany(e => e.ElementConnaissance)
+                .WithRequired(e => e.ActiviteApprentissage)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ElementConnaissance>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ElementConnaissance>()
+                .HasMany(e => e.PlanCadreElement)
+                .WithRequired(e => e.ElementConnaissance)
                 .WillCascadeOnDelete(false);
         }
     }

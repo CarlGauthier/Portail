@@ -15,7 +15,7 @@
         <header>
             <div class="fluid-container">
                 <div id="layout-head" class="clearfix">
-                    <button type="button" id="nav-button" data-toggle="collapse" data-target="#nav"><span class="glyphicon glyphicon-th-large"></span></button>
+                    <div id="nav-button" data-toggle="collapse" data-target="#nav" class="layout-button"><span class="glyphicon glyphicon-th-large"></span></div>
                     <a href='@Url.Action("Index", "Accueil")'><div class="header-logo"><!----></div></a>
                     @Html.Partial("_LoginPartial")
                 </div>
@@ -33,15 +33,12 @@
                         <p>Pédagogie</p>
                     </a>
                 }
-
         
-                @if (User.IsInRole("Enseignant")||User.IsInRole("Gestionnaire de stage"))
-                {
-                    <a class="tuile">
-                        <span class="glyphicon glyphicon-briefcase"></span>
-                        <p>Stage</p>
-                    </a>
-                }
+                <a class="tuile" href='@Url.Action("Index", "Rapport")'>
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                    <p>Rapport</p>
+                </a>
+
                 @if (User.IsInRole("Admin"))
                 {
                     <a class="tuile" href='@Url.Action("ConsoleAdmin", "Accueil")'>

@@ -10,21 +10,21 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal form-box single-action">
+        <div class="form-horizontal form-box single">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <h1>Créer un nouvel utilisateur</h1>
 
             <hr />
 
             <div class="form-group">
-                @Html.LabelFor(m => m.prenom, new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(m => m.Prenom, new { @class = "col-md-2 control-label" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.prenom, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
                 </div>
 
-                @Html.LabelFor(m => m.nom, new { @class = "col-md-1 control-label" })
+                @Html.LabelFor(m => m.Nom, new { @class = "col-md-1 control-label" })
                 <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.nom, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
                 </div>
             </div>
 
@@ -34,6 +34,16 @@
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                 </div>
             </div>
+
+            <div id="roles" class="child-container">
+                <div class="child clearfix">
+                    <p>Bluglo</p>
+                    <span class="glyphicon glyphicon-remove"><!----></span>
+                    <input type="hidden" value="3"/>
+                </div>
+            </div>
+
+            <div onclick="addRole()">Bluglo</div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -46,3 +56,29 @@
     }
 
 </div>
+
+<script>
+
+    var i = 0;
+
+    function addRole() {
+        var nom = "gg son";
+        var id = i++;
+        $('#roles').html($('#roles').html() + buildChildHtml(nom, id));
+    }
+
+    function buildChildHtml(nom, id) {
+        return html =
+            "<div id='" + id + "'class='child clearfix'>" +
+                "<p>" + nom + "</p>" +
+                "<span  onclick='removeRole(" + id + ")' class='glyphicon glyphicon-remove'></span>" +
+                "<input type='hidden' name='roles' value='" + id + "' />" +
+            "</div>";
+    }
+
+    function removeRole(id) {
+        $('#' + id).remove();
+        console.log("cringe");
+    }
+
+</script>
