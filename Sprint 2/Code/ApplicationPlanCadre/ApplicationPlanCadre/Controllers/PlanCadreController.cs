@@ -29,13 +29,13 @@ namespace ApplicationPlanCadre.Controllers
             return View(db.PlanCadre.ToList());
         }
 
-        public ActionResult Create(int? id)
+        public ActionResult Create(int? idProgramme)
         {
-            if (id == null)
+            if (idProgramme == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Programme programme = db.Programme.Find(id);
+            Programme programme = db.Programme.Find(idProgramme);
             if (programme == null)
             {
                 return HttpNotFound();
@@ -83,7 +83,7 @@ namespace ApplicationPlanCadre.Controllers
         public ActionResult Edit([Bind(Include = "idPlanCadre,numeroCours,titreCours,indicationPedago,environementPhys,ressource,nbHeureTheorie,nbHeurePratique,nbHeureDevoir,idProgramme")] PlanCadre planCadre)
         {
             bool existe;
-            existe = db.PlanCadre.Any(pc => pc.titreCours != planCadre.titreCours && pc.idProgramme == planCadre.idProgramme);
+            existe = db.PlanCadre.Any(pc => pc.idProgramme != planCadre.idProgramme && pc.titreCours == planCadre.titreCours);
             //Trim();
             if (!existe && ModelState.IsValid)
             {
