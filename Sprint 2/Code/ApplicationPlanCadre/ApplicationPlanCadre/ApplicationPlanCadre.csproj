@@ -259,8 +259,6 @@
   <ItemGroup>
     <Content Include="bin\ApplicationPlanCadre.dll" />
     <Content Include="bin\ApplicationPlanCadre.pdb" />
-    <Content Include="bin\Rotativa.Core.dll" />
-    <Content Include="bin\Rotativa.MVC.dll" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -292,6 +290,7 @@
     <Content Include="obj\Release\CoreCompileInputs.cache" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="App_Browsers\qt.browser" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\IIS Développement.pubxml" />
     <None Include="Properties\PublishProfiles\IIS Production.pubxml" />
     <None Include="Properties\PublishProfiles\IIS Test.pubxml" />
@@ -373,7 +372,6 @@
     <Content Include="Views\Rapport\RapportProgramme.cshtml" />
     <Content Include="Views\Rapport\Index.cshtml" />
     <Content Include="Views\Rapport\RapportPlanCadre.cshtml" />
-    <Content Include="Views\PlanCadre\Index.cshtml" />
     <Content Include="Views\PlanCadre\Info.cshtml" />
     <Content Include="Views\Programme\Index.cshtml" />
     <Content Include="Views\PlanCadre\Create.cshtml" />

@@ -29,11 +29,7 @@ namespace ApplicationPlanCadre.Models
         [StringLength(150)]
         public string titreCours { get; set; }
 
-        [StringLength(300)]
-        public string prealableAbs { get; set; }
-
-        [StringLength(300)]
-        public string prealableRel { get; set; }
+        
 
         [Column(TypeName = "text")]
         public string indicationPedago { get; set; }

@@ -44,18 +44,20 @@ namespace ApplicationPlanCadre.Controllers
             return View(planCadre);
         }
 
-        public ActionResult Info(int? idPlanCadre)
+        public ActionResult Info(int? id)
         {
-            if (idPlanCadre == null)
+            List<PlanCadre> planList = new List<PlanCadre>();
+            var planCadre = from a in db.PlanCadre
+                            join b in db.PlanCadrePrealable on a.idPlanCadre equals b.idPlanCadre
+                            where b.idPrealable == id
+                            select a;
+            foreach (PlanCadre plan in planCadre)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                planList.Add(plan);
             }
-            PlanCadre planCadre = db.PlanCadre.Find(idPlanCadre);
-            if (planCadre == null)
-            {
-                return HttpNotFound();
-            }
-            return View(planCadre);
+
+            ViewData["listPcPrealableA"] = planList;
+            return View(db.PlanCadre.Find(id));
         }
 
         public ActionResult Create()

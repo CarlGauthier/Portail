@@ -6,13 +6,9 @@
     Layout = null;
     string carriageReturnText;
     bool rowspanIndicationPedago = false;
-    bool rowspanActiviteApprentissage = false;
-    bool titrePrealableAbso = true;
-    bool titrePrealableRel = true;
     int idElementConnaissanceHold = 0;
     int idActiviteApprentissageHold = 0;
     int nbCompetence = Model.PlanCadreEnonce.Count();
-    string keep="";
     int counter = 0;
 
 }
@@ -22,6 +18,7 @@
         
         border-collapse: collapse;
         font-size: 18px;
+        
 
     }
     .td-no-borderTopBot {
@@ -242,7 +239,8 @@
                                                     {
                                                         foreach (PlanCadrePrealable prealable in pc.PlanCadrePrealable)
                                                         {
-                                                            if (prealable.idStatus == 2)
+                                                            
+                                                            if(prealable.idStatus == 2)
                                                             {
                                                                 <div class="prealableA">
                                                                     <div class="prealable-left">
@@ -265,14 +263,13 @@
                                                                             <div class="line-prealable">@Html.DisplayFor(x => pc.titreCours) @Html.DisplayFor(x => pc.numeroCours)</div>
                                                                         </div>
                                                                     </div>
-                                                                }
+                                                                    }
 
+                                                                }
                                                             }
                                                         }
                                                     }
-                                                }
-
-                                                <div class="clearfix"></div>
+                                                 <div class="clearfix"></div>
                                                   @foreach (PlanCadrePrealable prealable in a.PlanCadre.PlanCadrePrealable)
                                                   {
                                                       if (prealable.idStatus == 2)
@@ -334,7 +331,7 @@
                                     <td class="td-borderTopOnly">
                                         Éléments de connaissances
                                     </td>
-                                    <td>
+                                    <td class="td-borderTopOnly">
                                         Activités d'apprentissage suggérées
                                     </td>
                                 </tr>
@@ -356,7 +353,6 @@
                                                 {
                                                     if (element.idElement == criterePerf.idElement)
                                                     {
-
                                                         <div style="margin-top:15px;">
                                                             <div class="critere-left">
                                                                 @Html.DisplayFor(x => element.ElementCompetence.numero)<span>.</span>@Html.DisplayFor(x => criterePerf.numero)
@@ -442,14 +438,7 @@
                     </tr>
                 </tbody>
             </table>
-        
-
-    
-    
-           </div>
-           
-       
-   
+       </div>
 </div>
 
 
