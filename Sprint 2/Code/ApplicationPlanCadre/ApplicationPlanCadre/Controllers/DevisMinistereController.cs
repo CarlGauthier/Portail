@@ -23,7 +23,6 @@ namespace ApplicationPlanCadre.Controllers
             return PartialView(devisMinistere);
         }
 
-        [Route("DevisMinistere", Name = "Index-devisMinistere")]
         public ActionResult Index()
         {
             return View(db.DevisMinistere.ToList());

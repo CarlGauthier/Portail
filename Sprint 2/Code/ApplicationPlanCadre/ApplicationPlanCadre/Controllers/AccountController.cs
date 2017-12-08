@@ -29,6 +29,7 @@ namespace ApplicationPlanCadre.Controllers
 
         public AccountController()
         {
+
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -116,20 +117,17 @@ namespace ApplicationPlanCadre.Controllers
             }
         }
 
-        //
-        // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.roles = BuildRoleSelectList();
             return View();
         }
 
-        //
-        // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, ICollection<string> roles)
         {
             if (ModelState.IsValid)
             {
@@ -138,11 +136,13 @@ namespace ApplicationPlanCadre.Controllers
                 var result = await UserManager.CreateAsync(user, password);
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRoles(user.Id, roles.ToArray());
                     new MailHelper().SendActivationMail(user, password);
                     return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);
             }
+            ViewBag.roles = BuildRoleSelectList();
             return View(model);
         }
 
@@ -186,8 +186,12 @@ namespace ApplicationPlanCadre.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
+        private SelectList BuildRoleSelectList()
+        {
+            var liste = db.Roles.Select(e => new { role = e.Id, texte = e.Name }).ToList();
+            return new SelectList(liste, "role", "texte");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()

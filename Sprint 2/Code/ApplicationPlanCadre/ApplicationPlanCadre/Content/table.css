@@ -13,22 +13,6 @@ table.cool-table th {
     border-bottom: 2px solid #000;
 }
 
-table.cool-table tr:first-child th:first-child {
-    border-top-left-radius: 5px;
-}
-
-table.cool-table tr:first-child th:last-child {
-    border-top-right-radius: 5px;
-}
-
-table.cool-table tr:last-child td:first-child {
-    border-bottom-left-radius: 5px;
-}
-
-table.cool-table tr:last-child td:last-child {
-    border-bottom-right-radius: 5px;
-}
-
 table.cool-table td {
     color: #dddddd;
     background-color: #5C5C5C;

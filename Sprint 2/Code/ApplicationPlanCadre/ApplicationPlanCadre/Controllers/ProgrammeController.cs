@@ -21,8 +21,7 @@ namespace ApplicationPlanCadre.Controllers
 
             return PartialView(programme);
         }
-		
-        // GET: Programme
+
         public ActionResult Index()
         {
             return View(db.Programme.ToList());

@@ -19,47 +19,48 @@
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="field-box col-md-8">
+            <div class="field-box">
+                <div class="row">
+                    <div class="col-md-8">
 
-                @Html.ValidationMessage("Duplique", new { @class = "text-danger" })
+                        @Html.ValidationMessage("Duplique", new { @class = "text-danger" })
 
-                <div class="element">
+                        <div class="element">
 
-                    <p>Création d'un devis</p>
-                    <hr />
+                            <p>Création d'un devis</p>
+                            <hr />
 
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.codeProgramme)
+                            @Html.DropDownList("codeProgramme", null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.codeProgramme, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.annee)
+                            @Html.TextBoxFor(m => m.annee, null, new { @class = "form-control small", @maxlength = 4, @onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);" })
+                            @Html.ValidationMessageFor(m => m.annee, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.codeSpecialisation)
+                            @Html.TextBoxFor(m => m.codeSpecialisation, null, new { @class = "form-control small", @maxlength = 2 })
+                            @Html.ValidationMessageFor(m => m.codeSpecialisation, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="element">
+                            <input type="submit" value="Enregistrer" class="fancy-button" />
+                        </div>
+
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(m => m.codeProgramme)
-                    @Html.DropDownList("codeProgramme", null, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.codeProgramme, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(m => m.annee)
-                    @Html.TextBoxFor(m => m.annee, null, new { @class = "form-control small", @maxlength = 4, @onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);" })
-                    @Html.ValidationMessageFor(m => m.annee, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(m => m.codeSpecialisation)
-                    @Html.TextBoxFor(m => m.codeSpecialisation, null, new { @class = "form-control small", @maxlength = 2 })
-                    @Html.ValidationMessageFor(m => m.codeSpecialisation, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="element">
-                    <input type="submit" value="Enregistrer" class="fancy-button" />
-                </div>
-
             </div>
 
             @Html.Action("_PartialList")
 
-            <div class="element">
-                <a href='@Url.Action("ConsoleAdmin", "Accueil")' class="fancy-button rouge">Retour</a>
-            </div>
-
+            <a href='@Url.Action("ConsoleAdmin", "Accueil")' class="fancy-button rouge">Retour</a>
         </div>
     </div>
 

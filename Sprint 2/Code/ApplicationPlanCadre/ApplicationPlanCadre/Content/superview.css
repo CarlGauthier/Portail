@@ -2,7 +2,7 @@
     margin-left: 350px;
     padding: 40px;
     width: calc(100% - 350px);
-    min-height: calc(100vh - 50px);
+    min-height: calc(100vh - 55px);
     background-color: #fff;
 }
 
@@ -19,13 +19,13 @@
 }
 
 .info-child {
-    margin: 15px;
+    margin: 15px 0;
     display: block;
     width: 600px;
-    border-left: 7px solid #0d5ec9;
+    border-left: 7px solid #0078d7;
     text-decoration: none;
-    color: #000000;
-    background-color: #e7ecf2;
+    color: #333;
+    background-color: #f2f2f2;
     cursor: pointer;
     transition: 0.1s;
 }
@@ -35,7 +35,7 @@
 }
 
 .info-child:hover {
-    background-color: #f2f4f7;
+    filter: brightness(102%);
 }
 
 .info-child .gauche {

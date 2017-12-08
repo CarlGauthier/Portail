@@ -4,81 +4,153 @@
     ViewBag.Title = "Création d'un nouvel utilisateur";
 }
 
-<div class="container">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="form-box">
+            <div class="row">
+                <div class="col-md-8">
 
-        <div class="form-horizontal form-box single">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <h1>Créer un nouvel utilisateur</h1>
+                    <header>
+
+                        <h1>@ViewBag.Title</h1>
+
+                    </header>
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Prenom)
+                                @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Prenom, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Nom, new { @class = "col-md-1 control-label" })
+                                @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Nom, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="field-box">
+                        <div class="row">
+                            <div class="col-md-9">
+
+                                <p>Assigner un rôle</p>
+                                <hr />
+
+                                <div class="form-group">
+                                    @Html.DropDownList("roles", null, new { @class = "form-control", @onchange = "addRole()" })
+                                </div>
+
+                                <div id="rolesBox">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="RCPForm" class="col-md-6">
+                    <div class="field-box">
+                        <div class="row">
+                            <div class="col-md-9">
+
+                                <p>Assigner un programme au RCP</p>
+                                <hr />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
 
             <hr />
+            <input type="submit" value="Enregistrer" class="fancy-button" />
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.Prenom, new { @class = "col-md-2 control-label" })
-                <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
-                </div>
+            <a class="fancy-button rouge" href='@Url.Action("Index", "Account")'>Annuler</a>
 
-                @Html.LabelFor(m => m.Nom, new { @class = "col-md-1 control-label" })
-                <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <div class="col-md-6">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div id="roles" class="child-container">
-                <div class="child clearfix">
-                    <p>Bluglo</p>
-                    <span class="glyphicon glyphicon-remove"><!----></span>
-                    <input type="hidden" value="3"/>
-                </div>
-            </div>
-
-            <div onclick="addRole()">Bluglo</div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Confirmer" class="fancy-button" />
-                    <a class="fancy-button rouge" href='@Url.Action("Index", "Account")'>Retour</a>
-                </div>
-            </div>
         </div>
-
-    }
-
-</div>
+    </div>
+}
 
 <script>
 
-    var i = 0;
+    initDropDown();
 
-    function addRole() {
-        var nom = "gg son";
-        var id = i++;
-        $('#roles').html($('#roles').html() + buildChildHtml(nom, id));
+    function initDropDown() {
+        var selectList = document.getElementById('roles');
+        var option = document.createElement("option");
+        option.text = "Selectionnez un rôle";
+        selectList.insertBefore(option, selectList.firstChild);
+        optionEnabled(0, false);
+        dropDownDefault();
     }
 
-    function buildChildHtml(nom, id) {
+    function dropDownDefault() {
+        document.getElementById('roles').selectedIndex = "0";
+    }
+
+    function optionEnabled(index, state) {
+        document.getElementById("roles").options[index].disabled = !state;
+    }
+
+    function RCPFormVisible(state) {
+        if (state)
+            document.getElementById("RCPForm").style.display = "block";
+        else
+            document.getElementById("RCPForm").style.display = "none";
+    }
+
+    function checkRCP(option, state) {
+        if (option.value == 1)
+            RCPFormVisible(state);
+    }
+
+    function addRole() {
+        var selectList = document.getElementById('roles');
+        var option = selectList.options[selectList.selectedIndex];
+        document.getElementById("rolesBox").innerHTML += buildChildHtml(option.text, option.value);
+        optionEnabled(selectList.selectedIndex, false);
+        checkRCP(option, true);
+        dropDownDefault();
+    }
+
+    function buildChildHtml(nom, index) {
+        var id = "role" + index;
         return html =
-            "<div id='" + id + "'class='child clearfix'>" +
+            "<div id='" + id + "'class='child-field clearfix'>" +
                 "<p>" + nom + "</p>" +
                 "<span  onclick='removeRole(" + id + ")' class='glyphicon glyphicon-remove'></span>" +
-                "<input type='hidden' name='roles' value='" + id + "' />" +
+                "<input type='hidden' name='roles' value='" + nom + "' />" +
             "</div>";
     }
 
     function removeRole(id) {
-        $('#' + id).remove();
-        console.log("cringe");
+        var roleNode = document.getElementById(id);
+        var option = document.getElementById('roles').options[id + 1];
+        checkRCP(option, false);
+        optionEnabled(id + 1, true);
+        roleNode.remove();
     }
 
 </script>

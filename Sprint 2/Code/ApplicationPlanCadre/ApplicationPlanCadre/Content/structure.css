@@ -13,7 +13,7 @@
     background-attachment: fixed;
 }
 
-#portail .main {
+#portail #main {
     min-height: 100vh;
     background-image: url(../Content/Images/cegep-frost.jpg);
     background-color: #fff;
@@ -48,6 +48,7 @@
 
 #layout .main {
     background-color: #333333;
+    border-bottom: 5px solid #0078d7;
 }
 
 #layout .logo {
@@ -91,11 +92,11 @@
 #layout #logoutForm .layout-button {
     float: right;
     background-color: transparent;
-    border-left: 2px solid #000;
+    border-left: 1px solid #000;
 }
 
 #layout #nav-button:hover, #layout #logoutForm .layout-button:hover {
-    background-color: #0d5ec9;
+    background-color: #0063b1;
 }
 
 #layout .tuile-container {
@@ -146,13 +147,13 @@
 }
 
 #page-content {
-    margin-top: 50px;
+    margin-top: 55px;
 }
 
 #accueil {
     padding-bottom: 30px;
     width: 100%;
-    min-height: calc(100vh - 50px);
+    min-height: calc(100vh - 55px);
     text-align: center;
     background: url(Images/cegep-index.png) no-repeat center center, #4f4f4f;
     background-size: cover;
@@ -206,4 +207,8 @@
         width: 140px;
         height: 180px;
     }
+}
+
+#RCPForm {
+    display: none;
 }

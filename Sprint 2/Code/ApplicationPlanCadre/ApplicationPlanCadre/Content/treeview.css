@@ -4,7 +4,7 @@
     overflow-y: scroll;
     z-index: 1;
     padding-right: 15px;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 55px);
     width: 350px;
     color: #ddd;
     background-color: #333333;

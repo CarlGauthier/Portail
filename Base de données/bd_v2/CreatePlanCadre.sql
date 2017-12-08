@@ -29,7 +29,7 @@ CREATE TABLE PlanCadrePrealable
 
     idPlanCadre			    INT				NOT NULL,		--FK
 	idPrealable			    INT				NOT NULL,		--FK
-	idStatus				INT				NOT NULL,		--FK
+	idStatus				INT				NOT NULL		--FK			DEFAULT(),
 
 	PRIMARY KEY(idPlanCadrePrealable)
 );

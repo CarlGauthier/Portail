@@ -21,7 +21,7 @@
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     <section id="portail" class="container-fluid">
-        <div class="main col-md-4 col-md-offset-8 col-sm-6 col-sm-offset-6">
+        <div id="main" class="col-md-4 col-md-offset-8 col-sm-6 col-sm-offset-6">
             <div class="login">
                 <img class="logo" src="~/Content/Images/portail-logo.png" />
                     
@@ -70,7 +70,8 @@
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
-@section Scripts
-{
-    <script src="@Url.Content("~/Scripts/portail.js")"></script>
-}
+
+<script>
+    document.getElementById('portail').style.backgroundImage = "url(../Content/Images/cegep2.jpg)"
+    document.getElementById('main').style.backgroundImage = "url(../Content/Images/cegep2-frost.jpg)"
+</script>
