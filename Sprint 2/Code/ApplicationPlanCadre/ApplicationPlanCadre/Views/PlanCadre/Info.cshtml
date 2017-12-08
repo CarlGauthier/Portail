@@ -9,20 +9,31 @@
     int idActiviteApprentissageHold = 0;
     int nbCompetence = Model.PlanCadreEnonce.Count();
     int counter = 0;
+    
 
 }
 
 <style>
     table, th, td {
         border-collapse: collapse;
-        font-size: 18px;
+        font-size: 22px;
+        padding: 10px;
     }
+    td {
+        
+    }
+    
 
     .td-no-borderTopBot {
         border-top-style: none;
         border-bottom-style: none;
         border-left: 1px solid black;
         border-right: 1px solid black;
+        
+    }
+    th {
+        border: 3px solid black;
+        color:white;
     }
 
     .td-borderTopOnly {
@@ -52,6 +63,7 @@
     thead {
         display: table-header-group;
         font-weight: bold;
+        background-color: #0d5ec9;
     }
 
     tfoot {
@@ -208,15 +220,15 @@
                 <table style="margin-bottom:25px">
                     <thead>
                         <tr>
-                            <td class="td-borderTopOnly" style="width:20%;">
+                            <th class="td-borderTopOnly" style="width:20%;">
                                 Objectif - Énoncé des compétences
-                            </td>
-                            <td class="td-borderTopOnly" style="width:45%;">
+                            </th>
+                            <th class="td-borderTopOnly" style="width:45%;">
                                 Standard - Contexte de réalisation
-                            </td>
-                            <td class="td-borderTopOnly">
+                            </th>
+                            <th class="td-borderTopOnly">
                                 Indication pédagogiques, s'il y a lieu
-                            </td>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -327,23 +339,23 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <td colspan="4" class="td-borderTopOnly">
+                                    <th colspan="4" class="td-borderTopOnly">
                                         @Html.DisplayFor(x => a.EnonceCompetence.description) (@Html.DisplayFor(x => a.EnonceCompetence.codeCompetence))
-                                    </td>
+                                    </th>
                                 </tr>
                                 <tr>
-                                    <td class="td-borderTopOnly">
+                                    <th class="td-borderTopOnly">
                                         Les éléments de compétence
-                                    </td>
-                                    <td class="td-borderTopOnly">
+                                    </th>
+                                    <th class="td-borderTopOnly">
                                         Critères de performance
-                                    </td>
-                                    <td class="td-borderTopOnly">
+                                    </th>
+                                    <th class="td-borderTopOnly">
                                         Éléments de connaissances
-                                    </td>
-                                    <td class="td-borderTopOnly">
+                                    </th>
+                                    <th class="td-borderTopOnly">
                                         Activités d'apprentissage suggérées
-                                    </td>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -416,12 +428,12 @@
                 <table>
                     <thead>
                         <tr>
-                            <td class="td-borderTopOnly">
+                            <th class="td-borderTopOnly">
                                 Environement physique
-                            </td>
-                            <td class="td-borderTopOnly">
+                            </th>
+                            <th class="td-borderTopOnly">
                                 Ressources didactiques suggérées
-                            </td>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
