@@ -7,19 +7,21 @@
 @Html.Action("_TreeView")
 
 <div class="super-view">
-    <div class="info-display container-fluid">
-        <div class="info-detail">
-            <h1>Devis ministériels</h1>
-            <hr />
-            @foreach (var devisMinistere in Model)
-            {                                       
-                <a class="info-child clearfix" href='@Url.Action("Info", new { idDevis = devisMinistere.idDevis })'>
-                    <p class="gauche">
-                        @Html.DisplayFor(ec => devisMinistere.EnteteProgramme.nom)
-                    </p> 
-                    <p class="droite">@Html.DisplayFor(model => devisMinistere.codeProgramme)-@Html.DisplayFor(model => devisMinistere.annee)-@Html.DisplayFor(model => devisMinistere.codeSpecialisation)</p>
-                </a>
-            }
-        </div>
-    </div>
+
+    <header class="light-header">
+
+        <h1>@ViewBag.Title</h1>
+
+    </header>
+
+    @foreach (var devisMinistere in Model)
+    {                                       
+        <a class="info-child clearfix" href='@Url.Action("Info", new { idDevis = devisMinistere.idDevis })'>
+            <p class="gauche">
+                @Html.DisplayFor(ec => devisMinistere.EnteteProgramme.nom)
+            </p> 
+            <p class="droite">@Html.DisplayFor(model => devisMinistere.codeProgramme)-@Html.DisplayFor(model => devisMinistere.annee)-@Html.DisplayFor(model => devisMinistere.codeSpecialisation)</p>
+        </a>
+    }
+
 </div>

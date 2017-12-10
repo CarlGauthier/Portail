@@ -11,7 +11,7 @@
     <div class="container">
         <div class="form-box">
 
-            <header>
+            <header class="light-header">
 
                 <h1>@ViewBag.Title</h1>
 
@@ -60,7 +60,9 @@
 
             @Html.Action("_PartialList")
 
+            <hr />
             <a href='@Url.Action("ConsoleAdmin", "Accueil")' class="fancy-button rouge">Retour</a>
+            
         </div>
     </div>
 

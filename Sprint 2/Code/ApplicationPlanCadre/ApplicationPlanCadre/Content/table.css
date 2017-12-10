@@ -29,18 +29,14 @@ table.cool-table tr:hover td {
 }
 
 table.cool-table a {
-    display: block;
-    margin: -10px -20px;
     padding: 10px;
-    width: calc(100% + 40px);
-    background: none;
-    border: none;
     color: #dddddd;
+    border-radius: 5px;
     transition: 0.1s;
 }
 
 table.cool-table a:hover {
-    background-color: #696969;
+    background-color: #000;
 }
 
 table.cool-table .action-cell-header {
@@ -49,7 +45,7 @@ table.cool-table .action-cell-header {
 }
 
 table.cool-table .action-cell {
-    width: 15%;
+    width: 10%;
     text-align: center;
     border-left: 1px solid #707070;
 }

@@ -82,6 +82,10 @@ textarea {
     transform: scale(-1, 1);
 }
 
+.center-align {
+    text-align: center;
+}
+
 .fancy-button {
     padding: 5px 10px;
     display: inline-block;
@@ -95,12 +99,13 @@ textarea {
     transition: 0.1s;
 }
 
-.center-align {
-    text-align: center;
-}
-
 .fancy-button span {
     word-break: break-all;
+}
+
+.fancy-button .glyphicon {
+    position: relative;
+    top: 3px;
 }
 
 .fancy-button.rouge {
@@ -128,25 +133,33 @@ input[type="file"] {
     display: none;
 }
 
+header.light-header {
+    display: inline-block;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #0078d7;
+}
+
+header.fat-header {
+    margin: -40px;
+    margin-bottom: 0;
+    padding: 20px 40px;
+    color: #fff;
+    background-color: #0078d7;
+}
+
+header.fat-header hr {
+    border-bottom-color: #fff;
+}
+
+.box {
+    padding: 40px;
+}
+
 .form-box {
     margin: 40px;
     padding: 40px;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-
-.margin-auto {
-    margin: auto;
-}
-
-.single {
-    margin-top: 100px;
-}
-
-.form-box header {
-    display: inline-block;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #0078d7;
 }
 
 .field-box {
@@ -212,7 +225,7 @@ mark {
 
 .child-field .glyphicon {
     position: relative;
-    top: 3px;
+    top: 5px;
     float: right;
     cursor: pointer;
 }

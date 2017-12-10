@@ -9,6 +9,11 @@ namespace ApplicationPlanCadre.Models
     [Table("DevisMinistere")]
     public partial class DevisMinistere
     {
+        string _specialisation;
+        string _nbUnite;
+        string _condition;
+        string _sanction;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DevisMinistere()
         {
@@ -23,7 +28,7 @@ namespace ApplicationPlanCadre.Models
         {
             get
             {
-                if(specialisation != null)
+                if(specialisation != "N/A")
                     return codeDevis + " • " + specialisation;
                 return codeDevis;
             }
@@ -31,10 +36,7 @@ namespace ApplicationPlanCadre.Models
 
         public string codeDevis
         {
-            get
-            {
-                return EnteteProgramme.codeProgramme + "-" + annee + "-" + codeSpecialisation;
-            }
+            get { return EnteteProgramme.codeProgramme + "-" + annee + "-" + codeSpecialisation; }
         }
 
         [Required]
@@ -51,7 +53,11 @@ namespace ApplicationPlanCadre.Models
 
         [StringLength(30)]
         [Display(Name = "Spécialisation")]
-        public string specialisation { get; set; }
+        public string specialisation
+        {
+            get { return _specialisation != null ? _specialisation : "N/A"; }
+            set { _specialisation = value; }
+        }
 
         [StringLength(6)]
         [Display(Name = "Nombre d'unités")]
@@ -65,11 +71,11 @@ namespace ApplicationPlanCadre.Models
 
         [StringLength(300)]
         [Display(Name = "Type de condition")]
-        public string condition { get; set; } = "N/A";
+        public string condition { get; set; }
 
         [StringLength(50)]
         [Display(Name = "Sanction")]
-        public string sanction { get; set; } = "N/A";
+        public string sanction { get; set; }
 
         [StringLength(200)]
         [Display(Name = "Document ministériel")]

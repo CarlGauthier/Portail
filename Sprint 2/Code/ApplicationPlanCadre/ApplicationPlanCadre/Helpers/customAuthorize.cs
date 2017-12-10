@@ -7,7 +7,7 @@ using System.Web.Routing;
 
 namespace ApplicationPlanCadre.Helpers
 {
-    public class customAuthorize: AuthorizeAttribute
+    public class CustomAuthorize: AuthorizeAttribute
     {
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {

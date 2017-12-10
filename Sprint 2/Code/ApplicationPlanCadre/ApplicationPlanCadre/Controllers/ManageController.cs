@@ -58,7 +58,7 @@ namespace ApplicationPlanCadre.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ApplicationUser user = UserManager.FindById(userId);
-            user.roleNames = UserManager.GetRoles(user.Id);
+            user.roles = UserManager.GetRoles(user.Id);
             if (user == null)
             {
                 return HttpNotFound();

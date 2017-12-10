@@ -43,7 +43,7 @@ namespace ApplicationPlanCadre.Controllers
             var users = db.Users.ToList();
             foreach (var user in users)
             {
-                user.roleNames = UserManager.GetRoles(user.Id);
+                user.roles = UserManager.GetRoles(user.Id);
             }
             return View(users);
         }
@@ -72,8 +72,6 @@ namespace ApplicationPlanCadre.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
         [AllowAnonymous]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Login(string returnUrl)
@@ -87,8 +85,6 @@ namespace ApplicationPlanCadre.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -99,8 +95,6 @@ namespace ApplicationPlanCadre.Controllers
                 return View(model);
             }
 
-            // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
-            // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -157,7 +151,9 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            return View(user);
+            EditUserViewModel model = new EditUserViewModel { UserId = user.Id, Prenom = user.prenom, Nom = user.nom, Email = user.Email, Roles = UserManager.GetRoles(user.Id) };
+            ViewBag.roles = BuildRoleSelectList();
+            return View(model);
         }
 
         [HttpPost]
@@ -168,17 +164,21 @@ namespace ApplicationPlanCadre.Controllers
             {
                 var result = UserManager.SetEmail(model.UserId, model.Email);
                 if (!result.Succeeded)
-                {
                     AddErrors(result);
-                }
+
                 var user = UserManager.FindById(model.UserId);
                 user.prenom = model.Prenom;
                 user.nom = model.Nom;
+                user.roles = UserManager.GetRoles(user.Id);
+
                 result = UserManager.Update(user);
                 if (result.Succeeded)
                 {
                     string password = new PasswordGenerator().GeneratePassword(10);
+
                     new MailHelper().SendEditMail(user, password);
+                    new RolesHelper().ChangeRoles(user, model.Roles, UserManager);
+
                     return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);
@@ -188,8 +188,8 @@ namespace ApplicationPlanCadre.Controllers
 
         private SelectList BuildRoleSelectList()
         {
-            var liste = db.Roles.Select(e => new { role = e.Id, texte = e.Name }).ToList();
-            return new SelectList(liste, "role", "texte");
+            var liste = db.Roles.Select(e => e.Name).ToList();
+            return new SelectList(liste, "role");
         }
 
         [HttpPost]

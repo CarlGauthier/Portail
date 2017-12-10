@@ -217,9 +217,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MailHelper.cs" />
-    <Compile Include="Helpers\customAuthorize.cs" />
-    <Compile Include="Helpers\highlightHelper.cs" />
+    <Compile Include="Helpers\CustomAuthorize.cs" />
+    <Compile Include="Helpers\HighlightHelper.cs" />
     <Compile Include="Helpers\PasswordGenerator.cs" />
+    <Compile Include="Helpers\RolesHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BDPlanCadre.cs" />
     <Compile Include="Models\ContexteRealisation.cs" />
@@ -318,8 +319,10 @@
     <Content Include="Scripts\mark.js" />
     <Content Include="Scripts\mark.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\portail.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\roleSelect.js" />
     <Content Include="Views\static\cj-layout.png" />
     <Content Include="Views\static\footer.html" />
     <Content Include="Views\static\header.html" />
