@@ -439,7 +439,7 @@ mark {
 
     .table tbody {
         display: block;
-        max-height: 450px;
+        max-height: 600px;
         overflow-y: scroll;
     }
 
@@ -454,6 +454,6 @@ mark {
     font-size: medium;
 }
 
-    #grilleCoursHeure b {
-        font-size: large;
-    }
+#grilleCoursHeure b {
+    font-size: large;
+}

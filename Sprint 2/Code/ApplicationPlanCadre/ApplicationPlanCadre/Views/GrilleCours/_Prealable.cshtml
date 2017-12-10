@@ -5,9 +5,21 @@
 
     <table  class="table table-bordered">
          <thead>
+             <tr>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td class="warning">Préalable absolu</td>
+             </tr>
+             <tr>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td class="info">Préalable relatif</td>
+             </tr>
              <tr class="danger">
-                 <td>Cours</td>
-                 <td>Préalable</td>
+                 <td colspan="2">Cours</td>
+                 <td colspan="2">Préalable</td>
              </tr>
          </thead>
          <tbody id="grilleBody" class="grilleBody">
@@ -35,7 +47,7 @@
                         {
                             if (cour.PlanCadre.idPlanCadre == @pcp.idPrealable)
                             {
-                                <tr><td></td><td  class="@nomClasse">@cour.idCours @cour.PlanCadre.titreCours (@status)</td></tr>
+                                <tr><td></td><td  class="@nomClasse">@cour.PlanCadre.titreCours</td></tr>
                             }
 
                         }                                                   
