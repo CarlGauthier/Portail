@@ -10,6 +10,7 @@
     int idActiviteApprentissageHold = 0;
     int nbCompetence = Model.PlanCadreEnonce.Count();
     int counter = 0;
+    int planCadrPrealableHold = 0;
 
 }
 
@@ -239,36 +240,39 @@
                                                     {
                                                         foreach (PlanCadrePrealable prealable in pc.PlanCadrePrealable)
                                                         {
-                                                            
-                                                            if(prealable.idStatus == 2)
-                                                            {
-                                                                <div class="prealableA">
-                                                                    <div class="prealable-left">
-                                                                        <div>Préalable absolu à:</div>
-                                                                    </div>
-                                                                    <div class="prealable-right">
-                                                                        <div class="line-prealable">@Html.DisplayFor(x => pc.titreCours) @Html.DisplayFor(x => pc.numeroCours)</div>
-                                                                    </div>
-                                                                </div>
-                                                            }
-                                                            else
-                                                            {
-                                                                if (prealable.idStatus == 1)
+                                                            if(planCadrPrealableHold != prealable.idPlanCadre)
+                                                            { 
+                                                                if(prealable.idStatus == 2)
                                                                 {
                                                                     <div class="prealableA">
                                                                         <div class="prealable-left">
-                                                                            <div>Préalable Relatif à:</div>
+                                                                            <div>Préalable absolu à:</div>
                                                                         </div>
                                                                         <div class="prealable-right">
                                                                             <div class="line-prealable">@Html.DisplayFor(x => pc.titreCours) @Html.DisplayFor(x => pc.numeroCours)</div>
                                                                         </div>
                                                                     </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    if (prealable.idStatus == 1)
+                                                                    {
+                                                                        <div class="prealableA">
+                                                                            <div class="prealable-left">
+                                                                                <div>Préalable Relatif à:</div>
+                                                                            </div>
+                                                                            <div class="prealable-right">
+                                                                                <div class="line-prealable">@Html.DisplayFor(x => pc.titreCours) @Html.DisplayFor(x => pc.numeroCours)</div>
+                                                                            </div>
+                                                                        </div>
                                                                     }
 
                                                                 }
+                                                                planCadrPrealableHold = prealable.idPlanCadre;
                                                             }
                                                         }
                                                     }
+                                                }
                                                  <div class="clearfix"></div>
                                                   @foreach (PlanCadrePrealable prealable in a.PlanCadre.PlanCadrePrealable)
                                                   {
