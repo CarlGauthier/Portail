@@ -1,7 +1,7 @@
 ﻿@model ApplicationPlanCadre.Models.PlanCadre
 
 @{
-    ViewBag.Title = "Plan cadre - création";
+    ViewBag.Title = "Plan cadre - modification";
 }
 
 <div class="container">
@@ -14,9 +14,7 @@
 
         <div class="form-horizontal form-box single-action">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <h1>Créer un plan cadre</h1>
-
-            @Html.DisplayFor(model => model.Programme.nom) &nbsp @Html.DisplayFor(model => model.Programme.DevisMinistere.codeProgramme)
+            <h1>Modifier un Plan cadre</h1>
 
             <hr />
 
@@ -27,7 +25,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.titreCours, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.titreCours, new { htmlAttributes = new { @maxlength = "150" } })
+                    @Html.EditorFor(model => model.titreCours, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
                     @Html.ValidationMessageFor(model => model.titreCours, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -35,25 +33,29 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.nbHeureTheorie, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.nbHeureTheorie, new { @maxlength = "2", @class = "form-control small-input" })
+                    @Html.EditorFor(model => model.nbHeureTheorie, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
                     @Html.ValidationMessageFor(model => model.nbHeureTheorie, "", new { @class = "text-danger" })
                 </div>
+            </div>
 
+            <div class="form-group">
                 @Html.LabelFor(model => model.nbHeurePratique, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.nbHeurePratique, new { @maxlength = "2", @class = "form-control small-input" })
+                    @Html.EditorFor(model => model.nbHeurePratique, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
                     @Html.ValidationMessageFor(model => model.nbHeurePratique, "", new { @class = "text-danger" })
                 </div>
+            </div>
 
+            <div class="form-group">
                 @Html.LabelFor(model => model.nbHeureDevoir, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.nbHeureDevoir, new { @maxlength = "2", @class = "form-control small-input" })
+                    @Html.EditorFor(model => model.nbHeureDevoir, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
                     @Html.ValidationMessageFor(model => model.nbHeureDevoir, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.numeroCours, htmlAttributes: new { @class = "control-label col-md-2" })@*faire une auto completion, numero programme au debut automatique,  et jq a la fin automatique (jq=jonquiere)*@
+                @Html.LabelFor(model => model.numeroCours, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.numeroCours, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
                     @Html.ValidationMessageFor(model => model.numeroCours, "", new { @class = "text-danger" })
@@ -65,7 +67,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.indicationPedago, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.indicationPedago, new { htmlAttributes = new { @class = "form-control small-input" } })
+                    @Html.EditorFor(model => model.indicationPedago, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
                     @Html.ValidationMessageFor(model => model.indicationPedago, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -73,7 +75,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.environnementPhys, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.environnementPhys, new { htmlAttributes = new { @class = "form-control small-input" } })
+                    @Html.EditorFor(model => model.environnementPhys, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
                     @Html.ValidationMessageFor(model => model.environnementPhys, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -81,20 +83,20 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ressource, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ressource, new { htmlAttributes = new { @class = "form-control small-input" } })
+                    @Html.EditorFor(model => model.ressource, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
                     @Html.ValidationMessageFor(model => model.ressource, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            @*ajouter le type (contributive, spécifique, generale)*@
 
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Suivant" class="fancy-button" />
-                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "Programme", new { idProgramme = Model.idProgramme })'">Annuler</div>
+                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "PlanCadre", new { idPlanCadre = Model.idPlanCadre })'">Annuler</div>
                 </div>
             </div>
         </div>
     }
+
 </div>

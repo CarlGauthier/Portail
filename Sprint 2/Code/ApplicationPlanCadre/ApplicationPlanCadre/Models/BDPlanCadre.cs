@@ -28,6 +28,8 @@ namespace ApplicationPlanCadre.Models
         public virtual DbSet<TypePlanCadre> TypePlanCadre { get; set; }
         public virtual DbSet<PlanCadreElement> PlanCadreElement { get; set; }
         public virtual DbSet<PlanCadreEnonce> PlanCadreEnonce { get; set; }
+        public virtual DbSet<ActiviteApprentissage> ActiviteApprentissage { get; set; }
+        public virtual DbSet<ElementConnaissance> ElementConnaissance { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -238,6 +240,24 @@ namespace ApplicationPlanCadre.Models
             modelBuilder.Entity<PlanCadreElement>()
                 .Property(e => e.activiteApprentissage)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<ActiviteApprentissage>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ActiviteApprentissage>()
+                .HasMany(e => e.ElementConnaissance)
+                .WithRequired(e => e.ActiviteApprentissage)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ElementConnaissance>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ElementConnaissance>()
+                .HasMany(e => e.PlanCadreElement)
+                .WithRequired(e => e.ElementConnaissance)
+                .WillCascadeOnDelete(false);
         }
     }
 }

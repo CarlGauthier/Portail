@@ -7,22 +7,24 @@
 @Html.Action("_TreeView")
 
 <div class="super-view">
-    <div class="info-display container-fluid">
-        <div class="info-detail">
+    
+    <div class="container-fluid info-display">
+        <div id="info-detail">
             <h1>Liste des plans cadres</h1>
+
+            @foreach (var planCadre in Model.PlanCadre)
+            {
+                <a class="info-child clearfix" href='@Url.Action("info", "PlanCadre", new { idPlanCadre = planCadre.idPlanCadre })'>
+                    <p class="gauche">@Html.DisplayFor(ec => planCadre.titreCours)</p>
+                    <p class="droite">@Html.DisplayFor(model => planCadre.Programme.idProgramme)-@Html.DisplayFor(model => planCadre.Programme.annee)-@Html.DisplayFor(model => planCadre.Programme.DevisMinistere.codeSpecialisation)</p>
+                </a>
+            }
+
+            <hr />
+            <h1>Modification</h1>
+            <a class="fancy-button" href='@Url.Action("Create", "PlanCadre", new {idProgramme = Model.idProgramme})'><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un plan cadre</a>
+            <a class="fancy-button rouge" onclick="location.href='@Url.Action("Index", "Programme")'">Retour</a>
+
         </div>
-
-        @foreach (var planCadre in Model.PlanCadre)
-        {
-            <a class="info-child clearfix" href='@Url.Action("info", "PlanCadre", new { id = planCadre.idPlanCadre })'>
-                <p class="gauche">@Html.DisplayFor(ec => planCadre.titreCours)</p>
-                <p class="droite">@Html.DisplayFor(model => planCadre.Programme.idProgramme)-@Html.DisplayFor(model => planCadre.Programme.annee)-@Html.DisplayFor(model => planCadre.Programme.DevisMinistere.codeSpecialisation)</p>
-            </a>
-        }
-
-        <hr />
-        <h1>Modification</h1>
-        <a class="fancy-button" href='@Url.Action("Create", "PlanCadre", new {id = Model.PlanCadre})'><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un plan cadre</a>
-
     </div>
 </div>

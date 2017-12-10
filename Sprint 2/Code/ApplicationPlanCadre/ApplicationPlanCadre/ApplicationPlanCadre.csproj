@@ -222,12 +222,14 @@
     <Compile Include="Helpers\PasswordGenerator.cs" />
     <Compile Include="Helpers\RolesHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActiviteApprentissage.cs" />
     <Compile Include="Models\BDPlanCadre.cs" />
     <Compile Include="Models\ContexteRealisation.cs" />
     <Compile Include="Models\Cours.cs" />
     <Compile Include="Models\CriterePerformance.cs" />
     <Compile Include="Models\DevisMinistere.cs" />
     <Compile Include="Models\ElementCompetence.cs" />
+    <Compile Include="Models\ElementConnaissance.cs" />
     <Compile Include="Models\EnonceCompetence.cs" />
     <Compile Include="Models\EnteteProgramme.cs" />
     <Compile Include="Models\GrilleCours.cs" />
@@ -380,7 +382,6 @@
     <Content Include="Views\Rapport\RapportProgramme.cshtml" />
     <Content Include="Views\Rapport\Index.cshtml" />
     <Content Include="Views\Rapport\RapportPlanCadre.cshtml" />
-    <Content Include="Views\PlanCadre\Index.cshtml" />
     <Content Include="Views\PlanCadre\Info.cshtml" />
     <Content Include="Views\Programme\Index.cshtml" />
     <Content Include="Views\PlanCadre\Create.cshtml" />
@@ -388,6 +389,8 @@
     <Content Include="Views\Programme\Info.cshtml" />
     <Content Include="Views\Manage\Details.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\PlanCadre\Edit.cshtml" />
+    <Content Include="Views\PlanCadreEnonce\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
