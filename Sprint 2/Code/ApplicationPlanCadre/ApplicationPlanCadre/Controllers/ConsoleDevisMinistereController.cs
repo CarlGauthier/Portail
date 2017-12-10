@@ -42,7 +42,7 @@ namespace ApplicationPlanCadre.Controllers
                 return RedirectToAction("Create");
             }
             if (existe)
-                ModelState.AddModelError("Duplique", "Erreur, ce devisMinistere existe déjà.");
+                ModelState.AddModelError("Duplique", "Erreur, ce devis existe déjà.");
             ViewBag.codeProgramme = BuildCodeDevisMinistereSelectList();
             return View(devisMinistere);
         }

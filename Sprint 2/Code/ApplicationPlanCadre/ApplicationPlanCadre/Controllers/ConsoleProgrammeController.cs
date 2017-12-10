@@ -23,7 +23,7 @@ namespace ApplicationPlanCadre.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.idDevis = GetDevisSelectList();
+            ViewBag.idDevis = BuildDevisSelectList();
             return View();
         }
 
@@ -37,7 +37,7 @@ namespace ApplicationPlanCadre.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Create");
             }
-            ViewBag.idDevis = GetDevisSelectList();
+            ViewBag.idDevis = BuildDevisSelectList();
             return View(programme);
         }
 
@@ -52,7 +52,7 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idDevis = GetDevisSelectList(programme.idDevis);
+            ViewBag.idDevis = BuildDevisSelectList(programme.idDevis);
             return View(programme);
         }
 
@@ -66,23 +66,21 @@ namespace ApplicationPlanCadre.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Create");
             }
-            ViewBag.idDevis = GetDevisSelectList(programme.idDevis);
+            ViewBag.idDevis = BuildDevisSelectList(programme.idDevis);
             return View(programme);
         }
 
-        private SelectList GetDevisSelectList(int? idDevis = null)
+        private SelectList BuildDevisSelectList(int? idDevis = null)
         {
-            var liste =
-            db.DevisMinistere
-            .Select(dm => new
+            var devis = db.DevisMinistere;
+            List<SelectListItem> liste = new List<SelectListItem>();
+            foreach(DevisMinistere e in devis)
             {
-                idDevis = dm.idDevis,
-                texte = dm.codeProgramme + "-" + dm.annee + "-" + dm.codeSpecialisation + " • " + dm.specialisation,
-            })
-            .ToList();
+                liste.Add(new SelectListItem { Value = e.idDevis.ToString(), Text = e.nom });
+            }
             if(idDevis != null)
-                return new SelectList(liste, "idDevis", "texte", idDevis);
-            return new SelectList(liste, "idDevis", "texte");
+                return new SelectList(liste, "Value", "Text", idDevis);
+            return new SelectList(liste, "Value", "Text");
         }
 
         public ActionResult DeleteConfirmed(int idProgramme)
