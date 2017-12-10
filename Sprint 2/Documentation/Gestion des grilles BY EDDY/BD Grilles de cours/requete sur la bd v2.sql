@@ -96,4 +96,8 @@ select PC.TitreCours, SUM(PCE.ponderationEnHEure) as Total
 		on PC.idPlanCadre = PCE.idPlanCadre
 		group by  PC.TitreCours, PCE.idCompetence
 	
+	
+/* Les préalables */
+
+
 		

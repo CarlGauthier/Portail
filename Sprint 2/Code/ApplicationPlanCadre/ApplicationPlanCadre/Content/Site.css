@@ -381,3 +381,79 @@ mark {
     color: inherit;
     padding: 0;
 }
+
+
+
+/* Ajouté par Eddy */
+#select-grille {
+    color: black;
+    text-align: center;
+}
+
+#selected-grille {
+    color: white;
+    background-color: #083a7c;
+    text-align: center;
+}
+
+#hover-grille:hover {
+    color: grey;
+    cursor: pointer;
+    background-color: #083a7c;
+}
+
+#select-grille h3 {
+    font-size: large;
+}
+
+
+
+#infobulle:hover, #infobulle:focus {
+    background: rgba(0,0,0,.4);
+    box-shadow: 0 1px 0 rgba(255,255,255,.4);
+}
+
+#infobulle span {
+    position: absolute;
+    margin-top: 0px;
+    margin-left: 0px;
+    color: #fff;
+    background: #083a7c;
+    padding: 15px;
+    border-radius: 3px;
+    box-shadow: 0 0 2px rgba(0,0,0,.5);
+    transform: scale(0) rotate(-12deg);
+    transform: scale(1) rotate(0);
+    transition: all .25s;
+    opacity: 0;
+}
+
+#infobulle:hover span, #infobulle:focus span {
+    opacity: 1;
+}
+
+
+.table {
+    margin-top: 1%;
+}
+
+    .table tbody {
+        display: block;
+        max-height: 450px;
+        overflow-y: scroll;
+    }
+
+    .table thead, tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+#grilleCoursHeure {
+    text-align: center;
+    font-size: medium;
+}
+
+    #grilleCoursHeure b {
+        font-size: large;
+    }

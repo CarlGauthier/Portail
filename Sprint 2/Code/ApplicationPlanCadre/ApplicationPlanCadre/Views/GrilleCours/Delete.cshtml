@@ -18,9 +18,24 @@
         <dd>
             @Html.DisplayFor(model => model.nom)
         </dd>
+        @* Condition à tester, et peut être oprimiser... *@
+        @if (Model.Cours.FirstOrDefault() == null){
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            }
+        }
+        else
+        {
+            <p>La grille de cours ne peut être supprimée car des cours y sont associés ! Merci de dissocier les cours avant de supprimer cette grille de cours.</p>
+        }
     </dl>
-
+    @*
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
@@ -28,5 +43,5 @@
             <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
-    }
+    }*@
 </div>

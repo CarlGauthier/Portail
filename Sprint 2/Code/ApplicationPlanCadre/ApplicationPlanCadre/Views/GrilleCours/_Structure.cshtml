@@ -2,8 +2,7 @@
 
 @{ 
     //En attendant de pouvoir récupérer cette liste via une requête ou dans la table. 
-    string[] tabSession = { "I", "II", "IIII", "IV", "V", "VI" };
-    List<string> listeSession = new List<string> { "I", "II", "IIII", "IV", "V", "VI" };
+    List<string> listeSession = new List<string> { "I", "II", "III", "IV", "V", "VI" };
 }
 
 @* Début du tableau *@
@@ -13,12 +12,10 @@
         @* Vérifie si la liste est pleine ou vide *@
         @if (Model.Cours.FirstOrDefault() == null)
         {
-            //Aucun cours associé à cette grille de cours
             <p>Cette grille de cours est vide. Veuillez y associer des cours !!!</p>
         }
         else
         {
-            //Génération du tableau à partir de sa liste de cours
             <thead>
                 <tr class="danger">
                     <td colspan="2"></td>
@@ -63,7 +60,7 @@
                         {
                             if (cours.Session.nom == session)
                             {
-                                if (cours.PlanCadre.indicationPedago == "Générale")
+                                if (cours.PlanCadre.idType == 2)
                                 {
                                     <tr class="warning">
                                         <td id="infobulle"><b>@cours.PlanCadre.titreCours.Substring(0, 7)</b> <span>@cours.PlanCadre.titreCours (@cours.PlanCadre.numeroCours)</span> </td>
@@ -75,7 +72,6 @@
                                         <td id="infobulle" colspan="2"><b>@cours.PlanCadre.titreCours.Substring(0, 7)</b> <span>@cours.PlanCadre.titreCours (@cours.PlanCadre.numeroCours)</span> </td>
                                         @{
                                             var cpt = 0;
-                                            //Insertion des colonnes
                                             foreach (var ec in Model.Cours.FirstOrDefault().PlanCadre.Programme.DevisMinistere.EnonceCompetence)
                                             {
                                                 cpt++;
@@ -91,11 +87,8 @@
                                                     }
                                                 }
                                                 <td></td>
-
-
                                             }
                                             var totalPonderation = 0;
-                                            //Insertion de la colonne total:
                                             foreach (var pce in cours.PlanCadre.PlanCadreEnonce)
                                             {
                                                 totalPonderation = totalPonderation + pce.ponderationEnHeure;
@@ -115,13 +108,10 @@
                 }
 
             </tbody>
-
-                        }
-
-
+        }
     </table>
 </div>
 
 
 
-@* Fin du tableau *@
+

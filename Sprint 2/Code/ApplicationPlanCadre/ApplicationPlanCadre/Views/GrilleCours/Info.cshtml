@@ -1,92 +1,44 @@
 ﻿@model ApplicationPlanCadre.Models.GrilleCours
 
-@*
-    @model dynamic
-    @using ApplicationPlanCadre.Models
-*@
 
-    @{
 
-        // En attendant la nouvelle version      
+@{
+    //En attendant de pouvoir récupérer cette liste via une requête ou dans la table. 
+    string[] tabSession = { "I", "II", "IIII", "IV", "V", "VI" };
 
-        //En attendant de pouvoir récupérer cette liste via une requête ou dans la table. 
-        string[] tabSession = { "I", "II", "IIII", "IV", "V", "VI" };
+    List<String> listeConpetences = new List<string>();
 
-        List<String> listeConpetences = new List<string>();
+    var listeCompetences = ViewBag.List;
 
-        var listeCompetences = ViewBag.List;
+}
 
-    }
+<div id="super-view">
+    @Html.Action("_TreeView")
 
-    <div id="super-view">
-        @Html.Action("_TreeView")
+    <div id="info-display" class="container-fluid">
+        <div id="info-header">
+            <h3>Grille de cours : @Model.nom</h3> 
+        <div>
+            <h1>@ViewBag.nom</h1>
+            <div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "grilleCours", new { id = Model.idGrille })'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>
+            <div class="fancy-button edit" onclick="location.href='@Url.Action("Delete", "grilleCours", new { id = Model.idGrille })'"><span class="glyphicon glyphicon-trash"><!----></span> Supprimer</div>
+            <div class="fancy-button edit" data-toggle="collapse" id="collapse"><span class="glyphicon glyphicon-eye-open"><!----></span> Afficher les cours de formation générale</div>
 
-        <div id="info-display" class="container-fluid">
-            <div id="info-header">
-                <h3>Grille de cours</h3> @* Mettre du code plus propre *@
-            <div>
-                <h1>@ViewBag.nom</h1>
-                @*<div class="fancy-button edit" onclick="location.href='@Url.RouteUrl("Edit-grilleCours",new {id=Model.Id})'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>*@
-                <div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "grilleCours", new { id = Model.idGrille })'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>
-                <div class="fancy-button edit" onclick="location.href='@Url.Action("Delete", "grilleCours", new { id = Model.idGrille })'"><span class="glyphicon glyphicon-trash"><!----></span> Supprimer</div>
-                <div class="fancy-button edit" data-toggle="collapse" id="collapse"><span class="glyphicon glyphicon-eye-open"><!----></span> Afficher les cours de formation générale</div>
-
-                @*<a href="#fg" class="btn btn-primary" data-toggle="collapse" id="collapse">Afficher les cours de formation générale</a>*@
-            </div>
-            <hr />
-            <div id="select-grille">
-                <div class="row">
-                    <div class="col-sm-4" id="selected-grille" onclick="testAlert()"><h3>Structure</h3></div>
-                    <div class="col-sm-4" id="hover-grille" onclick="location.href='@Url.Action("infoHeure", "grilleCours", new { id = Model.idGrille })'"><h3>Heure</h3></div>
-                    <div class="col-sm-4" id="hover-grille" onclick="location.href='@Url.Action("InfoPrealable", "grilleCours", new { id = Model.idGrille })'"><h3>Préalable</h3></div>
-                </div>
-            </div>
-            <hr />
         </div>
-
-
-
-
-
-
-            @*
-    @foreach (Cours a in Model.listeCours)
-    {
-
-        <p>idCours: @Html.DisplayFor(p => a.idCours) - idPlanCadre: @Html.DisplayFor(p => a.idPlanCadre) - idSession: @Html.DisplayFor(p => a.idSession)</p>
-
-        foreach (PlanCadreEnonce planCadreEnonce in Model.listePlanCadreEnonce)
-        {
-
-            if (planCadreEnonce.idPlanCadre == a.idPlanCadre)
-            {
-                <p>PlanCadreEnonce : idPlanCadre : @Html.DisplayFor(p => planCadreEnonce.idPlanCadre) - idCompétences : @Html.DisplayFor(p => planCadreEnonce.idCompetence)</p>
-            }
-        }
-    }
-
-    @foreach (EnonceCompetence Enonce in Model.listeEnonce)
-    {
-
-        <p>idCompétences: @Html.DisplayFor(p => Enonce.idCompetence) - codeCompetences: @Html.DisplayFor(p => Enonce.codeCompetence)</p>
-    }
-    @foreach (Session session in Model.listeSession)
-    {
-
-    <p>idCSession: @Html.DisplayFor(p => session.idSession) - nomSession: @Html.DisplayFor(p => session.nom )</p>
-    }
-
-    @foreach (PlanCadre pc in Model.liste) {
-        <p>@Html.DisplayFor(p => pc.indicationPedago)</p>
-    }
-            *@
-
-
-            <div id="tableauVuePartielle">
-                @Html.Action("_Structure")
+        <hr />
+        <div id="select-grille">
+            <div class="row">
+                <div class="col-sm-4" id="selected-grille" onclick="testAlert()"><h3>Structure</h3></div>
+                <div class="col-sm-4" id="hover-grille" onclick="location.href='@Url.Action("infoHeure", "grilleCours", new { id = Model.idGrille })'"><h3>Heure</h3></div>
+                <div class="col-sm-4" id="hover-grille" onclick="location.href='@Url.Action("InfoPrealable", "grilleCours", new { id = Model.idGrille })'"><h3>Préalable</h3></div>
             </div>
-
-</div>
+        </div>
+        <hr />
+    </div>
+        <div id="tableauVuePartielle">
+            @Html.Action("_Structure")
+        </div>
+    </div>
 </div>
   
 <script language="JavaScript" type="text/JavaScript">
@@ -96,34 +48,4 @@
         });
     });
 </script>
-
-@* Affichage des vue patielles en javascript
-    <script type="text/javascript">
-        (function () {
-            var elt = document.getElementById('selected-grille')
-            var monTexte = elt.innerText;
-            alert(monTexte);
-        })();
-
-        function testAlert() {
-            alert("test");
-            var eltClasse = document.getElementsByTagName("menuHeure");
-            alert(mmaClasse);
-        }
-        function MenuHeure(nom) {
-            var name = document.getElementsByName('menuHeure');
-            var nametxt = name[0].innerText;
-            alert(nametxt);
-            var divTab = document.getElementById('tableauVuePartielle')
-            var content = '@Html.Action("_Heure")';
-            divTab.innerHTML = content;
-            //alert("" +nom);
-        }
-    </script>
-*@
-
-
-
-
-
 

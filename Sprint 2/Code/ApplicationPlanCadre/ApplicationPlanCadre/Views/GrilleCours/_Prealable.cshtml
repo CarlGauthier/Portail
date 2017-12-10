@@ -1,2 +1,91 @@
-﻿
-Cette fonctionnalité est en cours de développement...
+﻿@model ApplicationPlanCadre.Models.GrilleCours
+
+
+<div class="table-responsive" id="grilleCoursHeure">
+
+    <table  class="table table-bordered">
+         <thead>
+             <tr class="danger">
+                 <td>Cours</td>
+                 <td>Préalable</td>
+             </tr>
+         </thead>
+         <tbody id="grilleBody" class="grilleBody">
+             
+            @foreach (var cours in Model.Cours)
+            {
+                if (cours.PlanCadre.PlanCadrePrealable.FirstOrDefault() != null)
+                {
+                    <tr class="success"><td>@cours.PlanCadre.titreCours</td><td></td></tr>
+                    foreach (var pcp in cours.PlanCadre.PlanCadrePrealable)
+                    {
+                        var status ="";
+                        var nomClasse = "";
+                        if (pcp.idStatus == 1)
+                        {
+                            status = pcp.StatusPrealable.status;
+                            nomClasse = "info";
+                        }
+                        else if (pcp.idStatus == 2) {
+                            status = pcp.StatusPrealable.status;
+                            nomClasse = "warning";
+                        }
+
+                        foreach (var cour in Model.Cours)
+                        {
+                            if (cour.PlanCadre.idPlanCadre == @pcp.idPrealable)
+                            {
+                                <tr><td></td><td  class="@nomClasse">@cour.idCours @cour.PlanCadre.titreCours (@status)</td></tr>
+                            }
+
+                        }                                                   
+
+                    }
+
+                }
+            }
+            
+         </tbody>
+    </table>
+    <table class="table table-bordered">
+        <thead>
+            <tr class="danger">
+                <td>Préalable</td>
+                <td>Cours</td>
+            </tr>
+        </thead>
+        <tbody id="grilleBody" class="grilleBody">
+
+            @foreach (var cours in Model.Cours)
+            {
+                foreach (var pcp in cours.PlanCadre.PlanCadrePrealable)
+                {
+                    var status = "";
+                    var nomClasse = "";
+                    if (pcp.idStatus == 1)
+                    {
+                        status = pcp.StatusPrealable.status;
+                        nomClasse = "info";
+                    }
+                    else if (pcp.idStatus == 2)
+                    {
+                        status = pcp.StatusPrealable.status;
+                        nomClasse = "warning";
+                    }
+                    foreach (var cour in Model.Cours)
+                    {
+                        if (cour.idPlanCadre == pcp.idPrealable)
+                        {
+                            <tr><td class="@nomClasse">@cour.PlanCadre.titreCours</td><td class="success">@pcp.PlanCadre.titreCours</td></tr>
+                        }
+                    }
+                }
+            }
+
+        </tbody>
+    </table>
+
+</div>
+
+
+

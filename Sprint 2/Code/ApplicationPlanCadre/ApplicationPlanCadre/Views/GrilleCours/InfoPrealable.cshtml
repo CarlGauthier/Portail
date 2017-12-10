@@ -1,23 +1,17 @@
 ﻿@model ApplicationPlanCadre.Models.GrilleCours
 
 
-@{
-
-    
-
-}
-
 <div id="super-view">
     @Html.Action("_TreeView")
 
     <div id="info-display" class="container-fluid">
         <div id="info-header">
-            <h3>Grille de cours</h3> 
+            <h3>Grille de cours : @Model.nom</h3>
             <div>
                 <h1>@ViewBag.nom</h1>
                 <div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "grilleCours", new { id = Model.idGrille })'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</div>
                 <div class="fancy-button edit" onclick="location.href='@Url.Action("Delete", "grilleCours", new { id = Model.idGrille })'"><span class="glyphicon glyphicon-trash"><!----></span> Supprimer</div>
-
+                
             </div>
             <hr />
             <div id="select-grille">
@@ -30,7 +24,5 @@
             <hr />
         </div>
         @Html.Action("_Prealable")
-
-
     </div>
 </div>
