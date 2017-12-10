@@ -231,7 +231,6 @@
     <Compile Include="Models\ElementCompetence.cs" />
     <Compile Include="Models\ElementConnaissance.cs" />
     <Compile Include="Models\EnonceCompetence.cs" />
-    <Compile Include="Models\EnonceCompetenceAJAX.cs" />
     <Compile Include="Models\EnteteProgramme.cs" />
     <Compile Include="Models\GrilleCours.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -376,7 +375,6 @@
     <Content Include="Views\Rapport\RapportPlanCadre.cshtml" />
     <Content Include="Views\PlanCadre\Index.cshtml" />
     <Content Include="Views\PlanCadre\_TreeView.cshtml" />
-    <Content Include="Views\EnonceCompetence\CreateAJAX.cshtml" />
     <Content Include="Views\PlanCadre\Info.cshtml" />
     <Content Include="Views\Programme\Index.cshtml" />
     <Content Include="Views\PlanCadre\Create.cshtml" />

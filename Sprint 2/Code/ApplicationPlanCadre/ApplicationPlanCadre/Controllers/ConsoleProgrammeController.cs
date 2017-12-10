@@ -70,6 +70,15 @@ namespace ApplicationPlanCadre.Controllers
             return View(programme);
         }
 
+        public ActionResult Valider(int idProgramme)
+        {
+            Programme programme = db.Programme.Find(idProgramme);
+            programme.statusValider = true;
+            db.Entry(programme).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Create");
+        }
+
         private SelectList GetDevisSelectList(int? idDevis = null)
         {
             var liste =

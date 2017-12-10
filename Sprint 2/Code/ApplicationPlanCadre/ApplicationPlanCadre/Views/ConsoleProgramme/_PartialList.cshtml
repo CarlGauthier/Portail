@@ -12,6 +12,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.idDevis)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateValidation)
+            </th>
             <th class="action-cell-header">
                 <b>Modifier</b>
             </th>
@@ -22,8 +25,8 @@
 
         @foreach (var item in Model)
         {
-            bool valide = item.PlanCadre.Count() == 0;
-            string dblclickEvent = valide ? Url.Action("Edit", new { id = item.idProgramme }) : @Url.Action("Create");
+            bool valide = item.dateValidation == null;
+            string dblclickEvent = valide ? Url.Action("Edit", new { idProgramme = item.idProgramme }) : @Url.Action("Create");
             <tr ondblclick="location.href='@dblclickEvent'">
                 <td>
                     @Html.DisplayFor(modelItem => item.nom)
@@ -33,6 +36,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dateValidation)
                 </td>
                 <td class="action-cell">
                     @if (valide)

@@ -49,7 +49,7 @@ SET IDENTITY_INSERT [DevisMinistere] OFF
 GO
 SET IDENTITY_INSERT [Programme] ON
 GO
-INSERT [dbo].[Programme] ([idProgramme], [annee], [dateValidation], [idDevis]) VALUES (1, 2007, NULL, 1)
+INSERT [dbo].[Programme] ([idProgramme], [annee], [dateValidation], [statusValider], [idDevis]) VALUES (1, 2007, NULL, 0,1)
 GO
 SET IDENTITY_INSERT [Programme] OFF
 GO

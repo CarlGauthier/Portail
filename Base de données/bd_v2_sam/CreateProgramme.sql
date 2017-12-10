@@ -30,7 +30,7 @@ CREATE TABLE Programme
         nom						VARCHAR(50)     NULL,
 		annee                   CHAR(4)         NOT NULL,
         dateValidation          DATETIME        NULL,
-
+		statusValider			BIT				NULL,
         idDevis        			INT             NOT NULL,		--FK
 
         PRIMARY KEY (idProgramme)
