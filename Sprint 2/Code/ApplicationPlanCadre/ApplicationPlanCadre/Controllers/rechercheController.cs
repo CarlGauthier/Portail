@@ -24,25 +24,25 @@ namespace ApplicationPlanCadre.Controllers
         {
             return View("recherche");
         }
-
+        //todo: la recherche ne support présentement pas la recherche avec les espaces
         [HttpPost]
         public ActionResult Rechercher(string searchStr, bool chkRecherche)
         {
             dynamic model = new ExpandoObject();
             if (chkRecherche)
             {
-                model.Programme = getProgram(searchStr);
+                model.DevisMinistere = getDevis(searchStr);
                 model.EnonceCompetence = getEnonceCompetence(searchStr);
             }
             else
             {
                 model.EnonceCompetence = getEnonceCompetence(searchStr);
                 model.ElementCompetence = getElemCompetence(searchStr);
-                
+                model.DevisMinistere = getDevis(searchStr);
                 model.Programme = getProgram(searchStr);
                 model.CriterePerformance = getCriterePerformance(searchStr);
                 model.ContexteRealisation = getContexteRealisation(searchStr);
-                model.DevisMinistere = getDevis(searchStr);
+                
             }
             return PartialView("_afficherRecherche", model);
         }
@@ -53,7 +53,7 @@ namespace ApplicationPlanCadre.Controllers
             
             List<SecondaryDevisMinistere> devisList = new List<SecondaryDevisMinistere>();
             var devis = from a in db.DevisMinistere
-                        where a.specialisation.Contains(searchStr)||a.codeSpecialisation.Contains(searchStr)||a.codeProgramme.Contains(searchStr)
+                        where a.specialisation.Contains(searchStr)||a.codeSpecialisation.Contains(searchStr)||a.codeProgramme.Contains(searchStr)||a.annee.Contains(searchStr)
                         select a;
             foreach (DevisMinistere devisMins in devis)
             {

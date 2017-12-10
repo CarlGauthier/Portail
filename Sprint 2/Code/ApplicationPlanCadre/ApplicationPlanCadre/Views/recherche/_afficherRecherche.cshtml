@@ -4,142 +4,98 @@
 @{
     ViewBag.Title = "afficherRech";
 }
-
-
-<div class="container">
-    <h2>Votre Recherche</h2>
-    @if ((Model.EnonceCompetence.Count == 0) && (Model.ElementCompetence.Count == 0) && (Model.DevisMinistere.Count == 0) && (Model.CriterePerformance.Count == 0) && (Model.ContexteRealisation.Count == 0))
-    {
-        <p color="red">Aucune information à été trouvée</p>
+<style>
+    p{
+        font-size:20px;
     }
-    else
-    {
-        if (Model.EnonceCompetence.Count != 0)
+</style>
+
+
+<div id="info-display" class="container-fluid">
+    <div id="info-detail">
+        <h1>Résultat</h1>
+
+
+        @if ((Model.EnonceCompetence.Count == 0) && (Model.ElementCompetence == null) && (Model.DevisMinistere.Count == 0) && (Model.CriterePerformance.Count == 0) && (Model.ContexteRealisation.Count == 0))
         {
-            <h2>Énoncer Compétence</h2>
-            <table id="table" class="table">
-                <tr>
-                    
-                    <th>Code Compétence</th>
-                    <th>Énoncer Compétence</th>
-                    
-                </tr>
-                @foreach (SecondaryEnonceCompetence enonceCmpt in Model.EnonceCompetence)
+            <p color="red">Aucune information à été trouvée</p>
+        }
+        else
+        {
+            if (Model.EnonceCompetence.Count != 0)
+            {
+                <h2>Énoncer Compétence</h2>
+                <hr />
+                foreach (SecondaryEnonceCompetence enonceCmpt in Model.EnonceCompetence)
                 {
-                    <tr onclick="location.href = '@Url.RouteUrl("Info-enonceCompetence", new { id = enonceCmpt.idCompetence })'">
-                        
-                        <td>@Html.Raw(enonceCmpt.codeCompetence)</td>
-                        <td>@Html.Raw(enonceCmpt.description)</td>
-                        
-                    </tr>
+                    <a class="info-child clearfix" href="@Url.Action("Info","EnonceCompetence", new { idCompetence = enonceCmpt.idCompetence })">
+                        <p>@Html.Raw(enonceCmpt.codeCompetence)</p>
+                        <p>@Html.Raw(enonceCmpt.description)</p>
+                    </a>
+
                 }
-            </table>
-        }
-        if (((IDictionary<string, object>)Model).ContainsKey("ElementCompetence"))
-        {
-            if (Model.ElementCompetence.Count != 0)
-            {
-                <h2>Élément Compétence</h2>
-                <table class="table">
-                    <tr>
-                        
-                        <th>Description</th>
-                        
-                    </tr>
-                    @foreach (SecondaryElementCompetence enonceCmpt in Model.ElementCompetence)
-                    {
-                        <tr onclick="location.href = '@Url.RouteUrl("Info-enonceCompetence", new { id = enonceCmpt.idElement })'">
-                            
-                            <td>@Html.Raw(enonceCmpt.description)</td>
-                            
-                        </tr>
-
-                    }
-                </table>
-
             }
-        }
-
-
-        
-
-
-        if (Model.DevisMinistere.Count != 0)
-        {
-            <h2>Devis ministériel</h2>
-            <table class="table">
-                <tr>
-                    
-                    <th>annee</th>
-                    <th>codeSpecialisation</th>
-                    <th>specialisation</th>
-                    <th>condition</th>
-                    <th>sanction</th>
-                    
-                </tr>
-                @foreach (SecondaryDevisMinistere devis in Model.DevisMinistere)
+            if (((IDictionary<string, object>)Model).ContainsKey("ElementCompetence"))
+            {
+                if (Model.ElementCompetence.Count != 0)
                 {
-                    <tr @*onclick="location.href = '@Url.RouteUrl("Info-programme", new { id = devis.idDevis })'"*@>
-                        
-                        
-                        <td>@Html.Raw(devis.annee)</td>
-                        <td>@Html.Raw(devis.codeSpecialisation)</td>
-                        <td>@Html.Raw(devis.specialisation)</td>
-                        <td>@Html.Raw(devis.condition)</td>
-                        <td>@Html.Raw(devis.sanction)</td>
-                        
-                    </tr>
+                    <h2>Élément Compétence</h2>
+                    <hr />
+                    foreach (SecondaryElementCompetence elementCompt in Model.ElementCompetence)
+                    {
+                        <a class="info-child clearfix" href="@Url.Action("Info","ElementCompetence", new { idElement = elementCompt.idElement })">
+                            <p>@Html.Raw(elementCompt.description)</p>
+                        </a>
+                    }
                 }
-            </table>
-        }
-        if (((IDictionary<string, object>)Model).ContainsKey("CriterePerformance"))
-        {
-            if (Model.CriterePerformance.Count != 0)
-            {
-                <h2>Critères de performances</h2>
-                <table class="table">
-                    <tr>
-                        
-                        <th>criterePerformance</th>
-                        
-                    </tr>
-                    @foreach (SecondaryCriterePerformance enonceCmpt in Model.CriterePerformance)
-                    {
-                        <tr @*onclick="location.href = '@Url.RouteUrl("", new { id = })'"*@>
-                            
-                            <td>@Html.Raw(enonceCmpt.description)</td>
-                            
-                        </tr>
-                    }
-                </table>
             }
-        }
-        if (((IDictionary<string, object>)Model).ContainsKey("ContexteRealisation"))
-        {
-            if (Model.ContexteRealisation.Count != 0)
+            if (((IDictionary<string, object>)Model).ContainsKey("DevisMinistere"))
             {
-                <h2>Contexte de réalisation</h2>
-                <table class="table">
-                    <tr>
-                        
-                        <th>Contexte de Réalisation</th>
-                        
-                    </tr>
-                    @foreach (SecondaryContexteRealisation enonceCmpt in Model.ContexteRealisation)
+                if (Model.DevisMinistere.Count != 0)
+                {
+                <h2>Devis ministériel</h2>
+                <hr />
+                    foreach (SecondaryDevisMinistere devis in Model.DevisMinistere)
                     {
-                        <tr @*onclick="location.href = '@Url.RouteUrl("", new { id = })'"*@>
-                            
-
-                            <td>@Html.Raw(enonceCmpt.description)</td>
-                            
-                        </tr>
+                    <a class="info-child clearfix" href="@Url.Action("Info","DevisMinistere", new { idDevis = devis.idDevis })">
+                        <p>@Html.Raw(devis.annee)</p>
+                        <p>@Html.Raw(devis.codeSpecialisation)</p>
+                        <p>@Html.Raw(devis.specialisation)</p>
+                        <p>@Html.Raw(devis.condition)</p>
+                        <p>@Html.Raw(devis.sanction)</p>
+                    </a>
                     }
-                </table>
-            }
-        }
- }
+                }
 
+            }
+            if (((IDictionary<string, object>)Model).ContainsKey("ContexteRealisation"))
+            {
+                if (Model.ContexteRealisation.Count != 0)
+                {
+                    <h2>Contexte de réalisation</h2>
+                    <hr />
+
+
+
+                        foreach (SecondaryContexteRealisation contexteReal in Model.ContexteRealisation)
+                        {
+
+                            <a class="info-child clearfix" href="@Url.Action("Info","EnonceCompetence", new { idCompetence = contexteReal.idCompetence})">
+                                <p>@Html.Raw(contexteReal.description)</p>
+                            </a>
+                        }
+                }
+        }
+    }
+
+
+
+    </div>
 </div>
+
+
+
+
 
 
 

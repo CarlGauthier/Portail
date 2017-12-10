@@ -7,11 +7,11 @@ namespace ApplicationPlanCadre.Models
 {
     public class SecondaryCriterePerformance
     {
+        
         public int idCritere { get; set; }
         public string description { get; set; }
         public int numero { get; set; }
         public int idElement { get; set; }
 
-        
     }
 }

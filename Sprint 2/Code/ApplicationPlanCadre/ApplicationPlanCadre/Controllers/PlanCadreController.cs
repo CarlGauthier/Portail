@@ -23,7 +23,6 @@ namespace ApplicationPlanCadre.Controllers
             return PartialView(planCadre);
         }
 
-        // GET: PCInstance
         public ActionResult Index()
         {
             return View(db.PlanCadre.ToList());
@@ -109,7 +108,5 @@ namespace ApplicationPlanCadre.Controllers
             }
             return View(planCadre);
         }
-
-        
     }
 }

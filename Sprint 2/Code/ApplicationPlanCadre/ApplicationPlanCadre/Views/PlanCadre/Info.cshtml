@@ -1,35 +1,61 @@
 ﻿@model ApplicationPlanCadre.Models.PlanCadre
+
 @{
-    ViewBag.Title = "PlanCadre";
-    bool rowspanDone = false;
+    ViewBag.Title = "RapportPlanCadre";
+    string carriageReturnText;
+    bool rowspanIndicationPedago = false;
+    int idElementConnaissanceHold = 0;
+    int idActiviteApprentissageHold = 0;
+    int nbCompetence = Model.PlanCadreEnonce.Count();
+    int counter = 0;
 }
+
 <style>
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        font-size: 15px;
-    }
 
     table {
-        page-break-before: auto;
-        width: 100%;
-        margin-top: 25px;
+        margin: 0 -40px;
+        width: calc(100% + 80px);
+        border: 1px solid black;
+    }
+
+    table, th, td {
+        border-collapse: collapse;
+        padding: 10px;
+    }
+
+    .td-no-borderTopBot {
+        border-top-style: none;
+        border-bottom-style: none;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        
+    }
+    th {
+        border: 3px solid black;
+        color:white;
+    }
+
+    .td-borderTopOnly {
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
     }
 
     tr {
         page-break-inside: avoid;
-        page-break-after: always;
+        page-break-after: auto;
     }
 
     td {
         page-break-inside: avoid;
-        page-break-before: auto
+        page-break-before: auto;
+        vertical-align: top;
     }
 
     thead {
         display: table-header-group;
         font-weight: bold;
-        background-color: rgba(87, 85, 91, 0.5);
+        background-color: #0d5ec9;
     }
 
     tfoot {
@@ -42,7 +68,7 @@
 
     .divtop {
         width: 100%;
-        background-color: red;
+        font-size: 55px;
     }
 
     .pdf {
@@ -98,6 +124,9 @@
         margin: 0px;
     }
 
+    .prealable-right {
+    }
+
     .critere-left {
         display: inline;
         box-sizing: border-box;
@@ -115,9 +144,13 @@
         width: 90%;
     }
 
-
     .corps {
         padding-top: 25px;
+    }
+
+    .line-prealable {
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 
     #clear {
@@ -137,6 +170,241 @@
         <a class="fancy-button" href='@Url.Action("Edit", new { idPlanCadre = Model.idPlanCadre })'><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
         <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "Programme", new { idProgramme = Model.idProgramme })'">Retour</a>
 
+        <div id="clear"></div>
+
+
+        <!-- début du corps du plan cadre-->
+        <div class="corps">
+            <table style="margin-bottom:25px">
+                <thead>
+                    <tr>
+                        <th class="td-borderTopOnly" style="width:20%;">
+                            Objectif - Énoncé des compétences
+                        </th>
+                        <th class="td-borderTopOnly" style="width:45%;">
+                            Standard - Contexte de réalisation
+                        </th>
+                        <th class="td-borderTopOnly">
+                            Indication pédagogiques, s'il y a lieu
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var a in Model.PlanCadreEnonce)
+                    {
+                        <tr>
+                            <td class="td-borderTopOnly">
+                                <p>@Html.DisplayFor(x => a.EnonceCompetence.description) (@Html.DisplayFor(x => a.EnonceCompetence.codeCompetence))</p>
+                                <p>@Html.DisplayFor(x => a.ponderationEnHeure) heures</p>
+                            </td>
+                            <td class="td-borderTopOnly">
+                                @foreach (var c in a.EnonceCompetence.ContexteRealisation)
+                                {
+                                    <p>@Html.Raw("-")@Html.DisplayFor(x => c.description)</p>
+                                }
+                            </td>
+                            @if (rowspanIndicationPedago != true)
+                            {
+                                <td rowspan=@Html.Raw(nbCompetence) class="td-borderTopOnly">
+                                    @foreach (var pc in Model.PlanCadrePrealableA)
+                                    {
+                                        foreach (var prealable in pc.PlanCadrePrealable)
+                                        {
+
+                                            if (prealable.idStatus == 2)
+                                            {
+                                                <div class="prealableA">
+                                                    <div class="prealable-left">
+                                                        <div>Préalable absolu à:</div>
+                                                    </div>
+                                                    <div class="prealable-right">
+                                                        <div class="line-prealable">@Html.DisplayFor(x => pc.titreCours) @Html.DisplayFor(x => pc.numeroCours)</div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                if (prealable.idStatus == 1)
+                                                {
+                                                    <div class="prealableA">
+                                                        <div class="prealable-left">
+                                                            <div>Préalable Relatif à:</div>
+                                                        </div>
+                                                        <div class="prealable-right">
+                                                            <div class="line-prealable">@Html.DisplayFor(x => pc.titreCours) @Html.DisplayFor(x => pc.numeroCours)</div>
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                            }
+                                        }
+                                    }
+                                    <div class="clearfix"></div>
+                                    @foreach (var prealable in a.PlanCadre.PlanCadrePrealable)
+                                    {
+                                        if (prealable.idStatus == 2)
+                                        {
+                                            <div class="prealableA">
+                                                <div class="prealable-left">
+                                                    <div>Préalable absolu :</div>
+                                                </div>
+                                                <div class="prealable-right">
+                                                    <div class="line-prealable">@Html.DisplayFor(x => prealable.Prealable.titreCours) @Html.Raw(" (")@Html.DisplayFor(x => prealable.Prealable.numeroCours)@Html.Raw(")")</div>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            if (prealable.idStatus == 1)
+                                            {
+                                                <div class="prealableA">
+                                                    <div class="prealable-left">
+                                                        <div>Préalable relatif :</div>
+                                                    </div>
+                                                    <div class="prealable-right">
+                                                        <div class="line-prealable">@Html.DisplayFor(x => prealable.Prealable.titreCours) @Html.Raw(" (")@Html.DisplayFor(x => prealable.Prealable.numeroCours)@Html.Raw(")")</div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    }
+
+                                    @Html.DisplayFor(x => Model.indicationPedago)
+                                </td>
+                                rowspanIndicationPedago = true;
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @foreach (var a in Model.PlanCadreEnonce)
+            {
+            <!-- Affichage en boucle des tableau des ennoncer compétence-->
+
+                <div style="margin-top:50px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="4" class="td-borderTopOnly">
+                                    @Html.DisplayFor(x => a.EnonceCompetence.description) (@Html.DisplayFor(x => a.EnonceCompetence.codeCompetence))
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="td-borderTopOnly">
+                                    Les éléments de compétence
+                                </th>
+                                <th class="td-borderTopOnly">
+                                    Critères de performance
+                                </th>
+                                <th class="td-borderTopOnly">
+                                    Éléments de connaissances
+                                </th>
+                                <th class="td-borderTopOnly">
+                                    Activités d'apprentissage suggérées
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var element in a.PlanCadre.PlanCadreElement)
+                            {
+                                if (a.EnonceCompetence.idCompetence == element.ElementCompetence.idCompetence)
+                                {
+                                    <tr>
+                                        <td width="20%" class="td-borderTopOnly">
+                                            @Html.DisplayFor(x => element.ElementCompetence.numero)<span>. </span>@Html.DisplayFor(x => element.ElementCompetence.description)
+                                            <br />
+                                        </td>
+                                        <td width="25%" class="td-borderTopOnly">
+
+                                            @foreach (var criterePerf in element.ElementCompetence.CriterePerformance)
+                                            {
+                                                if (element.idElement == criterePerf.idElement)
+                                                {
+                                                    <div style="margin-top:15px;">
+                                                        <div class="critere-left">
+                                                            @Html.DisplayFor(x => element.ElementCompetence.numero)<span>.</span>@Html.DisplayFor(x => criterePerf.numero)
+                                                        </div>
+                                                        <div class="critere-right">
+                                                            @Html.DisplayFor(x => criterePerf.description)
+                                                        </div>
+                                                        <div id="clear"></div>
+                                                    </div>
+                                                }
+                                            }
+                                        </td>
+                                        @*si element connaissance et pareille a celui d'en haut *@
+                                        @if (idElementConnaissanceHold == element.ElementConnaissance.idElementConnaissance)
+                                        {
+                                            <td class="td-no-borderTopBot"></td>
+                                        }
+                                        else
+                                        {
+                                            carriageReturnText = element.ElementConnaissance.description;
+                                            carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
+                                            carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
+                                            <td class="td-borderTopOnly">@Html.Raw(carriageReturnText)</td>
+                                            idElementConnaissanceHold = element.ElementConnaissance.idElementConnaissance;
+                                        }
+
+                                        @*si activiteApprentissage et pareille a celui d'en haut *@
+                                        @if (idActiviteApprentissageHold == element.ElementConnaissance.ActiviteApprentissage.idActiviteApprentissage)
+                                        {
+                                            <td class="td-no-borderTopBot"><!--Empty--></td>
+                                        }
+                                        else
+                                        {
+                                            carriageReturnText = element.ElementConnaissance.ActiviteApprentissage.description;
+                                            carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
+                                            carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
+                                            <td class="td-borderTopOnly">@Html.Raw(carriageReturnText)</td>
+                                            idActiviteApprentissageHold = element.ElementConnaissance.ActiviteApprentissage.idActiviteApprentissage;
+                                        }
+
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            }
+            <table>
+                <thead>
+                    <tr>
+                        <th class="td-borderTopOnly">
+                            Environnement physique
+                        </th>
+                        <th class="td-borderTopOnly">
+                            Ressources didactiques suggérées
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="45%" class="td-borderTopOnly">
+                            @{
+                                carriageReturnText = Model.environnementPhys;
+                                carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
+                                carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
+                            }
+                            @Html.Raw(carriageReturnText)
+
+                        </td>
+                        <td class="td-borderTopOnly">
+                            @{
+                                carriageReturnText = Model.ressource;
+                                carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
+                                carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
+                            }
+                            @Html.Raw(carriageReturnText)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-

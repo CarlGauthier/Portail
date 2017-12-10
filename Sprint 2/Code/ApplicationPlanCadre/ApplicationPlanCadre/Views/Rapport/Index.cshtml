@@ -16,46 +16,39 @@
     .form-control {
         margin-right: 0 !important;
     }
+    p{
+        font-size:16px;
+    }
 </style>
-<h1>Rapport</h1>
 
-<h2>Programme</h2>
-<table>
-    @foreach (Programme prog in Model.Programme)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(x => prog.nom)
-            </td>
-            <td>
-                <a target="_blank" href='@Url.Action("RapportProgramme", "Rapport",new { id = prog.idProgramme })'>
-                    
-                    <span class="glyphicon glyphicon-file"></span>
+
+<div id="super-view">
+    @*@Html.Action("_TreeView")*@
+    <div id="info-display" class="container-fluid">
+        <div id="info-detail">
+            <h1>Rapport</h1>
+            <h2>Plan Cadre</h2>
+            <hr />
+            @foreach (PlanCadre planCadre in Model.PlanCadre)
+            {
+                <a class="info-child clearfix" target="_blank" href='@Url.Action("RapportPlanCadre", "Rapport",new { id = planCadre.idPlanCadre})'>
+                    <p class="gauche">@Html.DisplayFor(x => planCadre.titreCours)</p>
+                    <p class="droite">@Html.DisplayFor(x => planCadre.numeroCours)</p>
                 </a>
-            </td>
-        </tr>
-    }
-</table>
-
-<h2>Plan cadre</h2>
-<table>
-    @foreach (PlanCadre prog in Model.PlanCadre)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(x =>prog.numeroCours)
-            </td>
-            <td>@Html.DisplayFor(x => prog.titreCours)</td>
-            <td>
-                <a target="_blank" href='@Url.Action("RapportPlanCadre", "Rapport",new { id = prog.idPlanCadre})'>
-
-                    <span class="glyphicon glyphicon-file"></span>
+            }
+            <h2>Programme</h2>
+            <hr />
+            @foreach (Programme prog in Model.Programme)
+            {
+                <a class="info-child clearfix" target="_blank" href='@Url.Action("RapportProgramme", "Rapport",new { id = prog.idProgramme })'>
+                    <p class="gauche">@Html.DisplayFor(x => prog.nom)</p>
+                    <p class="droite"></p>
                 </a>
-            </td>
-        </tr>
-    }
-</table>
+            }
+        </div>
+    </div>
+</div>
 
         
 
-}
+

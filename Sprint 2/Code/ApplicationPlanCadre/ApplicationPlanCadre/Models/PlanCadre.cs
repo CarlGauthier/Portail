@@ -5,6 +5,7 @@ namespace ApplicationPlanCadre.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     [Table("PlanCadre")]
     public partial class PlanCadre
@@ -53,6 +54,22 @@ namespace ApplicationPlanCadre.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlanCadrePrealable> PlanCadrePrealable { get; set; }
+
+        public IEnumerable<PlanCadre> PlanCadrePrealableA
+        {
+            get
+            {
+                List<PlanCadrePrealable> prealable = new List<Models.PlanCadrePrealable>();
+                foreach(PlanCadre planCadre in Programme.PlanCadre)
+                {
+                    prealable.AddRange(planCadre.PlanCadrePrealable);
+                }
+                var shit = (from pc in Programme.PlanCadre
+                       join pcp in prealable on idPlanCadre equals pcp.idPlanCadre
+                       select pc).ToList();
+                return shit;
+            }
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlanCadreElement> PlanCadreElement { get; set; }
