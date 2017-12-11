@@ -240,16 +240,10 @@
     <Compile Include="Models\PlanCadreEnonce.cs" />
     <Compile Include="Models\PlanCadrePrealable.cs" />
     <Compile Include="Models\Programme.cs" />
-    <Compile Include="Models\SecondaryDevisMinistere.cs" />
+    <Compile Include="Models\ResearchViewModels.cs" />
     <Compile Include="Models\Session.cs" />
     <Compile Include="Models\StatusPrealable.cs" />
     <Compile Include="Models\TypePlanCadre.cs" />
-    <Compile Include="Models\SecondaryContexteRealisation.cs" />
-    <Compile Include="Models\SecondaryCriterePerformance.cs" />
-    <Compile Include="Models\SecondaryElementCompetence.cs" />
-    <Compile Include="Models\SecondaryEnonceCompetence.cs" />
-    <Compile Include="Models\SecondaryEnteteProgramme.cs" />
-    <Compile Include="Models\SecondaryProgramme.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
