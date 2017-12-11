@@ -51,8 +51,12 @@ namespace ApplicationPlanCadre.Models
 
         public virtual DevisMinistere DevisMinistere { get; set; }
 
+
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ElementCompetence> ElementCompetence { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlanCadreEnonce> PlanCadreEnonce { get; set; }

@@ -15,8 +15,21 @@ h1, h2, h3, h4, h5, h6 {
     font-family: Segoe UI Light, Calibri Light, Sans-Serif;
 }
 
+ul.hyphen-list {
+    padding-left: 10px;
+    list-style-type: none;
+}
+
+ul.hyphen-list li {
+    text-indent: -10px;
+}
+
+ul.hyphen-list li:before {
+    content: "- ";
+}
+
 li {
-    padding: 10px 15px;
+    padding: 10px;
 }
 
 hr {

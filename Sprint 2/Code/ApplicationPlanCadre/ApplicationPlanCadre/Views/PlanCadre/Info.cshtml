@@ -1,13 +1,12 @@
 ﻿@model ApplicationPlanCadre.Models.PlanCadre
 
 @{
-    ViewBag.Title = "RapportPlanCadre";
+    ViewBag.Title = Model.titreCours;
     string carriageReturnText;
     bool rowspanIndicationPedago = false;
     int idElementConnaissanceHold = 0;
     int idActiviteApprentissageHold = 0;
     int nbCompetence = Model.PlanCadreEnonce.Count();
-    int counter = 0;
 }
 
 @Html.Action("_TreeView", "Programme")
@@ -18,7 +17,7 @@
 
         <h3>Plan cadre</h3>
 
-        <h1>@Html.DisplayFor(m => m.titreCours)</h1>
+        <h1>@ViewBag.Title</h1>
         <hr />
 
         <h3>@Html.DisplayFor(m => m.numeroCours)</h3>
@@ -28,6 +27,7 @@
     <div class="plan-cadre-table-container">
 
         <table class="plan-cadre-table">
+
             <tr>
                 <th style="width:20%">
                     Objectif - Énoncé des compétences
@@ -43,19 +43,21 @@
             @foreach (var planCadreEnonce in Model.PlanCadreEnonce)
             {
                 <tr>
-                    <td>
+                    <td style="width:20%">
                         <p>@Html.DisplayFor(m => planCadreEnonce.EnonceCompetence.description) (@Html.DisplayFor(m => planCadreEnonce.EnonceCompetence.codeCompetence))</p>
                         <p>@Html.DisplayFor(m => planCadreEnonce.ponderationEnHeure) heures</p>
                     </td>
-                    <td>
-                        @foreach (var contexteRealisation in planCadreEnonce.EnonceCompetence.ContexteRealisation)
-                        {
-                            <p>@Html.Raw("-")@Html.DisplayFor(m => contexteRealisation.description)</p>
-                        }
+                    <td style="width:45%">
+                        <ul class="hyphen-list">
+                            @foreach (var contexteRealisation in planCadreEnonce.EnonceCompetence.ContexteRealisation)
+                            {
+                                <li>@Html.DisplayFor(m => contexteRealisation.description)</li>
+                            }
+                        </ul>
                     </td>
-                    @if (rowspanIndicationPedago != true)
-                {
-                        <td rowspan=@Html.Raw(nbCompetence)>
+                        @if (rowspanIndicationPedago != true)
+                        {
+                            <td rowspan=@Html.Raw(nbCompetence) style="width:35%">
                             @foreach (var pc in Model.PlanCadrePrealableA)
                             {
                                 foreach (var prealable in pc.PlanCadrePrealable)
@@ -154,11 +156,10 @@
                     if (planCadreEnonce.EnonceCompetence.idCompetence == planCadreElement.ElementCompetence.idCompetence)
                     {
                         <tr>
-                            <td>
+                            <td style="width: 10%">
                                 @Html.DisplayFor(m => planCadreElement.ElementCompetence.numero)<span>. </span>@Html.DisplayFor(m => planCadreElement.ElementCompetence.description)
-                                <br />
                             </td>
-                            <td>
+                            <td style="width: 30%">
                                 @foreach (var criterePerformance in planCadreElement.ElementCompetence.CriterePerformance)
                                 {
                                     if (planCadreElement.idElement == criterePerformance.idElement)
@@ -176,8 +177,8 @@
                             </td>
                             @*si element connaissance et pareille a celui d'en haut *@
                             @if (idElementConnaissanceHold == planCadreElement.ElementConnaissance.idElementConnaissance)
-                        {
-                                <td></td>
+                            {
+                                <td style="width: 30%"></td>
                             }
                             else
                             {
@@ -190,8 +191,8 @@
 
                             @*si activiteApprentissage et pareille a celui d'en haut *@
                             @if (idActiviteApprentissageHold == planCadreElement.ElementConnaissance.ActiviteApprentissage.idActiviteApprentissage)
-                        {
-                                <td class="merge-cell-top"><!--Empty--></td>
+                            {
+                                <td  style="width: 30%"><!--Empty--></td>
                             }
                             else
                             {
@@ -219,21 +220,10 @@
             </tr>
             <tr>
                 <td>
-                    @{
-                        carriageReturnText = Model.environnementPhys;
-                        carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
-                        carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
-                    }
-                    @Html.Raw(carriageReturnText)
-
+                    @Html.DisplayFor(m => m.environnementPhys)
                 </td>
                 <td>
-                    @{
-                        carriageReturnText = Model.ressource;
-                        carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
-                        carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
-                    }
-                    @Html.Raw(carriageReturnText)
+                    @Html.DisplayFor(m => m.ressource)
                 </td>
             </tr>
         </table>
