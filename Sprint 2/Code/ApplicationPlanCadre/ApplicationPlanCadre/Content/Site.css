@@ -457,3 +457,15 @@ mark {
 #grilleCoursHeure b {
     font-size: large;
 }
+
+#grilleCoursPrealable {
+    text-align: center;
+    font-size: medium;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+#grilleCoursPrealable b 
+{
+    font-size: large;
+}

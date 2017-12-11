@@ -1,7 +1,7 @@
 ﻿@model ApplicationPlanCadre.Models.GrilleCours
 
 
-<div class="table-responsive" id="grilleCoursHeure">
+<div class="table-responsive" id="grilleCoursPrealable">
 
     <table  class="table table-bordered">
          <thead>
@@ -9,17 +9,17 @@
                  <td></td>
                  <td></td>
                  <td></td>
-                 <td class="warning">Préalable absolu</td>
+                 <td class="warning"><b>Préalable absolu</b></td>
              </tr>
              <tr>
                  <td></td>
                  <td></td>
                  <td></td>
-                 <td class="info">Préalable relatif</td>
+                 <td class="info"><b>Préalable relatif</b></td>
              </tr>
              <tr class="danger">
-                 <td colspan="2">Cours</td>
-                 <td colspan="2">Préalable</td>
+                 <td colspan="2"><b>Cours</b></td>
+                 <td colspan="2"><b>Préalable</b></td>
              </tr>
          </thead>
          <tbody id="grilleBody" class="grilleBody">
@@ -28,7 +28,7 @@
             {
                 if (cours.PlanCadre.PlanCadrePrealable.FirstOrDefault() != null)
                 {
-                    <tr class="success"><td>@cours.PlanCadre.titreCours</td><td></td></tr>
+                    <tr class="success"><td>@cours.PlanCadre.numeroCours - @cours.PlanCadre.titreCours</td><td></td></tr>
                     foreach (var pcp in cours.PlanCadre.PlanCadrePrealable)
                     {
                         var status ="";
@@ -47,13 +47,10 @@
                         {
                             if (cour.PlanCadre.idPlanCadre == @pcp.idPrealable)
                             {
-                                <tr><td></td><td  class="@nomClasse">@cour.PlanCadre.titreCours</td></tr>
+                                <tr><td></td><td  class="@nomClasse">@cour.PlanCadre.numeroCours - @cour.PlanCadre.titreCours</td></tr>
                             }
-
                         }                                                   
-
                     }
-
                 }
             }
             
@@ -62,8 +59,8 @@
     <table class="table table-bordered">
         <thead>
             <tr class="danger">
-                <td>Préalable</td>
-                <td>Cours</td>
+                <td><b>Préalable</b></td>
+                <td><b>Cours</b></td>
             </tr>
         </thead>
         <tbody id="grilleBody" class="grilleBody">
@@ -88,7 +85,7 @@
                     {
                         if (cour.idPlanCadre == pcp.idPrealable)
                         {
-                            <tr><td class="@nomClasse">@cour.PlanCadre.titreCours</td><td class="success">@pcp.PlanCadre.titreCours</td></tr>
+                            <tr><td class="@nomClasse">@cour.PlanCadre.numeroCours @cour.PlanCadre.titreCours</td><td class="success">@cours.PlanCadre.numeroCours @pcp.PlanCadre.titreCours</td></tr>
                         }
                     }
                 }
