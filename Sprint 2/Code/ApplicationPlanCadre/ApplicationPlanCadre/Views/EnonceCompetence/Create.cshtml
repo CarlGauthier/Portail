@@ -35,32 +35,24 @@
 
             <div class="row">
 
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         @Html.LabelFor(model => model.obligatoire)
                         @Html.CheckBoxFor(model => model.obligatoire)
                         @Html.ValidationMessageFor(model => model.obligatoire, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.obligatoire)
-                        @Html.CheckBoxFor(model => model.obligatoire)
-                        @Html.ValidationMessageFor(model => model.obligatoire, "", new { @class = "text-danger" })
+                        @Html.LabelFor(model => model.actif)
+                        @Html.CheckBoxFor(model => model.actif)
+                        @Html.ValidationMessageFor(model => model.actif, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
             </div>
 
-            
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.actif)
-                @Html.CheckBoxFor(model => model.actif)
-                @Html.ValidationMessageFor(model => model.actif, "", new { @class = "text-danger" })
-            </div>
-
+            <hr />
             <input type="submit" value="Suivant" class="fancy-button" />
             <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "DevisMinistere", new { idDevis = Model.idDevis })'">Annuler</div>
         </div>
