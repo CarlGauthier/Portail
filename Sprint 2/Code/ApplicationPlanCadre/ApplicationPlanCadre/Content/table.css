@@ -51,9 +51,14 @@ table.cool-table .action-cell {
 
 /*PLANCADRE*/
 
-table.plan-cadre-table {
-    margin: 0 -40px;
+.plan-cadre-table-container {
+    margin: -20px -40px;
     width: calc(100% + 80px);
+}
+
+table.plan-cadre-table {
+    margin: 20px 0;
+    width: 100%;
 }
 
 table.plan-cadre-table th, table.plan-cadre-table td {

@@ -7,7 +7,7 @@
         string p_id = "p" + programme.idProgramme.ToString();
         string p_item = p_id + "item";
         string p_target = "#" + p_id;
-        <div id="p_item" class="tree-view-item">
+        <div id="@p_item" class="tree-view-item">
             @if (programme.PlanCadre.Count() > 0)
             {
                 <div class="collapse-button" data-toggle="collapse" data-target=@p_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }

@@ -1,29 +1,28 @@
 ﻿@model IEnumerable<ApplicationPlanCadre.Models.Programme>
 
 @{
-    ViewBag.Title = "Programme";
+    ViewBag.Title = "Plans cadres";
 }
 
 @Html.Action("_TreeView")
 
 <div class="super-view">
-    
-    <div class="container-fluid info-display">
-        <div id="info-detail">
-            <h1>Instance de programme</h1>
 
-            @foreach (var programme in Model)
-            {
-                <a class="info-child clearfix" href='@Url.Action("Info", "Programme", new { idProgramme = programme.idProgramme })'>
-                    <p class="gauche">@Html.DisplayFor(model => programme.description)</p>
-                    <p class="droite">@Html.DisplayFor(model => programme.DevisMinistere.EnteteProgramme.codeProgramme)-@Html.DisplayFor(model => programme.annee)-@Html.DisplayFor(model => programme.DevisMinistere.codeSpecialisation)</p>
-                </a>
-            }
-            <hr />
-            <h1>Option</h1>
-            <a class="fancy-button rouge" onclick="location.href='@Url.Action("Pedagogie", "Accueil")'">Retour</a>
+    <header class="light-header">
 
-        </div>
-    </div>
+        <h1>@ViewBag.Title</h1>
+
+    </header>
+
+    @foreach (var programme in Model)
+    {
+        <a class="info-child clearfix" href='@Url.Action("Info", "Programme", new { idProgramme = programme.idProgramme })'>
+            <p class="gauche">@Html.DisplayFor(model => programme.description)</p>
+            <p class="droite">@Html.DisplayFor(model => programme.DevisMinistere.EnteteProgramme.codeProgramme)-@Html.DisplayFor(model => programme.annee)-@Html.DisplayFor(model => programme.DevisMinistere.codeSpecialisation)</p>
+        </a>
+    }
+
+    <a class="fancy-button rouge" onclick="location.href='@Url.Action("Pedagogie", "Accueil")'">Retour</a>
+
 </div>
 

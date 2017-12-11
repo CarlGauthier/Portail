@@ -1,6 +1,7 @@
 ﻿.super-view {
     margin-left: 350px;
     padding: 40px;
+    overflow: hidden;
     width: calc(100% - 350px);
     min-height: calc(100vh - 55px);
     background-color: #fff;
