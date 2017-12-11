@@ -1,7 +1,7 @@
 ﻿@model ApplicationPlanCadre.Models.DevisMinistere
 
 @{
-    ViewBag.Title = Model.EnteteProgramme.nom;
+    ViewBag.Title = Model.nom;
 }
 
 @Html.Action("_TreeView")
@@ -12,7 +12,7 @@
 
         <h3>Devis ministériel</h3>
 
-        <h1>@Html.DisplayFor(m => m.nom)</h1>
+        <h1>@ViewBag.Title</h1>
         <hr />
 
         <h3><b>@Html.DisplayNameFor(m => m.specialisation) : </b>@Html.DisplayFor(m => m.specialisation)</h3>
@@ -92,11 +92,9 @@
 
     <h2>Options</h2>
 
-    <div class="element">
-        <a class="fancy-button" href='@Url.Action("Edit", new { id = Model.idDevis })'><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
-        <a class="fancy-button" href='@Url.Action("Create", "EnonceCompetence", new { idDevis = Model.idDevis })'><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un énoncé</a>
-        <a class="fancy-button rouge" href='@Url.Action("Index", "DevisMinistere")'>Retour</a>
-    </div>
+    <a class="fancy-button" href='@Url.Action("Edit", new { id = Model.idDevis })'><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
+    <a class="fancy-button" href='@Url.Action("Create", "EnonceCompetence", new { idDevis = Model.idDevis })'><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un énoncé</a>
+    <a class="fancy-button rouge" href='@Url.Action("Index", "DevisMinistere")'>Retour</a>
             
 </div>
 

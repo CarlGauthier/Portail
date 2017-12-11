@@ -33,8 +33,8 @@
                     else
                     {
                             <div class="no-button"><!----></div> }
-                        <a href='@Url.Action("Info", "DevisMinistere", new { idPlanCadre = planCadre.idPlanCadre })'>
-                            @Html.DisplayFor(p => planCadre.titreCours)
+                        <a href='@Url.Action("Info", "PlanCadre", new { idPlanCadre = planCadre.idPlanCadre })'>
+                            @Html.DisplayFor(p => planCadre.nom)
                         </a>
                     </div>
                     <div id=@pc_id class="collapse">

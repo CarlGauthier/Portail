@@ -23,6 +23,11 @@ namespace ApplicationPlanCadre.Models
         [Key]
         public int idPlanCadre { get; set; }
 
+        public string nom
+        {
+            get { return numeroCours + " " + titreCours; }
+        }
+
         [StringLength(10)]
         public string numeroCours { get; set; }
 
@@ -65,7 +70,7 @@ namespace ApplicationPlanCadre.Models
                     prealable.AddRange(planCadre.PlanCadrePrealable);
                 }
                 var shit = (from pc in Programme.PlanCadre
-                       join pcp in prealable on idPlanCadre equals pcp.idPlanCadre
+                       join pcp in prealable on idPlanCadre equals pcp.idPrealable
                        select pc).ToList();
                 return shit;
             }

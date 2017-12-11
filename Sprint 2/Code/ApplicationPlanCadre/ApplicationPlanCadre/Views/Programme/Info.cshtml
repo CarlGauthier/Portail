@@ -1,7 +1,7 @@
 ﻿@model ApplicationPlanCadre.Models.Programme
 
 @{
-    ViewBag.Title = "Info";
+    ViewBag.Title = Model.description;
 }
 
 @Html.Action("_TreeView")
@@ -10,9 +10,11 @@
 
     <header class="fat-header">
 
-        <h1>Programme</h1>
+        <h3>Programme</h3>
 
-        <h2>@Html.DisplayFor(model => model.description)</h2>
+        <h1>@ViewBag.Title</h1>
+        <hr />
+
         <h3>@Html.DisplayFor(model => model.DevisMinistere.EnteteProgramme.codeProgramme)-@Html.DisplayFor(model => model.annee)-@Html.DisplayFor(model => model.DevisMinistere.codeSpecialisation)</h3>
 
     </header>
@@ -29,7 +31,7 @@
 
     <hr />
 
-    <h2>Option</h2>
+    <h2>Options</h2>
 
     <a class="fancy-button" href='@Url.Action("Create", "PlanCadre", new {idProgramme = Model.idProgramme})'><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un plan cadre</a>
     <a class="fancy-button rouge" onclick="location.href='@Url.Action("Index", "Programme")'">Retour</a>
