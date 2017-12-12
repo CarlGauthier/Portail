@@ -36,9 +36,9 @@
                         <p><span>Code compétence : </span>@Html.Raw(enonceCmpt.codeCompetence)</p>
                         <p><span>Description : </span>@Html.Raw(enonceCmpt.description)</p>
                     </a>
-
                 }
             }
+
             if (((IDictionary<string, object>)Model).ContainsKey("ElementCompetence"))
             {
                 if (Model.ElementCompetence.Count != 0)
@@ -53,26 +53,28 @@
                     }
                 }
             }
+
             if (((IDictionary<string, object>)Model).ContainsKey("DevisMinistere"))
             {
                 if (Model.DevisMinistere.Count != 0)
                 {
-                <h2>Devis ministériel</h2>
-                <hr />
+                    <h2>Devis ministériel</h2>
+                    <hr />
                     foreach (SearchDevisMinistere devis in Model.DevisMinistere)
                     {
-                    <a class="info-child clearfix" href="@Url.Action("Info","DevisMinistere", new { idDevis = devis.idDevis })">
-                        <p><span>Année : </span>@Html.Raw(devis.annee)</p>
-                        <p><span>Code de spécialisation : </span>@Html.Raw(devis.codeSpecialisation)</p>
-                        <p><span>Spécialisation : </span>@Html.Raw(devis.specialisation)</p>
-                        <p><span>Condition : </span>@Html.Raw(devis.condition)</p>
-                        <p><span>Sanction : </span>@Html.Raw(devis.sanction)</p>
-                        <p><span>Code de programme : </span>@Html.Raw(devis.codeProgramme)</p>
-                    </a>
+                        <a class="info-child clearfix" href="@Url.Action("Info","DevisMinistere", new { idDevis = devis.idDevis })">
+                            <p><span>Année : </span>@Html.Raw(devis.annee)</p>
+                            <p><span>Code de spécialisation : </span>@Html.Raw(devis.codeSpecialisation)</p>
+                            <p><span>Spécialisation : </span>@Html.Raw(devis.specialisation)</p>
+                            <p><span>Condition : </span>@Html.Raw(devis.condition)</p>
+                            <p><span>Sanction : </span>@Html.Raw(devis.sanction)</p>
+                            <p><span>Code de programme : </span>@Html.Raw(devis.codeProgramme)</p>
+                        </a>
                     }
                 }
 
             }
+
             if (((IDictionary<string, object>)Model).ContainsKey("ContexteRealisation"))
             {
                 if (Model.ContexteRealisation.Count != 0)
@@ -82,13 +84,13 @@
 
                     foreach (SearchContexteRealisation contexteReal in Model.ContexteRealisation)
                     {
-
-                            <a class="info-child clearfix" href="@Url.Action("Info","EnonceCompetence", new { idCompetence = contexteReal.idCompetence})">
-                                <p><span>Description : </span>@Html.Raw(contexteReal.description)</p>
-                            </a>
+                        <a class="info-child clearfix" href="@Url.Action("Info","EnonceCompetence", new { idCompetence = contexteReal.idCompetence})">
+                           <p><span>Description : </span>@Html.Raw(contexteReal.description)</p>
+                        </a>
                     }
                 }
             }
+
             if (((IDictionary<string, object>)Model).ContainsKey("CriterePerformance"))
             {
                 if (Model.CriterePerformance.Count != 0)
@@ -105,11 +107,7 @@
             }
         }
 
-        
-
-
-
-    </div>
+       </div>
 </div>
 
 
