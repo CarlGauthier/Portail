@@ -15,6 +15,14 @@ h1, h2, h3, h4, h5, h6 {
     font-family: Segoe UI Light, Calibri Light, Sans-Serif;
 }
 
+ul, ol {
+    padding-left: 20px;
+}
+
+li {
+    padding: 10px;
+}
+
 ul.hyphen-list {
     padding-left: 10px;
     list-style-type: none;
@@ -28,8 +36,18 @@ ul.hyphen-list li:before {
     content: "- ";
 }
 
-li {
-    padding: 10px;
+ol.double-order {
+    counter-reset: item;
+    padding-left: 10px;
+}
+
+ol.double-order li {
+    display: block
+}
+
+ol.double-order li:before {
+    content: counters(item, ".") " ";
+    counter-increment: item
 }
 
 hr {

@@ -15,6 +15,7 @@
 }
 
 <style>
+
     table, th, td {
         
         border-collapse: collapse;
@@ -72,7 +73,7 @@
         font-size:55px;
     }
     .pdf{
-
+        font-family:Calibri;
         width:100%;
     }
     .entete {
@@ -372,14 +373,11 @@
                                                 @*si element connaissance et pareille a celui d'en haut *@
                                                  @if(idElementConnaissanceHold == element.ElementConnaissance.idElementConnaissance)
                                                  {
-                                                     <td class="td-no-borderTopBot"></td>
+                                                     <td class="td-no-borderTopBot"><!--Empty--></td>
                                                  }
                                                  else
                                                  {
-                                                     carriageReturnText = element.ElementConnaissance.description ;
-                                                     carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
-                                                     carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
-                                                     <td class="td-borderTopOnly">@Html.Raw(carriageReturnText)</td>
+                                                    <td class="td-borderTopOnly">@Html.Raw(element.ElementConnaissance.description)</td>
                                                      idElementConnaissanceHold = element.ElementConnaissance.idElementConnaissance;
                                                  }
                                                 
@@ -390,10 +388,10 @@
                                                 }
                                                 else
                                                 {
-                                                    carriageReturnText = element.ElementConnaissance.ActiviteApprentissage.description;
-                                                    carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
-                                                    carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
-                                                    <td class="td-borderTopOnly">@Html.Raw(carriageReturnText)</td>
+                                                    
+                                                    <td class="td-borderTopOnly">
+                                                         @Html.Raw(element.ElementConnaissance.ActiviteApprentissage.description)
+                                                    </td>
                                                     idActiviteApprentissageHold = element.ElementConnaissance.ActiviteApprentissage.idActiviteApprentissage;
 
                                                 }
@@ -421,23 +419,12 @@
                 <tbody>
                     <tr>
                         <td width="45%" class="td-borderTopOnly">
-                            @{ 
-                                carriageReturnText = Model.environnementPhys.ToString(); ;
-                                carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
-                                carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
-                            }
-                            @Html.Raw(carriageReturnText)
+                           @Html.Raw(Model.environnementPhys)
                             
                         </td>
                         <td class="td-borderTopOnly">
-                            @{
-                                carriageReturnText = Model.ressource.ToString(); ;
-                                carriageReturnText = carriageReturnText.Replace("\r\n", "<br>"); // retour de charriot
-                                carriageReturnText = carriageReturnText.Replace("\t", "&nbsp&nbsp&nbsp&nbsp"); // donne une tabulation
-                            }
-                            @Html.Raw(carriageReturnText)
-
-
+                           
+                            @Html.Raw(Model.ressource)
                         </td>
                     </tr>
                 </tbody>

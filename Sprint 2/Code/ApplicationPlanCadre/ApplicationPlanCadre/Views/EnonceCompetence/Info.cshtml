@@ -7,57 +7,54 @@
 @Html.Action("_TreeView", "DevisMinistere")
 
 <div class="super-view">
-    
 
-    <div class="info-display container-fluid">
-        <header class="light-header">
+    <header class="fat-header">
 
-            <h3>Énoncé de compétence</h3>
+        <h3>Énoncé de compétence</h3>
 
-            <h1>@ViewBag.Title</h1>
+        <h1>@ViewBag.Title</h1>
 
-        </header>
+    </header>
 
-        @if (Model.ContexteRealisation.Count > 0)
-        {
-            <h2>Contextes de réalisations</h2>
-            <ul>
-                @foreach (var contexteRealisation in Model.ContexteRealisation.OrderBy(m => m.numero))
-                {
-                    <li>@Html.DisplayFor(m => contexteRealisation.description)</li>
-                }
-            </ul>
-
-            <hr />
-        }
-
-        @if (Model.ElementCompetence.Count > 0)
-        {
-                
-            <h2>Éléments de compétence</h2>
-
-            foreach (var elementCompetence in Model.ElementCompetence.OrderBy(ec => ec.numero))
+    @if (Model.ContexteRealisation.Count > 0)
+    {
+        <h2>Contextes de réalisations</h2>
+        <ul>
+            @foreach (var contexteRealisation in Model.ContexteRealisation.OrderBy(m => m.numero))
             {
-                <a class="info-child clearfix" href='@Url.Action("Info", "ElementCompetence", new { idElement = elementCompetence.idElement })'>
-                    <p class="gauche">@Html.DisplayFor(m => elementCompetence.description)</p>
-                    <p class="droite">@Html.DisplayFor(m => elementCompetence.numero)</p>
-                </a>
+                <li>@Html.DisplayFor(m => contexteRealisation.description)</li>
             }
+        </ul>
 
-            <hr />
-        }
+        <hr />
+    }
 
-        <h2>Options</h2>
+    @if (Model.ElementCompetence.Count > 0)
+    { 
+        <h2>Éléments de compétence</h2>
 
-        <a class="fancy-button" onclick="location.href='@Url.Action("Edit", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
-        <a class="fancy-button" onclick="location.href='@Url.Action("Create", "ElementCompetence", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un élément</a>
-        <a class="fancy-button" onclick="location.href='@Url.Action("Delete", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-trash"><!----></span> Supprimer l'énoncé</a>
-        @if (Model.ElementCompetence.Count() > 1)
+        foreach (var elementCompetence in Model.ElementCompetence.OrderBy(ec => ec.numero))
         {
-            <a class="fancy-button" onclick="location.href='@Url.Action("Order", "ElementCompetence", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-sort"><!----></span> Changer l'ordre des éléments</a>
+            <a class="info-child clearfix" href='@Url.Action("Info", "ElementCompetence", new { idElement = elementCompetence.idElement })'>
+                <p class="gauche">@Html.DisplayFor(m => elementCompetence.description)</p>
+                <p class="droite">@Html.DisplayFor(m => elementCompetence.numero)</p>
+            </a>
         }
-        <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "DevisMinistere", new { idDevis = Model.idDevis })'">Retour</a>
-    </div>
+
+        <hr />
+    }
+
+    <h2>Options</h2>
+
+    <a class="fancy-button" onclick="location.href='@Url.Action("Edit", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
+    <a class="fancy-button" onclick="location.href='@Url.Action("Create", "ElementCompetence", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un élément</a>
+    <a class="fancy-button" onclick="location.href='@Url.Action("Delete", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-trash"><!----></span> Supprimer l'énoncé</a>
+    @if (Model.ElementCompetence.Count() > 1)
+    {
+        <a class="fancy-button" onclick="location.href='@Url.Action("Order", "ElementCompetence", new { idCompetence = Model.idCompetence })'"><span class="glyphicon glyphicon-sort"><!----></span> Changer l'ordre des éléments</a>
+    }
+    <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "DevisMinistere", new { idDevis = Model.idDevis })'">Retour</a>
+
 </div>
 
 <script>

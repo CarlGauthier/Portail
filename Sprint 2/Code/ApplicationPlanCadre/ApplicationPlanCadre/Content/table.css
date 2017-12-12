@@ -82,6 +82,10 @@ table.plan-cadre-table td {
     border-color: #ddd;
 }
 
+table.plan-cadre-table .rich-cell li {
+    padding: 3px;
+}
+
 /*GRILLE DE COURS -- Ajouté par Eddy */
 
 #select-grille {

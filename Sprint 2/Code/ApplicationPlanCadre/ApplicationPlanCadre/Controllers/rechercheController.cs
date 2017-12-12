@@ -9,9 +9,6 @@ using System.Data.Entity;
 using System.Configuration;
 using ApplicationPlanCadre.Helpers;
 using System.Linq.Expressions;
-
-
-
 using ApplicationPlanCadre.Models;
 
 namespace ApplicationPlanCadre.Controllers
@@ -19,11 +16,13 @@ namespace ApplicationPlanCadre.Controllers
     public class RechercheController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
+
         // GET: recherche
         public ActionResult Index()
         {
             return View("recherche");
         }
+
         //todo: la recherche ne support présentement pas la recherche avec les espaces
         [HttpPost]
         public ActionResult Rechercher(string searchStr, bool chkRecherche)
@@ -42,30 +41,28 @@ namespace ApplicationPlanCadre.Controllers
                 model.Programme = getProgram(searchStr);
                 model.CriterePerformance = getCriterePerformance(searchStr);
                 model.ContexteRealisation = getContexteRealisation(searchStr);
-                
+
             }
             return PartialView("_afficherRecherche", model);
         }
 
-
-        private List<SecondaryDevisMinistere> getDevis(string searchStr)
+        private List<SearchDevisMinistere> getDevis(string searchStr)
         {
-            
-            List<SecondaryDevisMinistere> devisList = new List<SecondaryDevisMinistere>();
+            List<SearchDevisMinistere> devisList = new List<SearchDevisMinistere>();
             var devis = from a in db.DevisMinistere
-                        where a.specialisation.Contains(searchStr)||a.codeSpecialisation.Contains(searchStr)||a.codeProgramme.Contains(searchStr)||a.annee.Contains(searchStr)
+                        where a.specialisation.Contains(searchStr) || a.codeSpecialisation.Contains(searchStr) || a.codeProgramme.Contains(searchStr) || a.annee.Contains(searchStr)
                         select a;
             foreach (DevisMinistere devisMins in devis)
             {
-                devisList.Add(new SecondaryDevisMinistere
+                devisList.Add(new SearchDevisMinistere
                 {
                     idDevis = devisMins.idDevis,
-                    annee=devisMins.annee.HighlightKeyWords(searchStr, "yellow", false),
+                    annee = devisMins.annee.HighlightKeyWords(searchStr, "yellow", false),
                     codeSpecialisation = devisMins.codeSpecialisation.HighlightKeyWords(searchStr, "yellow", false),
                     specialisation = devisMins.specialisation.HighlightKeyWords(searchStr, "yellow", false),
                     nbUnite = devisMins.nbUnite,
-                    //nbHeureFrmGenerale = devisMins.nbHeureFrmGenerale,
-                    //nbHeureFrmSpecifique = devisMins.nbHeureFrmSpecifique,
+                    nbHeureFrmGenerale = devisMins.nbHeureFrmGenerale,
+                    nbHeureFrmSpecifique = devisMins.nbHeureFrmSpecifique,
                     condition = devisMins.condition.HighlightKeyWords(searchStr, "yellow", false),
                     sanction = devisMins.sanction.HighlightKeyWords(searchStr, "yellow", false),
                     codeProgramme = devisMins.codeProgramme.HighlightKeyWords(searchStr, "yellow", false),
@@ -74,17 +71,17 @@ namespace ApplicationPlanCadre.Controllers
             }
             return devisList;
         }
-        //
-        private List<SecondaryEnonceCompetence> getEnonceCompetence(string searchStr)
+
+        private List<SearchEnonceCompetence> getEnonceCompetence(string searchStr)
         {
-            List<SecondaryEnonceCompetence> enonComptList = new List<SecondaryEnonceCompetence>();
+            List<SearchEnonceCompetence> enonComptList = new List<SearchEnonceCompetence>();
             var enonce = from a in db.EnonceCompetence
-                         where a.codeCompetence.Contains(searchStr)||a.description.Contains(searchStr)
+                         where a.codeCompetence.Contains(searchStr) || a.description.Contains(searchStr)
                          select a;
 
             foreach (EnonceCompetence EnonceCmpt in enonce)
             {
-                enonComptList.Add(new SecondaryEnonceCompetence
+                enonComptList.Add(new SearchEnonceCompetence
                 {
                     idCompetence = EnonceCmpt.idCompetence,
                     idDevis = EnonceCmpt.idDevis,
@@ -94,16 +91,16 @@ namespace ApplicationPlanCadre.Controllers
             }
             return enonComptList;
         }
-        private List<SecondaryElementCompetence> getElemCompetence(string searchStr)
+        private List<SearchElementCompetence> getElemCompetence(string searchStr)
         {
-            List<SecondaryElementCompetence> elementList = new List<SecondaryElementCompetence>();
+            List<SearchElementCompetence> elementList = new List<SearchElementCompetence>();
             var enonce = from a in db.ElementCompetence
                          where a.description.Contains(searchStr)
                          orderby a.numero
                          select a;
             foreach (ElementCompetence a in enonce)
             {
-                elementList.Add(new SecondaryElementCompetence
+                elementList.Add(new SearchElementCompetence
                 {
                     idElement = a.idElement,
                     idCompetence = a.idCompetence,
@@ -114,15 +111,15 @@ namespace ApplicationPlanCadre.Controllers
             return elementList;
         }
 
-        private List<SecondaryProgramme> getProgram(string searchStr)
+        private List<SearchProgramme> getProgram(string searchStr)
         {
-            List<SecondaryProgramme> programme = new List<SecondaryProgramme>();
+            List<SearchProgramme> programme = new List<SearchProgramme>();
             var holding = from a in db.Programme
-                            where a.annee.Contains(searchStr)||a.nom.Contains(searchStr)
-                            select a;
+                          where a.annee.Contains(searchStr) || a.nom.Contains(searchStr)
+                          select a;
             foreach (Programme prog in holding)
             {
-                programme.Add(new SecondaryProgramme
+                programme.Add(new SearchProgramme
                 {
                     idProgramme = Convert.ToInt32(prog.idProgramme),
                     annee = prog.annee.HighlightKeyWords(searchStr, "yellow", false),
@@ -133,16 +130,16 @@ namespace ApplicationPlanCadre.Controllers
             }
             return programme;
         }
-        private List<SecondaryCriterePerformance> getCriterePerformance(string searchStr)
+        private List<SearchCriterePerformance> getCriterePerformance(string searchStr)
         {
-            List<SecondaryCriterePerformance> critereList = new List<SecondaryCriterePerformance>();
+            List<SearchCriterePerformance> critereList = new List<SearchCriterePerformance>();
             var critere = from a in db.CriterePerformance
                           where a.description.Contains(searchStr)
                           orderby a.numero
                           select a;
             foreach (CriterePerformance a in critere)
             {
-                critereList.Add(new SecondaryCriterePerformance
+                critereList.Add(new SearchCriterePerformance
                 {
                     idCritere = a.idCritere,
                     idElement = a.idElement,
@@ -151,16 +148,16 @@ namespace ApplicationPlanCadre.Controllers
             }
             return critereList;
         }
-        private List<SecondaryContexteRealisation> getContexteRealisation(string searchStr)
+        private List<SearchContexteRealisation> getContexteRealisation(string searchStr)
         {
-            List<SecondaryContexteRealisation> contextList = new List<SecondaryContexteRealisation>();
+            List<SearchContexteRealisation> contextList = new List<SearchContexteRealisation>();
             var context = from a in db.ContexteRealisation
                           where a.description.Contains(searchStr)
                           orderby a.numero
                           select a;
             foreach (ContexteRealisation a in context)
             {
-                contextList.Add(new SecondaryContexteRealisation
+                contextList.Add(new SearchContexteRealisation
                 {
                     idContexte = a.idContexte,
                     idCompetence = a.idCompetence,
