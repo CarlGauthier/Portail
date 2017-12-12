@@ -114,7 +114,7 @@ namespace ApplicationPlanCadre.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.roles = BuildRoleSelectList();
+            ViewBag.role = BuildRoleSelectList();
             ViewBag.codeProgramme = new ConsoleDevisMinistereController().BuildCodeDevisMinistereSelectList();
             return View();
         }
@@ -137,7 +137,7 @@ namespace ApplicationPlanCadre.Controllers
                 }
                 AddErrors(result);
             }
-            ViewBag.roles = BuildRoleSelectList();
+            ViewBag.role = BuildRoleSelectList();
             ViewBag.codeProgramme = new ConsoleDevisMinistereController().BuildCodeDevisMinistereSelectList();
             return View(model);
         }
@@ -154,7 +154,7 @@ namespace ApplicationPlanCadre.Controllers
                 return HttpNotFound();
             }
             EditUserViewModel model = new EditUserViewModel { UserId = user.Id, Prenom = user.prenom, Nom = user.nom, Email = user.Email, Roles = UserManager.GetRoles(user.Id) };
-            ViewBag.roles = BuildRoleSelectList();
+            ViewBag.role = BuildRoleSelectList();
             ViewBag.codeProgramme = new ConsoleDevisMinistereController().BuildCodeDevisMinistereSelectList();
             return View(model);
         }
