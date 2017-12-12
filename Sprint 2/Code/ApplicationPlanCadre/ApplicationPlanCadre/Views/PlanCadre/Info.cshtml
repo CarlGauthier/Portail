@@ -115,9 +115,42 @@
                             </ol>
                         </td>
 
-                        <td style="width:30%" class="rich-cell">
-                            @Html.Raw(planCadreElement.ElementConnaissance.description)
-                        </td>
+                        @{
+                            bool isPreviousUsingSameConnaissance = false;
+                            if (i > 0)
+                            {
+                                var previousPlanCadreElement = planCadreEnonce.PlanCadreElement.ElementAt(i - 1);
+                                isPreviousUsingSameConnaissance = previousPlanCadreElement.ElementConnaissance.idElementConnaissance == planCadreElement.ElementConnaissance.idElementConnaissance;
+                            }
+
+                            bool isThereConnaissanceFollowing = false;
+                            int connaissanceRowspan = 1;
+                            for (int j = i + 1; j < planCadreEnonce.PlanCadreElement.Count(); j++)
+                            {
+                                var followingPlanCadreElement = planCadreEnonce.PlanCadreElement.ElementAt(j);
+                                if (followingPlanCadreElement.ElementConnaissance.idElementConnaissance == planCadreElement.ElementConnaissance.idElementConnaissance)
+                                {
+                                    isThereConnaissanceFollowing = true;
+                                    connaissanceRowspan++;
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                        }
+
+                        @if (!isPreviousUsingSameConnaissance)
+                        {
+                            if (isThereConnaissanceFollowing)
+                            {
+                                <td rowspan="@connaissanceRowspan" class="rich-cell">@Html.Raw(planCadreElement.ElementConnaissance.description)</td>
+                            }
+                            else
+                            {
+                                <td class="rich-cell">@Html.Raw(planCadreElement.ElementConnaissance.description)</td>
+                            }
+                        }
 
                         @{
                             bool isPreviousUsingSameActivite = false;
@@ -128,14 +161,14 @@
                             }
 
                             bool isThereActiviteFollowing = false;
-                            int rowspan = 1;
+                            int activiteRowspan = 1;
                             for(int j = i + 1; j < planCadreEnonce.PlanCadreElement.Count(); j++)
                             {
                                 var followingPlanCadreElement = planCadreEnonce.PlanCadreElement.ElementAt(j);
                                 if(followingPlanCadreElement.ElementConnaissance.idActiviteApprentissage == planCadreElement.ElementConnaissance.idActiviteApprentissage)
                                 {
                                     isThereActiviteFollowing = true;
-                                    rowspan++;
+                                    activiteRowspan++;
                                 }
                                 else
                                 {
@@ -148,7 +181,7 @@
                         {
                             if (isThereActiviteFollowing)
                             {
-                                <td rowspan="@rowspan" class="rich-cell">@Html.Raw(planCadreElement.ElementConnaissance.ActiviteApprentissage.description)</td>
+                                <td rowspan="@activiteRowspan" class="rich-cell">@Html.Raw(planCadreElement.ElementConnaissance.ActiviteApprentissage.description)</td>
                             }
                             else
                             {

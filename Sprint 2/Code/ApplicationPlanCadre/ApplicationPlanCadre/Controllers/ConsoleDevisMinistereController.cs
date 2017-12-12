@@ -81,7 +81,7 @@ namespace ApplicationPlanCadre.Controllers
             return View(devisMinistere);
         }
 
-        private SelectList BuildCodeDevisMinistereSelectList(string codeProgramme = null)
+        public SelectList BuildCodeDevisMinistereSelectList(string codeProgramme = null)
         {
             var liste = db.EnteteProgramme
             .Select(e => new { codeProgramme = e.codeProgramme, texte = e.codeProgramme + " - " + e.nom }).ToList();

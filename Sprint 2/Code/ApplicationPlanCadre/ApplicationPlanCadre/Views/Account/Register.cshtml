@@ -76,6 +76,14 @@
                                 <p>Assigner un programme au RCP</p>
                                 <hr />
 
+                                <div class="form-group">
+                                    @Html.DropDownList("codeProgramme", null, new { @class = "form-control", @onchange = "addProgramme()" })
+                                </div>
+
+                                <div id="codeProgrammeBox">
+
+                                </div>
+
                             </div>
                         </div>
                     </div>

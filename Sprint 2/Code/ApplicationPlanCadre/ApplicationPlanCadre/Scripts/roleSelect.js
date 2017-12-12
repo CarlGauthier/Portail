@@ -34,13 +34,21 @@ function checkRCP(option, state) {
 function addRole() {
     var selectList = document.getElementById('roles');
     var option = selectList.options[selectList.selectedIndex];
-    document.getElementById("rolesBox").innerHTML += buildChildHtml(option.text, option.index);
+    document.getElementById("rolesBox").innerHTML += buildRoleChildHtml(option.text, option.index);
     optionEnabled(selectList.selectedIndex, false);
     checkRCP(option, true);
     ResetIndex();
 }
 
-function buildChildHtml(nom, index) {
+function addProgramme() {
+    var selectList = document.getElementById('codeProgramme');
+    var option = selectList.options[selectList.selectedIndex];
+    document.getElementById("codeProgrammeBox").innerHTML += buildRoleChildHtml(option.text, option.index);
+    optionEnabled(selectList.selectedIndex, false);
+    ResetIndex();
+}
+
+function buildRoleChildHtml(nom, index) {
     id = "role" + index;
     return html =
         "<div id='" + id + "'class='child-field clearfix'>" +
@@ -50,10 +58,28 @@ function buildChildHtml(nom, index) {
         "</div>";
 }
 
+function buildCodeProgrammeChildHtml(nom, index) {
+    id = "codeProgramme" + index;
+    return html =
+        "<div id='" + id + "'class='child-field clearfix'>" +
+        "<p>" + nom + "</p>" +
+        "<span  onclick='removeCodeProgramme(" + index + ")' class='glyphicon glyphicon-remove'></span>" +
+        "<input type='hidden' name='codeProgrammes' value='" + nom + "' />" +
+        "</div>";
+}
+
+
 function removeRole(index) {
     var roleNode = document.getElementById("role" + index);
     var option = document.getElementById('roles').options[index];
     checkRCP(option, false);
+    optionEnabled(index, true);
+    roleNode.remove();
+}
+
+function removeCodeProgramme(index) {
+    var roleNode = document.getElementById("codeProgramme" + index);
+    var option = document.getElementById('codeProgrammes').options[index];
     optionEnabled(index, true);
     roleNode.remove();
 }
