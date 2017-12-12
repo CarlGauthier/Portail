@@ -24,7 +24,7 @@ namespace ApplicationPlanCadre.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.codeProgramme = GetCodeDevisMinistereSelectList();
+            ViewBag.codeProgramme = BuildCodeDevisMinistereSelectList();
             return View();
         }
 
@@ -42,8 +42,8 @@ namespace ApplicationPlanCadre.Controllers
                 return RedirectToAction("Create");
             }
             if (existe)
-                ModelState.AddModelError("Duplique", "Erreur, ce devisMinistere existe déjà.");
-            ViewBag.codeProgramme = GetCodeDevisMinistereSelectList();
+                ModelState.AddModelError("Duplique", "Erreur, ce devis existe déjà.");
+            ViewBag.codeProgramme = BuildCodeDevisMinistereSelectList();
             return View(devisMinistere);
         }
 
@@ -58,7 +58,7 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.codeProgramme = GetCodeDevisMinistereSelectList(devisMinistere.codeProgramme);
+            ViewBag.codeProgramme = BuildCodeDevisMinistereSelectList(devisMinistere.codeProgramme);
             return View(devisMinistere);
         }
 
@@ -77,20 +77,14 @@ namespace ApplicationPlanCadre.Controllers
             }
             if (existe)
                 ModelState.AddModelError("Duplique", "Erreur, ce devisMinistere existe déjà.");
-            ViewBag.codeProgramme = GetCodeDevisMinistereSelectList();
+            ViewBag.codeProgramme = BuildCodeDevisMinistereSelectList();
             return View(devisMinistere);
         }
 
-        private SelectList GetCodeDevisMinistereSelectList(string codeProgramme = null)
+        public SelectList BuildCodeDevisMinistereSelectList(string codeProgramme = null)
         {
-            var liste =
-            db.EnteteProgramme
-            .Select(ep => new
-            {
-                codeProgramme = ep.codeProgramme,
-                texte = ep.codeProgramme + " - " + ep.nom,
-            })
-            .ToList();
+            var liste = db.EnteteProgramme
+            .Select(e => new { codeProgramme = e.codeProgramme, texte = e.codeProgramme + " - " + e.nom }).ToList();
             if(codeProgramme != null)
                 return new SelectList(liste, "codeProgramme", "texte", codeProgramme);
             return new SelectList(liste, "codeProgramme", "texte");

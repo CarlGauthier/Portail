@@ -1,23 +1,28 @@
 ﻿@model IEnumerable<ApplicationPlanCadre.Models.Programme>
 
 @{
-    ViewBag.Title = "Programme";
+    ViewBag.Title = "Programmes";
 }
 
+@Html.Action("_TreeView")
+
 <div class="super-view">
-    @Html.Action("_TreeView")
-    <div id="info-display" class="container-fluid">
-        <div id="info-detail">
-            <h1>Instance de programme</h1>
-            <hr />
-            @foreach (var programme in Model)
-            {
-                <a class="info-child clearfix" href='@Url.Action("Info","Programme", new { idProgramme = programme.idProgramme })'>
-                    <p class="gauche">@Html.DisplayFor(model => programme.description)</p>
-                    <p class="droite">@Html.DisplayFor(model => programme.DevisMinistere.EnteteProgramme.codeProgramme)-@Html.DisplayFor(model => programme.annee)-@Html.DisplayFor(model => programme.DevisMinistere.codeSpecialisation)</p>
-                </a>
-            }
-        </div>
-    </div>
+
+    <header class="light-header">
+
+        <h1>@ViewBag.Title</h1>
+
+    </header>
+
+    @foreach (var programme in Model)
+    {
+        <a class="info-child clearfix" href='@Url.Action("Info", "Programme", new { idProgramme = programme.idProgramme })'>
+            <p class="gauche">@Html.DisplayFor(model => programme.description)</p>
+            <p class="droite">@Html.DisplayFor(model => programme.DevisMinistere.EnteteProgramme.codeProgramme)-@Html.DisplayFor(model => programme.annee)-@Html.DisplayFor(model => programme.DevisMinistere.codeSpecialisation)</p>
+        </a>
+    }
+
+    <a class="fancy-button rouge" onclick="location.href='@Url.Action("Pedagogie", "Accueil")'">Retour</a>
+
 </div>
 

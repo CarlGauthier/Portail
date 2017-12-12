@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ApplicationPlanCadre.Models.Programme>
 
-<div id="tree-view">
+<div class="tree-view">
     <div class="tree-view-header">Programme</div>
     @foreach (var programme in Model)
     {
         string p_id = "p" + programme.idProgramme.ToString();
         string p_item = p_id + "item";
         string p_target = "#" + p_id;
-        <div id="p_item" class="tree-view-item">
+        <div id="@p_item" class="tree-view-item">
             @if (programme.PlanCadre.Count() > 0)
             {
                 <div class="collapse-button" data-toggle="collapse" data-target=@p_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
@@ -33,8 +33,8 @@
                     else
                     {
                             <div class="no-button"><!----></div> }
-                        <a href='@Url.Action("Info", "DevisMinistere", new { idPlanCadre = planCadre.idPlanCadre })'>
-                            @Html.DisplayFor(p => planCadre.titreCours)
+                        <a href='@Url.Action("Info", "PlanCadre", new { idPlanCadre = planCadre.idPlanCadre })'>
+                            @Html.DisplayFor(p => planCadre.nom)
                         </a>
                     </div>
                     <div id=@pc_id class="collapse">
@@ -46,7 +46,7 @@
                                 string enc_item = enc_id + "item";
                                 string enc_target = "#" + enc_id;
                                 <div id=@enc_item class="tree-view-item">
-                                    @if (planCadre.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == planCadreEnonce.idCompetence).Count() > 0)
+                                    @if (planCadreEnonce.PlanCadreElement.Count() > 0)
                                     {
                                         <div class="collapse-button" data-toggle="collapse" data-target=@enc_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
                                     else
@@ -60,7 +60,7 @@
                                 <div id=@enc_id class="collapse">
                                     <div class="tree-view-item-container">
                                         <div class="tree-view-header">Éléments de compétence</div>
-                                        @foreach (var planCadreElement in planCadreEnonce.GetPlanCadreElements())
+                                        @foreach (var planCadreElement in planCadreEnonce.PlanCadreElement)
                                         {
                                             string el_item = "el" + planCadreElement.idElement.ToString() + "item";
                                             <div id=@el_item class="tree-view-item">
@@ -75,6 +75,12 @@
                     </div>
                 }
             </div>
+
         </div>
     }
 </div>
+
+<script src="@Url.Content("~/Scripts/perfect-scrollbar.js")"></script>
+<script>
+    var ps = new PerfectScrollbar('.tree-view');
+</script>

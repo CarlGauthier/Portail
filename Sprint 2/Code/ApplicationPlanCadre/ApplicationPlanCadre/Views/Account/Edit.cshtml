@@ -1,47 +1,107 @@
 ﻿@model ApplicationPlanCadre.Models.EditUserViewModel
+
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Modifier les informations d'un utilisateur";
 }
 
-<div class="container">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.UserId)
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.UserId)
+    <div class="container">
+        <div class="form-box">
+            <div class="row">
+                <div class="col-md-8">
 
-        <div class="form-horizontal form-box single">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <h1>Modifier un utilisateur</h1>
+                    <header class="light-header">
+
+                        <h1>@ViewBag.Title</h1>
+
+                    </header>
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Prenom)
+                                @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Prenom, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Nom, new { @class = "col-md-1 control-label" })
+                                @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Nom, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="field-box">
+                        <div class="row">
+                            <div class="col-md-9">
+
+                                <p>Assigner un rôle</p>
+                                <hr />
+
+                                <div class="form-group">
+                                    @Html.DropDownList("roles", null, new { @class = "form-control", @onchange = "addRole()" })
+                                </div>
+
+                                <div id="rolesBox">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="RCPForm" class="col-md-6">
+                    <div class="field-box">
+                        <div class="row">
+                            <div class="col-md-9">
+
+                                <p>Assigner un programme au RCP</p>
+                                <hr />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
 
             <hr />
+            <input type="submit" value="Enregistrer" class="fancy-button" />
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.Prenom, new { @class = "col-md-2 control-label" })
-                <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
-                </div>
+            <a class="fancy-button rouge" href='@Url.Action("Index", "Account")'>Annuler</a>
 
-                @Html.LabelFor(m => m.Nom, new { @class = "col-md-1 control-label" })
-                <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <div class="col-md-6">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-9">
-                    <input type="submit" value="Confirmer" class="fancy-button" />
-                    <a href='@Url.Action("Index")' class="fancy-button rouge">Annuler</a>
-                </div>
-            </div>
         </div>
-    }
+    </div>
+}
 
-</div>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            @foreach (string role in Model.Roles)
+            {
+                @:loadRole("@role");
+            }
+        });
+    </script>
+    <script src="@Url.Content("~/Scripts/roleSelect.js")"></script>
+}

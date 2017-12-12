@@ -206,6 +206,9 @@
     <Compile Include="Controllers\ElementCompetenceController.cs" />
     <Compile Include="Controllers\EnonceCompetenceController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\GrilleCoursController.cs" />
+    <Compile Include="Controllers\GrilleCoursEnonceController.cs" />
+    <Compile Include="Models\GrilleCoursViewModel.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\DevisMinistereController.cs" />
     <Compile Include="Controllers\ProgrammeController.cs" />
@@ -213,14 +216,14 @@
     <Compile Include="Controllers\RechercheController.cs" />
     <Compile Include="Controllers\PlanCadreController.cs" />
     <Compile Include="Controllers\PlanCadreEnonceController.cs" />
-    <Compile Include="Controllers\StageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MailHelper.cs" />
-    <Compile Include="Helpers\customAuthorize.cs" />
-    <Compile Include="Helpers\highlightHelper.cs" />
+    <Compile Include="Helpers\CustomAuthorize.cs" />
+    <Compile Include="Helpers\HighlightHelper.cs" />
     <Compile Include="Helpers\PasswordGenerator.cs" />
+    <Compile Include="Helpers\RolesHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiviteApprentissage.cs" />
     <Compile Include="Models\BDPlanCadre.cs" />
@@ -258,6 +261,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\extend.css" />
+    <Content Include="Content\Images\cegep-frost.jpg" />
     <Content Include="Content\Images\cegep-index.png" />
     <Content Include="Content\Images\cegep.jpg" />
     <Content Include="Content\Images\cegep2.jpg" />
@@ -265,11 +269,17 @@
     <Content Include="Content\Images\cj-layout.png" />
     <Content Include="Content\Images\cj-logo.png" />
     <Content Include="Content\Images\dicj-logo.png" />
+    <Content Include="Content\Images\portail-layout.svg" />
     <Content Include="Content\Images\portail-logo.png" />
+    <Content Include="Content\perfect-scrollbar.css" />
+    <Content Include="Content\superview.css" />
+    <Content Include="Content\treeview.css" />
+    <Content Include="Content\Images\watermark.png" />
+    <Content Include="Content\table.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\structure.css" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -307,8 +317,10 @@
     <Content Include="Scripts\mark.js" />
     <Content Include="Scripts\mark.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\portail.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\roleSelect.js" />
     <Content Include="Views\static\cj-layout.png" />
     <Content Include="Views\static\footer.html" />
     <Content Include="Views\static\header.html" />
@@ -373,6 +385,20 @@
     <Content Include="Views\Programme\Info.cshtml" />
     <Content Include="Views\Manage\Details.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\GrilleCours\Create.cshtml" />
+    <Content Include="Views\GrilleCours\Delete.cshtml" />
+    <Content Include="Views\GrilleCours\Details.cshtml" />
+    <Content Include="Views\GrilleCours\Edit.cshtml" />
+    <Content Include="Views\GrilleCours\Index.cshtml" />
+    <Content Include="Views\GrilleCours\Info.cshtml" />
+    <Content Include="Views\GrilleCours\InfoHeure.cshtml" />
+    <Content Include="Views\GrilleCours\InfoPrealable.cshtml" />
+    <Content Include="Views\GrilleCours\TreeView.cshtml" />
+    <Content Include="Views\GrilleCours\_Heure.cshtml" />
+    <Content Include="Views\GrilleCours\_Prealable.cshtml" />
+    <Content Include="Views\GrilleCours\_Structure.cshtml" />
+    <Content Include="Views\GrilleCours\_TreeView.cshtml" />
+    <Content Include="Views\GrilleCoursEnonce\GetEnonceModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,81 +4,103 @@
     ViewBag.Title = "Création d'un nouvel utilisateur";
 }
 
-<div class="container">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="form-box">
+            <div class="row">
+                <div class="col-md-8">
 
-        <div class="form-horizontal form-box single">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <h1>Créer un nouvel utilisateur</h1>
+                    <header class="light-header">
+
+                        <h1>@ViewBag.Title</h1>
+
+                    </header>
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Prenom)
+                                @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Prenom, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.Nom, new { @class = "col-md-1 control-label" })
+                                @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Nom, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="field-box">
+                        <div class="row">
+                            <div class="col-md-9">
+
+                                <p>Assigner un rôle</p>
+                                <hr />
+
+                                <div class="form-group">
+                                    @Html.DropDownList("role", null, new { @class = "form-control" })
+                                </div>
+
+                                <div id="roleBox">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="RCPForm" class="col-md-6">
+                    <div class="field-box">
+                        <div class="row">
+                            <div class="col-md-9">
+
+                                <p>Assigner un programme au RCP</p>
+                                <hr />
+
+                                <div class="form-group">
+                                    @Html.DropDownList("codeProgramme", null, new { @class = "form-control", @onchange = "addProgramme()" })
+                                </div>
+
+                                <div id="codeProgrammeBox">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
 
             <hr />
+            <input type="submit" value="Enregistrer" class="fancy-button" />
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.Prenom, new { @class = "col-md-2 control-label" })
-                <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
-                </div>
+            <a class="fancy-button rouge" href='@Url.Action("Index", "Account")'>Annuler</a>
 
-                @Html.LabelFor(m => m.Nom, new { @class = "col-md-1 control-label" })
-                <div class="col-md-4">
-                    @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <div class="col-md-6">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div id="roles" class="child-container">
-                <div class="child clearfix">
-                    <p>Bluglo</p>
-                    <span class="glyphicon glyphicon-remove"><!----></span>
-                    <input type="hidden" value="3"/>
-                </div>
-            </div>
-
-            <div onclick="addRole()">Bluglo</div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Confirmer" class="fancy-button" />
-                    <a class="fancy-button rouge" href='@Url.Action("Index", "Account")'>Retour</a>
-                </div>
-            </div>
         </div>
+    </div>
+}
 
-    }
-
-</div>
-
-<script>
-
-    var i = 0;
-
-    function addRole() {
-        var nom = "gg son";
-        var id = i++;
-        $('#roles').html($('#roles').html() + buildChildHtml(nom, id));
-    }
-
-    function buildChildHtml(nom, id) {
-        return html =
-            "<div id='" + id + "'class='child clearfix'>" +
-                "<p>" + nom + "</p>" +
-                "<span  onclick='removeRole(" + id + ")' class='glyphicon glyphicon-remove'></span>" +
-                "<input type='hidden' name='roles' value='" + id + "' />" +
-            "</div>";
-    }
-
-    function removeRole(id) {
-        $('#' + id).remove();
-        console.log("cringe");
-    }
-
-</script>
+@section scripts {
+    <script src="@Url.Content("~/Scripts/roleSelect.js")"></script>
+}

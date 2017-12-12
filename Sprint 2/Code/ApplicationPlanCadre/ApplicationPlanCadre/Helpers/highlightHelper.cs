@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ApplicationPlanCadre.Helpers
 {
-    public static class highlightHelper
+    public static class HighlightHelper
     {
        /// <summary>
     /// Wraps matched strings in HTML span elements styled with a background-color

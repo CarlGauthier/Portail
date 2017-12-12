@@ -45,7 +45,7 @@ namespace ApplicationPlanCadre.Helpers
         {
             return "<p> Bonjour " + user.prenom + ",</p>" +
                 "<p>Un compte à été crée pour vous, rendez vous sur Portail afin de vous connectez avec les informations ci dessous.</p>" +
-                "<p>Vous devrez changer votre mot de passe afin d'activer le compte.</p>" +
+                "<p>Vous allez pouvoir changer votre mot de passe une fois connecté.</p>" +
                 "<p>Cordialement,</p>" +
                 "<p>L'équipe de Portail</p>" +
                 "<p><b> Courriel: </b>" + user.Email + "<br>" +

@@ -22,16 +22,16 @@ namespace ApplicationPlanCadre.Models
         public string prenom { get; set; }
 
         //Les rôles doivent être donnés au model par AccountController ou ManageController afin de pouvoir être utilisé.
-        
-        public IEnumerable<string> roleNames { get; set; }
+        public IEnumerable<string> roles { get; set; }
 
+        //Cette propriété effectue une concaténation de tous les rôles qui se trouve dans "roles".
         [Display(Name = "Rôles")]
-        public string roles
+        public string rolesWrap
         {
             get
             {
                 string line = "";
-                foreach(string role in roleNames)
+                foreach(string role in roles)
                 {
                     line += role + ", ";
                 }

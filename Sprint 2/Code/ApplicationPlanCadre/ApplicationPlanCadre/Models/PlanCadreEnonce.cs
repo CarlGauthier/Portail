@@ -33,9 +33,9 @@ namespace ApplicationPlanCadre.Models
 
         public virtual PlanCadre PlanCadre { get; set; }
 
-        public IEnumerable<PlanCadreElement> GetPlanCadreElements()
+        public IEnumerable<PlanCadreElement> PlanCadreElement
         {
-            return PlanCadre.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == idCompetence);
+            get { return PlanCadre.PlanCadreElement.Where(m => m.ElementCompetence.EnonceCompetence.idCompetence == idCompetence); }
         }
     }
 }

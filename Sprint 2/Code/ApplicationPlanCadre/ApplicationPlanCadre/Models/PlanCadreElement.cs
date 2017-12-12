@@ -13,8 +13,6 @@ namespace ApplicationPlanCadre.Models
         [Column(Order = 0)]
         public int idPlanCadreElement { get; set; }
 
-        
-
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

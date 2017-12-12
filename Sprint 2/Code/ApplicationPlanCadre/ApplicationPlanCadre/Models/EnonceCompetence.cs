@@ -20,6 +20,11 @@ namespace ApplicationPlanCadre.Models
         [Key]
         public int idCompetence { get; set; }
 
+        public string nom
+        {
+            get { return codeCompetence + " • " + description; }
+        }
+
         [Required]
         [StringLength(4)]
         [Display(Name = "Code de la compétence")]
@@ -46,8 +51,12 @@ namespace ApplicationPlanCadre.Models
 
         public virtual DevisMinistere DevisMinistere { get; set; }
 
+
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ElementCompetence> ElementCompetence { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlanCadreEnonce> PlanCadreEnonce { get; set; }

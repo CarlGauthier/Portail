@@ -153,8 +153,6 @@ namespace ApplicationPlanCadre.Models
                 .Property(e => e.titreCours)
                 .IsUnicode(false);
 
-            
-
             modelBuilder.Entity<PlanCadre>()
                 .Property(e => e.indicationPedago)
                 .IsUnicode(false);
@@ -234,8 +232,6 @@ namespace ApplicationPlanCadre.Models
                 .HasMany(e => e.PlanCadre)
                 .WithRequired(e => e.TypePlanCadre)
                 .WillCascadeOnDelete(false);
-
-            
 
             modelBuilder.Entity<ActiviteApprentissage>()
                 .Property(e => e.description)

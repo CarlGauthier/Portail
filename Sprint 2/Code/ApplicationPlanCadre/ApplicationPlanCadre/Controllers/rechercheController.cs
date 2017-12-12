@@ -9,9 +9,6 @@ using System.Data.Entity;
 using System.Configuration;
 using ApplicationPlanCadre.Helpers;
 using System.Linq.Expressions;
-
-
-
 using ApplicationPlanCadre.Models;
 
 namespace ApplicationPlanCadre.Controllers
@@ -19,11 +16,13 @@ namespace ApplicationPlanCadre.Controllers
     public class RechercheController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
+
         // GET: recherche
         public ActionResult Index()
         {
             return View("recherche");
         }
+
         //todo: la recherche ne support présentement pas la recherche avec les espaces
         [HttpPost]
         public ActionResult Rechercher(string searchStr, bool chkRecherche)
@@ -43,17 +42,17 @@ namespace ApplicationPlanCadre.Controllers
                 model.Programme = getProgram(searchStr);
                 model.CriterePerformance = getCriterePerformance(searchStr);
                 model.ContexteRealisation = getContexteRealisation(searchStr);
+
             }
             return PartialView("_afficherRecherche", model);
         }
-
 
         private List<SearchDevisMinistere> getDevis(string searchStr)
         {
             List<SearchDevisMinistere> devisList = new List<SearchDevisMinistere>();
 
             var devis = from a in db.DevisMinistere
-                        where a.specialisation.Contains(searchStr)||a.codeSpecialisation.Contains(searchStr)||a.codeProgramme.Contains(searchStr)||a.annee.Contains(searchStr)
+                        where a.specialisation.Contains(searchStr) || a.codeSpecialisation.Contains(searchStr) || a.codeProgramme.Contains(searchStr) || a.annee.Contains(searchStr)
                         select a;
 
             foreach (DevisMinistere devisMins in devis)
@@ -61,7 +60,7 @@ namespace ApplicationPlanCadre.Controllers
                 devisList.Add(new SearchDevisMinistere
                 {
                     idDevis = devisMins.idDevis,
-                    annee=devisMins.annee.HighlightKeyWords(searchStr, "yellow", false),
+                    annee = devisMins.annee.HighlightKeyWords(searchStr, "yellow", false),
                     codeSpecialisation = devisMins.codeSpecialisation.HighlightKeyWords(searchStr, "yellow", false),
                     specialisation = devisMins.specialisation.HighlightKeyWords(searchStr, "yellow", false),
                     nbUnite = devisMins.nbUnite,
@@ -75,13 +74,13 @@ namespace ApplicationPlanCadre.Controllers
             }
             return devisList;
         }
-        //
+
         private List<SearchEnonceCompetence> getEnonceCompetence(string searchStr)
         {
             List<SearchEnonceCompetence> enonComptList = new List<SearchEnonceCompetence>();
 
             var enonce = from a in db.EnonceCompetence
-                         where a.codeCompetence.Contains(searchStr)||a.description.Contains(searchStr)
+                         where a.codeCompetence.Contains(searchStr) || a.description.Contains(searchStr)
                          select a;
 
             foreach (EnonceCompetence EnonceCmpt in enonce)
@@ -118,6 +117,7 @@ namespace ApplicationPlanCadre.Controllers
             return elementList;
         }
 
+
             
         private List<SearchProgramme> getProgram(string searchStr)
         {
@@ -135,9 +135,11 @@ namespace ApplicationPlanCadre.Controllers
                     annee = prog.annee.HighlightKeyWords(searchStr, "yellow", false),
                     nom = prog.nom.HighlightKeyWords(searchStr, "yellow", false),
                     idDevis = prog.idDevis
+
                 });
            }
            return programme;
+
         }
         private List<SearchCriterePerformance> getCriterePerformance(string searchStr)
         {

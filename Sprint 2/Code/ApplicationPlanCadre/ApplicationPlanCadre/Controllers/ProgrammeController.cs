@@ -27,20 +27,14 @@ namespace ApplicationPlanCadre.Controllers
             return View(db.Programme.ToList());
         }
 
-        public ActionResult Info(int? id)
+        public ActionResult Info(int? idProgramme)
         {
-
-            if (id == null)
+            if (idProgramme == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Programme programme = db.Programme.Find(id);
-            
-            if (programme.idProgramme == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-           if (programme == null)
+            Programme programme = db.Programme.Find(idProgramme);
+            if (programme == null)
             {
                 return HttpNotFound();
             }
