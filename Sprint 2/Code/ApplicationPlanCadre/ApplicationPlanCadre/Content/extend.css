@@ -9,6 +9,11 @@
     background-attachment: fixed;
 }
 
+::selection {
+    background: #0063b1;
+    color: #fff;
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin: 5px 0;
     line-height: 50px;
@@ -34,20 +39,7 @@ ul.hyphen-list li {
 
 ul.hyphen-list li:before {
     content: "- ";
-}
-
-ol.double-order {
-    counter-reset: item;
-    padding-left: 10px;
-}
-
-ol.double-order li {
-    display: block
-}
-
-ol.double-order li:before {
-    content: counters(item, ".") " ";
-    counter-increment: item
+    font-weight: bold;
 }
 
 hr {

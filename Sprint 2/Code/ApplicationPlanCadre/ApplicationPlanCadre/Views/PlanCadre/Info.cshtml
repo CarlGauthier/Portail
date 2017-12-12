@@ -1,10 +1,8 @@
 ﻿@model ApplicationPlanCadre.Models.PlanCadre
+@using ApplicationPlanCadre.Models;
 
 @{
     ViewBag.Title = Model.titreCours;
-    string carriageReturnText;
-    int idElementConnaissanceHold = 0;
-    int idActiviteApprentissageHold = 0;
 }
 
 @Html.Action("_TreeView", "Programme")
@@ -26,39 +24,43 @@
 
         <table class="plan-cadre-table">
 
+        <tr>
+
+            <th style="width:20%">Objectif - Énoncé des compétences</th>
+
+            <th style="width:45%">Standard - Contexte de réalisation</th>
+
+            <th style="width:35%">Indication pédagogiques, s'il y a lieu</th>
+
+        </tr>
+
+        @foreach (var planCadreEnonce in Model.PlanCadreEnonce)
+        {
             <tr>
-                <th style="width:20%">Objectif - Énoncé des compétences</th>
-                <th style="width:45%">Standard - Contexte de réalisation</th>
-                <th style="width:35%">Indication pédagogiques, s'il y a lieu</th>
-            </tr>
 
-            @foreach (var planCadreEnonce in Model.PlanCadreEnonce)
-            {
-                <tr>
+            <td style="width:20%">
+                <p>@Html.DisplayFor(m => planCadreEnonce.EnonceCompetence.description) (@Html.DisplayFor(m => planCadreEnonce.EnonceCompetence.codeCompetence))</p>
+                <p>@Html.DisplayFor(m => planCadreEnonce.ponderationEnHeure) heures</p>
+            </td>
 
-                    <td style="width:20%">
-                        <p>@Html.DisplayFor(m => planCadreEnonce.EnonceCompetence.description) (@Html.DisplayFor(m => planCadreEnonce.EnonceCompetence.codeCompetence))</p>
-                        <p>@Html.DisplayFor(m => planCadreEnonce.ponderationEnHeure) heures</p>
-                    </td>
-
-                    <td style="width:45%">
-                        <ul class="hyphen-list">
-                            @foreach (var contexteRealisation in planCadreEnonce.EnonceCompetence.ContexteRealisation)
-                            {
-                                <li>@Html.DisplayFor(m => contexteRealisation.description)</li>
-                            }
-                        </ul>
-                    </td>
-
-                    @if (planCadreEnonce == Model.PlanCadreEnonce.First())
+            <td style="width:45%">
+                <ul class="hyphen-list">
+                    @foreach (var contexteRealisation in planCadreEnonce.EnonceCompetence.ContexteRealisation)
                     {
-                        <td rowspan="@Model.PlanCadreEnonce.Count()" style="width:35%">
-                            @Html.DisplayFor(m => Model.indicationPedago)
-                        </td>
+                        <li>@Html.DisplayFor(m => contexteRealisation.description)</li>
                     }
+                </ul>
+            </td>
 
-                </tr>
+            @if (planCadreEnonce == Model.PlanCadreEnonce.First())
+            {
+                <td rowspan="@Model.PlanCadreEnonce.Count()" style="width:35%">
+                    @Html.DisplayFor(m => Model.indicationPedago)
+                </td>
             }
+
+            </tr>
+        }
         </table>
 
         @foreach (var planCadreEnonce in Model.PlanCadreEnonce)
@@ -91,8 +93,9 @@
 
                 </tr>
 
-                @foreach (var planCadreElement in planCadreEnonce.PlanCadreElement)
+                @for (int i = 0; i < planCadreEnonce.PlanCadreElement.Count(); i++)
                 {
+                    var planCadreElement = planCadreEnonce.PlanCadreElement.ElementAt(i);
                     var elementCompetence = planCadreElement.ElementCompetence;
 
                     <tr>
@@ -116,9 +119,42 @@
                             @Html.Raw(planCadreElement.ElementConnaissance.description)
                         </td>
 
-                        <td style="width:25%" class="rich-cell">
-                            @Html.Raw(planCadreElement.ElementConnaissance.ActiviteApprentissage.description)
-                        </td>
+                        @{
+                            bool isPreviousUsingSameActivite = false;
+                            if(i > 0)
+                            {
+                                var previousPlanCadreElement = planCadreEnonce.PlanCadreElement.ElementAt(i - 1);
+                                isPreviousUsingSameActivite = previousPlanCadreElement.ElementConnaissance.idActiviteApprentissage == planCadreElement.ElementConnaissance.idActiviteApprentissage;
+                            }
+
+                            bool isThereActiviteFollowing = false;
+                            int rowspan = 1;
+                            for(int j = i + 1; j < planCadreEnonce.PlanCadreElement.Count(); j++)
+                            {
+                                var followingPlanCadreElement = planCadreEnonce.PlanCadreElement.ElementAt(j);
+                                if(followingPlanCadreElement.ElementConnaissance.idActiviteApprentissage == planCadreElement.ElementConnaissance.idActiviteApprentissage)
+                                {
+                                    isThereActiviteFollowing = true;
+                                    rowspan++;
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                        }
+
+                        @if (!isPreviousUsingSameActivite)
+                        {
+                            if (isThereActiviteFollowing)
+                            {
+                                <td rowspan="@rowspan" class="rich-cell">@Html.Raw(planCadreElement.ElementConnaissance.ActiviteApprentissage.description)</td>
+                            }
+                            else
+                            {
+                                <td class="rich-cell">@Html.Raw(planCadreElement.ElementConnaissance.ActiviteApprentissage.description)</td>
+                            }
+                        }
 
                     </tr>
                 }
@@ -126,22 +162,31 @@
         }
 
         <table class="plan-cadre-table">
+
             <tr>
+
                 <th style="width:50%">
                     Environnement physique
                 </th>
+
                 <th style="width:50%">
                     Ressources didactiques suggérées
                 </th>
+
             </tr>
+
             <tr>
+
                 <td style="width:50%" class="rich-cell">
                     @Html.Raw(Model.environnementPhys)
                 </td>
+
                 <td style="width:50%" class="rich-cell">
                     @Html.Raw(Model.ressource)
                 </td>
+
             </tr>
+
         </table>
 
     </div>
