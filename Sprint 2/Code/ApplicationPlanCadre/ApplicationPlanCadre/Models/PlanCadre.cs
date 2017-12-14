@@ -29,25 +29,34 @@ namespace ApplicationPlanCadre.Models
         }
 
         [StringLength(10)]
+        [Display(Name = "Code de cours")]
         public string numeroCours { get; set; }
 
         [Required]
+        [Display(Name = "Titre du cour")]
         [StringLength(150)]
         public string titreCours { get; set; }
 
+        [Display(Name = "Indication pédagogique")]
         [Column(TypeName = "text")]
         public string indicationPedago { get; set; }
 
+        [Display(Name = "Environement physique")]
         [Column(TypeName = "text")]
         public string environnementPhys { get; set; }
 
+        [Display(Name = "Ressource/réfférences")]
         [Column(TypeName = "text")]
         public string ressource { get; set; }
 
+
+        [Display(Name = "Heure de théorie")]
         public int? nbHeureTheorie { get; set; }
 
+        [Display(Name = "Heure de pratique")]
         public int? nbHeurePratique { get; set; }
 
+        [Display(Name = "Heure de devoir")]
         public int? nbHeureDevoir { get; set; }
 
         public int idProgramme { get; set; }

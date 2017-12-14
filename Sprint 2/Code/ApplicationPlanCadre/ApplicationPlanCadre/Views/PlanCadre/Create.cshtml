@@ -3,6 +3,11 @@
 @{
     ViewBag.Title = "Plan cadre - création";
 }
+<style>
+    #editor {
+        overflow: scroll;
+    }
+</style>
 
 <div class="container">
 
@@ -27,7 +32,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.titreCours, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.titreCours, new { htmlAttributes = new { @maxlength = "150" } })
+                    @Html.TextAreaFor(model => model.titreCours, new { @maxlength = "150", @class = "form-control small-input" })
                     @Html.ValidationMessageFor(model => model.titreCours, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -86,8 +91,42 @@
                 </div>
             </div>
 
-            @*ajouter le type (contributive, spécifique, generale)*@
 
+            <div class="hero-unit">                
+                <div id="alerts"></div>
+                <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+                    <div class="btn-group">
+                        <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="glyphicon glyphicon-bold"></i></a>
+                        <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="glyphicon glyphicon-italic"></i></a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="glyphicon glyphicon-list"></i></a>
+                        <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="glyphicon glyphicon-indent-left"></i></a>
+                        <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="glyphicon glyphicon-indent-right"></i></a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="glyphicon glyphicon-align-left"></i></a>
+                        <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="glyphicon glyphicon-align-center"></i></a>
+                        <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="glyphicon glyphicon-align-right"></i></a>
+                        <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="	glyphicon glyphicon-align-justify"></i></a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="glyphicon glyphicon-link"></i></a>
+                        <div class="dropdown-menu input-append">
+                            <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
+                            <button class="btn" type="button">Add</button>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="glyphicon glyphicon-menu-left"></i></a>
+                        <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="glyphicon glyphicon-menu-right"></i></a>
+                    </div>
+                </div>
+                <hr />
+                <textarea class="form-control" id="editor" name="Description" rows="5" cols="20" style="overflow: scroll;">Zone de text</textarea>
+            </div>
+
+            @*ajouter le type (contributive, spécifique, generale)*@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -98,3 +137,5 @@
         </div>
     }
 </div>
+
+<script src="@Url.Content("~/Scripts/bootstrap-wysiwyg.js")"></script>
