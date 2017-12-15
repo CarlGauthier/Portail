@@ -122,21 +122,32 @@ namespace ApplicationPlanCadre.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model, ICollection<string> roles)
+        public async Task<ActionResult> Register(RegisterViewModel model, ICollection<string> role, ICollection<string> codeProgramme)
         {
-            if (ModelState.IsValid)
+            bool rolePresent = role != null;
+            bool programmeRCP = true;
+            if (!rolePresent)
+                ModelState.AddModelError("rolePresent", "L'utilisateur doit avoir au minimum un rôle.");
+            else
+                foreach (string r in role)
+                    if (r == "RCP")
+                        programmeRCP = codeProgramme != null;
+
+            if (ModelState.IsValid && rolePresent && programmeRCP)
             {
                 string password = new PasswordGenerator().GeneratePassword(10);
                 var user = new ApplicationUser { nom = model.Nom, prenom = model.Prenom, UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, password);
                 if (result.Succeeded)
                 {
-                    UserManager.AddToRoles(user.Id, roles.ToArray());
+                    UserManager.AddToRoles(user.Id, role.ToArray());
                     new MailHelper().SendActivationMail(user, password);
                     return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);
             }
+            if(!programmeRCP)
+                ModelState.AddModelError("rolePresent", "Un RCP doit avoir au minimum un programme d'assigné.");
             ViewBag.role = BuildRoleSelectList();
             ViewBag.codeProgramme = new ConsoleDevisMinistereController().BuildCodeDevisMinistereSelectList();
             return View(model);
@@ -180,7 +191,7 @@ namespace ApplicationPlanCadre.Controllers
                     string password = new PasswordGenerator().GeneratePassword(10);
 
                     new MailHelper().SendEditMail(user, password);
-                    new RolesHelper().ChangeRoles(user, model.Roles, UserManager);
+                    //new RolesHelper().ChangeRoles(user, model.Roles, UserManager);
 
                     return RedirectToAction("Index", "Account");
                 }

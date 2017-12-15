@@ -10,12 +10,12 @@
         <div id="@p_item" class="tree-view-item">
             @if (programme.PlanCadre.Count() > 0)
             {
-                <div class="collapse-button" data-toggle="collapse" data-target=@p_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
+                <div class="collapse-button" data-toggle="collapse" data-target=@p_target><span class="glyphicon glyphicon-chevron-right"></span></div> }
             else
             {
-                <div class="no-button"><!----></div> }
+                <div class="no-button"></div> }
             <a href='@Url.Action("Info", "Programme", new { idProgramme = programme.idProgramme })'>
-                @Html.DisplayFor(p => programme.description)
+                @Html.DisplayFor(m => programme.description)
             </a>
         </div>
         <div id="@p_id" class="collapse">
@@ -29,18 +29,18 @@
                     <div id=@pc_item class="tree-view-item">
                         @if (planCadre.PlanCadreEnonce.Count > 0)
                     {
-                            <div class="collapse-button" data-toggle="collapse" data-target=@pc_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
+                            <div class="collapse-button" data-toggle="collapse" data-target=@pc_target><span class="glyphicon glyphicon-chevron-right"></span></div> }
                     else
                     {
-                            <div class="no-button"><!----></div> }
+                            <div class="no-button"></div> }
                         <a href='@Url.Action("Info", "PlanCadre", new { idPlanCadre = planCadre.idPlanCadre })'>
-                            @Html.DisplayFor(p => planCadre.nom)
+                            @Html.DisplayFor(m => planCadre.nom)
                         </a>
                     </div>
                     <div id=@pc_id class="collapse">
                         <div class="tree-view-item-container">
                             <div class="tree-view-header">Énoncés de compétence</div>
-                            @foreach (var planCadreEnonce in planCadre.PlanCadreEnonce.OrderBy(ec => ec.idPlanCadreEnonce))
+                            @foreach (var planCadreEnonce in planCadre.PlanCadreEnonce.OrderBy(e => e.idPlanCadreEnonce))
                             {
                                 string enc_id = "enc" + planCadreEnonce.idPlanCadreEnonce.ToString();
                                 string enc_item = enc_id + "item";
@@ -48,13 +48,13 @@
                                 <div id=@enc_item class="tree-view-item">
                                     @if (planCadreEnonce.PlanCadreElement.Count() > 0)
                                     {
-                                        <div class="collapse-button" data-toggle="collapse" data-target=@enc_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div> }
+                                        <div class="collapse-button" data-toggle="collapse" data-target=@enc_target><span class="glyphicon glyphicon-chevron-right"></span></div> }
                                     else
                                     {
-                                        <div class="no-button"><!----></div> }
+                                        <div class="no-button"></div> }
                                     <a href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = planCadreEnonce.idCompetence })'>
-                                        @Html.DisplayFor(enc => planCadreEnonce.EnonceCompetence.codeCompetence) •
-                                        @Html.DisplayFor(enc => planCadreEnonce.EnonceCompetence.description)
+                                        @Html.DisplayFor(m => planCadreEnonce.EnonceCompetence.codeCompetence) •
+                                        @Html.DisplayFor(m => planCadreEnonce.EnonceCompetence.description)
                                     </a>
                                 </div>
                                 <div id=@enc_id class="collapse">
@@ -64,8 +64,8 @@
                                         {
                                             string el_item = "el" + planCadreElement.idElement.ToString() + "item";
                                             <div id=@el_item class="tree-view-item">
-                                                <div class="no-button"><!----></div>
-                                                <a href='@Url.Action("Info", "ElementCompetence", new { idElement = planCadreElement.idElement })'>@Html.DisplayFor(elc => planCadreElement.ElementCompetence.description)</a>
+                                                <div class="no-button"></div>
+                                                <a href='@Url.Action("Info", "ElementCompetence", new { idElement = planCadreElement.idElement })'>@Html.DisplayFor(m => planCadreElement.ElementCompetence.description)</a>
                                             </div>
                                         }
                                     </div>

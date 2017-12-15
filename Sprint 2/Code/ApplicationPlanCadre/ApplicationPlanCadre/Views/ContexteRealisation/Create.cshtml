@@ -1,37 +1,44 @@
 ﻿@model ApplicationPlanCadre.Models.ContexteRealisation
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Gérer les contextes de réalisation";
 }
 
-<div class="container">
+@using (Html.BeginForm("Create", "ContexteRealisation"))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.idCompetence)
 
-    @using (Html.BeginForm("Create", "ContexteRealisation"))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.idCompetence)
+    <div class="container">
+        <div class="form-box">
 
-        <div class="horizontal-form">
+            <header class="light-header">
 
-            <h1>@Model.EnonceCompetence.enonceCompetence1</h1>
+                <h3>@Model.EnonceCompetence.nom</h3>
+
+                <h1>@ViewBag.Title</h1>
+
+            </header>
+
+            <div class="field-box">
+
+                <p>Création d'un contexte de réalisation</p>
+                <hr />
+
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.description, new { @rows = "3", @maxlength = "300", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.description, "", new { @class = "text-danger" })
+                </div>
+
+                <input type="submit" value="Ajouter" class="fancy-button" />
+
+            </div>
+
+            @Html.Action("_PartialList")
 
             <hr />
+            <a href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = Model.idCompetence })' class="fancy-button rouge">Terminer</a>
 
-            <h3>Ajouter un nouveau contexte de réalisation</h3>
-
-            <div class="form-group">
-                @Html.TextAreaFor(model => model.contexteRealisation1, new { @rows = "3", @maxlength = "300", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.contexteRealisation1, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Ajouter" class="fancy-button"/>
-                <a href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = Model.idCompetence })' class="fancy-button rouge">Terminer</a>
-            </div>
         </div>
-    }
-    
-    <hr />
-
-    @Html.Action("_PartialList")
-
-</div>
+    </div>
+}

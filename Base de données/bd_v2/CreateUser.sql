@@ -133,3 +133,15 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[AspNetUserRoles] CHECK CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId]
 GO
+
+CREATE TABLE AccesProgramme
+(
+	idAcces			        INT             NOT NULL        IDENTITY(1,1),
+
+	userMail				NVARCHAR(256)   NOT NULL,
+	
+    codeProgramme			CHAR(3)         NOT NULL,       --FK
+)
+
+ALTER TABLE AccesProgramme
+ADD FOREIGN KEY(codeProgramme) REFERENCES EnteteProgramme(codeProgramme)

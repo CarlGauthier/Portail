@@ -4,24 +4,27 @@
     ViewBag.Title = "Information sur l'utilisateur";
 }
 
-<div class="container single">
+<div class="container">
+    <div class="box">
 
-    <h1>@Html.DisplayFor(m => m.prenom) @Html.DisplayFor(m => m.nom)</h1>
+        <header class="light-header">
 
-    <hr />
+            <h1>@Html.DisplayFor(m => m.prenom) @Html.DisplayFor(m => m.nom)</h1>
 
-    <div class="champ">
-        <label>@Html.DisplayNameFor(m => m.Email)</label>
-        <p>@Html.DisplayFor(m => m.Email)</p>
-    </div>
+        </header>
 
-    <div class="champ">
-        <label>@Html.DisplayNameFor(m => m.rolesWrap)</label>
-        <p>@Html.DisplayFor(m => m.rolesWrap)</p>
-    </div>
+        <div class="element">
+            @Html.LabelFor(m => m.Email)
+            @Html.DisplayFor(m => m.Email)
+        </div>
 
-    <div class="champ">
+        <div class="element">
+            @Html.LabelFor(m => m.rolesWrap)
+            @Html.DisplayFor(m => m.rolesWrap)
+        </div>
+
+        <hr />
         <a href='@Url.Action("ChangePassword", "Manage")'>Changer mon mot de passe</a>
-    </div>
 
+    </div>
 </div>

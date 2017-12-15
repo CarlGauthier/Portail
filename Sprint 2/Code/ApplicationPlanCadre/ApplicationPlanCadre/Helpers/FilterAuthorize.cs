@@ -7,7 +7,9 @@ using System.Web.Routing;
 
 namespace ApplicationPlanCadre.Helpers
 {
-    public class CustomAuthorize: AuthorizeAttribute
+    //La balise [FilterAuthorize] est utilisé lorsque plusieurs rôles doivent être intégré au [Authorize]
+
+    public class FilterAuthorize: AuthorizeAttribute
     {
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
@@ -18,7 +20,7 @@ namespace ApplicationPlanCadre.Helpers
             else
             {
                 filterContext.Result = new RedirectToRouteResult(new
-                RouteValueDictionary(new { controller = "Error", action = "AccessDenied" }));
+                RouteValueDictionary(new { controller = "Accueil", action = "Index" }));
             }
         }
     }

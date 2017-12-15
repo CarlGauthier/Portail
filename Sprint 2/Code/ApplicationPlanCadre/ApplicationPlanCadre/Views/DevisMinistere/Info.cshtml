@@ -41,7 +41,7 @@
             {
                 <div class="element">
                     <a class="fancy-button rouge" href='@Url.Content("~/Files/Document ministériel/" + Model.docMinistere)' target="_blank">
-                        <span>@Html.DisplayFor(m => Model.docMinistere)</span> <span class="glyphicon glyphicon-file"><!----></span>
+                        <span>@Html.DisplayFor(m => Model.docMinistere)</span> <span class="glyphicon glyphicon-file"></span>
                     </a>
                 </div>
             }
@@ -92,8 +92,8 @@
 
     <h2>Options</h2>
 
-    <a class="fancy-button" href='@Url.Action("Edit", new { id = Model.idDevis })'><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
-    <a class="fancy-button" href='@Url.Action("Create", "EnonceCompetence", new { idDevis = Model.idDevis })'><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un énoncé</a>
+    <a class="fancy-button" href='@Url.Action("Edit", new { idDevis = Model.idDevis })'><span class="glyphicon glyphicon-pencil"></span> Modifier</a>
+    <a class="fancy-button" href='@Url.Action("Create", "EnonceCompetence", new { idDevis = Model.idDevis })'><span class="glyphicon glyphicon-plus"></span> Ajouter un énoncé</a>
     <a class="fancy-button rouge" href='@Url.Action("Index", "DevisMinistere")'>Retour</a>
             
 </div>

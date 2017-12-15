@@ -1,48 +1,44 @@
 ﻿@model ApplicationPlanCadre.Models.EnonceCompetence
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Suppression d'un énoncé de compétence";
 }
 
-<div class="container">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm("DeleteConfirmed"))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.idCompetence)
+    <div class="container">
+        <div class="form-box">
 
-        <div class="form-horizontal single">
+            <header class="light-header">
 
-            <h1>Supprimer un énoncé de compétence</h1>
-            <h3>@Model.description</h3>
+                <h1>@ViewBag.Title</h1>
 
-            <hr />
+                <h3>@Html.DisplayFor(m => m.nom)</h3>
+
+            </header>
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="col-md-12">
+            @if (Model.ElementCompetence.Count() > 0)
+            {
                 <p>Si vous supprimez cette compétence, vous supprimez aussi les éléments de compétence suivants.</p>
-                @foreach (var elementCompetence in Model.ElementCompetence)
+
+                foreach (var elementCompetence in Model.ElementCompetence)
                 {
                     <a class="info-child clearfix" href='@Url.Action("Info", "ElementCompetence", new { idElement = elementCompetence.idElement })'>
-                        <p>@Html.DisplayFor(ec => elementCompetence.description)</p>
+                        <p>@Html.DisplayFor(m => elementCompetence.description)</p>
                     </a>
                 }
-            </div>
+            }
 
-            <div class="col-md-12">
-                <p>Êtes-vous certain de vouloir supprimer cet énoncé de compétence?</p>
-            </div>
+            <p>Êtes-vous certain de vouloir supprimer cet énoncé de compétence?</p>
 
-            <div class="form-group">
-                <div class="col-md-12">
-                    <a class="fancy-button" href='@Url.Action("DeleteConfirmed", new { idCompetence = Model.idCompetence })'>Confirmer</a>
-                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "DevisMinistere", new { idDevis = Model.idDevis })'">Annuler</div>
-                </div>
-            </div>
+            <hr />
+            <input type="submit" value="Confirmer" class="fancy-button" />
+            <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = Model.idCompetence })'">Annuler</div>
+
         </div>
-
-    }
-
-</div>
-
+    </div>
+}

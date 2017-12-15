@@ -7,14 +7,14 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.idCompetence)
+    @Html.HiddenFor(m => m.idCompetence)
 
     <div class="container">
         <div class="form-box">
 
             <header class="light-header">
 
-                <h1>Créer un énoncé de compétence</h1>
+                <h1>@ViewBag.Title</h1>
 
             </header>
 
@@ -22,31 +22,31 @@
             @Html.ValidationMessage("Duplique", new { @class = "text-danger" })
 
             <div class="form-group">
-                @Html.LabelFor(model => model.codeCompetence)
-                @Html.TextBoxFor(model => model.codeCompetence, new { @maxlength = "4", @class = "form-control small" })
-                @Html.ValidationMessageFor(model => model.codeCompetence, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.codeCompetence)
+                @Html.TextBoxFor(m => m.codeCompetence, new { @maxlength = "4", @class = "form-control small" })
+                @Html.ValidationMessageFor(m => m.codeCompetence, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.description)
-                @Html.TextAreaFor(model => model.description, new { @rows = "3", @maxlength = "300", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.description)
+                @Html.TextAreaFor(m => m.description, new { @rows = "3", @maxlength = "300", @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.description, "", new { @class = "text-danger" })
             </div>
 
             <div class="row">
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.obligatoire)
-                        @Html.CheckBoxFor(model => model.obligatoire)
-                        @Html.ValidationMessageFor(model => model.obligatoire, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.obligatoire)
+                        @Html.CheckBoxFor(m => m.obligatoire)
+                        @Html.ValidationMessageFor(m => m.obligatoire, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        @Html.LabelFor(model => model.actif)
-                        @Html.CheckBoxFor(model => model.actif)
-                        @Html.ValidationMessageFor(model => model.actif, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.actif)
+                        @Html.CheckBoxFor(m => m.actif)
+                        @Html.ValidationMessageFor(m => m.actif, "", new { @class = "text-danger" })
                     </div>
                 </div>
 

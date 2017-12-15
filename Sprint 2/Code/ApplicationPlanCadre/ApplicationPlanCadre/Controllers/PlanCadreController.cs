@@ -9,25 +9,21 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ApplicationPlanCadre.Models;
+using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
+    [RCPPlanCadreAuthorize]
     public class PlanCadreController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
-
-        public ActionResult _TreeView()
-        {
-            var planCadre = db.PlanCadre.ToList();
-
-            return PartialView(planCadre);
-        }
 
         public ActionResult Index()
         {
             return View(db.PlanCadre.ToList());
         }
 
+        [RCPProgrammeAuthorize]
         public ActionResult Create(int? idProgramme)
         {
             if (idProgramme == null)
@@ -46,6 +42,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [RCPProgrammeAuthorize]
         public ActionResult Create([Bind(Include = "idPlanCadre,numeroCours,titreCours,indicationPedago,environementPhys,ressource,nbHeureTheorie,nbHeurePratique,nbHeureDevoir,idProgramme")] PlanCadre planCadre)
         {
             bool existe;
