@@ -1,28 +1,43 @@
 ﻿@model ApplicationPlanCadre.Models.Programme
 
 @{
-    ViewBag.Title = "Info";
+    ViewBag.Title = Model.description;
 }
 
 @Html.Action("_TreeView")
 
 <div class="super-view">
-    <div class="info-display container-fluid">
-        <div class="info-detail">
-            <h1>Liste des plans cadres</h1>
-        </div>
 
-        @foreach (var planCadre in Model.PlanCadre)
-        {
-            <a class="info-child clearfix" href='@Url.Action("info", "PlanCadre", new { id = planCadre.idPlanCadre })'>
-                <p class="gauche">@Html.DisplayFor(ec => planCadre.titreCours)</p>
-                <p class="droite">@Html.DisplayFor(model => planCadre.Programme.idProgramme)-@Html.DisplayFor(model => planCadre.Programme.annee)-@Html.DisplayFor(model => planCadre.Programme.DevisMinistere.codeSpecialisation)</p>
-            </a>
-        }
+    <header class="fat-header">
 
+        <h3>Programme</h3>
+
+        <h1>@ViewBag.Title</h1>
         <hr />
-        <h1>Modification</h1>
-        <a class="fancy-button" href='@Url.Action("Create", "PlanCadre", new {id = Model.PlanCadre})'><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un plan cadre</a>
 
-    </div>
+        <h3>@Html.DisplayFor(model => model.DevisMinistere.EnteteProgramme.codeProgramme)-@Html.DisplayFor(model => model.annee)-@Html.DisplayFor(model => model.DevisMinistere.codeSpecialisation)</h3>
+
+    </header>
+
+    <h2>Plans cadres</h2>
+
+    @foreach (var planCadre in Model.PlanCadre)
+    {
+        <a class="info-child clearfix" href='@Url.Action("info", "PlanCadre", new { idPlanCadre = planCadre.idPlanCadre })'>
+            <p class="gauche">@Html.DisplayFor(ec => planCadre.titreCours)</p>
+            <p class="droite">@Html.DisplayFor(model => planCadre.numeroCours)</p>
+        </a>
+    }
+
+    <hr />
+
+    <h2>Options</h2>
+
+    <a class="fancy-button" href='@Url.Action("Create", "PlanCadre", new {idProgramme = Model.idProgramme})'><span class="glyphicon glyphicon-plus"><!----></span> Ajouter un plan cadre</a>
+    <a class="fancy-button rouge" onclick="location.href='@Url.Action("Index", "Programme")'">Retour</a>
+
 </div>
+
+<script>
+    $(("#p" + @Model.idProgramme + "item")).addClass('active');
+</script>

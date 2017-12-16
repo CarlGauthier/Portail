@@ -23,24 +23,75 @@ namespace ApplicationPlanCadre.Controllers
             return PartialView(planCadre);
         }
 
-        // GET: PCInstance
         public ActionResult Index()
         {
             return View(db.PlanCadre.ToList());
         }
 
-
-        public ActionResult Create(int? id)
+        public ActionResult Create(int? idProgramme)
         {
-            if (id == null)
+            if (idProgramme == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PlanCadre planCadre = db.PlanCadre.Find(id);
+            Programme programme = db.Programme.Find(idProgramme);
+            if (programme == null)
+            {
+                return HttpNotFound();
+            }
+            PlanCadre planCadre = new PlanCadre();
+            planCadre.idProgramme = programme.idProgramme;
+            return View(planCadre);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "idPlanCadre,numeroCours,titreCours,indicationPedago,environementPhys,ressource,nbHeureTheorie,nbHeurePratique,nbHeureDevoir,idProgramme")] PlanCadre planCadre)
+        {
+            bool existe;
+            existe = db.PlanCadre.Any(pc => pc.titreCours == planCadre.titreCours && pc.idProgramme == planCadre.idProgramme);
+            //Trim();
+            if (!existe && ModelState.IsValid)
+            {
+                planCadre.titreCours = planCadre.titreCours.ToUpper();
+                db.PlanCadre.Add(planCadre);
+                db.SaveChanges();
+                return RedirectToAction("info", "Programme", new { idProgramme = planCadre.idProgramme });
+            }
+            if (existe)
+                ModelState.AddModelError("Duplique", "Erreur, un plan cadre avec ce nom existe déjà.");
+            return View(planCadre);
+        }
+
+        public ActionResult Edit(int? idPlanCadre)
+        {
+            if (idPlanCadre == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PlanCadre planCadre = db.PlanCadre.Find(idPlanCadre);
             if (planCadre == null)
             {
                 return HttpNotFound();
             }
+            return View(planCadre);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "idPlanCadre,numeroCours,titreCours,indicationPedago,environementPhys,ressource,nbHeureTheorie,nbHeurePratique,nbHeureDevoir,idProgramme")] PlanCadre planCadre)
+        {
+            bool existe;
+            existe = db.PlanCadre.Any(pc => pc.idProgramme != planCadre.idProgramme && pc.titreCours == planCadre.titreCours);
+            //Trim();
+            if (!existe && ModelState.IsValid)
+            {
+                db.Entry(planCadre).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("info", new { idPlanCadre = planCadre.idPlanCadre });
+            }
+            if (existe)
+                ModelState.AddModelError("Duplique", "Erreur, un plan cadre avec ce nom existe déjà.");
             return View(planCadre);
         }
 
@@ -56,12 +107,6 @@ namespace ApplicationPlanCadre.Controllers
                 return HttpNotFound();
             }
             return View(planCadre);
-        }
-
-        public ActionResult Create()
-        {
-            ViewBag.PlanCadre = new SelectList(db.PlanCadre, "idPlanCadre", "titreCours");
-            return View();
         }
     }
 }

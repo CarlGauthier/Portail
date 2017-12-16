@@ -1,118 +1,103 @@
 ﻿@model ApplicationPlanCadre.Models.DevisMinistere
-
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Modifier un devis ministériel";
 }
 
-<div class="container">
+@using (Html.BeginForm("Edit", "DevisMinistere", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.idDevis)
+    @Html.HiddenFor(model => model.codeProgramme)
+    @Html.HiddenFor(model => model.annee)
+    @Html.HiddenFor(model => model.codeSpecialisation)
+    @Html.HiddenFor(model => model.docMinistere)
 
-    @using (Html.BeginForm("Edit", "DevisMinistere", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="form-box">
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.idDevis)
-        @Html.HiddenFor(model => model.codeProgramme)
-        @Html.HiddenFor(model => model.annee)
-        @Html.HiddenFor(model => model.codeSpecialisation)
-        @Html.HiddenFor(model => model.docMinistere)
+            <header class="light-header">
 
-        <div class="form-horizontal form-box single">
-            <h1>Modifier un devis ministériel</h1>
-            <h3>
-                @Html.DisplayFor(model => model.EnteteProgramme.nom)
-                @Html.DisplayFor(model => model.codeProgramme)-@Html.DisplayFor(model => model.annee)-@Html.DisplayFor(model => model.codeSpecialisation)
-            </h3>
-            
+                <h1>@ViewBag.Title</h1>
+
+                <h3>@Html.DisplayFor(m => m.nom)</h3>
+
+            </header>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.specialisation)
+                        @Html.TextBoxFor(m => m.specialisation, new { @maxlength = "30", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.specialisation, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.sanction)
+                        @Html.TextBoxFor(m => m.sanction, new { @maxlength = "50", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.sanction, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.nbUnite)
+                        @Html.TextBoxFor(m => m.nbUnite, new { @maxlength = "6", @class = "form-control small" })
+                        @Html.ValidationMessageFor(m => m.nbUnite, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.condition)
+                        @Html.TextBoxFor(m => m.condition, new { @maxlength = "300", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.condition, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="element">
+                        @Html.LabelFor(m => m.docMinistere)
+
+                        <input type="file" id="pdf" name="docMinistere" class="inputfile" accept="application/pdf" />
+
+                        <label for="pdf" class="file-button fancy-button rouge">
+                            <span class="upload glyphicon glyphicon-download-alt"><!----></span>
+                            <span class="filename">
+                                @(Model.docMinistere == null ? @Html.Raw("Téléverser un PDF") : @Html.DisplayFor(m => m.docMinistere))
+                            </span>
+                        </label>
+
+                        <p>@Html.ValidationMessage("PDF", new { @class = "text-danger" })</p>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="field-box">
+
+                        <p>Heures</p>
+                        <hr />
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.nbHeureFrmGenerale)
+                            @Html.TextBoxFor(m => m.nbHeureFrmGenerale, new { @type = "number", @min = "0", @step = "10", @maxlength = "4", @class = "form-control small" })
+                            @Html.ValidationMessageFor(m => m.nbHeureFrmGenerale, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.nbHeureFrmSpecifique)
+                            @Html.TextBoxFor(m => m.nbHeureFrmSpecifique, new { @type="number", @min = "0", @step = "10", @maxlength = "4", @class = "form-control small" })
+                            @Html.ValidationMessageFor(m => m.nbHeureFrmSpecifique, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
             <hr />
-            <div class="row">
-                <div class="col-md-6">
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.specialisation, new { @class = "col-xs-4 control-label" })
-                        <div class="col-xs-8">
-                            @Html.TextBoxFor(model => model.specialisation, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.specialisation, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+            <input type="submit" value="Enregistrer" class="fancy-button" />
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.sanction, new { @class = "col-xs-4 control-label" })
-                        <div class="col-xs-8">
-                            @Html.TextBoxFor(model => model.sanction, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.sanction, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+            <a class="fancy-button rouge" href='@Url.Action("Info", "DevisMinistere", new { idDevis = Model.idDevis })'>Annuler</a>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.nbUnite, new { @class = "col-xs-4 control-label" })
-                        <div class="col-xs-8">
-                            @Html.TextBoxFor(model => model.nbUnite, new { @class = "form-control small-input" })
-                            @Html.ValidationMessageFor(model => model.nbUnite, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.condition, new { @class = "col-xs-4 control-label" })
-                        <div class="col-xs-8">
-                            @Html.TextBoxFor(model => model.condition, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.condition, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.docMinistere, new { @class = "col-xs-4 control-label" })
-                        <div class="col-xs-8">
-                            <input type="file" id="pdf" name="docMinistere" class="inputfile" accept="application/pdf" />
-                            <label for="pdf" class="file-button fancy-button rouge">
-                                <span class="upload glyphicon glyphicon-download-alt"><!----></span>
-                                @if (Model.docMinistere == null)
-                                {
-                                    <span class="filename">Téléverser un PDF</span>
-                                }
-                                else
-                                {
-                                    <span class="filename">@Html.DisplayFor(model => model.docMinistere)</span>
-                                }
-                            </label>
-                            <p>
-                                @Html.ValidationMessage("PDF", new { @class = "text-danger" })
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <fieldset>
-                        <legend>Heures</legend>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.nbHeureFrmGenerale, new { @class = "col-xs-4 control-label" })
-                            <div class="col-xs-8">
-                                @Html.TextBoxFor(model => model.nbHeureFrmGenerale, new { @maxlength = "4", @class = "form-control small-input" })
-                                @Html.ValidationMessageFor(model => model.nbHeureFrmGenerale, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.nbHeureFrmSpecifique, new { @class = "col-xs-4 control-label" })
-                            <div class="col-xs-8">
-                                @Html.TextBoxFor(model => model.nbHeureFrmSpecifique, new { @maxlength = "4", @class = "form-control small-input" })
-                                @Html.ValidationMessageFor(model => model.nbHeureFrmSpecifique, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="col-xs-offset-4 col-xs-8">
-                        <input type="submit" value="Enregistrer" class="fancy-button" />
-                        <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "DevisMinistere", new { idDevis = Model.idDevis })'">Annuler</div>
-                    </div>
-                </div>
-            </div>
         </div>
-    }
-
-</div>
+    </div>
+}
 
 @Scripts.Render("~/Scripts/jquery.custom-file-input.js")

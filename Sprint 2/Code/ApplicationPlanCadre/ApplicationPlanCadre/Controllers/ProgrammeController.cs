@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ApplicationPlanCadre.Models;
+using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
@@ -18,11 +19,9 @@ namespace ApplicationPlanCadre.Controllers
         public ActionResult _TreeView()
         {
             var programme = db.Programme.ToList();
-
             return PartialView(programme);
         }
-		
-        // GET: Programme
+
         public ActionResult Index()
         {
             return View(db.Programme.ToList());

@@ -29,6 +29,7 @@ namespace ApplicationPlanCadre.Controllers
 
         public AccountController()
         {
+
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -42,7 +43,7 @@ namespace ApplicationPlanCadre.Controllers
             var users = db.Users.ToList();
             foreach (var user in users)
             {
-                user.roleNames = UserManager.GetRoles(user.Id);
+                user.roles = UserManager.GetRoles(user.Id);
             }
             return View(users);
         }
@@ -71,8 +72,6 @@ namespace ApplicationPlanCadre.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
         [AllowAnonymous]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         public ActionResult Login(string returnUrl)
@@ -86,8 +85,6 @@ namespace ApplicationPlanCadre.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -98,8 +95,6 @@ namespace ApplicationPlanCadre.Controllers
                 return View(model);
             }
 
-            // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
-            // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -116,20 +111,18 @@ namespace ApplicationPlanCadre.Controllers
             }
         }
 
-        //
-        // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.role = BuildRoleSelectList();
+            ViewBag.codeProgramme = new ConsoleDevisMinistereController().BuildCodeDevisMinistereSelectList();
             return View();
         }
 
-        //
-        // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, ICollection<string> roles)
         {
             if (ModelState.IsValid)
             {
@@ -138,11 +131,14 @@ namespace ApplicationPlanCadre.Controllers
                 var result = await UserManager.CreateAsync(user, password);
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRoles(user.Id, roles.ToArray());
                     new MailHelper().SendActivationMail(user, password);
                     return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);
             }
+            ViewBag.role = BuildRoleSelectList();
+            ViewBag.codeProgramme = new ConsoleDevisMinistereController().BuildCodeDevisMinistereSelectList();
             return View(model);
         }
 
@@ -157,7 +153,10 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            return View(user);
+            EditUserViewModel model = new EditUserViewModel { UserId = user.Id, Prenom = user.prenom, Nom = user.nom, Email = user.Email, Roles = UserManager.GetRoles(user.Id) };
+            ViewBag.role = BuildRoleSelectList();
+            ViewBag.codeProgramme = new ConsoleDevisMinistereController().BuildCodeDevisMinistereSelectList();
+            return View(model);
         }
 
         [HttpPost]
@@ -168,17 +167,21 @@ namespace ApplicationPlanCadre.Controllers
             {
                 var result = UserManager.SetEmail(model.UserId, model.Email);
                 if (!result.Succeeded)
-                {
                     AddErrors(result);
-                }
+
                 var user = UserManager.FindById(model.UserId);
                 user.prenom = model.Prenom;
                 user.nom = model.Nom;
+                user.roles = UserManager.GetRoles(user.Id);
+
                 result = UserManager.Update(user);
                 if (result.Succeeded)
                 {
                     string password = new PasswordGenerator().GeneratePassword(10);
+
                     new MailHelper().SendEditMail(user, password);
+                    new RolesHelper().ChangeRoles(user, model.Roles, UserManager);
+
                     return RedirectToAction("Index", "Account");
                 }
                 AddErrors(result);
@@ -186,8 +189,12 @@ namespace ApplicationPlanCadre.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
+        private SelectList BuildRoleSelectList()
+        {
+            var liste = db.Roles.Select(e => e.Name).ToList();
+            return new SelectList(liste, "role");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()

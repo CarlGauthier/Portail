@@ -1,23 +1,19 @@
 ﻿@model IEnumerable<ApplicationPlanCadre.Models.ApplicationUser>
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Liste des utilisateurs";
 }
 
 <div class="container">
+    <div class="box">
 
-    <h1>Liste des utilisateurs</h1>
+        <header class="light-header">
 
-    <div class="form-group">
-        <a href='@Url.Action("Register", "Account")' class="fancy-button">Créer un utilisateur</a>
-        <a href='@Url.Action("ConsoleAdmin", "Accueil")' class="fancy-button rouge">Terminer</a>
-    </div>
+            <h1>@ViewBag.Title</h1>
 
-    <hr />
+        </header>
 
-    <div class="crud-list">
-
-        <table>
+        <table class="cool-table">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.nom)
@@ -26,7 +22,7 @@
                     @Html.DisplayNameFor(model => model.Email)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.roles)
+                    @Html.DisplayNameFor(model => model.rolesWrap)
                 </th>
                 <th class="action-cell-header">
                     <b>Modifier</b>
@@ -37,13 +33,13 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.prenom) @Html.DisplayFor(modelItem => item.nom) 
+                        @Html.DisplayFor(modelItem => item.prenom) @Html.DisplayFor(modelItem => item.nom)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.roles)
+                        @Html.DisplayFor(modelItem => item.rolesWrap)
                     </td>
                     <td class="action-cell">
                         <a href='@Url.Action("Edit", new { userId = item.Id })'>
@@ -53,6 +49,13 @@
                 </tr>
             }
         </table>
-    </div>
 
+        <hr />
+
+        <h2>Options</h2>
+
+        <a href='@Url.Action("Register", "Account")' class="fancy-button"><span class="glyphicon glyphicon-plus"><!----></span> Créer un utilisateur</a>
+        <a href='@Url.Action("ConsoleAdmin", "Accueil")' class="fancy-button rouge">Retour</a>
+
+    </div>
 </div>

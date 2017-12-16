@@ -4,43 +4,38 @@
     ViewBag.Title = Model.description;
 }
 
+@Html.Action("_TreeView", "DevisMinistere")
+
 <div class="super-view">
-    @Html.Action("_TreeView", "DevisMinistere")
 
-    <div class="info-display container-fluid">
-        <div class="info-header">
-            <h3>Élément de compétence</h3>
-            <div>
-                <h1>@Html.DisplayFor(model => model.description)</h1>
-            </div>
-        </div>
+    <header class="fat-header">
 
-        <div class="info-detail">
+        <h3>Élément de compétence</h3>
 
-            @if (Model.CriterePerformance.Count > 0)
+        <h1>@ViewBag.Title</h1>
+
+    </header>
+
+    @if (Model.CriterePerformance.Count > 0)
+    {
+        <h2>Critères de performance</h2>
+
+        <ol type="1">
+            @foreach (var criterePerformance in Model.CriterePerformance.OrderBy(ec => ec.numero))
             {
-                <h2>Critères de performance</h2>
-
-                <ol type="1">
-                    @foreach (var criterePerformance in Model.CriterePerformance.OrderBy(ec => ec.numero))
-                    {
-                        <li>@Html.DisplayFor(cp => criterePerformance.description)</li>
-                    }
-                </ol>
-
-                <hr />
+                <li>@Html.DisplayFor(cp => criterePerformance.description)</li>
             }
+        </ol>
 
-            <h2>Options</h2>
+        <hr />
+    }
 
-            <div class="champ">
-                <a class="fancy-button" href='@Url.Action("Edit", new { idElement = Model.idElement })'><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
-                <a class="fancy-button" onclick="location.href='@Url.Action("Delete", new { idElement = Model.idElement })'"><span class="glyphicon glyphicon-trash"><!----></span> Supprimer l'élément</a>
-                <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = Model.idCompetence })'">Retour</a>
-            </div>
+    <h2>Options</h2>
 
-        </div>
-    </div>
+    <a class="fancy-button" href='@Url.Action("Edit", new { idElement = Model.idElement })'><span class="glyphicon glyphicon-pencil"><!----></span> Modifier</a>
+    <a class="fancy-button" onclick="location.href='@Url.Action("Delete", new { idElement = Model.idElement })'"><span class="glyphicon glyphicon-trash"><!----></span> Supprimer l'élément</a>
+    <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = Model.idCompetence })'">Retour</a>
+
 </div>
 
 <script>

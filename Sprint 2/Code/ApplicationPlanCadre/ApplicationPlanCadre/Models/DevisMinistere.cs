@@ -9,6 +9,11 @@ namespace ApplicationPlanCadre.Models
     [Table("DevisMinistere")]
     public partial class DevisMinistere
     {
+        string _specialisation;
+        string _nbUnite;
+        string _condition;
+        string _sanction;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DevisMinistere()
         {
@@ -23,16 +28,15 @@ namespace ApplicationPlanCadre.Models
         {
             get
             {
-                return codeDevis + " • " + specialisation;
+                if(specialisation != "N/A")
+                    return codeDevis + " • " + specialisation;
+                return codeDevis;
             }
         }
 
         public string codeDevis
         {
-            get
-            {
-                return this.EnteteProgramme.codeProgramme + "-" + annee + "-" + codeSpecialisation;
-            }
+            get { return EnteteProgramme.codeProgramme + "-" + annee + "-" + codeSpecialisation; }
         }
 
         [Required]
@@ -49,7 +53,11 @@ namespace ApplicationPlanCadre.Models
 
         [StringLength(30)]
         [Display(Name = "Spécialisation")]
-        public string specialisation { get; set; }
+        public string specialisation
+        {
+            get { return _specialisation != null ? _specialisation : "N/A"; }
+            set { _specialisation = value; }
+        }
 
         [StringLength(6)]
         [Display(Name = "Nombre d'unités")]
