@@ -8,6 +8,9 @@
     #editor {
         overflow: scroll;
     }
+    .input-group{
+        width:100%;
+    }
 </style>
 
 <div class="container">
@@ -65,77 +68,38 @@
                     @Html.ValidationMessageFor(model => model.numeroCours, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            <hr />
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.indicationPedago, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.indicationPedago, new { htmlAttributes = new { @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.indicationPedago, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.environnementPhys, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.environnementPhys, new { htmlAttributes = new { @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.environnementPhys, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ressource, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ressource, new { htmlAttributes = new { @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.ressource, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-            <div class="hero-unit">               
-               <div class="row">
-                    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
-
-
-                        <div class="btn-group">
-                            <a class="btn btn-primary" data-edit="bold" title="" data-original-title="Bold (Ctrl/Cmd+B)"><i class="glyphicon glyphicon-bold"></i></a>
-                            <a class="btn btn-primary" data-edit="italic" title="" data-original-title="Italic (Ctrl/Cmd+I)"><i class="glyphicon glyphicon-italic"></i></a>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn btn-primary" data-edit="insertunorderedlist" title="" data-original-title="Bullet list"><i class="glyphicon glyphicon-list"></i></a>
-                            <a class="btn btn-primary" data-edit="outdent" title="" data-original-title="Reduce indent (Shift+Tab)"><i class="glyphicon glyphicon-indent-left"></i></a>
-                            <a class="btn btn-primary" data-edit="indent" title="" data-original-title="Indent (Tab)"><i class="glyphicon glyphicon-indent-right"></i></a>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn btn-primary" data-edit="justifyleft" title="" data-original-title="Align Left (Ctrl/Cmd+L)"><i class="glyphicon glyphicon-align-left"></i></a>
-                            <a class="btn btn-primary" data-edit="justifycenter" title="" data-original-title="Center (Ctrl/Cmd+E)"><i class="glyphicon glyphicon-align-center"></i></a>
-                            <a class="btn btn-primary" data-edit="justifyright" title="" data-original-title="Align Right (Ctrl/Cmd+R)"><i class="glyphicon glyphicon-align-right"></i></a>
-                            <a class="btn btn-primary" data-edit="justifyfull" title="" data-original-title="Justify (Ctrl/Cmd+J)"><i class="glyphicon glyphicon-align-justify"></i></a>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Hyperlink"><i class="glyphicon glyphicon-link"></i></a>
-                            <div class="dropdown-menu input-append">
-                                <input class="span2" placeholder="URL" type="text" data-edit="createLink">
-                                <button class="btn" type="button">Add</button>
-                            </div>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn btn-primary" data-edit="undo" title="" data-original-title="Undo (Ctrl/Cmd+Z)"><i class="glyphicon glyphicon-menu-left"></i></a>
-                            <a class="btn btn-primary" data-edit="redo" title="" data-original-title="Redo (Ctrl/Cmd+Y)"><i class="glyphicon glyphicon-menu-right"></i></a>
+            <section>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Environnement Physique </label>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            @Html.TextAreaFor(m => m.environnementPhys, new { rows = "80", style = "width:400px;", placeholder = Html.DisplayNameFor(m => m.environnementPhys), @class ="form-control textarea-editor2 "})
                         </div>
                     </div>
-                   <hr />
-                    <div id="editor" class="form-control" >
-                        Go ahead..
-                    </div>
-
                 </div>
+            </section>
 
-            </div>
-
-            @*ajouter le type (contributive, spécifique, generale)*@
-
+            <section>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">ressource </label>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            @Html.TextAreaFor(m => m.ressource, new { rows = "80", style = "width:400px;", placeholder = Html.DisplayNameFor(m => m.ressource), @class = "form-control textarea-editor1" })
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Indication pédago </label>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            @Html.TextAreaFor(m => m.indicationPedago, new { rows = "80", style = "resize:none;width:400px;", placeholder = Html.DisplayNameFor(m => m.indicationPedago), @class = "form-control input-lg textarea-editor" })
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Suivant" class="fancy-button" />
@@ -145,15 +109,67 @@
         </div>
     }
 </div>
-<script>
-    $.getScript('http://mindmup.github.io/bootstrap-wysiwyg/external/jquery.hotkeys.js',function(){
-    $.getScript('http://mindmup.github.io/bootstrap-wysiwyg/bootstrap-wysiwyg.js',function(){
-    
-    $('#editor').wysiwyg();
-    $('#editor').cleanHtml();
 
-});
-});
+@section Scripts
+ {
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+    <!-- include summernote css/js-->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.0/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.0/summernote.js"></script>
+}
+  
+<script>
+    $(document).ready(function () {
+        $('.textarea-editor').summernote({
+            height: 250,
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ol', 'paragraph']],
+                ['link', ['link']],
+            ]
+        });
+        $('.dropdown-toggle').dropdown()
+    });
+    $(document).ready(function () {
+        $('.textarea-editor1').summernote({
+            height:250,
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ol','paragraph']],
+                ['link',['link']],
+            ]
+        });
+        $('.dropdown-toggle').dropdown()
+    });
+    $(document).ready(function () {
+        $('.textarea-editor2').summernote({
+            height: 250,
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ol', 'paragraph']],
+                ['link', ['link']],
+            ]
+        });
+        $('.dropdown-toggle').dropdown()
+    });
+
+   
 </script>
 
 

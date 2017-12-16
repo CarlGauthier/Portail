@@ -6,6 +6,7 @@ namespace ApplicationPlanCadre.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
     using System.Linq;
+    using System.Web.Mvc;
 
     [Table("PlanCadre")]
     public partial class PlanCadre
@@ -37,6 +38,7 @@ namespace ApplicationPlanCadre.Models
         [StringLength(150)]
         public string titreCours { get; set; }
 
+        [AllowHtml]
         [Display(Name = "Indication pédagogique")]
         [Column(TypeName = "text")]
         public string indicationPedago { get; set; }
