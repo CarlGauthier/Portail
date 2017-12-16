@@ -7,10 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ApplicationPlanCadre.Models;
+using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    [Authorize(Roles = "RCP")]
+    [RCPElementCompetenceAuthorize]
     public class ElementCompetenceController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
@@ -28,6 +29,7 @@ namespace ApplicationPlanCadre.Controllers
             return View(elementCompetence);
         }
 
+        [RCPEnonceCompetenceAuthorize]
         public ActionResult Create(int? idCompetence)
         {
             if (idCompetence == null)
@@ -47,6 +49,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [RCPEnonceCompetenceAuthorize]
         public ActionResult Create([Bind(Include = "idElement,description,numero,motClef,commentaire,idCompetence")] ElementCompetence elementCompetence)
         {
             AssignNo(elementCompetence);
@@ -102,6 +105,8 @@ namespace ApplicationPlanCadre.Controllers
             return View(elementCompetence);
         }
 
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int idElement)
         {
             ElementCompetence elementCompetence = db.ElementCompetence.Find(idElement);

@@ -8,24 +8,35 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ApplicationPlanCadre.Models;
+using ApplicationPlanCadre.Helpers;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    [Authorize(Roles = "RCP")]
+    [RCPDevisMinistereAuthorize]
     public class DevisMinistereController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
 
+        private IQueryable<DevisMinistere> getRCPDevisMinistere()
+        {
+            string username = User.Identity.GetUserName();
+            return from devisMinistere in db.DevisMinistere
+                   join enteteProgramme in db.EnteteProgramme on devisMinistere.codeProgramme equals enteteProgramme.codeProgramme
+                   join accesProgramme in db.AccesProgramme on enteteProgramme.codeProgramme equals accesProgramme.codeProgramme
+                   where accesProgramme.userMail == username
+                   select devisMinistere;
+        }
+
         public ActionResult _TreeView()
         {
-            var devisMinistere = db.DevisMinistere.ToList();
-
-            return PartialView(devisMinistere);
+            return PartialView(getRCPDevisMinistere().ToList());
         }
 
         public ActionResult Index()
         {
-            return View(db.DevisMinistere.ToList());
+            return View(getRCPDevisMinistere().ToList());
         }
 
         public ActionResult Info(int? idDevis)
@@ -43,36 +54,14 @@ namespace ApplicationPlanCadre.Controllers
             //ViewBag.dateValidation = checkValidation(devisMinistere);
             return View(devisMinistere);
         }
-		
-        public ActionResult Create()
-        {
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire");
-            return View();
-        }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idDevis,annee,nom,nbUnite,codeSpecialisation,specialisation,nbHeurefrmGenerale,nbHeurefrmSpecifique,condition,sanction,commentaire,docMinistere,dateValidation,codeProgramme")] DevisMinistere devisMinistere)
+        public ActionResult Edit(int? idDevis)
         {
-            Trim(devisMinistere);
-            if (ModelState.IsValid)
-            {
-                db.DevisMinistere.Add(devisMinistere);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.codeProgramme = new SelectList(db.EnteteProgramme, "codeProgramme", "commentaire", devisMinistere.codeProgramme);
-            return View(devisMinistere);
-        }
-
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
+            if (idDevis == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DevisMinistere devisMinistere = db.DevisMinistere.Find(id);
+            DevisMinistere devisMinistere = db.DevisMinistere.Find(idDevis);
             if (devisMinistere == null)
             {
                 return HttpNotFound();

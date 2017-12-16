@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {

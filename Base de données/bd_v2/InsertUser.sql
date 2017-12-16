@@ -36,11 +36,14 @@ INSERT INTO AspNetUserRoles (UserId, RoleId) VALUES
 
 ('10a69245-2a83-4923-9482-f55551274033', 1), --AYMEN
 ('10a69245-2a83-4923-9482-f55551274033', 5)
+GO
+
+DELETE FROM AccesProgramme
+INSERT INTO AccesProgramme (UserMail, codeProgramme) VALUES
+(N'ericchose@outlook.ca', '420') --ERIC
 
 --select * from AspNetRoles
 --select * from AspNetUserClaims
 --select * from AspNetUserLogins
 --select * from AspNetUserRoles
 --select * from AspNetUsers
-
---USE [BDPlanCadreTEST]

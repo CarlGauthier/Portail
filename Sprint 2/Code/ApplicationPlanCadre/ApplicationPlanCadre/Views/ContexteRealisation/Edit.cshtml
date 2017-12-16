@@ -1,30 +1,32 @@
 ﻿@model ApplicationPlanCadre.Models.ContexteRealisation
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Modification d'un contexte de réalisation";
 }
 
-<div class="container">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.idCompetence)
+    @Html.HiddenFor(m => m.numero)
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.idContexte)
-        @Html.HiddenFor(model => model.idCompetence)
+    <div class="container">
+        <div class="form-box">
 
-        <div class="horizontal-form form-box single">
+            <header class="light-header">
 
-            <h3>Modifier un contexte de réalisation</h3>
+                <h1>@ViewBag.Title</h1>
+
+            </header>
 
             <div class="form-group">
-                @Html.TextAreaFor(model => model.description, new { @rows = "3", @maxlength = "300", @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(m => m.description, new { @rows = "3", @maxlength = "300", @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.description, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <input type="submit" value="Confirmer" class="fancy-button" />
-                <a href='@Url.Action("Create", new { idCompetence = Model.idCompetence })' class="fancy-button rouge">Annuler</a>
-            </div>
+
+            <input type="submit" value="Confirmer" class="fancy-button" />
+            <a href='@Url.Action("Create", new { idCompetence = Model.idCompetence })' class="fancy-button rouge">Annuler</a>
+
         </div>
-    }
-
-</div>
+    </div>
+}

@@ -20,6 +20,10 @@ h1, h2, h3, h4, h5, h6 {
     font-family: Segoe UI Light, Calibri Light, Sans-Serif;
 }
 
+a {
+    color: #0078d7;
+}
+
 ul, ol {
     padding-left: 20px;
 }
@@ -164,7 +168,7 @@ header.light-header {
 
 header.fat-header {
     margin: -40px;
-    margin-bottom: 0;
+    margin-bottom: 20px;
     padding: 20px 40px;
     color: #fff;
     background-color: #0078d7;

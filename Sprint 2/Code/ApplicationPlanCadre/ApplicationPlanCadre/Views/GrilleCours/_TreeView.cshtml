@@ -9,7 +9,7 @@
         string p_item = p_id + "item";
         string p_target = "#" + p_id;
         <div id=@p_item class="tree-view-item">
-            <div class="collapse-button" data-toggle="collapse" data-target=@p_target><span class="glyphicon glyphicon-chevron-right"><!----></span></div>
+            <div class="collapse-button" data-toggle="collapse" data-target=@p_target><span class="glyphicon glyphicon-chevron-right"></span></div>
             <a href='@Url.Action("Info","grilleCours", new { id = grille.idGrille })'>@Html.DisplayFor(p => grille.nom)</a>
         </div>
         <div id=@p_id class="collapse">
