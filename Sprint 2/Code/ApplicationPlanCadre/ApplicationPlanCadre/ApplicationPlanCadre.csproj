@@ -317,7 +317,9 @@
     <Content Include="Scripts\mark.js" />
     <Content Include="Scripts\mark.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\perfect-scrollbar.js" />
     <Content Include="Scripts\portail.js" />
+    <Content Include="Scripts\preventSubmit.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\roleSelect.js" />
@@ -398,11 +400,11 @@
     <Content Include="Views\GrilleCours\_Structure.cshtml" />
     <Content Include="Views\GrilleCours\_TreeView.cshtml" />
     <Content Include="Views\GrilleCoursEnonce\GetEnonceModel.cshtml" />
+    <Content Include="Views\PlanCadre\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\Document ministériel\" />
-    <Folder Include="Views\AccesProgramme\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

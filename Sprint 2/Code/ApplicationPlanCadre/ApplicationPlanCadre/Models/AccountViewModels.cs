@@ -35,6 +35,10 @@ namespace ApplicationPlanCadre.Models
         [EmailAddress]
         [Display(Name = "Courriel")]
         public string Email { get; set; }
+
+        public IEnumerable<string> Roles { get; set; }
+
+        public IEnumerable<string> CodeProgrammes { get; set; }
     }
 
     public class EditUserViewModel
@@ -59,5 +63,7 @@ namespace ApplicationPlanCadre.Models
 
         [Display(Name = "Rôles")]
         public IEnumerable<string> Roles { get; set; }
+
+        public IEnumerable<string> CodeProgrammes { get; set; }
     }
 }

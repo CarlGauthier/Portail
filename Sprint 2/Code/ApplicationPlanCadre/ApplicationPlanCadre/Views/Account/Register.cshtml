@@ -21,6 +21,8 @@
 
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+                    @Html.ValidationMessage("netMail", new { @class = "text-danger" })
+
                     @Html.ValidationMessage("rolePresent", new { @class = "text-danger" })
 
                     @Html.ValidationMessage("programmeRCP", new { @class = "text-danger" })
@@ -107,4 +109,17 @@
 
 @section scripts {
     <script src="@Url.Content("~/Scripts/roleSelect.js")"></script>
+    <script>
+        $(document).ready(function () {
+            @foreach (string role in Model.Roles)
+            {
+                @:loadRole("@role");
+            }
+
+            @foreach (string codeProgramme in Model.CodeProgrammes)
+            {
+                @:loadCodeProgramme("@codeProgramme");
+            }
+        });
+    </script>
 }

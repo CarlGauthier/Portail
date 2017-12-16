@@ -85,8 +85,7 @@ namespace ApplicationPlanCadre.Controllers
             return View(criterePerformance);
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
         public ActionResult DeleteConfirmed(int idCritere)
         {
             CriterePerformance criterePerformance = db.CriterePerformance.Find(idCritere);

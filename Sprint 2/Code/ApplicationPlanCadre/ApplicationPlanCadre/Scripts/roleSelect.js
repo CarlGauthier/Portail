@@ -71,7 +71,6 @@ function loadRole(role) {
 function findRoleOptionByValue(value) {
     var options = document.querySelectorAll("#role option");
     for (var i = 0; i < options.length; i++) {
-        console.log(options[i].value);
         if (options[i].value === value)
             return options[i];
     }
@@ -121,6 +120,13 @@ function removeCodeProgramme(index) {
     checkRCP(option, false);
     codeProgrammeOptionEnabled(index, true);
     codeProgrammeNode.remove();
+}
+
+function loadCodeProgramme(codeProgramme) {
+    var option = findCodeProgrammeOptionByValue(codeProgramme);
+    codeProgrammeOptionEnabled(option.index, false);
+    document.getElementById('codeProgramme').selectedIndex = option.index;
+    addCodeProgramme();
 }
 
 function loadCodeProgramme(codeProgramme) {

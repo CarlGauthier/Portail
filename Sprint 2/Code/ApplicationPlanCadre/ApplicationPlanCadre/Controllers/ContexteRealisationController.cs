@@ -85,8 +85,7 @@ namespace ApplicationPlanCadre.Controllers
             return View(contexteRealisation);
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
         public ActionResult DeleteConfirmed(int idContexte)
         {
             ContexteRealisation contexteRealisation = db.ContexteRealisation.Find(idContexte);

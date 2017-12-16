@@ -111,12 +111,63 @@ namespace ApplicationPlanCadre.Controllers
             }
         }
 
+        public void RegisterModelDefault(RegisterViewModel model, IEnumerable<string> role, IEnumerable<string> codeProgramme)
+        {
+            if (role != null)
+                model.Roles = role;
+            else
+                model.Roles = new List<string>();
+
+            if (codeProgramme != null)
+                model.CodeProgrammes = codeProgramme;
+            else
+                model.CodeProgrammes = new List<string>();
+        }
+
+        public void EditModelDefault(EditUserViewModel model, IEnumerable<string> role, IEnumerable<string> codeProgramme)
+        {
+            if (role != null)
+                model.Roles = role;
+            else
+                model.Roles = new List<string>();
+
+            if (codeProgramme != null)
+                model.CodeProgrammes = codeProgramme;
+            else
+                model.CodeProgrammes = new List<string>();
+        }
+
         [AllowAnonymous]
         public ActionResult Register()
         {
             ViewBag.role = BuildRoleSelectList();
             ViewBag.codeProgramme = new ConsoleDevisMinistereController().BuildCodeDevisMinistereSelectList();
-            return View();
+            RegisterViewModel model = new RegisterViewModel();
+            RegisterModelDefault(model, null, null);
+            return View(model);
+        }
+
+        private bool IsRCP(ICollection<string> role)
+        {
+            bool isRCP = false;
+            if(role != null)
+                foreach (string r in role)
+                    if (r == "RCP")
+                    {
+                        isRCP = true;
+                        break;
+                    }
+            return isRCP;
+        }
+
+        private void SetRCPAccesProgramme(ApplicationUser user, ICollection<string> codeProgramme)
+        {
+            foreach(string code in codeProgramme)
+            {
+                AccesProgramme accesProgramme = new AccesProgramme { userMail = user.UserName, codeProgramme = code };
+                new BDPlanCadre().AccesProgramme.Add(accesProgramme);
+            }
+            db.SaveChanges();
         }
 
         [HttpPost]
@@ -125,32 +176,43 @@ namespace ApplicationPlanCadre.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model, ICollection<string> role, ICollection<string> codeProgramme)
         {
             bool rolePresent = role != null;
-            bool programmeRCP = true;
+            bool isRCP = IsRCP(role);
+            bool programmeRCP = isRCP && codeProgramme != null || !isRCP;
             if (!rolePresent)
                 ModelState.AddModelError("rolePresent", "L'utilisateur doit avoir au minimum un rôle.");
-            else
-                foreach (string r in role)
-                    if (r == "RCP")
-                        programmeRCP = codeProgramme != null;
-
+            if (!programmeRCP)
+                ModelState.AddModelError("rolePresent", "Un RCP doit avoir au minimum un programme d'assigné.");
             if (ModelState.IsValid && rolePresent && programmeRCP)
             {
                 string password = new PasswordGenerator().GeneratePassword(10);
-                var user = new ApplicationUser { nom = model.Nom, prenom = model.Prenom, UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, password);
-                if (result.Succeeded)
+                ApplicationUser user = new ApplicationUser { nom = model.Nom, prenom = model.Prenom, UserName = model.Email, Email = model.Email };
+                bool mailSend = new MailHelper().SendActivationMail(user, password);
+                if(mailSend)
                 {
-                    UserManager.AddToRoles(user.Id, role.ToArray());
-                    new MailHelper().SendActivationMail(user, password);
-                    return RedirectToAction("Index", "Account");
+                    var result = await UserManager.CreateAsync(user, password);
+                    if (result.Succeeded)
+                    {
+                        UserManager.AddToRoles(user.Id, role.ToArray());
+                        if (isRCP)
+                            SetRCPAccesProgramme(user, codeProgramme);
+                        return RedirectToAction("Index", "Account");
+                    }
+                    AddErrors(result);
                 }
-                AddErrors(result);
+                else
+                    ModelState.AddModelError("netMail", "Une erreur est survenue lors de l'envoi du courriel, veuillez réessayer plus tard.");
             }
-            if(!programmeRCP)
-                ModelState.AddModelError("rolePresent", "Un RCP doit avoir au minimum un programme d'assigné.");
+            RegisterModelDefault(model, role, codeProgramme);
             ViewBag.role = BuildRoleSelectList();
             ViewBag.codeProgramme = new ConsoleDevisMinistereController().BuildCodeDevisMinistereSelectList();
             return View(model);
+        }
+
+        private IEnumerable<string> GetCodeProgrammes(ApplicationUser user)
+        {
+            return (from accesProgramme in new BDPlanCadre().AccesProgramme
+                    where accesProgramme.userMail == user.UserName
+                    select accesProgramme.codeProgramme).ToList();
         }
 
         public ActionResult Edit(string userId)
@@ -164,7 +226,7 @@ namespace ApplicationPlanCadre.Controllers
             {
                 return HttpNotFound();
             }
-            EditUserViewModel model = new EditUserViewModel { UserId = user.Id, Prenom = user.prenom, Nom = user.nom, Email = user.Email, Roles = UserManager.GetRoles(user.Id) };
+            EditUserViewModel model = new EditUserViewModel { UserId = user.Id, Prenom = user.prenom, Nom = user.nom, Email = user.Email, Roles = UserManager.GetRoles(user.Id), CodeProgrammes = GetCodeProgrammes(user) };
             ViewBag.role = BuildRoleSelectList();
             ViewBag.codeProgramme = new ConsoleDevisMinistereController().BuildCodeDevisMinistereSelectList();
             return View(model);
@@ -191,7 +253,6 @@ namespace ApplicationPlanCadre.Controllers
                     string password = new PasswordGenerator().GeneratePassword(10);
 
                     new MailHelper().SendEditMail(user, password);
-                    //new RolesHelper().ChangeRoles(user, model.Roles, UserManager);
 
                     return RedirectToAction("Index", "Account");
                 }
