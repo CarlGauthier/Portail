@@ -55,7 +55,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.numeroCours, htmlAttributes: new { @class = "control-label col-md-2" })@*faire une auto completion, numero programme au debut automatique,  et jq a la fin automatique (jq=jonquiere)*@
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.numeroCours, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
+                    @Html.EditorFor(model => model.numeroCours, new { htmlAttributes = new { @class = "form-control small-input" } })
                     @Html.ValidationMessageFor(model => model.numeroCours, "", new { @class = "text-danger" })
                 </div>
             </div>

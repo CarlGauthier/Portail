@@ -1,0 +1,37 @@
+﻿@model ApplicationPlanCadre.Models.PlanCadre
+
+@{
+    ViewBag.Title = "Plan cadre - Competence";
+}
+
+<h2>Competence</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.idPlanCadre)
+
+    <div class="form-group">
+        @Html.DropDownList("enonce", null, new { @class = "form-control", @onchange = "selectedEnonce()" })
+    </div>
+
+    <div id="enonceBox">
+
+    </div>
+    foreach (var enonceCompetence in Model.Programme.DevisMinistere.EnonceCompetence)
+    {
+        <select hidden="hidden" id="@Html.Raw("ddlElement")@enonceCompetence.idCompetence">
+            @foreach (var elementCompetence in enonceCompetence.ElementCompetence)
+            {
+                <option value="@elementCompetence.idElement">@elementCompetence.description</option>
+            }
+        </select>
+    }
+
+    <input type="submit" value="Enregistrer" class="fancy-button" />
+}
+
+@section scripts {
+    <script src="@Url.Content("~/Scripts/Competence.js")"></script>
+}
