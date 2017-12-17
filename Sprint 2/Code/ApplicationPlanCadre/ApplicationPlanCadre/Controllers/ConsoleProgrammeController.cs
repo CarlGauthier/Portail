@@ -69,6 +69,15 @@ namespace ApplicationPlanCadre.Controllers
             ViewBag.idDevis = BuildDevisSelectList(programme.idDevis);
             return View(programme);
         }
+		
+        public ActionResult Valider(int idProgramme)
+        {
+            Programme programme = db.Programme.Find(idProgramme);
+            programme.statusValider = true;
+            db.Entry(programme).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Create");
+        }
 
         private SelectList BuildDevisSelectList(int? idDevis = null)
         {

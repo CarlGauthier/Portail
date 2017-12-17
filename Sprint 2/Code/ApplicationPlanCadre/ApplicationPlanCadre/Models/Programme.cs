@@ -40,7 +40,10 @@ namespace ApplicationPlanCadre.Models
         public string annee { get; set; }
 
         [Display(Name = "Dernière validation")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = false)]
         public DateTime? dateValidation { get; set; }
+
+        public bool statusValider { get; set; }
 
         [Display(Name = "Dévis ministériel")]
         public int idDevis { get; set; }

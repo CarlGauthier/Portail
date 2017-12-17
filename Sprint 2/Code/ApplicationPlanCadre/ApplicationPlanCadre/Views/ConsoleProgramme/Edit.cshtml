@@ -42,7 +42,11 @@
                         @Html.TextBoxFor(model => model.annee, new { @class = "form-control small", @maxlength = 4, @onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);" })
                         @Html.ValidationMessageFor(model => model.annee, "", new { @class = "text-danger" })
                     </div>
-
+					
+                    <input type="submit" value="Confirmer" class="fancy-button" />
+                    <a href='@Url.Action("Create")' class="fancy-button rouge">Annuler</a>
+                    <a href='@Url.Action("Valider", new { idProgramme = Model.idProgramme})' class="fancy-button">Valider</a>
+					
                 </div>
             </div>
 

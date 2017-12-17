@@ -21,7 +21,7 @@
 
     @foreach (var item in Model)
     {
-        bool valide = item.PlanCadre.Count() == 0;
+        bool valide = item.dateValidation == null;
         string dblclickEvent = valide ? Url.Action("Edit", new { idProgramme = item.idProgramme }) : @Url.Action("Create");
         <tr ondblclick="location.href='@dblclickEvent'">
             <td>
