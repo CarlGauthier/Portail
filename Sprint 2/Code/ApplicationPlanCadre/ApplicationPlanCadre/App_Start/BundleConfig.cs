@@ -31,6 +31,7 @@ namespace ApplicationPlanCadre
                         "~/Content/treeview.css",
                         "~/Content/superview.css",
                         "~/Content/perfect-scrollbar.css",
+                        "~/Content/section-grille.css",
                         "~/Content/structure.css"));
         }
     }
