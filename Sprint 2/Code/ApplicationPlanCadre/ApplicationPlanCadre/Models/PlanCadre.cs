@@ -43,10 +43,12 @@ namespace ApplicationPlanCadre.Models
         [Column(TypeName = "text")]
         public string indicationPedago { get; set; }
 
+        [AllowHtml]
         [Display(Name = "Environement physique")]
         [Column(TypeName = "text")]
         public string environnementPhys { get; set; }
 
+        [AllowHtml]
         [Display(Name = "Ressource/réfférences")]
         [Column(TypeName = "text")]
         public string ressource { get; set; }

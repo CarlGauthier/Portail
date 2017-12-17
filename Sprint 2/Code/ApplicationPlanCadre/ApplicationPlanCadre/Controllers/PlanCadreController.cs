@@ -88,6 +88,7 @@ namespace ApplicationPlanCadre.Controllers
             if (!existe && ModelState.IsValid)
             {
                 db.Entry(planCadre).State = EntityState.Modified;
+                planCadre.idType = 1;
                 db.SaveChanges();
                 return RedirectToAction("info", new { idPlanCadre = planCadre.idPlanCadre });
             }

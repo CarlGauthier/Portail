@@ -401,6 +401,7 @@
     <Content Include="Views\GrilleCours\_Structure.cshtml" />
     <Content Include="Views\GrilleCours\_TreeView.cshtml" />
     <Content Include="Views\GrilleCoursEnonce\GetEnonceModel.cshtml" />
+    <Content Include="Views\PlanCadre\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
