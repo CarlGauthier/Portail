@@ -28,6 +28,7 @@ namespace ApplicationPlanCadre.Controllers
         public ActionResult Rechercher(string searchStr, bool chkRecherche)
         {
             dynamic model = new ExpandoObject();
+
             if (chkRecherche)
             {
                 model.DevisMinistere = getDevis(searchStr);
@@ -49,9 +50,11 @@ namespace ApplicationPlanCadre.Controllers
         private List<SearchDevisMinistere> getDevis(string searchStr)
         {
             List<SearchDevisMinistere> devisList = new List<SearchDevisMinistere>();
+
             var devis = from a in db.DevisMinistere
                         where a.specialisation.Contains(searchStr) || a.codeSpecialisation.Contains(searchStr) || a.codeProgramme.Contains(searchStr) || a.annee.Contains(searchStr)
                         select a;
+
             foreach (DevisMinistere devisMins in devis)
             {
                 devisList.Add(new SearchDevisMinistere
@@ -75,6 +78,7 @@ namespace ApplicationPlanCadre.Controllers
         private List<SearchEnonceCompetence> getEnonceCompetence(string searchStr)
         {
             List<SearchEnonceCompetence> enonComptList = new List<SearchEnonceCompetence>();
+
             var enonce = from a in db.EnonceCompetence
                          where a.codeCompetence.Contains(searchStr) || a.description.Contains(searchStr)
                          select a;
@@ -94,10 +98,12 @@ namespace ApplicationPlanCadre.Controllers
         private List<SearchElementCompetence> getElemCompetence(string searchStr)
         {
             List<SearchElementCompetence> elementList = new List<SearchElementCompetence>();
+
             var enonce = from a in db.ElementCompetence
                          where a.description.Contains(searchStr)
                          orderby a.numero
                          select a;
+
             foreach (ElementCompetence a in enonce)
             {
                 elementList.Add(new SearchElementCompetence
@@ -111,14 +117,18 @@ namespace ApplicationPlanCadre.Controllers
             return elementList;
         }
 
+
+            
         private List<SearchProgramme> getProgram(string searchStr)
         {
-            List<SearchProgramme> programme = new List<SearchProgramme>();
-            var holding = from a in db.Programme
-                          where a.annee.Contains(searchStr) || a.nom.Contains(searchStr)
-                          select a;
-            foreach (Programme prog in holding)
-            {
+           List<SearchProgramme> programme = new List<SearchProgramme>();
+
+           var holding = from a in db.Programme
+                              where a.annee.Contains(searchStr)||a.nom.Contains(searchStr)
+                              select a;
+
+           foreach (Programme prog in holding)
+           {
                 programme.Add(new SearchProgramme
                 {
                     idProgramme = Convert.ToInt32(prog.idProgramme),
@@ -127,16 +137,19 @@ namespace ApplicationPlanCadre.Controllers
                     idDevis = prog.idDevis
 
                 });
-            }
-            return programme;
+           }
+           return programme;
+
         }
         private List<SearchCriterePerformance> getCriterePerformance(string searchStr)
         {
             List<SearchCriterePerformance> critereList = new List<SearchCriterePerformance>();
+
             var critere = from a in db.CriterePerformance
                           where a.description.Contains(searchStr)
                           orderby a.numero
                           select a;
+
             foreach (CriterePerformance a in critere)
             {
                 critereList.Add(new SearchCriterePerformance
@@ -151,6 +164,7 @@ namespace ApplicationPlanCadre.Controllers
         private List<SearchContexteRealisation> getContexteRealisation(string searchStr)
         {
             List<SearchContexteRealisation> contextList = new List<SearchContexteRealisation>();
+
             var context = from a in db.ContexteRealisation
                           where a.description.Contains(searchStr)
                           orderby a.numero

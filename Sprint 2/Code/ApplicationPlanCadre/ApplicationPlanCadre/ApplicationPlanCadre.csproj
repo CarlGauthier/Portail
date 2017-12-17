@@ -301,6 +301,7 @@
     <None Include="Properties\PublishProfiles\IIS Test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Rotativa\wkhtmltopdf.exe" />
+    <Content Include="Scripts\bootstrap-wysiwyg.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -324,6 +325,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\roleSelect.js" />
+    <Content Include="Scripts\script-custom-editor.js" />
     <Content Include="Views\static\cj-layout.png" />
     <Content Include="Views\static\footer.html" />
     <Content Include="Views\static\header.html" />

@@ -4,99 +4,177 @@
     ViewBag.Title = "Plan cadre - modification";
 }
 
+<style>
+    #editor {
+        overflow: scroll;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+</style>
+
 <div class="container">
 
     @using (Html.BeginForm())
     {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.idPlanCadre)
-        @Html.HiddenFor(model => model.idProgramme)
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.idPlanCadre)
+    @Html.HiddenFor(model => model.idProgramme)
 
-        <div class="form-horizontal form-box single-action">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <h1>Modifier un Plan cadre</h1>
+    <div class="form-horizontal form-box single-action">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <h1>Modifier un Plan cadre</h1>
 
-            <hr />
+        <hr />
 
-            <div class="champ">
-                @Html.ValidationMessage("Duplique", new { @class = "text-danger" })
-            </div>
+        <div class="champ">
+            @Html.ValidationMessage("Duplique", new { @class = "text-danger" })
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.titreCours, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.titreCours, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.titreCours, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.nbHeureTheorie, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.nbHeureTheorie, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.nbHeureTheorie, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.nbHeurePratique, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.nbHeurePratique, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.nbHeurePratique, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.nbHeureDevoir, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.nbHeureDevoir, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.nbHeureDevoir, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.numeroCours, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.numeroCours, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.numeroCours, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <hr />
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.indicationPedago, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.indicationPedago, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.indicationPedago, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.environnementPhys, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.environnementPhys, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.environnementPhys, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ressource, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ressource, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.ressource, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Suivant" class="fancy-button" />
-                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "PlanCadre", new { idPlanCadre = Model.idPlanCadre })'">Annuler</div>
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.titreCours, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.titreCours, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
+                @Html.ValidationMessageFor(model => model.titreCours, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nbHeureTheorie, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nbHeureTheorie, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
+                @Html.ValidationMessageFor(model => model.nbHeureTheorie, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nbHeurePratique, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nbHeurePratique, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
+                @Html.ValidationMessageFor(model => model.nbHeurePratique, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nbHeureDevoir, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nbHeureDevoir, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
+                @Html.ValidationMessageFor(model => model.nbHeureDevoir, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.numeroCours, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.numeroCours, new { htmlAttributes = new { @maxlength = "4", @class = "form-control small-input" } })
+                @Html.ValidationMessageFor(model => model.numeroCours, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+        <section>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Environnement Physique </label>
+                <div class="col-md-10">
+                    <div class="input-group">
+                        @Html.TextAreaFor(m => m.environnementPhys, new { rows = "80", style = "width:400px;", placeholder = Html.DisplayNameFor(m => m.environnementPhys), @class ="form-control textarea-editor2 "})
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="form-group">
+                <label class="col-md-2 control-label">ressource </label>
+                <div class="col-md-10">
+                    <div class="input-group">
+                        @Html.TextAreaFor(m => m.ressource, new { rows = "80", style = "width:400px;", placeholder = Html.DisplayNameFor(m => m.ressource), @class = "form-control textarea-editor1" })
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Indication pédago </label>
+                <div class="col-md-10">
+                    <div class="input-group">
+                        @Html.TextAreaFor(m => m.indicationPedago, new { rows = "80", style = "resize:none;width:400px;", placeholder = Html.DisplayNameFor(m => m.indicationPedago), @class = "form-control input-lg textarea-editor" })
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Suivant" class="fancy-button" />
+                <div class="fancy-button rouge" onclick="location.href='@Url.Action(" Info", "PlanCadre" , new { idPlanCadre=Model.idPlanCadre })'">Annuler</div>
+            </div>
+        </div>
+    </div>
     }
 
 </div>
+
+@section Scripts
+ {
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+    <!-- include summernote css/js-->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.0/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.0/summernote.js"></script>
+}
+
+<script>
+    $(document).ready(function () {
+        $('.textarea-editor').summernote({
+            height: 250,
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ol', 'paragraph']],
+                ['link', ['link']],
+            ]
+        });
+        $('.dropdown-toggle').dropdown()
+    });
+    $(document).ready(function () {
+        $('.textarea-editor1').summernote({
+            height:250,
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ol','paragraph']],
+                ['link',['link']],
+            ]
+        });
+        $('.dropdown-toggle').dropdown()
+    });
+    $(document).ready(function () {
+        $('.textarea-editor2').summernote({
+            height: 250,
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ol', 'paragraph']],
+                ['link', ['link']],
+            ]
+        });
+        $('.dropdown-toggle').dropdown()
+    });
+
+
+</script>

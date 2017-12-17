@@ -39,11 +39,11 @@ namespace ApplicationPlanCadre.Controllers
             planCadre.idProgramme = programme.idProgramme;
             return View(planCadre);
         }
-
+        //todo:pour l'instant les type de plan cadre ne son pas géré pour l'instant il sont automatique
         [HttpPost]
         [ValidateAntiForgeryToken]
         [RCPProgrammeAuthorize]
-        public ActionResult Create([Bind(Include = "idPlanCadre,numeroCours,titreCours,indicationPedago,environementPhys,ressource,nbHeureTheorie,nbHeurePratique,nbHeureDevoir,idProgramme")] PlanCadre planCadre)
+        public ActionResult Create([Bind(Include = "idPlanCadre,numeroCours,titreCours,indicationPedago,environnementPhys,ressource,nbHeureTheorie,nbHeurePratique,nbHeureDevoir,idProgramme")] PlanCadre planCadre)
         {
             bool existe;
             existe = db.PlanCadre.Any(pc => pc.titreCours == planCadre.titreCours && pc.idProgramme == planCadre.idProgramme);
@@ -51,6 +51,7 @@ namespace ApplicationPlanCadre.Controllers
             if (!existe && ModelState.IsValid)
             {
                 planCadre.titreCours = planCadre.titreCours.ToUpper();
+                planCadre.idType = 1;
                 db.PlanCadre.Add(planCadre);
                 db.SaveChanges();
                 return RedirectToAction("info", "Programme", new { idProgramme = planCadre.idProgramme });
@@ -84,6 +85,7 @@ namespace ApplicationPlanCadre.Controllers
             if (!existe && ModelState.IsValid)
             {
                 db.Entry(planCadre).State = EntityState.Modified;
+                planCadre.idType = 1;
                 db.SaveChanges();
                 return RedirectToAction("info", new { idPlanCadre = planCadre.idPlanCadre });
             }

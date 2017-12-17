@@ -4,6 +4,15 @@
     ViewBag.Title = "Plan cadre - création";
 }
 
+<style>
+    #editor {
+        overflow: scroll;
+    }
+    .input-group{
+        width:100%;
+    }
+</style>
+
 <div class="container">
 
     @using (Html.BeginForm())
@@ -27,7 +36,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.titreCours, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.titreCours, new { htmlAttributes = new { @maxlength = "150" } })
+                    @Html.TextAreaFor(model => model.titreCours, new { @maxlength = "150", @class = "form-control small-input" })
                     @Html.ValidationMessageFor(model => model.titreCours, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -59,36 +68,39 @@
                     @Html.ValidationMessageFor(model => model.numeroCours, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            <hr />
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.indicationPedago, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.indicationPedago, new { htmlAttributes = new { @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.indicationPedago, "", new { @class = "text-danger" })
+            <section>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Environnement Physique </label>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            @Html.TextAreaFor(m => m.environnementPhys, new { rows = "80", style = "width:400px;", placeholder = Html.DisplayNameFor(m => m.environnementPhys), @class ="form-control textarea-editor2 "})
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.environnementPhys, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.environnementPhys, new { htmlAttributes = new { @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.environnementPhys, "", new { @class = "text-danger" })
+            <section>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">ressource </label>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            @Html.TextAreaFor(m => m.ressource, new { rows = "80", style = "width:400px;", placeholder = Html.DisplayNameFor(m => m.ressource), @class = "form-control textarea-editor1" })
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ressource, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ressource, new { htmlAttributes = new { @class = "form-control small-input" } })
-                    @Html.ValidationMessageFor(model => model.ressource, "", new { @class = "text-danger" })
+            <section>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Indication pédago </label>
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            @Html.TextAreaFor(m => m.indicationPedago, new { rows = "80", style = "resize:none;width:400px;", placeholder = Html.DisplayNameFor(m => m.indicationPedago), @class = "form-control input-lg textarea-editor" })
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            @*ajouter le type (contributive, spécifique, generale)*@
-
-
+            </section>
+            
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Suivant" class="fancy-button" />
@@ -98,3 +110,67 @@
         </div>
     }
 </div>
+
+@section Scripts
+ {
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+    <!-- include summernote css/js-->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.0/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.0/summernote.js"></script>
+}
+  
+<script>
+    $(document).ready(function () {
+        $('.textarea-editor').summernote({
+            height: 250,
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ol', 'paragraph']],
+                ['link', ['link']],
+            ]
+        });
+        $('.dropdown-toggle').dropdown()
+    });
+    $(document).ready(function () {
+        $('.textarea-editor1').summernote({
+            height:250,
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ol','paragraph']],
+                ['link',['link']],
+            ]
+        });
+        $('.dropdown-toggle').dropdown()
+    });
+    $(document).ready(function () {
+        $('.textarea-editor2').summernote({
+            height: 250,
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ol', 'paragraph']],
+                ['link', ['link']],
+            ]
+        });
+        $('.dropdown-toggle').dropdown()
+    });
+
+   
+</script>
+
+
