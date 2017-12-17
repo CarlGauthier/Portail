@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<ApplicationPlanCadre.Models.GrilleCours>
 
-<div id="tree-view">
+<div class="tree-view">
     <div class="tree-view-header"><a href='@Url.Action("Index","GrilleCours")'>Informatique (420-2001-AA)</a></div>
     @foreach (var grille in Model)
     {
@@ -21,3 +21,8 @@
         </div>
     }
 </div>
+
+<script src="@Url.Content("~/Scripts/perfect-scrollbar.js")"></script>
+<script>
+    var ps = new PerfectScrollbar('.tree-view');
+</script>
