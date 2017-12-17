@@ -150,7 +150,7 @@ namespace ApplicationPlanCadre.Models
             modelBuilder.Entity<PlanCadre>()
                 .Property(e => e.titreCours)
                 .IsUnicode(false);
-
+            /*
             modelBuilder.Entity<PlanCadre>()
                 .Property(e => e.prealableAbs)
                 .IsUnicode(false);
@@ -158,7 +158,7 @@ namespace ApplicationPlanCadre.Models
             modelBuilder.Entity<PlanCadre>()
                 .Property(e => e.prealableRel)
                 .IsUnicode(false);
-
+                */
             modelBuilder.Entity<PlanCadre>()
                 .Property(e => e.indicationPedago)
                 .IsUnicode(false);

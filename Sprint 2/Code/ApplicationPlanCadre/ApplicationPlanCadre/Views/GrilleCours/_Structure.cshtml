@@ -1,15 +1,12 @@
 ﻿@model ApplicationPlanCadre.Models.GrilleCours
 
 @{ 
-    //En attendant de pouvoir récupérer cette liste via une requête ou dans la table. 
     List<string> listeSession = new List<string> { "I", "II", "III", "IV", "V", "VI" };
 }
 
-@* Début du tableau *@
 
 <div class="table-responsive">
     <table class="table table-hover">
-        @* Vérifie si la liste est pleine ou vide *@
         @if (Model.Cours.FirstOrDefault() == null)
         {
             <p>Cette grille de cours est vide. Veuillez y associer des cours !!!</p>

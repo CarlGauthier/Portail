@@ -35,13 +35,4 @@
             <p>La grille de cours ne peut être supprimée car des cours y sont associés ! Merci de dissocier les cours avant de supprimer cette grille de cours.</p>
         }
     </dl>
-    @*
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }*@
 </div>
