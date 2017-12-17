@@ -83,8 +83,7 @@ namespace ApplicationPlanCadre.Controllers
             return new SelectList(liste, "Value", "Text");
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
         public ActionResult DeleteConfirmed(int idProgramme)
         {
             Programme Programme = db.Programme.Find(idProgramme);
