@@ -43,17 +43,14 @@
                         @Html.ValidationMessageFor(model => model.annee, "", new { @class = "text-danger" })
                     </div>
 					
+                    <hr />
+
                     <input type="submit" value="Confirmer" class="fancy-button" />
-                    <a href='@Url.Action("Create")' class="fancy-button rouge">Annuler</a>
                     <a href='@Url.Action("Valider", new { idProgramme = Model.idProgramme})' class="fancy-button">Valider</a>
+                    <a href='@Url.Action("Create")' class="fancy-button rouge">Annuler</a>
 					
                 </div>
             </div>
-
-            <hr />
-
-            <input type="submit" value="Confirmer" class="fancy-button" />
-            <a href='@Url.Action("Create")' class="fancy-button rouge">Annuler</a>
 
         </div>
     </div>

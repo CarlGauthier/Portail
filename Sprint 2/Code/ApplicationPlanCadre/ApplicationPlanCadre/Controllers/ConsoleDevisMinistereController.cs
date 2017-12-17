@@ -90,8 +90,7 @@ namespace ApplicationPlanCadre.Controllers
             return new SelectList(liste, "codeProgramme", "texte");
         }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
             DevisMinistere DevisMinistere = db.DevisMinistere.Find(id);

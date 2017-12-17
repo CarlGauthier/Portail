@@ -160,28 +160,38 @@ namespace ApplicationPlanCadre.Controllers
             return isRCP;
         }
 
-        private void SetRCPAccesProgramme(ApplicationUser user, ICollection<string> codeProgramme)
+        private void CreateRCPAccesProgramme(ApplicationUser user, ICollection<string> codeProgramme)
         {
+            BDPlanCadre bd = new BDPlanCadre();
             foreach(string code in codeProgramme)
             {
                 AccesProgramme accesProgramme = new AccesProgramme { userMail = user.UserName, codeProgramme = code };
-                new BDPlanCadre().AccesProgramme.Add(accesProgramme);
+                bd.AccesProgramme.Add(accesProgramme);
             }
-            db.SaveChanges();
+            bd.SaveChanges();
+        }
+
+        private void EditRCPAccesProgramme(ApplicationUser user, ICollection<string> codeProgramme)
+        {
+            BDPlanCadre bd = new BDPlanCadre();
+            bd.AccesProgramme.RemoveRange(bd.AccesProgramme.Where(e => e.userMail == user.UserName));
+            CreateRCPAccesProgramme(user, codeProgramme);
+        }
+
+        private void EditRoles(ApplicationUser user, ICollection<string> role)
+        {
+            UserManager.RemoveFromRoles(user.Id, user.roles.ToArray());
+            UserManager.AddToRoles(user.Id, role.ToArray());
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model, ICollection<string> role, ICollection<string> codeProgramme)
+        public ActionResult Register(RegisterViewModel model, ICollection<string> role, ICollection<string> codeProgramme)
         {
             bool rolePresent = role != null;
             bool isRCP = IsRCP(role);
             bool programmeRCP = isRCP && codeProgramme != null || !isRCP;
-            if (!rolePresent)
-                ModelState.AddModelError("rolePresent", "L'utilisateur doit avoir au minimum un rôle.");
-            if (!programmeRCP)
-                ModelState.AddModelError("rolePresent", "Un RCP doit avoir au minimum un programme d'assigné.");
+            
             if (ModelState.IsValid && rolePresent && programmeRCP)
             {
                 string password = new PasswordGenerator().GeneratePassword(10);
@@ -189,12 +199,12 @@ namespace ApplicationPlanCadre.Controllers
                 bool mailSend = new MailHelper().SendActivationMail(user, password);
                 if(mailSend)
                 {
-                    var result = await UserManager.CreateAsync(user, password);
+                    var result = UserManager.Create(user, password);
                     if (result.Succeeded)
                     {
                         UserManager.AddToRoles(user.Id, role.ToArray());
                         if (isRCP)
-                            SetRCPAccesProgramme(user, codeProgramme);
+                            CreateRCPAccesProgramme(user, codeProgramme);
                         return RedirectToAction("Index", "Account");
                     }
                     AddErrors(result);
@@ -202,6 +212,11 @@ namespace ApplicationPlanCadre.Controllers
                 else
                     ModelState.AddModelError("netMail", "Une erreur est survenue lors de l'envoi du courriel, veuillez réessayer plus tard.");
             }
+            if (!rolePresent)
+                ModelState.AddModelError("rolePresent", "L'utilisateur doit avoir au minimum un rôle.");
+            if (!programmeRCP)
+                ModelState.AddModelError("rolePresent", "Un RCP doit avoir au minimum un programme d'assigné.");
+
             RegisterModelDefault(model, role, codeProgramme);
             ViewBag.role = BuildRoleSelectList();
             ViewBag.codeProgramme = new ConsoleDevisMinistereController().BuildCodeDevisMinistereSelectList();
@@ -234,30 +249,47 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(EditUserViewModel model)
+        public ActionResult Edit(EditUserViewModel model, ICollection<string> role, ICollection<string> codeProgramme)
         {
-            if (ModelState.IsValid)
-            {
-                var result = UserManager.SetEmail(model.UserId, model.Email);
-                if (!result.Succeeded)
-                    AddErrors(result);
+            bool rolePresent = role != null;
+            bool isRCP = IsRCP(role);
+            bool programmeRCP = isRCP && codeProgramme != null || !isRCP;
 
-                var user = UserManager.FindById(model.UserId);
+            if (ModelState.IsValid && rolePresent && programmeRCP)
+            {
+                string password = new PasswordGenerator().GeneratePassword(10);
+                ApplicationUser user = UserManager.FindById(model.UserId);
                 user.prenom = model.Prenom;
                 user.nom = model.Nom;
                 user.roles = UserManager.GetRoles(user.Id);
-
-                result = UserManager.Update(user);
-                if (result.Succeeded)
+                var resultMail = UserManager.SetEmail(model.UserId, model.Email);
+                if (!resultMail.Succeeded)
                 {
-                    string password = new PasswordGenerator().GeneratePassword(10);
-
-                    new MailHelper().SendEditMail(user, password);
-
-                    return RedirectToAction("Index", "Account");
+                    bool mailSend = new MailHelper().SendEditMail(user, password);
+                    if(mailSend)
+                    {
+                        var resultUpdate = UserManager.Update(user);
+                        if(resultUpdate.Succeeded)
+                        {
+                            EditRoles(user, role);
+                            if (isRCP)
+                                EditRCPAccesProgramme(user, codeProgramme);
+                            return RedirectToAction("Index", "Account");
+                        }
+                        AddErrors(resultUpdate);
+                    }
+                    else
+                        ModelState.AddModelError("netMail", "Une erreur est survenue lors de l'envoi du courriel, veuillez réessayer plus tard.");
                 }
-                AddErrors(result);
             }
+            if (!rolePresent)
+                ModelState.AddModelError("rolePresent", "L'utilisateur doit avoir au minimum un rôle.");
+            if (!programmeRCP)
+                ModelState.AddModelError("rolePresent", "Un RCP doit avoir au minimum un programme d'assigné.");
+
+            EditModelDefault(model, role, codeProgramme);
+            ViewBag.role = BuildRoleSelectList();
+            ViewBag.codeProgramme = new ConsoleDevisMinistereController().BuildCodeDevisMinistereSelectList();
             return View(model);
         }
 

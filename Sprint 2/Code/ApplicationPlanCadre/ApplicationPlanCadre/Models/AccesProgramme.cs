@@ -11,6 +11,7 @@ namespace ApplicationPlanCadre.Models
     {
         [Key]
         [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idAcces { get; set; }
 
         [Key]

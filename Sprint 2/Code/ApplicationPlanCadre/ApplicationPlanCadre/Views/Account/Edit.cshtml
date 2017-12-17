@@ -113,6 +113,11 @@
             {
                 @:loadRole("@role");
             }
+
+            @foreach (string codeProgramme in Model.CodeProgrammes)
+            {
+                @:loadCodeProgramme("@codeProgramme");
+            }
         });
     </script>
     <script src="@Url.Content("~/Scripts/roleSelect.js")"></script>

@@ -382,8 +382,6 @@
     <Content Include="Views\Rapport\RapportProgramme.cshtml" />
     <Content Include="Views\Rapport\Index.cshtml" />
     <Content Include="Views\Rapport\RapportPlanCadre.cshtml" />
-    <Content Include="Views\PlanCadre\Index.cshtml" />
-    <Content Include="Views\PlanCadre\_TreeView.cshtml" />
     <Content Include="Views\PlanCadre\Info.cshtml" />
     <Content Include="Views\Programme\Index.cshtml" />
     <Content Include="Views\PlanCadre\Create.cshtml" />

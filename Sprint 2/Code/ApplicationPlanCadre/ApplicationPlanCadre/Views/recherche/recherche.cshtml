@@ -1,6 +1,5 @@
-﻿
-@{
-    ViewBag.Title = "recherche";
+﻿@{
+    ViewBag.Title = "Recherche dans les devis";
 }
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <style type="text/css">
@@ -15,7 +14,6 @@
         <br />
         <br />
     </div>
-
 
     @using (Ajax.BeginForm("Rechercher", "recherche", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "resultArea" }, new { defaultbutton = "searchBtn" }))
     {

@@ -17,10 +17,9 @@ namespace ApplicationPlanCadre.Controllers
     {
         private BDPlanCadre db = new BDPlanCadre();
 
-        // GET: recherche
-        public ActionResult Index()
+        public ActionResult Recherche()
         {
-            return View("recherche");
+            return View();
         }
 
         //todo: la recherche ne support présentement pas la recherche avec les espaces
@@ -117,8 +116,6 @@ namespace ApplicationPlanCadre.Controllers
             return elementList;
         }
 
-
-            
         private List<SearchProgramme> getProgram(string searchStr)
         {
            List<SearchProgramme> programme = new List<SearchProgramme>();
