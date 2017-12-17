@@ -7,7 +7,6 @@
 
 #portail {
     padding: 0;
-    background-image: url(../Content/Images/cegep.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -15,7 +14,6 @@
 
 #portail #main {
     min-height: 100vh;
-    background-image: url(../Content/Images/cegep-frost.jpg);
     background-color: #fff;
     background-size: cover;
     background-position: center;
@@ -113,7 +111,7 @@
     height: 110px;
     text-align: center;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 0.8em;
     color: #ffffff;
     background-color: #0078d7;
     user-select: none;
@@ -174,7 +172,6 @@
     width: 180px;
     height: 180px;
     text-align: center;
-    font-size: 18px;
     text-decoration: none;
     color: #ffffff;
     cursor: pointer;

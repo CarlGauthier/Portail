@@ -12,7 +12,8 @@ namespace ApplicationPlanCadre
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/preventSubmit.js*"));
 
             // Utilisez la version de développement de Modernizr pour le développement et l'apprentissage. Puis, une fois
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
@@ -30,6 +31,7 @@ namespace ApplicationPlanCadre
                         "~/Content/treeview.css",
                         "~/Content/superview.css",
                         "~/Content/perfect-scrollbar.css",
+                        "~/Content/section-grille.css",
                         "~/Content/structure.css"));
         }
     }

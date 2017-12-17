@@ -15,6 +15,9 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body>
 
@@ -73,8 +76,5 @@
 
 </body>
 </html>
-
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
 
 <script src="@Url.Content("~/Scripts/portail.js")"></script>

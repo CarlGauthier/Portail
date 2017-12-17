@@ -7,10 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ApplicationPlanCadre.Models;
+using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    [Authorize(Roles = "RCP")]
+    [RCPContexteRealisationAuthorize]
     public class ContexteRealisationController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
@@ -18,9 +19,10 @@ namespace ApplicationPlanCadre.Controllers
         public ActionResult _PartialList(int? idCompetence)
         {
             EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(idCompetence);
-            return PartialView(enonceCompetence.ContexteRealisation.OrderBy(m => m.numero));
+            return PartialView(enonceCompetence.ContexteRealisation.OrderBy(e => e.numero));
         }
 
+        [RCPEnonceCompetenceAuthorize]
         public ActionResult Create(int? idCompetence)
         {
             if (idCompetence == null)
@@ -40,9 +42,11 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [RCPEnonceCompetenceAuthorize]
         public ActionResult Create([Bind(Include = "idContexte,description,commentaire,idCompetence")] ContexteRealisation contexteRealisation)
         {
             Trim(contexteRealisation);
+            AssignNo(contexteRealisation);
             if (ModelState.IsValid)
             {
                 db.ContexteRealisation.Add(contexteRealisation);
@@ -69,7 +73,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idContexte,description,commentaire,idCompetence")] ContexteRealisation contexteRealisation)
+        public ActionResult Edit([Bind(Include = "idContexte,numero,description,commentaire,idCompetence")] ContexteRealisation contexteRealisation)
         {
             Trim(contexteRealisation);
             if (ModelState.IsValid)
@@ -86,6 +90,7 @@ namespace ApplicationPlanCadre.Controllers
         {
             ContexteRealisation contexteRealisation = db.ContexteRealisation.Find(idContexte);
             db.ContexteRealisation.Remove(contexteRealisation);
+            AjustNo(contexteRealisation);
             db.SaveChanges();
             return RedirectToAction("Create", new { idCompetence = contexteRealisation.idCompetence });
         }

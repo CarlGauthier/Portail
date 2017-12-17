@@ -30,6 +30,7 @@ namespace ApplicationPlanCadre.Models
         public virtual DbSet<PlanCadreEnonce> PlanCadreEnonce { get; set; }
         public virtual DbSet<ActiviteApprentissage> ActiviteApprentissage { get; set; }
         public virtual DbSet<ElementConnaissance> ElementConnaissance { get; set; }
+        public virtual DbSet<AccesProgramme> AccesProgramme { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -250,6 +251,11 @@ namespace ApplicationPlanCadre.Models
                 .HasMany(e => e.PlanCadreElement)
                 .WithRequired(e => e.ElementConnaissance)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<AccesProgramme>()
+                .Property(e => e.codeProgramme)
+                .IsFixedLength()
+                .IsUnicode(false);
         }
     }
 }

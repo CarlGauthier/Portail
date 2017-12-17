@@ -24,21 +24,29 @@ namespace ApplicationPlanCadre.Helpers
             client.Credentials = new System.Net.NetworkCredential("equipe1@dicj.info", "equipe1");
         }
 
-        public void SendActivationMail(ApplicationUser user, string password)
+        public bool SendActivationMail(ApplicationUser user, string password)
         {
-            SendMail(user, "Bienvenue sur Portail!", BuildActivationMail(user, password));
+            return SendMail(user, "Bienvenue sur Portail!", BuildActivationMail(user, password));
         }
 
-        public void SendEditMail(ApplicationUser user, string password)
+        public bool SendEditMail(ApplicationUser user, string password)
         {
-            SendMail(user, "Modification de votre compte sur portail", BuildEditMail(user, password));
+            return SendMail(user, "Modification de votre compte sur portail", BuildEditMail(user, password));
         }
 
-        private void SendMail(ApplicationUser user, string subject, string body)
+        private bool SendMail(ApplicationUser user, string subject, string body)
         {
             MailMessage message = new MailMessage("portaildonotreply@dicj.info", user.Email, subject, body);
             message.IsBodyHtml = true;
-            client.Send(message);
+            try
+            {
+                client.Send(message);
+                return true;
+            }
+            catch (SmtpException)
+            {
+                return false;
+            }
         }
 
         private string BuildActivationMail(ApplicationUser user, string password)

@@ -6,11 +6,11 @@
 @using (Html.BeginForm("Edit", "DevisMinistere", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.idDevis)
-    @Html.HiddenFor(model => model.codeProgramme)
-    @Html.HiddenFor(model => model.annee)
-    @Html.HiddenFor(model => model.codeSpecialisation)
-    @Html.HiddenFor(model => model.docMinistere)
+    @Html.HiddenFor(m => m.idDevis)
+    @Html.HiddenFor(m => m.codeProgramme)
+    @Html.HiddenFor(m => m.annee)
+    @Html.HiddenFor(m => m.codeSpecialisation)
+    @Html.HiddenFor(m => m.docMinistere)
 
     <div class="container">
         <div class="form-box">
@@ -31,7 +31,7 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.specialisation)
                         @Html.TextBoxFor(m => m.specialisation, new { @maxlength = "30", @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.specialisation, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.specialisation, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group">
@@ -58,7 +58,7 @@
                         <input type="file" id="pdf" name="docMinistere" class="inputfile" accept="application/pdf" />
 
                         <label for="pdf" class="file-button fancy-button rouge">
-                            <span class="upload glyphicon glyphicon-download-alt"><!----></span>
+                            <span class="upload glyphicon glyphicon-download-alt"></span>
                             <span class="filename">
                                 @(Model.docMinistere == null ? @Html.Raw("Téléverser un PDF") : @Html.DisplayFor(m => m.docMinistere))
                             </span>

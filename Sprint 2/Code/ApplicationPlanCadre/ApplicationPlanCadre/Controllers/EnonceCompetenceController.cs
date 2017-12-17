@@ -7,15 +7,15 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ApplicationPlanCadre.Models;
+using ApplicationPlanCadre.Helpers;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    [Authorize(Roles = "RCP")]
+    [RCPEnonceCompetenceAuthorize]
     public class EnonceCompetenceController : Controller
     {
         private BDPlanCadre db = new BDPlanCadre();
-        
-        [Route("Enoncer-Competence/{id:int?}",Name ="Info-enonceCompetence")]
+
         public ActionResult Info(int? idCompetence)
         {
             if (idCompetence == null)
@@ -30,6 +30,7 @@ namespace ApplicationPlanCadre.Controllers
             return View(enonceCompetence);
         }
 
+        [RCPDevisMinistereAuthorize]
         public ActionResult Create(int? idDevis)
         {
             if (idDevis == null)
@@ -50,6 +51,7 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [RCPDevisMinistereAuthorize]
         public ActionResult Create([Bind(Include = "idCompetence,codeCompetence,description,motClef,obligatoire,actif,commentaire,idDevis")] EnonceCompetence enonceCompetence)
         {
             bool existe;
@@ -113,6 +115,8 @@ namespace ApplicationPlanCadre.Controllers
             return View(enonceCompetence);
         }
 
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int idCompetence)
         {
             EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(idCompetence);

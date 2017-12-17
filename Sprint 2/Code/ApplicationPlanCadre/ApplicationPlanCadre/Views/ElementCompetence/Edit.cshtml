@@ -1,39 +1,33 @@
 ﻿@model ApplicationPlanCadre.Models.ElementCompetence
 
 @{
-    ViewBag.Title = "Énoncé de compétence - modification";
+    ViewBag.Title = "Modification d'un element de compétence";
 }
 
-<div class="container">
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.numero)
+    @Html.HiddenFor(m => m.idCompetence)
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.idElement)
-        @Html.HiddenFor(model => model.numero)
-        @Html.HiddenFor(model => model.idCompetence)
+    <div class="container">
+        <div class="form-box">
 
-        <div class="form-horizontal form-box single">
-            <h1>Modifier élément de compétence</h1>
+            <header class="light-header">
 
-            <hr />
+                <h1>@ViewBag.Title</h1>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.description, new { @rows = "3", @maxlength = "300", @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            </header>
 
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Suivant" class="fancy-button" />
-                    <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "ElementCompetence", new { idElement = Model.idElement })'">Annuler</div>
-                </div>
+                @Html.LabelFor(m => m.description)
+                @Html.TextAreaFor(m => m.description, new { @rows = "3", @maxlength = "300", @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.description, "", new { @class = "text-danger" })
             </div>
+
+            <input type="submit" value="Suivant" class="fancy-button" />
+            <a class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "ElementCompetence", new { idElement = Model.idElement })'">Annuler</a>
+
         </div>
-
-    }
-
-</div>
+    </div>
+}

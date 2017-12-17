@@ -208,6 +208,8 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GrilleCoursController.cs" />
     <Compile Include="Controllers\GrilleCoursEnonceController.cs" />
+    <Compile Include="Helpers\RCPAuthorize.cs" />
+    <Compile Include="Models\AccesProgramme.cs" />
     <Compile Include="Models\GrilleCoursViewModel.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\DevisMinistereController.cs" />
@@ -215,15 +217,13 @@
     <Compile Include="Controllers\RapportController.cs" />
     <Compile Include="Controllers\RechercheController.cs" />
     <Compile Include="Controllers\PlanCadreController.cs" />
-    <Compile Include="Controllers\PlanCadreEnonceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MailHelper.cs" />
-    <Compile Include="Helpers\CustomAuthorize.cs" />
+    <Compile Include="Helpers\FilterAuthorize.cs" />
     <Compile Include="Helpers\HighlightHelper.cs" />
     <Compile Include="Helpers\PasswordGenerator.cs" />
-    <Compile Include="Helpers\RolesHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiviteApprentissage.cs" />
     <Compile Include="Models\BDPlanCadre.cs" />
@@ -261,6 +261,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\extend.css" />
+    <Content Include="Content\grille.css" />
     <Content Include="Content\Images\cegep-frost.jpg" />
     <Content Include="Content\Images\cegep-index.png" />
     <Content Include="Content\Images\cegep.jpg" />
@@ -318,7 +319,9 @@
     <Content Include="Scripts\mark.js" />
     <Content Include="Scripts\mark.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\perfect-scrollbar.js" />
     <Content Include="Scripts\portail.js" />
+    <Content Include="Scripts\preventSubmit.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\roleSelect.js" />
@@ -346,7 +349,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Accueil\Index.cshtml" />
-    <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\DevisMinistere\Index.cshtml" />
     <Content Include="Views\ConsoleDevisMinistere\Edit.cshtml" />
     <Content Include="Views\ConsoleDevisMinistere\Create.cshtml" />
