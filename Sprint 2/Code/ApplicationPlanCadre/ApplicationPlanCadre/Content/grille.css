@@ -1,6 +1,6 @@
 ﻿/*GRILLE DE COURS -- Ajouté par Eddy */
 
-.section-grille #select-grille {
+.section-grille .select-grille {
     color: black;
     text-align: center;
 }
@@ -17,7 +17,7 @@
     background-color: #083a7c;
 }
 
-.section-grille #select-grille h3 {
+.section-grille .select-grille h3 {
     font-size: large;
 }
 
@@ -61,7 +61,7 @@
     table-layout: fixed;
 }
 
-.section-grille #grilleCoursHeure {
+.section-grille .grilleCoursHeure {
     text-align: center;
     font-size: medium;
 }
@@ -80,3 +80,4 @@
 .section-grille #grilleCoursPrealable b {
     font-size: large;
 }
+

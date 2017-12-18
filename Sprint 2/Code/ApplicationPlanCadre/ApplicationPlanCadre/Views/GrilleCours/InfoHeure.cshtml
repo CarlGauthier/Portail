@@ -19,23 +19,26 @@
         <h1>@ViewBag.Title</h1>
 
     </header>
-            
-    <div>
-        <h1>@ViewBag.nom</h1>
-        @*<div class="fancy-button edit" onclick="location.href='@Url.RouteUrl("Edit-grilleCours",new {id=Model.Id})'"><span class="glyphicon glyphicon-pencil"></span> Modifier</div>*@
-        <div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "grilleCours", new { id = Model.idGrille })'"><span class="glyphicon glyphicon-pencil"></span> Modifier</div>
-        <div class="fancy-button edit" onclick="location.href='@Url.Action("Delete", "grilleCours", new { id = Model.idGrille })'"><span class="glyphicon glyphicon-trash"></span> Supprimer</div>
-    </div>
-    <hr />
-    <div id="select-grille">
-        <div class="row">
-            <div class="col-sm-4" id="hover-grille" onclick="location.href='@Url.Action("Info", "grilleCours", new { id = Model.idGrille })'"><h3>Structure</h3></div>
-            <div class="col-sm-4" id="selected-grille"><h3>Heure</h3></div>
-            <div class="col-sm-4" id="hover-grille" onclick="location.href='@Url.Action("InfoPrealable", "grilleCours", new { id = Model.idGrille })'"><h3>Préalable</h3></div>
+       
+    <div class="section-grille">
+        <div>
+            <h1>@ViewBag.nom</h1>
+            @*<div class="fancy-button edit" onclick="location.href='@Url.RouteUrl("Edit-grilleCours",new {id=Model.Id})'"><span class="glyphicon glyphicon-pencil"></span> Modifier</div>*@
+            <div class="fancy-button edit" onclick="location.href='@Url.Action("Edit", "grilleCours", new { id = Model.idGrille })'"><span class="glyphicon glyphicon-pencil"></span> Modifier</div>
+            <div class="fancy-button edit" onclick="location.href='@Url.Action("Delete", "grilleCours", new { id = Model.idGrille })'"><span class="glyphicon glyphicon-trash"></span> Supprimer</div>
         </div>
+        <hr />
+        <div class="select-grille">
+            <div class="row">
+                <div class="col-sm-4" id="hover-grille" onclick="location.href='@Url.Action("Info", "grilleCours", new { id = Model.idGrille })'"><h3>Structure</h3></div>
+                <div class="col-sm-4" id="selected-grille"><h3>Heure</h3></div>
+                <div class="col-sm-4" id="hover-grille" onclick="location.href='@Url.Action("InfoPrealable", "grilleCours", new { id = Model.idGrille })'"><h3>Préalable</h3></div>
+            </div>
+        </div>
+        <hr />
     </div>
-    <hr />
+        
 
-    @Html.Action("_Heure")
+        @Html.Action("_Heure")
 
-</div>
+    </div>
