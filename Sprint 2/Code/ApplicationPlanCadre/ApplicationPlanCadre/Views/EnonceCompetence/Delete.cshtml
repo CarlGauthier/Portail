@@ -29,10 +29,10 @@
             }
             else
             {
-                @if (Model.ElementCompetence.Count() > 0)
+                if (Model.ElementCompetence.Count() > 0)
                 {
                     <p>Si vous supprimez cette compétence, vous supprimez aussi les éléments de compétence suivants.</p>
-
+                    <p>Êtes-vous certain de vouloir supprimer cet énoncé de compétence?</p>
                     foreach (var elementCompetence in Model.ElementCompetence)
                     {
                         <a class="info-child clearfix" href='@Url.Action("Info", "ElementCompetence", new { idElement = elementCompetence.idElement })'>
@@ -44,7 +44,7 @@
 
             }
 
-            <p>Êtes-vous certain de vouloir supprimer cet énoncé de compétence?</p>
+            
 
             <hr />
             
