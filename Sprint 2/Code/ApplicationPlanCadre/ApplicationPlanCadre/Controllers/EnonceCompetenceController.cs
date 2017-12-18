@@ -119,15 +119,23 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int idCompetence)
         {
+            var PlanCadreEnonce = from pc in db.PlanCadreEnonce
+                                  where pc.idCompetence == idCompetence
+                                  select pc;
             EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(idCompetence);
-            foreach(ElementCompetence ec in enonceCompetence.ElementCompetence)
+            if (PlanCadreEnonce.Count() == 0)
             {
-                db.CriterePerformance.RemoveRange(ec.CriterePerformance);
+                
+                foreach (ElementCompetence ec in enonceCompetence.ElementCompetence)
+                {
+                    db.CriterePerformance.RemoveRange(ec.CriterePerformance);
+                }
+                db.ElementCompetence.RemoveRange(enonceCompetence.ElementCompetence);
+                db.ContexteRealisation.RemoveRange(enonceCompetence.ContexteRealisation);
+                db.EnonceCompetence.Remove(enonceCompetence);
+                db.SaveChanges();
             }
-            db.ElementCompetence.RemoveRange(enonceCompetence.ElementCompetence);
-            db.ContexteRealisation.RemoveRange(enonceCompetence.ContexteRealisation);
-            db.EnonceCompetence.Remove(enonceCompetence);
-            db.SaveChanges();
+            
             return RedirectToAction("Info", "DevisMinistere", new { idDevis = enonceCompetence.idDevis });
         }
 
