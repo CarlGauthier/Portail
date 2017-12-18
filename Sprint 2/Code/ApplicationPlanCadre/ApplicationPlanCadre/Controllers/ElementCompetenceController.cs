@@ -109,11 +109,18 @@ namespace ApplicationPlanCadre.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int idElement)
         {
+            var PlanCadreElement = from pc in db.PlanCadreElement
+                                   where pc.idElement == idElement
+                                   select pc;
             ElementCompetence elementCompetence = db.ElementCompetence.Find(idElement);
-            db.CriterePerformance.RemoveRange(elementCompetence.CriterePerformance);
-            db.ElementCompetence.Remove(elementCompetence);
-            AjustNo(elementCompetence);
-            db.SaveChanges();
+            if(PlanCadreElement.Count() == 0)
+            {
+                db.CriterePerformance.RemoveRange(elementCompetence.CriterePerformance);
+                db.ElementCompetence.Remove(elementCompetence);
+                AjustNo(elementCompetence);
+                db.SaveChanges();
+            }
+           
             return RedirectToAction("Info", "EnonceCompetence", new { idCompetence = elementCompetence.idCompetence });
         }
 
