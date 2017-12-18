@@ -122,10 +122,10 @@ namespace ApplicationPlanCadre.Controllers
             var PlanCadreEnonce = from pc in db.PlanCadreEnonce
                                   where pc.idCompetence == idCompetence
                                   select pc;
-
-            if(PlanCadreEnonce.Count() == 0)
+            EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(idCompetence);
+            if (PlanCadreEnonce.Count() == 0)
             {
-                EnonceCompetence enonceCompetence = db.EnonceCompetence.Find(idCompetence);
+                
                 foreach (ElementCompetence ec in enonceCompetence.ElementCompetence)
                 {
                     db.CriterePerformance.RemoveRange(ec.CriterePerformance);
