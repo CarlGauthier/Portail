@@ -15,13 +15,13 @@
 </style>
 
 
-<div id="info-display" class="container-fluid">
-    <div id="info-detail">
+<div class="container">
+    <div class="form-box">
         <h1>Résultat</h1>
 
 
         @if ((Model.EnonceCompetence.Count == 0) && (Model.ElementCompetence.Count == 0) && (Model.DevisMinistere.Count == 0) && (Model.CriterePerformance.Count == 0) && (Model.ContexteRealisation.Count == 0))
-        {
+            {
             <p style="color:red;">Aucune information à été trouvée</p>
         }
         else
@@ -29,7 +29,7 @@
             if (Model.EnonceCompetence.Count != 0)
             {
                 <h2>Énoncer Compétence</h2>
-                <hr />
+                    <hr />
                 foreach (SearchEnonceCompetence enonceCmpt in Model.EnonceCompetence)
                 {
                     <a class="info-child clearfix" href="@Url.Action("Info","EnonceCompetence", new { idCompetence = enonceCmpt.idCompetence })">
@@ -44,7 +44,7 @@
                 if (Model.ElementCompetence.Count != 0)
                 {
                     <h2>Élément Compétence</h2>
-                    <hr />
+                        <hr />
                     foreach (SearchElementCompetence elementCompt in Model.ElementCompetence)
                     {
                         <a class="info-child clearfix" href="@Url.Action("Info","ElementCompetence", new { idElement = elementCompt.idElement })">
@@ -59,7 +59,7 @@
                 if (Model.DevisMinistere.Count != 0)
                 {
                     <h2>Devis ministériel</h2>
-                    <hr />
+                        <hr />
                     foreach (SearchDevisMinistere devis in Model.DevisMinistere)
                     {
                         <a class="info-child clearfix" href="@Url.Action("Info","DevisMinistere", new { idDevis = devis.idDevis })">
@@ -80,12 +80,12 @@
                 if (Model.ContexteRealisation.Count != 0)
                 {
                     <h2>Contexte de réalisation</h2>
-                    <hr />
+                        <hr />
 
                     foreach (SearchContexteRealisation contexteReal in Model.ContexteRealisation)
                     {
                         <a class="info-child clearfix" href="@Url.Action("Info","EnonceCompetence", new { idCompetence = contexteReal.idCompetence})">
-                           <p><span class="ligne">Description : </span>@Html.Raw(contexteReal.description)</p>
+                            <p><span class="ligne">Description : </span>@Html.Raw(contexteReal.description)</p>
                         </a>
                     }
                 }
@@ -96,7 +96,7 @@
                 if (Model.CriterePerformance.Count != 0)
                 {
                     <h2>Critère de performance</h2>
-                    <hr />
+                        <hr />
                     foreach (SearchCriterePerformance critPerf in Model.CriterePerformance)
                     {
                         <a class="info-child clearfix" href="@Url.Action("Info","ElementCompetence", new { idElement = critPerf.idElement })">
@@ -106,8 +106,7 @@
                 }
             }
         }
-
-       </div>
+    </div>
 </div>
 
 
