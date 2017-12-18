@@ -35,7 +35,6 @@ namespace ApplicationPlanCadre.Controllers
                     model.DevisMinistere = getDevis(searchStr);
                     model.EnonceCompetence = getEnonceCompetence(searchStr);
                     model.ElementCompetence = null;
-                    model.Programme = null;
                     model.CriterePerformance = null;
                     model.ContexteRealisation = null;
                 }
@@ -44,7 +43,6 @@ namespace ApplicationPlanCadre.Controllers
                     model.EnonceCompetence = getEnonceCompetence(searchStr);
                     model.ElementCompetence = getElemCompetence(searchStr);
                     model.DevisMinistere = getDevis(searchStr);
-                    model.Programme = getProgram(searchStr);
                     model.CriterePerformance = getCriterePerformance(searchStr);
                     model.ContexteRealisation = getContexteRealisation(searchStr);
 
@@ -55,7 +53,6 @@ namespace ApplicationPlanCadre.Controllers
                 model.EnonceCompetence = null;
                 model.ElementCompetence = null;
                 model.DevisMinistere = null;
-                model.Programme = null;
                 model.CriterePerformance = null;
                 model.ContexteRealisation = null;
             }
