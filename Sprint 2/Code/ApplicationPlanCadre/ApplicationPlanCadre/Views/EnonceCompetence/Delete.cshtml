@@ -21,22 +21,33 @@
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            @if (Model.ElementCompetence.Count() > 0)
+           
+            @if(Model.PlanCadreEnonce.Count()>0)
             {
-                <p>Si vous supprimez cette compétence, vous supprimez aussi les éléments de compétence suivants.</p>
-
-                foreach (var elementCompetence in Model.ElementCompetence)
+                <p>Vous ne pouvez pas supprimer cette énoncé, il est lier à des plans plan cadres</p>
+                
+            }
+            else
+            {
+                @if (Model.ElementCompetence.Count() > 0)
                 {
-                    <a class="info-child clearfix" href='@Url.Action("Info", "ElementCompetence", new { idElement = elementCompetence.idElement })'>
-                        <p>@Html.DisplayFor(m => elementCompetence.description)</p>
-                    </a>
+                    <p>Si vous supprimez cette compétence, vous supprimez aussi les éléments de compétence suivants.</p>
+
+                    foreach (var elementCompetence in Model.ElementCompetence)
+                    {
+                        <a class="info-child clearfix" href='@Url.Action("Info", "ElementCompetence", new { idElement = elementCompetence.idElement })'>
+                            <p>@Html.DisplayFor(m => elementCompetence.description)</p>
+                        </a>
+                    }
                 }
+                <input type="submit" value="Confirmer" class="fancy-button" />
+
             }
 
             <p>Êtes-vous certain de vouloir supprimer cet énoncé de compétence?</p>
 
             <hr />
-            <input type="submit" value="Confirmer" class="fancy-button" />
+            
             <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "EnonceCompetence", new { idCompetence = Model.idCompetence })'">Annuler</div>
 
         </div>

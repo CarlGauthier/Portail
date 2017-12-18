@@ -28,21 +28,36 @@ namespace ApplicationPlanCadre.Controllers
         public ActionResult Rechercher(string searchStr, bool chkRecherche)
         {
             dynamic model = new ExpandoObject();
-
-            if (chkRecherche)
+            if(searchStr != "")
             {
-                model.DevisMinistere = getDevis(searchStr);
-                model.EnonceCompetence = getEnonceCompetence(searchStr);
+                if (chkRecherche)
+                {
+                    model.DevisMinistere = getDevis(searchStr);
+                    model.EnonceCompetence = getEnonceCompetence(searchStr);
+                    model.ElementCompetence = null;
+                    model.Programme = null;
+                    model.CriterePerformance = null;
+                    model.ContexteRealisation = null;
+                }
+                else
+                {
+                    model.EnonceCompetence = getEnonceCompetence(searchStr);
+                    model.ElementCompetence = getElemCompetence(searchStr);
+                    model.DevisMinistere = getDevis(searchStr);
+                    model.Programme = getProgram(searchStr);
+                    model.CriterePerformance = getCriterePerformance(searchStr);
+                    model.ContexteRealisation = getContexteRealisation(searchStr);
+
+                }
             }
             else
             {
-                model.EnonceCompetence = getEnonceCompetence(searchStr);
-                model.ElementCompetence = getElemCompetence(searchStr);
-                model.DevisMinistere = getDevis(searchStr);
-                model.Programme = getProgram(searchStr);
-                model.CriterePerformance = getCriterePerformance(searchStr);
-                model.ContexteRealisation = getContexteRealisation(searchStr);
-
+                model.EnonceCompetence = null;
+                model.ElementCompetence = null;
+                model.DevisMinistere = null;
+                model.Programme = null;
+                model.CriterePerformance = null;
+                model.ContexteRealisation = null;
             }
             return PartialView("_afficherRecherche", model);
         }
