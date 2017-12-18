@@ -260,3 +260,7 @@ mark {
 .highlighted {
     background-color: Yellow;
 }
+
+.ligne {
+    color: darkblue;
+}

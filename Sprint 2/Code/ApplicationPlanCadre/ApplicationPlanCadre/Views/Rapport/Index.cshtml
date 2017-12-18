@@ -26,8 +26,14 @@
     @*@Html.Action("_TreeView")*@
     <div class="container">
         <div class="form-box">
-            <h1>Rapport</h1>
-            <h2>Plan Cadre</h2>
+
+            <header class="light-header">
+
+                <h1>Rapport</h1>
+
+            </header>
+            
+            <h3>Plan Cadre</h3>
             <hr />
             @foreach (PlanCadre planCadre in Model.PlanCadre)
             {
@@ -36,7 +42,7 @@
                     <p class="droite">@Html.DisplayFor(x => planCadre.numeroCours)</p>
                 </a>
             }
-            <h2>Programme</h2>
+            <h3>Programme</h3>
             <hr />
             @foreach (Programme prog in Model.Programme)
             {
