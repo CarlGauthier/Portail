@@ -256,3 +256,7 @@ mark {
     float: right;
     cursor: pointer;
 }
+
+.highlighted {
+    background-color: Yellow;
+}

@@ -17,6 +17,15 @@
     background-color: #4C4C4C;
 }
 
+.tree-view-header a {
+    color: #ddd;
+    transition: 0.1s;
+}
+
+.tree-view-header a:hover {
+    color: #fff;
+}
+
 .tree-view .tree-view-item-container {
     padding-left: 30px;
 }

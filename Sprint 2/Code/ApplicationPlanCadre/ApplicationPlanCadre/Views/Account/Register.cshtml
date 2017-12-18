@@ -111,6 +111,9 @@
     <script src="@Url.Content("~/Scripts/roleSelect.js")"></script>
     <script>
         $(document).ready(function () {
+            initRoleDropDown();
+            initCodeProgrammeDropDown();
+
             @foreach (string role in Model.Roles)
             {
                 @:loadRole("@role");

@@ -109,6 +109,9 @@
 @section scripts {
     <script>
         $(document).ready(function () {
+            initRoleDropDown();
+            initCodeProgrammeDropDown();
+
             @foreach (string role in Model.Roles)
             {
                 @:loadRole("@role");

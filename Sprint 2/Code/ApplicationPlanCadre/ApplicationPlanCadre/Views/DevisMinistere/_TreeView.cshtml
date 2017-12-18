@@ -1,9 +1,12 @@
 ﻿@model IEnumerable<ApplicationPlanCadre.Models.DevisMinistere>
 
 <div class="tree-view">
-
-    <a href="@Url.Action("Recherche", "Recherche")">LOL SEARCH</a>
-    <div class="tree-view-header">Devis ministériels</div>
+    <div class="tree-view-header">
+        Devis ministériels
+        <a href="@Url.Action("Recherche", "Recherche")">
+            <span class="glyphicon glyphicon glyphicon-search"></span>
+        </a>
+    </div>
     @foreach (var devisMinistere in Model.OrderBy(m => m.codeProgramme))
     {
         string p_id = "p" + devisMinistere.idDevis.ToString();

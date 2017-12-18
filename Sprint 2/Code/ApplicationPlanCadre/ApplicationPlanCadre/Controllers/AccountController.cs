@@ -19,7 +19,7 @@ using System.Web.Security;
 
 namespace ApplicationPlanCadre.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AccountController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -137,7 +137,6 @@ namespace ApplicationPlanCadre.Controllers
                 model.CodeProgrammes = new List<string>();
         }
 
-        [AllowAnonymous]
         public ActionResult Register()
         {
             ViewBag.role = BuildRoleSelectList();
@@ -171,10 +170,16 @@ namespace ApplicationPlanCadre.Controllers
             bd.SaveChanges();
         }
 
-        private void EditRCPAccesProgramme(ApplicationUser user, ICollection<string> codeProgramme)
+        private void RemoveAllRCPAccesProgramme(ApplicationUser user)
         {
             BDPlanCadre bd = new BDPlanCadre();
             bd.AccesProgramme.RemoveRange(bd.AccesProgramme.Where(e => e.userMail == user.UserName));
+            bd.SaveChanges();
+        }
+
+        private void EditRCPAccesProgramme(ApplicationUser user, ICollection<string> codeProgramme)
+        {
+            RemoveAllRCPAccesProgramme(user);
             CreateRCPAccesProgramme(user, codeProgramme);
         }
 
@@ -263,7 +268,7 @@ namespace ApplicationPlanCadre.Controllers
                 user.nom = model.Nom;
                 user.roles = UserManager.GetRoles(user.Id);
                 var resultMail = UserManager.SetEmail(model.UserId, model.Email);
-                if (!resultMail.Succeeded)
+                if (resultMail.Succeeded)
                 {
                     bool mailSend = new MailHelper().SendEditMail(user, password);
                     if(mailSend)
@@ -274,6 +279,8 @@ namespace ApplicationPlanCadre.Controllers
                             EditRoles(user, role);
                             if (isRCP)
                                 EditRCPAccesProgramme(user, codeProgramme);
+                            else
+                                RemoveAllRCPAccesProgramme(user);
                             return RedirectToAction("Index", "Account");
                         }
                         AddErrors(resultUpdate);
@@ -281,6 +288,7 @@ namespace ApplicationPlanCadre.Controllers
                     else
                         ModelState.AddModelError("netMail", "Une erreur est survenue lors de l'envoi du courriel, veuillez réessayer plus tard.");
                 }
+                AddErrors(resultMail);
             }
             if (!rolePresent)
                 ModelState.AddModelError("rolePresent", "L'utilisateur doit avoir au minimum un rôle.");
@@ -300,6 +308,7 @@ namespace ApplicationPlanCadre.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {

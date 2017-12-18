@@ -209,3 +209,36 @@
 #RCPForm {
     display: none;
 }
+
+#searchForm {
+    text-align: center;
+}
+
+#searchForm input[type="text"] {
+    width: 300px;
+    display: inline-block;
+}
+
+#searchForm #searchBtn {
+    margin: 0;
+    display: inline-block;
+    box-sizing: border-box;
+    vertical-align: middle;
+    padding: 0;
+    height: initial;
+    box-shadow: initial;
+    color: #fff;
+    border-radius: initial;
+    border: none;
+    border-bottom: 2px solid #0063b1;
+    background-color: #0078d7;
+}
+
+#searchForm #searchBtn .glyphicon {
+    padding: 7px 20px;
+    font-size: 22px;
+}
+
+#searchForm .checkbox {
+    text-align: left;
+}

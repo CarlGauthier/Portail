@@ -2,73 +2,34 @@
     ViewBag.Title = "Recherche dans les devis";
 }
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-<style type="text/css">
-    .highlighted {
-        background-color: Yellow;
-    }
-</style>
 
-<!--touche pas a c'est 3 br la carl sa l'air inutile mais touche les juste pas bordel -->
-    <div>
-        <br />
-        <br />
-        <br />
-    </div>
+@using (Ajax.BeginForm("Rechercher", "recherche", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "resultArea" }, new { defaultbutton = "searchBtn" }))
+{
+    <div class="container">
+        <div class="form-box">
+            <div id="searchForm">
 
-    @using (Ajax.BeginForm("Rechercher", "recherche", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "resultArea" }, new { defaultbutton = "searchBtn" }))
-    {
+                <input type="text" class="form-control" placeholder="Search" id="Stxt" name="searchStr">
+                <button type="submit" id="searchBtn"><span class="glyphicon glyphicon-search"></span></button>
 
-
-        <div class="container">
-            <div class="form-box">
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <div id="imaginary_container">
-                            <div class="input-group stylish-input-group">
-                                <input type="text" class="form-control" placeholder="Search" id="Stxt" name="searchStr">
-                                <span class="input-group-addon">
-                                    <button type="submit" id="searchBtn">
-                                        <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                                </span>
-                            </div>
-                            @Html.CheckBox("chkRecherche")Seulement Devis du ministère et compétence
-                        </div>
-                    </div>
-                </div>
                 <div>
+                    @Html.CheckBox("chkRecherche")
+                    Limiter la recherche au devis et compétences
+                </div>
 
-                </div>
-                </div>
             </div>
-    };
-    <script type="text/javascript">
-        $(document).bind('keydown', function (e) {
-            if (e.which === 13) { // return
-                $('#searchBtn').trigger('click');
-            }
-        });
-       
-    </script>
-
-
-
-    <div id="resultArea">
-
+        </div>
     </div>
+};
 
+<script type="text/javascript">
+    $(document).bind('keydown', function (e) {
+        if (e.which === 13) { // return
+            $('#searchBtn').trigger('click');
+        }
+    });
+</script>
 
+<div id="resultArea">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>

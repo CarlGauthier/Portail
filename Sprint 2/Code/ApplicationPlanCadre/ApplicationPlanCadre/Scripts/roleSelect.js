@@ -1,9 +1,4 @@
-﻿$(document).ready(function () {
-    initRoleDropDown();
-    initCodeProgrammeDropDown();
-});
-
-//Role
+﻿//Role
 
 function initRoleDropDown() {
     var selectList = document.getElementById('role');
@@ -139,7 +134,6 @@ function loadCodeProgramme(codeProgramme) {
 function findCodeProgrammeOptionByValue(value) {
     var options = document.querySelectorAll("#codeProgramme option");
     for (var i = 0; i < options.length; i++) {
-        console.log(options[i].value);
         if (options[i].value === value)
             return options[i];
     }
