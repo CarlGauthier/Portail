@@ -27,7 +27,8 @@ namespace ApplicationPlanCadre.Controllers
         public ActionResult Rechercher(string searchStr, bool chkRecherche)
         {
             dynamic model = new ExpandoObject();
-            if(searchStr != "")
+            searchStr = searchStr.Trim();
+            if (searchStr != "")
             {
                 if (chkRecherche)
                 {

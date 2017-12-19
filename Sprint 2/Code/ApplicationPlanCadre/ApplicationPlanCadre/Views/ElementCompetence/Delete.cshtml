@@ -23,7 +23,7 @@
 
             @if (Model.PlanCadreElement.Count() > 0)
             {
-                <p>Vous ne pouvez pas supprimer cette élément, il est lier à des plans plan cadres</p>
+                <p>Cet élément est lié à des plans cadre, la suppression est impossible.</p>
             }
             else
             {
@@ -35,7 +35,6 @@
             }
             
             <div class="fancy-button rouge" onclick="location.href='@Url.Action("Info", "ElementCompetence", new { idElement = Model.idElement })'">Annuler</div>
-            
 
         </div>
     </div>

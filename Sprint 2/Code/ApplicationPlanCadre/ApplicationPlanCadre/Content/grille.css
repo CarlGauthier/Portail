@@ -21,7 +21,7 @@
     font-size: large;
 }
 
-.section-grille #infobulle:hover, #infobulle:focus {
+.section-grille #infobulle:hover, .section-grille #infobulle:focus {
     background: rgba(0,0,0,.4);
     box-shadow: 0 1px 0 rgba(255,255,255,.4);
 }
@@ -41,7 +41,7 @@
     opacity: 0;
 }
 
-.section-grille #infobulle:hover span, #infobulle:focus span {
+.section-grille #infobulle:hover span, .section-grille #infobulle:focus span {
     opacity: 1;
 }
 
@@ -55,7 +55,7 @@
     overflow-y: scroll;
 }
 
-.section-grille .table thead, tbody tr {
+.section-grille .table thead, .section-grille tbody tr {
     display: table;
     width: 100%;
     table-layout: fixed;
@@ -80,4 +80,3 @@
 .section-grille #grilleCoursPrealable b {
     font-size: large;
 }
-

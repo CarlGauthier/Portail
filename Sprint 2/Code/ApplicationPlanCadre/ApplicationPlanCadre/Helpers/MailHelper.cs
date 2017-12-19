@@ -57,7 +57,8 @@ namespace ApplicationPlanCadre.Helpers
                 "<p>Cordialement,</p>" +
                 "<p>L'équipe de Portail</p>" +
                 "<p><b> Courriel: </b>" + user.Email + "<br>" +
-                "<b> Mot de passe: </b>" + password + "</p>";
+                "<b> Mot de passe: </b>" + password + "</p>" +
+                "<p><a href='http://deptinfo420/Projet2017/Equipe1/test'>Rendez-vous sur portail</a></p>";
         }
 
         private string BuildEditMail(ApplicationUser user, string password)
@@ -69,7 +70,8 @@ namespace ApplicationPlanCadre.Helpers
                 "<p>Cordialement,</p>" +
                 "<p>L'équipe de Portail</p>" +
                 "<p><b> Courriel: </b>" + user.Email + "<br>" +
-                "<b> Mot de passe: </b>" + password + "</p>";
+                "<b> Mot de passe: </b>" + password + "</p>" +
+                "<p><a href='http://deptinfo420/Projet2017/Equipe1/test'>Rendez-vous sur portail</a></p>";
         }
     }
 }

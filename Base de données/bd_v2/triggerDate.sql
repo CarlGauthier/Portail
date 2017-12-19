@@ -1,6 +1,4 @@
-USE BDPlanCadreV2
-GO 
-
+GO
 CREATE TRIGGER DateTimeTrigger
 ON [dbo].[Programme]
 AFTER UPDATE

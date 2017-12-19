@@ -21,11 +21,13 @@
         <h1>@ViewBag.Title</h1>
 
     </header>
+
     <div class="section-grille">
+
         <div>
             <a class="fancy-button" href='@Url.Action("Edit", "grilleCours", new { id = Model.idGrille })'><span class="glyphicon glyphicon-pencil"></span> Modifier</a>
             <a class="fancy-button" href='@Url.Action("Delete", "grilleCours", new { id = Model.idGrille })'><span class="glyphicon glyphicon-trash"></span> Supprimer</a>
-            <a class="fancy-button" data-toggle="collapse" id="collapse"><span class="glyphicon glyphicon-eye-open"></span> Afficher les cours de formation générale</a>
+            <a class="fancy-button" data-toggle="collapse" data-target="#collapseTest" id="collapse"><span class="glyphicon glyphicon-eye-open"></span><span id="showHide">Afficher les cours de formation générale</span></a>
         </div>
 
         <hr />
@@ -42,15 +44,21 @@
 
     </div>
         
-        <div id="tableauVuePartielle">
-            @Html.Action("_Structure")
-        </div>
-
+    <div id="tableauVuePartielle">
+        @Html.Action("_Structure")
     </div>
+
+</div>
   
 <script language="JavaScript" type="text/JavaScript">
     $(document).ready(function () {
         $("#collapse").click(function () {
+            if ($('#collapseTest').attr('aria-expanded') === "false") {
+                document.getElementById("showHide").innerText = "Masquer les cours de formation générale";
+            }
+            else {
+                document.getElementById("showHide").innerText = "Afficher les cours de formation générale";
+            }
             $("tr.warning").toggle();
         });
     });

@@ -39,13 +39,14 @@ table.cool-table a:hover {
 }
 
 table.cool-table .action-cell-header {
+    width: 15%;
     text-align: center;
     border-left: 1px solid #000;
 }
 
 table.cool-table .action-cell {
     padding: 0;
-    width: 10%;
+    width: 15%;
     text-align: center;
     border-left: 1px solid #707070;
 }
