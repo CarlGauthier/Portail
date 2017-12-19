@@ -68,7 +68,6 @@ namespace ApplicationPlanCadre.Controllers
         public ActionResult Competence(int? idPlanCadre)
         {
             ViewBag.enonce = BuildEnonceSelectList();
-            ViewBag.element = BuildElementSelectList();
             if (idPlanCadre == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -83,26 +82,77 @@ namespace ApplicationPlanCadre.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Competence(int idPlancadre,ICollection<int> ponderationEnHeure, ICollection<int> enonces, ICollection<int> elements)
+        public ActionResult Competence(int idProgramme, int idPlancadre,ICollection<int> ponderationEnHeure, ICollection<int> enonces, ICollection<int> elements)
         {
             List<EnonceCompetence> listeEnonce = new List<EnonceCompetence>();
             List<ElementCompetence> listeELement = new List<ElementCompetence>();
-            foreach(var e in enonces)
+            List<int> listePonderation = new List<int>();
+            int cpt = 0;
+            if(ponderationEnHeure != null)
             {
-                var EnonceCompetence = from a in db.EnonceCompetence
-                                       where a.idCompetence == e
-                                       select a;
-                listeEnonce.AddRange(EnonceCompetence);
+                foreach (var ponderation in ponderationEnHeure)
+                {
+                    listePonderation.Add(ponderation);
+                }
             }
 
-            foreach(var x in elements)
+            if(enonces != null)
             {
-                var ElementCompetence = from y in db.ElementCompetence
-                                        where y.idElement == x
-                                        select y;
+                foreach (var e in enonces)
+                {
+                    var EnonceCompetence = from a in db.EnonceCompetence
+                                           where a.idCompetence == e
+                                           select a;
+                    listeEnonce.AddRange(EnonceCompetence);
+                }
 
+                foreach (var i in listeEnonce)
+                {
+                    PlanCadreEnonce planCadreEnonce = new PlanCadreEnonce();
+                    planCadreEnonce.idPlanCadre = idPlancadre;
+                    planCadreEnonce.idCompetence = i.idCompetence;
+                    planCadreEnonce.ponderationEnHeure = listePonderation[cpt];
+                    //if (ModelState.IsValid)
+                    //{
+                    //    db.PlanCadreEnonce.Add(planCadreEnonce);
+                    //    db.SaveChanges();
+                    //}
+                    cpt++;
+                }
             }
-            return View();
+
+            if(elements != null)
+            {
+                foreach (var x in elements)
+                {
+                    var ElementCompetence = from y in db.ElementCompetence
+                                            where y.idElement == x
+                                            select y;
+                    listeELement.AddRange(ElementCompetence);
+                }
+
+                foreach (var z in listeELement)
+                {
+                    PlanCadreElement planCadreElement = new PlanCadreElement();
+                    planCadreElement.idPlanCadre = idPlancadre;
+                    planCadreElement.idElement = z.idElement;
+                    planCadreElement.idElementConnaissance = 1;
+                    if (ModelState.IsValid)
+                    {
+                        db.PlanCadreElement.Add(planCadreElement);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            ElementConnaissance elementConnaissance = new ElementConnaissance();
+            ViewBag.planCadreElement = BuildElementSelectList(idPlancadre);
+            return View("Connaissance", elementConnaissance);
+        }
+
+        [HttpPost]
+        public ActionResult Connaissance()
+        {
+            return RedirectToAction("Index", "Programme");
         }
         public ActionResult Edit(int? idPlanCadre)
         {
@@ -147,10 +197,18 @@ namespace ApplicationPlanCadre.Controllers
             return new SelectList(liste, "Value", "Text");
         }
 
-        private SelectList BuildElementSelectList()
+        private SelectList BuildElementSelectList(int idPlanCadre)
         {
-            var liste = db.ElementCompetence.Select(e => e.description).ToList();
-            return new SelectList(liste, "Element competence");
+            var elementPlanCadre = from a in db.PlanCadreElement
+                                   where a.idPlanCadre == idPlanCadre
+                                   select a.ElementCompetence;
+
+            List<SelectListItem> liste = new List<SelectListItem>();
+            foreach(ElementCompetence e in elementPlanCadre)
+            {
+                liste.Add(new SelectListItem { Value = e.idElement.ToString(), Text = e.description });
+            }
+            return new SelectList(liste, "Value", "Text");
         }
         public ActionResult Info(int? idPlanCadre)
         {

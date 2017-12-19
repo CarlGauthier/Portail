@@ -306,6 +306,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Competence.js" />
+    <Content Include="Scripts\Connaissance.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -392,6 +393,7 @@
     <Content Include="Views\PlanCadre\Edit.cshtml" />
     <Content Include="Views\PlanCadreEnonce\Index.cshtml" />
     <Content Include="Views\PlanCadre\Competence.cshtml" />
+    <Content Include="Views\PlanCadre\Connaissance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

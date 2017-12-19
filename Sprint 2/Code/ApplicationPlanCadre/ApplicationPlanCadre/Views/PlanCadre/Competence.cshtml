@@ -10,6 +10,7 @@
 {
     @Html.AntiForgeryToken()
 
+    @Html.HiddenFor(model => model.idProgramme)
     @Html.HiddenFor(model => model.idPlanCadre)
 
     <div class="form-group">

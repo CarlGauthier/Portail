@@ -16,7 +16,7 @@ namespace ApplicationPlanCadre.Models
         }
 
         [Key]
-        public int idElementConnaissance { get; set; }
+        public int? idElementConnaissance { get; set; }
 
         [Column(TypeName = "text")]
         [Required]

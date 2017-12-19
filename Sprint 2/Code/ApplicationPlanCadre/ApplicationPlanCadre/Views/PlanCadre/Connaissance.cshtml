@@ -1,0 +1,36 @@
+﻿@model ApplicationPlanCadre.Models.ElementConnaissance
+
+@{
+    ViewBag.Title = "Connaissance";
+}
+
+<h2>Element de connaissance</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div >
+            @Html.EditorFor(model => model.description, new { htmlAttributes = new { @maxlength = "150" } })
+            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <p>Ajouter des éléments de competence a l'élément de connaissance</p>
+    <div class="child-field clearfix">
+        @Html.DropDownList("planCadreElement", null, new { @class = "form-control", @onchange = "selectedElement()"})
+    </div>
+
+    <div id="elementBox"></div>
+    <div id="hiddenddl" hidden="hidden"></div>
+
+    <div id="newConnaissance"></div>
+
+    <button type="button" onclick="ajouterConnaissance()">Ajouter un élément de connaissance</button>
+}
+
+@section scripts {
+    <script src="@Url.Content("~/Scripts/Connaissance.js")"></script>
+}

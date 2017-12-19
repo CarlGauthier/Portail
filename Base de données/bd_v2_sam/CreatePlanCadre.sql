@@ -68,7 +68,7 @@ CREATE TABLE PlanCadreElement
 
     idPlanCadre             INT             NOT NULL,       --FK
     idElement               INT             NOT NULL,       --FK
-	idElementConnaissance	INT				NOT NULL,		--FK
+	idElementConnaissance	INT					NULL,		--FK
 );
 
 IF OBJECT_ID ('PlanCadreEnonce') IS NOT NULL
@@ -91,7 +91,7 @@ CREATE TABLE ElementConnaissance
     idElementConnaissance				INT             NOT NULL        IDENTITY(1,1),
 	description							TEXT            NOT NULL,
 
-    idActiviteApprentissage				INT				NOT NULL,		--FK
+    idActiviteApprentissage				INT					NULL,		--FK
 
 	PRIMARY KEY(idElementConnaissance)
 );
