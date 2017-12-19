@@ -1,3 +1,0 @@
-http://deptinfo420/Projet2017/Equipe1/dev
-http://deptinfo420/Projet2017/Equipe1/test
-http://deptinfo420/Projet2017/Equipe1/prod
